@@ -92,8 +92,26 @@ plângeri noi din 20 martie 2025. Din 20 iulie 2025, **referințele către platf
 nu mai au voie să apară în textele legale și pe site-uri**. **[confirmat — verificat
 independent: iubenda, Taylor Wessing, Comisia Europeană / consumer-redress.ec.europa.eu]**
 
-**Propunere pentru footer:** link ANPC + link SAL (Soluționarea Alternativă a
-Litigiilor, structura națională ANPC). Ce URL-uri exacte vrea clientul — de confirmat.
+Mai important, există și o bază **românească**, nu doar europeană: **Ordinul ANPC
+449/2022** obligă la pictograme SAL (și, pe vremuri, SOL) de **250×50 px**, cu link
+corect, **pe prima pagină** a site-ului comercial. Iar **OPANPC 270/2026**, publicat în
+mai 2026, modifică Ordinul 449/2022 exact ca să **șteargă referințele la SOL și să
+păstreze doar SAL**. **[dedus — două surse independente: agentia-digitala.ro,
+validsoftware.ro]**
+
+Amenzile pentru neconformitate: **2.000–100.000 lei** **[dedus]**.
+
+⚠️ **O sursă din 2026 încă listează „pictogramele SAL și SOL" la controale.** Sursele
+nu sunt de acord între ele. Recomandarea mea rămâne SAL-only, dar **înainte de lansare
+verifică cu un jurist** — nu e o decizie de design.
+
+**Propunere pentru footer:** pictogramă **SAL 250×50** cu link corect, plus ANPC.
+Fără SOL. Ce URL-uri exacte vrea clientul — de confirmat.
+
+**Tot obligatoriu pe site** (Legea 365/2002, OG 130/2000) **[dedus]**, și le avem pe
+toate confirmate din §2.1: denumirea completă, **numărul din Registrul Comerțului
+(J2017003263233)** și **adresa completă a sediului social** (Str. Avram Iancu 22–26F,
+Otopeni, jud. Ilfov).
 
 ### 1.4 O tensiune de rezolvat conștient: emoji
 
@@ -256,30 +274,53 @@ Nu schimbă designul, dar merită în backlog:
 
 ## 3. Direcția vizuală
 
-### 3.1 Constrângerea de care trebuie să știi înainte de orice
+### 3.1 Identitatea de brand — recuperată, 20 august
 
-**Nu am văzut logo-ul.** Nu am putut obține nicio culoare de brand, niciun fișier de
-logo și nicio informație de tipografie. Zero. Căutarea nu a expus nicio valoare hex,
-iar profilul Brandfetch al domeniului există dar e inaccesibil prin proxy
-**[confirmat că există, conținut necunoscut]**.
+**Secțiunea asta spunea până acum „paletă necunoscută, propunere de sistem".
+Nu mai e cazul.** După ce a fost deblocat accesul la `smartinohome.ro` — magazinul
+suroră, același grup, aceeași temă — am putut extrage identitatea reală.
 
-Singurul lucru stabilit despre wordmark: apare cu **majusculă integrală, `SMARTINO`**,
-în fiecare titlu de pagină **[confirmat]** — dar titlurile sunt câmpuri text, nu
-dovadă despre artwork **[dedus, slab]**.
+**Logo-ul.** Wordmark **cu literă mică**, sans geometric rotunjit, cu **®** după
+„smartino"; descriptorul de sub-brand („home") într-un gri deschis, ca a doua greutate.
+Sursa: `smartinohome.ro/cdn/shop/files/logo_smartino_home_1_300x.svg` **[confirmat —
+descărcat și inspectat]**.
 
-Deci ce urmează e o **propunere de sistem vizual**, nu o descriere a identității
-existente. Structura, ierarhia și regulile de mai jos rămân valabile indiferent de
-culoarea finală. Culoarea primară se substituie într-un singur token când primesc
-brand kit-ul.
+> ⚠️ **Corecție la ce scriam înainte.** Dedusesem „wordmark all-caps SMARTINO" din
+> title tag-uri, marcând dovada ca slabă. Era greșit: **logo-ul e lowercase.** Bine că
+> nu m-am bazat pe el.
 
-> **Cea mai profitabilă deblocare din tot proiectul:** Shopify oglindește orice fișier
-> de magazin la `https://cdn.shopify.com/s/files/1/<idA>/<idB>/files/<nume>`, iar
-> `cdn.shopify.com` **e accesibil** din sesiune. În momentul în care există **o
-> singură** adresă de imagine de produs în repo (adică `data/products.json` e
-> descărcat de pe un calculator deblocat și comis), `<idA>/<idB>` devine cunoscut și
-> **logo-ul plus toate imaginile de produs devin accesibile din sesiune.** Un singur
-> `node scripts/fetch-shopify-data.mjs` deblochează simultan datele, imaginile și
-> identitatea vizuală.
+**Paleta reală**, citită din variabilele CSS ale temei **[confirmat]**:
+
+| Token | Valoare | Rol observat |
+| --- | --- | --- |
+| **Primară** | **`#15B7C6`** | `--color`, `--sm-promo-c1` — cyan/turcoaz, culoarea wordmark-ului |
+| Text | `#232323` | `--logo-color`, titluri, countdown |
+| Text secundar | `#3c3c3c` | corp de text |
+| **Reducere** | `#d12442` | roșu, folosit pe promoții |
+| Fundal | `#f1f1f1` / `#ffffff` | suprafețe |
+
+**Tipografia.** Tema surori rulează pe **Quicksand** (`--font-family-1` și
+`--font-family-2` — o singură familie, două roluri) **[confirmat]**. Se potrivește cu
+wordmark-ul: geometric rotunjit, aceeași familie de forme.
+
+**Ce înseamnă pentru direcția noastră.** Cyanul e o culoare de brand genuină și
+neobișnuită în retailul de igienă românesc — e un avantaj, nu o problemă. Îl păstrăm ca
+primară. Trei ajustări pe care le propun:
+
+1. **Cyanul rămâne accent, nu suprafață.** `#15B7C6` la 100% pe suprafețe mari obosește
+   ochiul și scade contrastul textului. CTA, stări active, progres — da. Fundaluri de
+   secțiune — nu.
+2. **Contrast de verificat.** `#15B7C6` pe alb dă un raport sub 4.5:1 pentru text mic.
+   Pentru butoane cu text alb avem nevoie de o variantă mai închisă (`brand-700`), cu
+   cyanul original păstrat ca accent și pentru suprafețe mari.
+3. **Quicksand doar pentru display.** E potrivit pentru wordmark și titluri, dar
+   rotunjimea îi scade lizibilitatea la corp mic și la cifre — exact unde ne doare, la
+   prețuri. Propun **Quicksand pentru titluri** (continuitate cu logo-ul) și o
+   secundară neutră cu **cifre tabulare** pentru preț, specificații și UI.
+
+**Ce rămâne de confirmat:** logo-ul propriu **smartinoshop** (îl am doar pe cel de
+Home), și dacă cele două magazine trebuie să arate ca un sistem comun sau deliberat
+diferit. Vezi §7.
 
 ### 3.2 Principiul care conduce designul
 
@@ -562,6 +603,23 @@ din convențiile confirmate de denumire:
 Pe mobil, filtrele intră în drawer, cu numărul de rezultate actualizat live și
 aplicare explicită.
 
+**Două reguli luate din benchmark-uri (§9), nu inventate:**
+
+- **Tot ce scriem pe card trebuie să fie filtrabil.** Baymard: *„Have Filters for All
+  Displayed List Item Info"* — **38% dintre site-uri nu o fac**. Concret: dacă tipărim
+  „7,5 picături" pe card, absorbția trebuie să fie fațetă. Altfel îi arătăm clientului
+  un criteriu pe care nu-l poate folosi.
+- **Chip-uri cu filtrele active, plus „șterge tot".** **20% dintre site-uri nu arată
+  deloc filtrele aplicate** **[dedus — Baymard]**.
+
+**Sortări.** Baymard: **doar 36% dintre site-uri oferă toate cele patru sortări
+esențiale** — preț, rating, best-selling, cele mai noi. Le punem pe toate patru. Plus
+una specifică acestui business, pe care o are și eMAG: **procent reducere**
+**[confirmat — din slug-urile de facetă eMAG]**. Pentru un retailer construit pe preț
+e sortarea cea mai firească. Mai târziu, când numărul de bucăți devine metafield
+(§8.5), se adaugă și **preț pe bucată** — cea mai onestă sortare într-un catalog cu
+pachete de mărimi diferite.
+
 ### 6.3 Preț pe unitate — cea mai valoroasă adăugare pentru acest catalog
 
 Fiecare titlu se termină în „X bucăți", iar același produs se vinde în pachete de 20,
@@ -575,6 +633,28 @@ metafield, ca să nu depindă de parsarea titlului.
 
 **Asta e diferența dintre a afișa prețul și a-l face comparabil.** E cea mai directă
 traducere în design a poziționării confirmate din §2.2.
+
+### 6.3b Butonul care devine selector de cantitate
+
+Baymard, dintr-un studiu pe **grocery**: *„Dynamically Update the 'Add to Cart' Button
+to a Quantity Selector after Item Added"* **[confirmat — titlu]**. După adăugare,
+butonul de pe card se transformă pe loc într-un stepper **− 2 +**.
+
+Se potrivește exact aici, pentru că jumătate din catalog e **cumpărătură repetată** —
+scutece, șervețele, detergent, hârtie. Clientul nu adaugă o bucată, adaugă trei. Fără
+asta îl obligăm să apese de trei ori și să se întrebe de fiecare dată dacă s-a
+înregistrat. Baymard notează și că exact aici apare întrebarea *„am adăugat sau nu?"*
+când butonul nu-și schimbă starea.
+
+### 6.3c Produsele deja în coș, marcate în listă
+
+Baymard: *„Highlight Items Already in the User's Cart"* — **96% dintre site-uri nu o
+fac** **[confirmat — titlu]**.
+
+E cel mai bun raport valoare/efort din toată lista, și e fix pentru catalogul ăsta: pe
+o listă de menaj sau de îngrijire, clientul adaugă 8–10 produse și pierde șirul. Un
+marcaj discret „în coș · 2" pe card previne dublul adaos și dă senzația de listă de
+cumpărături, nu de vitrină.
 
 ### 6.4 Onestitate pe stoc și urgency
 
@@ -594,6 +674,26 @@ neinteligibil.
 Aceleași componente, alt registru: fără ton vesel, fără infantilizare, fotografie
 sobră, limbaj clinic-dar-cald, filtrele potrivite (talie, absorbție) în prim-plan.
 E o decizie de design explicită, nu o omisiune.
+
+### 6.6b Costul livrării în blocul de cumpărare, nu în checkout
+
+Cel mai direct transferabil finding din tot benchmark-ul. Baymard: *„Product Pages Need
+to Show 'Estimated Shipping Costs' (Yet 43% of Sites Don't)"* **[confirmat — titlu]**,
+iar **64% dintre utilizatori caută costul livrării pe pagina de produs înainte să
+adauge în coș** **[dedus]**.
+
+Se leagă direct de abandonul de coș: **70,22% rata globală**, iar motivul #1 sunt
+**costurile suplimentare — 48%** **[dedus — Baymard]**. Costul ascuns până la checkout
+e chiar mecanismul abandonului.
+
+Avem toate datele reale ca să fim expliciți **[confirmat]**:
+
+> **Livrare 24,90 lei** · easybox 15 lei · **gratuit peste 200 lei**
+> Comandat azi → **livrat în 1–3 zile lucrătoare**
+
+Sub buton, nu în footer, nu în checkout. Onest inclusiv pe partea neplăcută: comenzile
+de vineri după 14:00 și din weekend se procesează luni/marți **[confirmat]** — mai bine
+o spunem decât să promitem și să ratăm.
 
 ### 6.7 Încredere
 
@@ -658,15 +758,30 @@ Detaliul complet, per componentă, e în **`docs/ella-mapping.md`**. Aici doar c
 pagină nu a fost deschisă direct. 13 puncte rămân de verificat în theme editor
 (`ella-mapping.md` §4).
 
-### 8.1 Prima întrebare de lămurit: Ella 6 sau Ella 7?
+### 8.1 Versiunea Ella — răspuns găsit: **Ella 6**
 
-**Sunt două produse diferite.** Ella 7 e o rescriere pe Shopify Theme Blocks / OS 3.0
-(„Flex Section"), **fără upgrade automat din 6.x — paginile se reconstruiesc manual**.
-Documentațiile sunt separate, iar arhitectura de header și mega-menu diferă substanțial.
+Întrebarea asta era deschisă. S-a închis singură când am putut deschide
+`smartinohome.ro`, care servește:
 
-Contează concret: în Ella 7, blocul Custom Liquid e „disponibil peste tot", ceea ce ar
-face mai ieftine exact componentele care acum cer editare de Liquid — footer-ul ANPC și
-eticheta de procent. **Ce versiune e licențiată?**
+```
+Shopify.theme = {"name":"GIVEAWAY - Marea Deschidere","schema_name":"Ella",
+                 "schema_version":"6.7.6","role":"main"}
+```
+
+**[confirmat — citit direct din sursa paginii]**
+
+Grupul rulează deci deja **Ella 6.7.6** pe magazinul suroră. Nu e dovadă formală că
+aceeași licență se aplică și pentru smartinoshop, dar e cea mai bună indicație
+disponibilă și e o presupunere de lucru rezonabilă — **de confirmat cu clientul.**
+
+**Ce înseamnă practic:** toate căile de setări din `ella-mapping.md` sunt scrise pe
+arborele 6.x, deci sunt cele corecte. Și, mai important: în Ella 6 **nu** avem blocul
+Custom Liquid „disponibil peste tot" din Ella 7, deci componentele care cer Liquid
+rămân la efortul estimat — în special footer-ul ANPC (§8.3) și eticheta de procent.
+
+Un avantaj neașteptat: **avem un magazin Ella 6 real, al aceluiași grup, ca referință
+vie.** Multe dintre cele 13 puncte necunoscute din `ella-mapping.md` §4 se pot verifica
+uitându-ne cum le rezolvă smartinohome.ro, nu doar în documentație.
 
 ### 8.2 Bilanțul
 
@@ -719,7 +834,103 @@ De estimat separat.
 
 ---
 
-## 9. Ce urmează, dacă aprobi
+## 9. Referințe și benchmark-uri
+
+Punctul 4 din brief: eMAG, Amazon, Walmart, Baymard și 2–3 magazine Shopify premium din
+nișa home/beauty. **Pentru pattern-uri de conversie, nu pentru copiat.**
+
+Aceeași limitare ca peste tot: `emag.ro`, `baymard.com`, `amazon.com` sunt blocate din
+sesiune. Sursa e conținut indexat de căutare. **Titlurile de rezultat le tratez ca
+sigure; cifrele din sumarizări sunt [dedus].**
+
+### 9.1 eMAG — convenții de piață românească
+
+| Ce | Dovadă |
+| --- | --- |
+| **Starea filtrelor trăiește în URL**, ca segmente de cale lizibile și indexabile: `/cafea/filter/forma-produs-f8408,boabe-v-6124346/aroma-f8410,ciocolata-v-6124375/c` | **[confirmat — din URL-uri indexate]** |
+| **Starea promo e fațetă de primă clasă** — `super-pret`, `top-favorite` | **[confirmat — din slug-uri]** |
+| Sortări oferite: Relevanță, Cele mai populare, Preț ↑, Preț ↓, Număr de review-uri, **Procent reducere** | **[dedus]** |
+| Paginare cu **60 / 80 / 100** produse pe pagină — *nu* infinite scroll | **[dedus]** |
+| **„Adaugă în coș"** e eticheta standard de CTA | **[dedus]** |
+| Recenzii cu **„Achiziție verificată"** | **[dedus]** |
+
+**Ce luăm:** filtrele în URL (shareable, bookmarkabil — cumpărătorul român e obișnuit
+cu asta) și reducerea ca fațetă, nu doar ca badge.
+
+**Ce nu luăm:** densitatea eMAG. E un marketplace cu milioane de SKU-uri; Smartino are
+~2.000 și un brand propriu de apărat.
+
+### 9.2 Mixul de plată din România — schimbă ce blocuri contează
+
+| | |
+| --- | --- |
+| **Ramburs ≈ 51% din comenzi (2025)** | **[dedus]** |
+| Card ≈ 70% din tranzacțiile online | **[dedus]** |
+| **Rate = până la 30% din tranzacții, cu AOV de ~3× față de plata integrală** | **[dedus]** |
+
+Rambursul nu e o relicvă — e **majoritar**. Deci „Plata la livrare" nu se ascunde în
+checkout, se spune lângă buton, ca reasigurare. Smartino îl are confirmat.
+
+**Ratele sunt o recomandare pentru client, nu ceva ce construiesc.** Smartino are
+confirmat doar ramburs + card prin PayU/MobilPay **[confirmat]**. Dacă segmentul cu AOV
+3× contează, e o discuție comercială separată — n-o presupun în design.
+
+### 9.3 Baymard — findings-urile pe care le-am folosit efectiv
+
+Fiecare e legat de o componentă concretă, nu citat decorativ.
+
+| Finding | Unde l-am aplicat |
+| --- | --- |
+| *„Product Pages Need to Show 'Estimated Shipping Costs' (Yet 43% of Sites Don't)"*; **64%** caută costul livrării pe PDP înainte de add-to-cart | §6.6b — cost + termen în blocul de cumpărare |
+| Abandon coș **70,22%**; motiv #1 **costuri suplimentare, 48%** | §6.6b |
+| *„Highlight Items Already in the User's Cart"* — **96%** nu o fac | §6.3c |
+| *„Grocery: Update the Add to Cart Button to a Quantity Selector"* | §6.3b |
+| *„Have Filters for All Displayed List Item Info"* — **38%** nu o fac | §6.2 |
+| Doar **36%** oferă toate cele patru sortări esențiale; **20%** nu arată filtrele active | §6.2 |
+| **34%** n-au breadcrumb ierarhic | §5.4 |
+| **Load More + lazy-load bate și paginarea, și infinite scroll** | §5.4 |
+| Pagini de categorie intermediare → promovează subcategoriile cu **thumbnail-uri** | §5.2, §5.4 |
+
+**O divergență pe care o iau conștient:** Baymard recomandă Load More; eMAG face
+paginare 60/80/100. Merg pe **Load More**, pentru că infinite scroll strică
+bookmarking-ul și accesul la footer — unde stă exact pictograma SAL obligatorie (§1.3).
+
+### 9.4 Magazine premium — trei lecții structurale
+
+Toate **[dedus]** — surse secundare, niciun magazin deschis direct.
+
+**Soko Glam (K-beauty).** Diagnosticul lor e util: problema de conversie în K-beauty nu
+e prețul, e **supraîncărcarea educațională** — rutine în mai mulți pași, ingrediente
+necunoscute, categorii care se suprapun. Magazinele bune o rezolvă **în fluxul de
+cumpărare**, nu într-un blog separat. Și vând **kituri de rutină ca produse de sine
+stătătoare**, nu ca upsell pe PDP.
+
+→ Smartino are deja tiparul: `pachet-promo-ingrijire-ten`, `seturi-cadou`, „Pachet
+Promoțional Cosmetice Coreene" **[confirmat]**. Nu trebuie inventat, trebuie **tratat
+ca produs de primă clasă** — exact ce spune §6.5.
+
+**Lalo (baby).** PDP aerisit, imagini alese să arate **textura și calitatea execuției**
+ca proxy pentru siguranță. Trust marks din presă terță, nu doar stele proprii.
+
+**Blueland / Branch Basics (home care).** Catalog organizat **pe treabă de făcut**, un
+SKU per treabă (multi-suprafețe, geamuri, baie, vase, rufe), cu sistem de rezerve —
+astfel a doua achiziție e structural diferită de prima.
+
+→ Relevant direct pentru verticala de curățenie a Smartino, care azi e organizată pe
+tip de produs. Merită discutat cu clientul ca variantă de IA — **nu o schimb unilateral**.
+
+### 9.5 Ce a rămas necunoscut
+
+- **Ordinea exactă a blocurilor** pe PDP-ul și pagina de categorie eMAG — neindexată
+- Ordinea exactă a blocurilor pe **Walmart PDP**
+- Pragurile curente de livrare gratuită eMAG/Genius — surse contradictorii (30 / 100 /
+  400 / 1500 lei)
+- Dacă cerința SAL-only e pe deplin în vigoare în august 2026 — **de verificat juridic**
+- Conținutul noilor obligații pentru magazinele online din **28 iunie 2025**
+
+---
+
+## 10. Ce urmează, dacă aprobi
 
 Ordinea de lucru, o pagină pe rând, cu screenshot desktop (1440) + mobil (390),
 verificate critic înainte să ți le arăt, apoi commit + push. **Nu trec mai departe
