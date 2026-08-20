@@ -1,0 +1,2042 @@
+[
+  {
+    "id": 675582247293,
+    "title": "Absorbante",
+    "handle": "absorbante",
+    "description": "",
+    "published_at": "2025-11-06T22:52:04+02:00",
+    "updated_at": "2026-08-08T14:39:03+03:00",
+    "image": null,
+    "products_count": 5
+  },
+  {
+    "id": 464851960103,
+    "title": "ABSORBANTE DAMA - BF2023",
+    "handle": "absorbante-dama",
+    "description": "",
+    "published_at": "2023-11-10T00:35:20+02:00",
+    "updated_at": "2026-06-26T11:07:06+03:00",
+    "image": null,
+    "products_count": 4
+  },
+  {
+    "id": 673060815229,
+    "title": "Accesorii Pachetel",
+    "handle": "accesorii-pachetel",
+    "description": "",
+    "published_at": "2025-09-04T22:30:38+03:00",
+    "updated_at": "2026-08-18T14:45:47+03:00",
+    "image": null,
+    "products_count": 7
+  },
+  {
+    "id": 668622422397,
+    "title": "Baby Pyunkang Yul",
+    "handle": "baby-pyunkang-yul",
+    "description": "",
+    "published_at": "2025-04-05T16:30:42+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 10
+  },
+  {
+    "id": 480318193959,
+    "title": "Balsam de Buze",
+    "handle": "balsam-de-buze",
+    "description": "",
+    "published_at": "2024-07-11T20:32:46+03:00",
+    "updated_at": "2026-06-08T19:25:50+03:00",
+    "image": null,
+    "products_count": 2
+  },
+  {
+    "id": 461993869607,
+    "title": "Balsam rufe",
+    "handle": "balsam-rufe",
+    "description": "",
+    "published_at": "2023-09-27T14:20:46+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 35
+  },
+  {
+    "id": 682468934013,
+    "title": "Balsam si detergent rufe",
+    "handle": "balsam-si-detergent-rufe",
+    "description": "",
+    "published_at": "2026-04-22T23:26:01+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 61
+  },
+  {
+    "id": 461994885415,
+    "title": "Batiste nazale",
+    "handle": "batiste-nazale",
+    "description": "",
+    "published_at": "2023-09-27T14:29:26+03:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 8
+  },
+  {
+    "id": 461991739687,
+    "title": "Best sellers",
+    "handle": "best-seller",
+    "description": "",
+    "published_at": "2023-09-27T13:59:10+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 2034
+  },
+  {
+    "id": 461993935143,
+    "title": "Bețișoare parfumate",
+    "handle": "bețișoare-parfumate",
+    "description": "",
+    "published_at": "2023-09-27T14:21:09+03:00",
+    "updated_at": "2026-06-30T16:31:33+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 464849469735,
+    "title": "BlackFriday Grupa Produse 15 % - Kalyon & Perlux/Sidolux (curățenie generală)",
+    "handle": "blackfriday-grupa-produse-15-kalyon-perlux-sidolux-curațenie-generala",
+    "description": "",
+    "published_at": "2023-11-09T23:45:02+02:00",
+    "updated_at": "2026-08-18T14:45:43+03:00",
+    "image": null,
+    "products_count": 29
+  },
+  {
+    "id": 464849928487,
+    "title": "BlackFriday Grupa Produse 15% - Gama natural",
+    "handle": "blackfriday-grupa-produse-15-gama-natural",
+    "description": "",
+    "published_at": "2023-11-09T23:56:25+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 7
+  },
+  {
+    "id": 464849502503,
+    "title": "BlackFriday Grupa Produse 15% - Produse incontinență",
+    "handle": "blackfriday-grupa-produse-15-produse-incontinența",
+    "description": "",
+    "published_at": "2023-11-09T23:45:23+02:00",
+    "updated_at": "2026-08-03T14:38:24+03:00",
+    "image": null,
+    "products_count": 7
+  },
+  {
+    "id": 464849764647,
+    "title": "BlackFriday Grupa Produse 20% - Menaj",
+    "handle": "blackfriday-grupa-produse-20-menaj",
+    "description": "",
+    "published_at": "2023-11-09T23:51:34+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 2
+  },
+  {
+    "id": 464849666343,
+    "title": "BlackFriday Grupa Produse 20% - Sleepy Absorbante Black & Natural",
+    "handle": "blackfriday-grupa-produse-20-sleepy-absorbante-black-natural",
+    "description": "",
+    "published_at": "2023-11-09T23:47:44+02:00",
+    "updated_at": "2026-08-08T14:39:03+03:00",
+    "image": null,
+    "products_count": 12
+  },
+  {
+    "id": 464849862951,
+    "title": "BlackFriday Grupa Produse 20% - Săpun lichid",
+    "handle": "blackfriday-grupa-produse-20-sapun-lichid",
+    "description": "",
+    "published_at": "2023-11-09T23:53:41+02:00",
+    "updated_at": "2026-08-11T14:42:54+03:00",
+    "image": null,
+    "products_count": 12
+  },
+  {
+    "id": 464849076519,
+    "title": "BlackFriday Grupa Produse 25 % - Gama Aroma Black Home + Șervețele XL 50",
+    "handle": "blackfriday-grupa-produse-25-gama-aroma-black-home-șervețele-xl-50",
+    "description": "",
+    "published_at": "2023-11-09T23:33:01+02:00",
+    "updated_at": "2026-06-30T16:31:27+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 464850157863,
+    "title": "BlackFriday Grupa Produse 30 % - Gama Ecologic + Easy Clean Multisuprafete",
+    "handle": "blackfriday-grupa-produse-30-gama-ecologic-easy-clean-multisuprafete",
+    "description": "",
+    "published_at": "2023-11-10T00:02:10+02:00",
+    "updated_at": "2026-08-18T14:45:47+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 464849731879,
+    "title": "BlackFriday Grupa Produse 35%",
+    "handle": "blackfriday-grupa-produse-35",
+    "description": "",
+    "published_at": "2023-11-09T23:48:27+02:00",
+    "updated_at": "2026-06-29T15:40:52+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 461993967911,
+    "title": "Bureti vase",
+    "handle": "bureti-vase",
+    "description": "",
+    "published_at": "2023-09-27T14:21:30+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 34
+  },
+  {
+    "id": 482066399527,
+    "title": "Capete de periuta electrica",
+    "handle": "capete-de-periuta-electrica",
+    "description": "",
+    "published_at": "2024-08-23T16:14:49+03:00",
+    "updated_at": "2026-06-30T13:53:25+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 666176225661,
+    "title": "Capsule pentru masina de spalat vase",
+    "handle": "capsule-pentru-masina-de-spalat",
+    "description": "",
+    "published_at": "2025-01-09T15:09:02+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 2
+  },
+  {
+    "id": 461995704615,
+    "title": "Cele mai recente",
+    "handle": "cele-mai-recente",
+    "description": "",
+    "published_at": "2023-09-27T14:35:14+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 2034
+  },
+  {
+    "id": 461995540775,
+    "title": "Cele mai vandute",
+    "handle": "cele-mai-vandute",
+    "description": "",
+    "published_at": "2023-09-27T14:34:11+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 2034
+  },
+  {
+    "id": 477274603815,
+    "title": "Cosmetice Coreene",
+    "handle": "cosmetice-coreene",
+    "description": "",
+    "published_at": "2024-05-28T02:25:45+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 207
+  },
+  {
+    "id": 670109368701,
+    "title": "Cosmetice coreene",
+    "handle": "cosmetice-1",
+    "description": "",
+    "published_at": "2025-05-30T02:03:55+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 207
+  },
+  {
+    "id": 643063710077,
+    "title": "Cosmetice Coreene Craciun",
+    "handle": "cosmetice-coreene-cr",
+    "description": "",
+    "published_at": "2024-11-07T14:11:09+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 133
+  },
+  {
+    "id": 667738046845,
+    "title": "Cosmetice Coreene promo",
+    "handle": "cosmetice-coreene-8-martie",
+    "description": "",
+    "published_at": "2025-03-06T15:16:51+02:00",
+    "updated_at": "2025-05-05T03:15:51+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 461995213095,
+    "title": "Cosuri rufe",
+    "handle": "cosuri-rufe",
+    "description": "",
+    "published_at": "2023-09-27T14:31:12+03:00",
+    "updated_at": "2026-06-26T11:07:30+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 480318226727,
+    "title": "Creion de Buze",
+    "handle": "creion-de-buze",
+    "description": "",
+    "published_at": "2024-07-11T20:33:07+03:00",
+    "updated_at": "2026-06-12T14:42:44+03:00",
+    "image": null,
+    "products_count": 5
+  },
+  {
+    "id": 480321470759,
+    "title": "Creion pentru Sprancene",
+    "handle": "creion-pentru-sprancene",
+    "description": "",
+    "published_at": "2024-07-11T21:41:14+03:00",
+    "updated_at": "2026-06-11T14:44:52+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 679817740669,
+    "title": "Creme de fata",
+    "handle": "creme-de-fata",
+    "description": "",
+    "published_at": "2026-02-19T18:07:48+02:00",
+    "updated_at": "2026-07-10T14:56:43+03:00",
+    "image": null,
+    "products_count": 6
+  },
+  {
+    "id": 461993804071,
+    "title": "Curatenie & Intretinere",
+    "handle": "curatenie-intretinere",
+    "description": "",
+    "published_at": "2023-09-27T14:19:59+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 719
+  },
+  {
+    "id": 643063972221,
+    "title": "Curatenie si intretinere Craciun",
+    "handle": "curatenie-si-intretinere-cr",
+    "description": "",
+    "published_at": "2024-11-07T14:28:19+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 192
+  },
+  {
+    "id": 472589500711,
+    "title": "Curățenie și Întreținere",
+    "handle": "perlux",
+    "description": "",
+    "published_at": "2024-03-07T16:03:57+02:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 74
+  },
+  {
+    "id": 683869045117,
+    "title": "Deodorante",
+    "handle": "deodorante",
+    "description": "",
+    "published_at": "2026-05-23T00:33:31+03:00",
+    "updated_at": "2026-07-28T15:29:20+03:00",
+    "image": null,
+    "products_count": 44
+  },
+  {
+    "id": 686061126013,
+    "title": "Detergent pentru rufe",
+    "handle": "detergent-pentru-rufe",
+    "description": "",
+    "published_at": "2026-07-07T13:40:04+03:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 20
+  },
+  {
+    "id": 461994000679,
+    "title": "Detergent rufe",
+    "handle": "detergent-rufe",
+    "description": "",
+    "published_at": "2023-09-27T14:21:48+03:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 80
+  },
+  {
+    "id": 461994098983,
+    "title": "Detergent vase",
+    "handle": "detergent-vase",
+    "description": "",
+    "published_at": "2023-09-27T14:22:08+03:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 25
+  },
+  {
+    "id": 671044469117,
+    "title": "Diverse",
+    "handle": "diverse",
+    "description": "",
+    "published_at": "2025-07-02T12:28:24+03:00",
+    "updated_at": "2026-08-19T14:48:55+03:00",
+    "image": null,
+    "products_count": 95
+  },
+  {
+    "id": 461995245863,
+    "title": "Dulapuri/Spatii depozitare",
+    "handle": "dulapuri-spatii-depozitare",
+    "description": "",
+    "published_at": "2023-09-27T14:31:44+03:00",
+    "updated_at": "2026-06-26T11:07:34+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 461994131751,
+    "title": "Echipamente și accesorii",
+    "handle": "echipamente-si-accesorii",
+    "description": "",
+    "published_at": "2023-09-27T14:22:29+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 78
+  },
+  {
+    "id": 479932580135,
+    "title": "Eyeliner",
+    "handle": "eyeliner",
+    "description": "",
+    "published_at": "2024-07-05T16:04:54+03:00",
+    "updated_at": "2026-08-11T14:42:54+03:00",
+    "image": null,
+    "products_count": 7
+  },
+  {
+    "id": 480321601831,
+    "title": "Fond de ten",
+    "handle": "fond-de-ten",
+    "description": "",
+    "published_at": "2024-07-11T21:42:08+03:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 13
+  },
+  {
+    "id": 483354542375,
+    "title": "Frigidere Cosmetice",
+    "handle": "frigidere-cosmetice",
+    "description": "",
+    "published_at": "2024-09-12T15:57:07+03:00",
+    "updated_at": "2026-06-08T19:32:50+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 485908054311,
+    "title": "Gel de dus",
+    "handle": "gel-de-dus-1",
+    "description": "",
+    "published_at": "2024-10-21T15:51:51+03:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 11
+  },
+  {
+    "id": 461993115943,
+    "title": "Gel de duș",
+    "handle": "gel-de-dus",
+    "description": "",
+    "published_at": "2023-09-27T14:17:10+03:00",
+    "updated_at": "2026-08-19T14:48:55+03:00",
+    "image": null,
+    "products_count": 17
+  },
+  {
+    "id": 480321536295,
+    "title": "Gel de fixare",
+    "handle": "gel-de-fixare",
+    "description": "",
+    "published_at": "2024-07-11T21:41:40+03:00",
+    "updated_at": "2026-06-08T19:25:51+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 679819084157,
+    "title": "Geluri de dus",
+    "handle": "geluri-de-dus",
+    "description": "",
+    "published_at": "2026-02-19T18:22:20+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 461994950951,
+    "title": "Hartie igienica",
+    "handle": "hartie-igienica",
+    "description": "",
+    "published_at": "2023-09-27T14:29:52+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 19
+  },
+  {
+    "id": 461988790567,
+    "title": "Home page",
+    "handle": "frontpage",
+    "description": null,
+    "published_at": "2023-09-27T13:16:16+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 31
+  },
+  {
+    "id": 673060716925,
+    "title": "Igiena Acasa",
+    "handle": "igiena-acasa",
+    "description": "",
+    "published_at": "2025-09-04T22:28:04+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 16
+  },
+  {
+    "id": 461995639079,
+    "title": "Igiena intima",
+    "handle": "igiena-intima",
+    "description": "",
+    "published_at": "2023-09-27T14:34:54+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 32
+  },
+  {
+    "id": 461993181479,
+    "title": "Igiena orala",
+    "handle": "igiena-orala",
+    "description": "",
+    "published_at": "2023-09-27T14:18:14+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 369
+  },
+  {
+    "id": 461992788263,
+    "title": "Igiena si ingrijire copii",
+    "handle": "igiena-si-ingrijire-copii",
+    "description": "",
+    "published_at": "2023-09-27T14:15:16+03:00",
+    "updated_at": "2026-06-26T11:14:11+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 643063841149,
+    "title": "Igiena si ingrijire copii Craciun",
+    "handle": "ingrijire-copii-cr",
+    "description": "",
+    "published_at": "2024-11-07T14:21:37+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 8
+  },
+  {
+    "id": 672978862461,
+    "title": "Incaltaminte",
+    "handle": "incaltaminte",
+    "description": "",
+    "published_at": "2025-09-03T14:46:51+03:00",
+    "updated_at": "2026-08-19T14:48:55+03:00",
+    "image": null,
+    "products_count": 90
+  },
+  {
+    "id": 464851829031,
+    "title": "INCONTINENTA - BF2023",
+    "handle": "incontinenta-bf2023",
+    "description": "",
+    "published_at": "2023-11-10T00:32:14+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 21
+  },
+  {
+    "id": 477336731943,
+    "title": "Ingrijire copii",
+    "handle": "ingrijire-copii",
+    "description": "",
+    "published_at": "2024-05-28T17:19:23+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 11
+  },
+  {
+    "id": 477336666407,
+    "title": "Ingrijire corp",
+    "handle": "ingrijire-corp",
+    "description": "",
+    "published_at": "2024-05-28T17:18:43+03:00",
+    "updated_at": "2026-08-18T14:45:47+03:00",
+    "image": null,
+    "products_count": 24
+  },
+  {
+    "id": 477336830247,
+    "title": "Ingrijire dantura",
+    "handle": "ingrijire-dantura",
+    "description": "",
+    "published_at": "2024-05-28T17:20:57+03:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 35
+  },
+  {
+    "id": 477336764711,
+    "title": "Ingrijire multipla",
+    "handle": "ingrijire-multipla",
+    "description": "",
+    "published_at": "2024-05-28T17:20:18+03:00",
+    "updated_at": "2026-08-04T10:06:59+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 477336633639,
+    "title": "Ingrijire par",
+    "handle": "ingrijire-par",
+    "description": "",
+    "published_at": "2024-05-28T17:18:20+03:00",
+    "updated_at": "2026-08-17T14:52:08+03:00",
+    "image": null,
+    "products_count": 22
+  },
+  {
+    "id": 679316586877,
+    "title": "Ingrijire rufe",
+    "handle": "ingrijire-rufe",
+    "description": "",
+    "published_at": "2026-02-08T23:42:20+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 43
+  },
+  {
+    "id": 679818428797,
+    "title": "Ingrijirea ochilor",
+    "handle": "ingrijirea-ochilor",
+    "description": "",
+    "published_at": "2026-02-19T18:11:51+02:00",
+    "updated_at": "2026-02-26T11:09:58+02:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 477336699175,
+    "title": "Ingrijirea pielii",
+    "handle": "ingrijirea-pielii",
+    "description": "",
+    "published_at": "2024-05-28T17:19:03+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 55
+  },
+  {
+    "id": 482066071847,
+    "title": "Irigatoare bucale",
+    "handle": "irigatoare-bucale",
+    "description": "",
+    "published_at": "2024-08-23T16:12:32+03:00",
+    "updated_at": "2026-06-30T13:48:07+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 665997115773,
+    "title": "JTF - Ingrijire dentara",
+    "handle": "jtf-periute-de-dinti-electrice",
+    "description": "",
+    "published_at": "2024-12-22T00:45:10+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 178
+  },
+  {
+    "id": 667738112381,
+    "title": "JTF 8 Martie",
+    "handle": "jtf-8-martie",
+    "description": "",
+    "published_at": "2025-03-06T15:17:48+02:00",
+    "updated_at": "2025-03-10T00:08:45+02:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 673060782461,
+    "title": "Kit Igiena Scoala",
+    "handle": "kit-igiena-scoala",
+    "description": "",
+    "published_at": "2025-09-04T22:29:17+03:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 5
+  },
+  {
+    "id": 683872289149,
+    "title": "Lavete umede mop",
+    "handle": "lavete-umede-mop",
+    "description": "",
+    "published_at": "2026-05-23T01:46:09+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 41
+  },
+  {
+    "id": 679818461565,
+    "title": "Lotiune de corp",
+    "handle": "produse-pentru-baie-si-dus",
+    "description": "",
+    "published_at": "2026-02-19T18:12:43+02:00",
+    "updated_at": "2026-06-08T18:46:09+03:00",
+    "image": null,
+    "products_count": 2
+  },
+  {
+    "id": 461993247015,
+    "title": "Lotiuni si creme de corp",
+    "handle": "lotiuni-si-creme-de-corp",
+    "description": "",
+    "published_at": "2023-09-27T14:18:46+03:00",
+    "updated_at": "2026-06-26T11:08:17+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 485908087079,
+    "title": "Lotiuni si Creme de corp",
+    "handle": "lotiuni-si-creme-de-corp-1",
+    "description": "",
+    "published_at": "2024-10-21T15:53:05+03:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 9
+  },
+  {
+    "id": 461994230055,
+    "title": "Lumânări parfumate",
+    "handle": "lumanari-parfumate",
+    "description": "",
+    "published_at": "2023-09-27T14:23:44+03:00",
+    "updated_at": "2026-06-30T16:31:33+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 481503969575,
+    "title": "Luvum",
+    "handle": "luvum",
+    "description": "",
+    "published_at": "2024-08-12T20:27:29+03:00",
+    "updated_at": "2026-07-07T09:40:20+03:00",
+    "image": null,
+    "products_count": 10
+  },
+  {
+    "id": 668622487933,
+    "title": "Luvum promo",
+    "handle": "luvum-promo",
+    "description": "",
+    "published_at": "2025-04-05T16:31:32+03:00",
+    "updated_at": "2026-06-30T07:22:24+03:00",
+    "image": null,
+    "products_count": 5
+  },
+  {
+    "id": 479894339879,
+    "title": "Machiaje",
+    "handle": "machiaje",
+    "description": "",
+    "published_at": "2024-07-04T17:45:00+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 76
+  },
+  {
+    "id": 667738014077,
+    "title": "Macromax 8 Martie",
+    "handle": "macromax-8-martie",
+    "description": "",
+    "published_at": "2025-03-06T15:16:22+02:00",
+    "updated_at": "2025-03-10T00:08:36+02:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 675563274621,
+    "title": "Macromax BF",
+    "handle": "macromax-bf",
+    "description": "",
+    "published_at": "2025-11-06T13:12:13+02:00",
+    "updated_at": "2025-11-06T13:13:22+02:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 461994262823,
+    "title": "Manusi unica folosinta",
+    "handle": "manusi-unica-folosinta",
+    "description": "",
+    "published_at": "2023-09-27T14:24:14+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 679817707901,
+    "title": "Masca de fata",
+    "handle": "masca-de-fata",
+    "description": "",
+    "published_at": "2026-02-19T18:06:39+02:00",
+    "updated_at": "2026-06-30T21:58:39+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 666837975421,
+    "title": "Mini Easy Clean",
+    "handle": "mini-easy-clean",
+    "description": "",
+    "published_at": "2025-02-04T15:24:53+02:00",
+    "updated_at": "2026-08-14T15:11:25+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 476546662695,
+    "title": "Mop si lavete",
+    "handle": "mop-si-lavete",
+    "description": "",
+    "published_at": "2024-05-15T16:21:34+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 153
+  },
+  {
+    "id": 477336928551,
+    "title": "Mostre",
+    "handle": "mostre",
+    "description": "",
+    "published_at": "2024-05-28T17:21:50+03:00",
+    "updated_at": "2026-07-10T09:08:33+03:00",
+    "image": null,
+    "products_count": 4
+  },
+  {
+    "id": 675099410813,
+    "title": "Nard",
+    "handle": "nard",
+    "description": "",
+    "published_at": "2025-10-27T00:42:34+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 64
+  },
+  {
+    "id": 668014281085,
+    "title": "Nard promo",
+    "handle": "promo-nard",
+    "description": "",
+    "published_at": "2025-03-16T01:34:47+02:00",
+    "updated_at": "2025-04-24T00:59:37+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 669068722557,
+    "title": "Noutati",
+    "handle": "noutati",
+    "description": "",
+    "published_at": "2025-04-24T15:01:14+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 2034
+  },
+  {
+    "id": 479932481831,
+    "title": "Ochi",
+    "handle": "ochi",
+    "description": "",
+    "published_at": "2024-07-05T16:04:28+03:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 14
+  },
+  {
+    "id": 461994754343,
+    "title": "Odorizant cameră spray",
+    "handle": "odorizant-camera-spray",
+    "description": "",
+    "published_at": "2023-09-27T14:27:45+03:00",
+    "updated_at": "2026-06-29T14:45:29+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 477336797479,
+    "title": "Odorizant incaperi",
+    "handle": "odorizant-incaperi",
+    "description": "",
+    "published_at": "2024-05-28T17:20:39+03:00",
+    "updated_at": "2026-08-04T10:06:53+03:00",
+    "image": null,
+    "products_count": 4
+  },
+  {
+    "id": 665625264509,
+    "title": "Odorizante Craciun",
+    "handle": "odorizante-cr",
+    "description": "",
+    "published_at": "2024-12-01T00:42:15+02:00",
+    "updated_at": "2026-06-30T16:31:33+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 461994328359,
+    "title": "Odorizante pentru toaletă",
+    "handle": "odorizante-pentru-toaleta",
+    "description": "",
+    "published_at": "2023-09-27T14:24:30+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 21
+  },
+  {
+    "id": 665227460989,
+    "title": "Pachet Promo Ingrijire Ten",
+    "handle": "pachet-promo-ingrijire-ten",
+    "description": "",
+    "published_at": "2024-11-22T13:05:35+02:00",
+    "updated_at": "2026-06-08T20:57:01+03:00",
+    "image": null,
+    "products_count": 13
+  },
+  {
+    "id": 484339319079,
+    "title": "PACHET PROMO Nard Himalaya",
+    "handle": "pachet-promo-nard-himalaya",
+    "description": "",
+    "published_at": "2024-09-27T16:01:29+03:00",
+    "updated_at": "2026-06-08T19:34:08+03:00",
+    "image": null,
+    "products_count": 9
+  },
+  {
+    "id": 668644868477,
+    "title": "Pachete promo",
+    "handle": "pachete-promo",
+    "description": "",
+    "published_at": "2025-04-07T03:29:01+03:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 647017431421,
+    "title": "Pachete Promo Periute",
+    "handle": "pachete-promo-periute",
+    "description": "",
+    "published_at": "2024-11-20T16:20:13+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 15
+  },
+  {
+    "id": 476501836071,
+    "title": "Pachete promo scutece copii",
+    "handle": "pachete-promo-scutece-copii",
+    "description": "",
+    "published_at": "2024-05-14T15:12:27+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 11
+  },
+  {
+    "id": 675562291581,
+    "title": "Pachete PROMO Sleepy Easy Clean BF",
+    "handle": "pachete-promo-sleepy-easy-clean-multisuprafete",
+    "description": "",
+    "published_at": "2025-11-06T12:59:21+02:00",
+    "updated_at": "2025-11-10T00:30:27+02:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 674506473853,
+    "title": "Pachete Promotionale",
+    "handle": "pachete-promotionale",
+    "description": "",
+    "published_at": "2025-10-13T14:07:47+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 668
+  },
+  {
+    "id": 668014346621,
+    "title": "Pachete Promotionale Coreene",
+    "handle": "pachete-promotionale-coreene",
+    "description": "",
+    "published_at": "2025-03-16T01:36:27+02:00",
+    "updated_at": "2025-04-01T00:29:37+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 484850893095,
+    "title": "Pachete Promotionale Cosmetice Coreene",
+    "handle": "pachete-promotionale-cosmetice-coreene",
+    "description": "",
+    "published_at": "2024-10-08T15:03:17+03:00",
+    "updated_at": "2026-06-30T13:33:44+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 667738177917,
+    "title": "Pachete Promotionale Paste",
+    "handle": "pachete-promotionale-8-martie",
+    "description": "",
+    "published_at": "2025-03-06T15:18:41+02:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 480318095655,
+    "title": "Paleta de Farduri",
+    "handle": "paleta-de-farduri-1",
+    "description": "",
+    "published_at": "2024-07-11T20:31:55+03:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 7
+  },
+  {
+    "id": 675582312829,
+    "title": "Parex BF",
+    "handle": "parex-bf",
+    "description": "",
+    "published_at": "2025-11-06T22:53:50+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 12
+  },
+  {
+    "id": 679819772285,
+    "title": "Pasta de dinti bebelusi",
+    "handle": "pasta-de-dinti",
+    "description": "",
+    "published_at": "2026-02-19T18:28:30+02:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 2
+  },
+  {
+    "id": 484490314023,
+    "title": "Periuta de dinti electrica pentru copii",
+    "handle": "periuta-de-dinti-electrica-pentru-copii",
+    "description": "",
+    "published_at": "2024-10-01T10:12:15+03:00",
+    "updated_at": "2026-06-30T13:50:26+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 482065973543,
+    "title": "Periute de dinti electrice",
+    "handle": "periute-de-dinti-electrice",
+    "description": "",
+    "published_at": "2024-08-23T16:11:54+03:00",
+    "updated_at": "2026-06-30T13:54:02+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 668622553469,
+    "title": "Periute de dinti promo",
+    "handle": "periute-de-dinti-promo",
+    "description": "",
+    "published_at": "2025-04-05T16:34:11+03:00",
+    "updated_at": "2026-06-26T10:38:55+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 669499523453,
+    "title": "Periute de dinti promo mai",
+    "handle": "periute-de-dinti-promo-mai",
+    "description": "",
+    "published_at": "2025-05-09T18:22:06+03:00",
+    "updated_at": "2025-07-24T22:58:41+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 477336863015,
+    "title": "Produse Baie",
+    "handle": "produse-baie",
+    "description": "",
+    "published_at": "2024-05-28T17:21:14+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 5
+  },
+  {
+    "id": 684281102717,
+    "title": "Produse de curatenie PAREX",
+    "handle": "produse-de-curatenie-parex",
+    "description": "",
+    "published_at": "2026-05-28T15:00:30+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 17
+  },
+  {
+    "id": 480389824807,
+    "title": "Produse de ingrijire",
+    "handle": "produse-de-ingrijire",
+    "description": "",
+    "published_at": "2024-07-13T15:47:31+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 145
+  },
+  {
+    "id": 461994787111,
+    "title": "Produse din hartie",
+    "handle": "produse-din-hartie",
+    "description": "",
+    "published_at": "2023-09-27T14:28:17+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 62
+  },
+  {
+    "id": 643064267133,
+    "title": "Produse incontinenta Craciun",
+    "handle": "produse-incontinenta-cr",
+    "description": "",
+    "published_at": "2024-11-07T14:39:57+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 101
+  },
+  {
+    "id": 643064365437,
+    "title": "Produse ingrijire animale BF",
+    "handle": "produse-ingrijire-animale-bf",
+    "description": "",
+    "published_at": "2024-11-07T14:40:55+02:00",
+    "updated_at": "2026-08-13T14:45:34+03:00",
+    "image": null,
+    "products_count": 16
+  },
+  {
+    "id": 461995573543,
+    "title": "Produse ingrijire personala",
+    "handle": "produse-ingrijire-personala",
+    "description": "",
+    "published_at": "2023-09-27T14:34:35+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 464
+  },
+  {
+    "id": 484957552935,
+    "title": "Produse Macromax",
+    "handle": "produse-macromax",
+    "description": "",
+    "published_at": "2024-10-10T15:08:38+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 132
+  },
+  {
+    "id": 643064037757,
+    "title": "Produse Macromax Craciun",
+    "handle": "produse-macromax-cr",
+    "description": "",
+    "published_at": "2024-11-07T14:31:07+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 44
+  },
+  {
+    "id": 461995114791,
+    "title": "Produse menaj",
+    "handle": "produse-menaj",
+    "description": "",
+    "published_at": "2023-09-27T14:30:54+03:00",
+    "updated_at": "2026-06-30T16:31:33+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 461993836839,
+    "title": "Produse pentru bucatarie",
+    "handle": "produse-pentru-bucatarie",
+    "description": "",
+    "published_at": "2023-09-27T14:20:25+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 88
+  },
+  {
+    "id": 679818264957,
+    "title": "Produse pentru curatarea fetei",
+    "handle": "produse-pentru-curatarea-fetei",
+    "description": "",
+    "published_at": "2026-02-19T18:10:23+02:00",
+    "updated_at": "2026-06-15T14:45:37+03:00",
+    "image": null,
+    "products_count": 4
+  },
+  {
+    "id": 461995311399,
+    "title": "Produse pentru vesela",
+    "handle": "produse-pentru-vesela",
+    "description": "",
+    "published_at": "2023-09-27T14:32:22+03:00",
+    "updated_at": "2026-06-30T16:31:33+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 461994426663,
+    "title": "Produse profesionale",
+    "handle": "produse-profesionale",
+    "description": "",
+    "published_at": "2023-09-27T14:24:52+03:00",
+    "updated_at": "2026-08-18T14:45:43+03:00",
+    "image": null,
+    "products_count": 9
+  },
+  {
+    "id": 461995082023,
+    "title": "Produse îngrijire animale",
+    "handle": "produse-ingrijire-animale",
+    "description": "",
+    "published_at": "2023-09-27T14:30:30+03:00",
+    "updated_at": "2026-06-26T11:13:51+03:00",
+    "image": null,
+    "products_count": 11
+  },
+  {
+    "id": 673128907133,
+    "title": "Promo Back to school",
+    "handle": "promo-back-to-school",
+    "description": "",
+    "published_at": "2025-09-06T13:33:14+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 21
+  },
+  {
+    "id": 668014248317,
+    "title": "Promo Luvum",
+    "handle": "promo-luvum",
+    "description": "",
+    "published_at": "2025-03-16T01:34:16+02:00",
+    "updated_at": "2025-04-01T00:30:11+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 669502472573,
+    "title": "PROMO MAI 2025",
+    "handle": "promo-mai-2025",
+    "description": "",
+    "published_at": "2025-05-09T20:42:16+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 15
+  },
+  {
+    "id": 668354937213,
+    "title": "Promo Sleepy Bio Easy Clean",
+    "handle": "promo-sleepy-bio-easy-clean",
+    "description": "",
+    "published_at": "2025-03-27T22:46:11+02:00",
+    "updated_at": "2026-07-22T14:44:44+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 668693889405,
+    "title": "Promotii",
+    "handle": "promotii",
+    "description": "",
+    "published_at": "2025-04-09T01:06:13+03:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 8
+  },
+  {
+    "id": 679714161021,
+    "title": "Promotii Cosmetice Coreene",
+    "handle": "promotii-cosmetice-coreene",
+    "description": "",
+    "published_at": "2026-02-17T14:32:48+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 207
+  },
+  {
+    "id": 461995016487,
+    "title": "Prosoape de bucatarie",
+    "handle": "prosoape-de-bucatarie",
+    "description": "",
+    "published_at": "2023-09-27T14:30:11+03:00",
+    "updated_at": "2026-08-18T14:45:47+03:00",
+    "image": null,
+    "products_count": 11
+  },
+  {
+    "id": 668422799741,
+    "title": "Pyunkang Yul",
+    "handle": "pyunkang-yul",
+    "description": "",
+    "published_at": "2025-03-31T17:25:29+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 57
+  },
+  {
+    "id": 685536608637,
+    "title": "Pyunkang Yul - Lichidare de stoc",
+    "handle": "pyunkang-yul-lichidare-de-stoc",
+    "description": "",
+    "published_at": "2026-06-18T16:08:59+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 21
+  },
+  {
+    "id": 668014313853,
+    "title": "Pyunkang Yul promo",
+    "handle": "promo-pyunkang-yul",
+    "description": "",
+    "published_at": "2025-03-16T01:35:17+02:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 461995376935,
+    "title": "Rafturi depozitare",
+    "handle": "rafturi-depozitare",
+    "description": "",
+    "published_at": "2023-09-27T14:32:48+03:00",
+    "updated_at": "2026-06-26T11:07:33+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 461995442471,
+    "title": "Reduceri",
+    "handle": "reduceri",
+    "description": "",
+    "published_at": "2023-09-27T14:33:43+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 255
+  },
+  {
+    "id": 677304303997,
+    "title": "Reduceri de Craciun",
+    "handle": "reduceri-de-craciun-2025",
+    "description": "",
+    "published_at": "2025-12-17T19:25:10+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 120
+  },
+  {
+    "id": 665887932797,
+    "title": "Reduceri de Craciun 2024",
+    "handle": "reduceri-de-craciun-2024",
+    "description": "",
+    "published_at": "2024-12-14T01:25:19+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 451
+  },
+  {
+    "id": 682717577597,
+    "title": "Reduceri de primavara",
+    "handle": "reduceri-de-primavara",
+    "description": "",
+    "published_at": "2026-04-30T23:31:34+03:00",
+    "updated_at": "2026-05-09T00:00:39+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 472863572263,
+    "title": "REELUP (DO NOT DELETE)",
+    "handle": "reelup-do-not-delete",
+    "description": null,
+    "published_at": "2024-03-12T01:44:54+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 222
+  },
+  {
+    "id": 675582411133,
+    "title": "REMAPLE BF",
+    "handle": "remaple-bf",
+    "description": "",
+    "published_at": "2025-11-06T22:56:00+02:00",
+    "updated_at": "2026-08-13T14:45:34+03:00",
+    "image": null,
+    "products_count": 7
+  },
+  {
+    "id": 484921999655,
+    "title": "Saci gunoi",
+    "handle": "saci-gunoi",
+    "description": "",
+    "published_at": "2024-10-09T14:54:45+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 14
+  },
+  {
+    "id": 461993017639,
+    "title": "Sapunuri",
+    "handle": "sapunuri",
+    "description": "",
+    "published_at": "2023-09-27T14:16:43+03:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 30
+  },
+  {
+    "id": 668422472061,
+    "title": "Scrub Daddy",
+    "handle": "scrub-daddy",
+    "description": "",
+    "published_at": "2025-03-31T17:21:47+03:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 13
+  },
+  {
+    "id": 668622520701,
+    "title": "Scrub Daddy promo",
+    "handle": "scrub-daddy-promo",
+    "description": "",
+    "published_at": "2025-04-05T16:32:07+03:00",
+    "updated_at": "2026-06-30T08:18:08+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 461992821031,
+    "title": "Scutece adulti",
+    "handle": "scutece-pentru-adulti",
+    "description": "",
+    "published_at": "2023-09-27T14:15:35+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 101
+  },
+  {
+    "id": 473007915303,
+    "title": "Scutece Adulți",
+    "handle": "scutece-adulți",
+    "description": "",
+    "published_at": "2024-03-15T01:09:55+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 71
+  },
+  {
+    "id": 466858606887,
+    "title": "Scutece chilotel",
+    "handle": "scutece-chilotel",
+    "description": "",
+    "published_at": "2023-12-05T17:07:23+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 82
+  },
+  {
+    "id": 466858541351,
+    "title": "Scutece copii",
+    "handle": "scutece-copii",
+    "description": "",
+    "published_at": "2023-12-05T17:06:34+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 157
+  },
+  {
+    "id": 464851599655,
+    "title": "SCUTECE COPII - BF2023",
+    "handle": "scutece-copii-bf2023",
+    "description": "",
+    "published_at": "2023-11-10T00:29:56+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 18
+  },
+  {
+    "id": 675562652029,
+    "title": "Scutece incontinenta adulti BF",
+    "handle": "scutece-incontinenta-adulti",
+    "description": "",
+    "published_at": "2025-11-06T13:04:35+02:00",
+    "updated_at": "2025-11-10T00:30:28+02:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 461990658343,
+    "title": "Scutece si chilotei copii",
+    "handle": "scutece-si-chilotei-copii",
+    "description": "",
+    "published_at": "2023-09-27T13:40:46+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 157
+  },
+  {
+    "id": 669499556221,
+    "title": "Scutece si chilotei copii",
+    "handle": "scutece-si-chilotei-copii-1",
+    "description": "",
+    "published_at": "2025-05-09T18:22:44+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 7
+  },
+  {
+    "id": 667738079613,
+    "title": "Scutece si Chilotei copii 8 Martie",
+    "handle": "scutece-si-chilotei-copii-8-martie",
+    "description": "",
+    "published_at": "2025-03-06T15:17:22+02:00",
+    "updated_at": "2025-03-10T00:08:44+02:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 675581690237,
+    "title": "Scutece si Chilotei Copii BF",
+    "handle": "scutece-si-chilotei-copii-bf",
+    "description": "",
+    "published_at": "2025-11-06T22:28:06+02:00",
+    "updated_at": "2025-11-10T00:30:24+02:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 643063808381,
+    "title": "Scutece si chilotei copii Craciun",
+    "handle": "scutece-si-chilotei-copii-cr",
+    "description": "",
+    "published_at": "2024-11-07T14:20:12+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 31
+  },
+  {
+    "id": 675099181437,
+    "title": "Scutece Sleepy BIO NATURAL DOUBLE",
+    "handle": "scutece-sleepy-bio-natural-double",
+    "description": "",
+    "published_at": "2025-10-27T00:34:24+02:00",
+    "updated_at": "2026-08-18T14:45:47+03:00",
+    "image": null,
+    "products_count": 7
+  },
+  {
+    "id": 675099214205,
+    "title": "Scutece Sleepy Natural Double",
+    "handle": "scutece-sleepy-natural-double",
+    "description": "",
+    "published_at": "2025-10-27T00:35:30+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 16
+  },
+  {
+    "id": 679817838973,
+    "title": "Seruri pentru piele",
+    "handle": "seruri-pentru-piele",
+    "description": "",
+    "published_at": "2026-02-19T18:08:36+02:00",
+    "updated_at": "2026-06-30T21:58:39+03:00",
+    "image": null,
+    "products_count": 4
+  },
+  {
+    "id": 675502522749,
+    "title": "Servetele bucatarie EasyClean",
+    "handle": "servetele-bucatarie-easyclean",
+    "description": "",
+    "published_at": "2025-11-05T02:20:54+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 14
+  },
+  {
+    "id": 461994852647,
+    "title": "Servetele de masa",
+    "handle": "servetele-de-masa",
+    "description": "",
+    "published_at": "2023-09-27T14:29:06+03:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 9
+  },
+  {
+    "id": 683869929853,
+    "title": "Servetele demachiante",
+    "handle": "servetele-demachiante",
+    "description": "",
+    "published_at": "2026-05-23T00:52:27+03:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 5
+  },
+  {
+    "id": 684279267709,
+    "title": "Servetele DOYFRESH",
+    "handle": "servetele-doyfresh",
+    "description": "",
+    "published_at": "2026-05-28T14:03:41+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 60
+  },
+  {
+    "id": 461994819879,
+    "title": "Servetele faciale",
+    "handle": "servetele-faciale",
+    "description": "",
+    "published_at": "2023-09-27T14:28:36+03:00",
+    "updated_at": "2026-08-19T14:48:59+03:00",
+    "image": null,
+    "products_count": 15
+  },
+  {
+    "id": 675581559165,
+    "title": "Servetele multisuprafete Sleepy Bio Easy Clean",
+    "handle": "servetele-multisuprafete-sleepy-bio-easy-clean",
+    "description": "",
+    "published_at": "2025-11-06T22:25:19+02:00",
+    "updated_at": "2026-07-22T14:44:44+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 643064136061,
+    "title": "Servetele Sleepy Easy Clean Craciun",
+    "handle": "servetele-sleepy-easy-clean-cr",
+    "description": "",
+    "published_at": "2024-11-07T14:34:11+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 48
+  },
+  {
+    "id": 643249471869,
+    "title": "Servetele test",
+    "handle": "servetele-test",
+    "description": "",
+    "published_at": "2024-11-16T00:45:39+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 223
+  },
+  {
+    "id": 461992722727,
+    "title": "Servetele Umede",
+    "handle": "servetele-umede",
+    "description": "",
+    "published_at": "2023-09-27T14:14:39+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 302
+  },
+  {
+    "id": 679249346941,
+    "title": "Servetele umede",
+    "handle": "servetele-umede-1",
+    "description": "",
+    "published_at": "2026-02-06T14:56:46+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 16
+  },
+  {
+    "id": 464852386087,
+    "title": "SERVETELE UMEDE - BF2023",
+    "handle": "servetele-umede-bf2023",
+    "description": "",
+    "published_at": "2023-11-10T00:41:26+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 4
+  },
+  {
+    "id": 683869503869,
+    "title": "Servetele umede animale",
+    "handle": "servetele-umede-animale",
+    "description": "",
+    "published_at": "2026-05-23T00:41:05+03:00",
+    "updated_at": "2026-08-13T14:45:34+03:00",
+    "image": null,
+    "products_count": 5
+  },
+  {
+    "id": 667959361917,
+    "title": "Servetele umede bebelusi",
+    "handle": "servetele-umede-bebelusi",
+    "description": "",
+    "published_at": "2025-03-13T18:52:50+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 36
+  },
+  {
+    "id": 669502865789,
+    "title": "Servetele umede copii",
+    "handle": "servetele-umede-copii",
+    "description": "",
+    "published_at": "2025-05-09T21:15:31+03:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 683869733245,
+    "title": "Servetele umede copii",
+    "handle": "servetele-umede-copii-1",
+    "description": "",
+    "published_at": "2026-05-23T00:47:10+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 23
+  },
+  {
+    "id": 643064201597,
+    "title": "Servetele Umede Craciun",
+    "handle": "servetele-umede-cr",
+    "description": "",
+    "published_at": "2024-11-07T14:37:19+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 93
+  },
+  {
+    "id": 667967390077,
+    "title": "Servetele umede incontinenta",
+    "handle": "servetele-umede-incontinenta",
+    "description": "",
+    "published_at": "2025-03-13T21:57:11+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 463499788583,
+    "title": "Servetele umede multisuprafete",
+    "handle": "servetele-umede-multisuprafete",
+    "description": "",
+    "published_at": "2023-10-18T12:00:52+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 230
+  },
+  {
+    "id": 483618160935,
+    "title": "Servetele Umede Multisuprafete - Sleepy Easy Clean Bio",
+    "handle": "servetele-umede-multisuprafete-sleepy-bio",
+    "description": "",
+    "published_at": "2024-09-17T12:56:59+03:00",
+    "updated_at": "2026-07-22T14:44:44+03:00",
+    "image": null,
+    "products_count": 21
+  },
+  {
+    "id": 669499785597,
+    "title": "Servetele umede multisuprafete promo",
+    "handle": "servetele-umede-multisuprafete-promo",
+    "description": "",
+    "published_at": "2025-05-09T18:25:08+03:00",
+    "updated_at": "2026-07-22T14:44:44+03:00",
+    "image": null,
+    "products_count": 7
+  },
+  {
+    "id": 683871043965,
+    "title": "Servetele umede pardoseli",
+    "handle": "servetele-umede-pardoseli",
+    "description": "",
+    "published_at": "2026-05-23T01:18:32+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 60
+  },
+  {
+    "id": 675099246973,
+    "title": "Servetele Umede pentru copii, 40 bucati, 99,5% Apa Pura - Sleepy Bio Natural",
+    "handle": "servetele-umede-pentru-copii-40-bucati-99-5-apa-pura-sleepy-bio-natural",
+    "description": "",
+    "published_at": "2025-10-27T00:39:38+02:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 675099279741,
+    "title": "Servetele Umede pentru copii, 40 bucati, 99,5% Apa Pura - Sleepy Bio Natural",
+    "handle": "servetele-umede-pentru-copii-40-bucati-99-5-apa-pura-sleepy-bio-natural-1",
+    "description": "",
+    "published_at": "2025-10-27T00:39:38+02:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 668713222525,
+    "title": "Servetele umede Sleepy Easy Clean Cherry multisuprafete",
+    "handle": "servetele-umede-sleepy-easy-clean-cherry-multisuprafețe",
+    "description": "",
+    "published_at": "2025-04-09T19:04:55+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 467446989095,
+    "title": "Servetele Umede Sleepy XL",
+    "handle": "servetele-umede-sleepy-xl",
+    "description": "",
+    "published_at": "2023-12-15T21:01:18+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 6
+  },
+  {
+    "id": 476546793767,
+    "title": "Servețele umede Easy Clean",
+    "handle": "servețele-umede-easy-clean",
+    "description": "",
+    "published_at": "2024-05-15T16:25:38+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 83
+  },
+  {
+    "id": 477336895783,
+    "title": "Seturi cadou",
+    "handle": "seturi-cadou",
+    "description": "",
+    "published_at": "2024-05-28T17:21:34+03:00",
+    "updated_at": "2026-07-10T09:06:10+03:00",
+    "image": null,
+    "products_count": 21
+  },
+  {
+    "id": 679818985853,
+    "title": "Seturi pentru ingrijirea pielii",
+    "handle": "seturi-pentru-ingrijirea-pielii",
+    "description": "",
+    "published_at": "2026-02-19T18:21:11+02:00",
+    "updated_at": "2026-07-10T09:04:26+03:00",
+    "image": null,
+    "products_count": 3
+  },
+  {
+    "id": 480321372455,
+    "title": "Sisua Lip Plumper",
+    "handle": "sisua-lip-plumper",
+    "description": "",
+    "published_at": "2024-07-11T21:39:43+03:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 5
+  },
+  {
+    "id": 674282275197,
+    "title": "Sleepy BIO NATURAL",
+    "handle": "sleepy-bio-natural",
+    "description": "",
+    "published_at": "2025-10-08T13:27:25+03:00",
+    "updated_at": "2026-08-18T14:45:47+03:00",
+    "image": null,
+    "products_count": 11
+  },
+  {
+    "id": 678266044797,
+    "title": "Sleepy Easy Clean Acti Foam",
+    "handle": "sleepy-easy-clean-acti-foam1",
+    "description": "<p data-start=\"256\" data-end=\"574\">Noile produse <strong data-start=\"272\" data-end=\"309\">Sleepy Easy Clean cu spumă activă</strong> reunesc soluțiile esențiale pentru o curățenie completă în bucătărie și baie, fără efort suplimentar. Concepute pentru eficiență maximă, aceste șervețele umede oferă o curățare rapidă și profundă a murdăriei dificile, grăsimii persistente și depunerilor de calcar.</p>\n<p data-start=\"576\" data-end=\"897\">Formula lor naturală, îmbogățită cu oțet alb, bicarbonat de sodiu și acid citric, asigură rezultate vizibile fără a deteriora suprafețele. Structura inovatoare față-verso combină <strong data-start=\"755\" data-end=\"805\">Green Macro Fiber cu spumă activă tensioactivă</strong>, care desprinde murdăria, și <strong data-start=\"835\" data-end=\"858\">White Micro Cyclone</strong>, care captează și reține impuritățile.</p>\n<p data-start=\"899\" data-end=\"1161\">Procesul de curățare este simplu și eficient, în doar 3 pași: spumare, colectare și clătire. Pachetele sunt ideale pentru utilizare zilnică, atât în bucătărie (hote, plite, cuptoare, blaturi), cât și în baie (chiuvete, baterii, toaletă, cabine și capete de duș).</p>\n<p data-start=\"2097\" data-end=\"2252\"><!----></p>\n<p data-start=\"1552\" data-end=\"1709\" data-is-last-node=\"\" data-is-only-node=\"\"><!----></p>\n<p><!----></p>",
+    "published_at": "2026-01-13T20:24:12+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 7
+  },
+  {
+    "id": 684003721597,
+    "title": "Sleepy test",
+    "handle": "sleepy-test",
+    "description": "",
+    "published_at": "2026-05-25T16:18:45+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 121
+  },
+  {
+    "id": 461994459431,
+    "title": "Solutie curatat geamuri",
+    "handle": "solutie-curatat-geamuri",
+    "description": "",
+    "published_at": "2023-09-27T14:25:14+03:00",
+    "updated_at": "2026-08-15T14:37:14+03:00",
+    "image": null,
+    "products_count": 6
+  },
+  {
+    "id": 461994524967,
+    "title": "Solutie curatat podele",
+    "handle": "solutie-curata-podele",
+    "description": "",
+    "published_at": "2023-09-27T14:25:40+03:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 37
+  },
+  {
+    "id": 461994557735,
+    "title": "Solutii suprafete baie",
+    "handle": "solutii-suprafete-baie",
+    "description": "",
+    "published_at": "2023-09-27T14:26:48+03:00",
+    "updated_at": "2026-08-18T14:45:49+03:00",
+    "image": null,
+    "products_count": 21
+  },
+  {
+    "id": 680230453629,
+    "title": "TEMS",
+    "handle": "tems",
+    "description": "",
+    "published_at": "2026-03-02T16:57:04+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 2
+  },
+  {
+    "id": 667738145149,
+    "title": "Tems 8 Martie",
+    "handle": "tems-8-martie",
+    "description": "",
+    "published_at": "2025-03-06T15:18:09+02:00",
+    "updated_at": "2025-03-10T00:08:22+02:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 675562389885,
+    "title": "TEMS Capsule 4-în-1 BF",
+    "handle": "tems-capsule-4-in-1",
+    "description": "",
+    "published_at": "2025-11-06T13:02:14+02:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 669172367741,
+    "title": "TEMS Promo",
+    "handle": "tems-promo",
+    "description": "",
+    "published_at": "2025-04-28T14:16:52+03:00",
+    "updated_at": "2026-08-20T14:47:29+03:00",
+    "image": null,
+    "products_count": 1
+  },
+  {
+    "id": 480318161191,
+    "title": "Tint pentru Buze",
+    "handle": "tint",
+    "description": "",
+    "published_at": "2024-07-11T20:32:23+03:00",
+    "updated_at": "2026-07-23T14:45:41+03:00",
+    "image": null,
+    "products_count": 14
+  },
+  {
+    "id": 679818166653,
+    "title": "Tonere pentru fata",
+    "handle": "tonere-pentru-fata",
+    "description": "",
+    "published_at": "2026-02-19T18:09:31+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 7
+  },
+  {
+    "id": 667865710973,
+    "title": "Unleashia",
+    "handle": "unleashia",
+    "description": "",
+    "published_at": "2025-03-10T21:36:54+02:00",
+    "updated_at": "2026-08-20T14:47:28+03:00",
+    "image": null,
+    "products_count": 76
+  },
+  {
+    "id": 668014215549,
+    "title": "Unleashia promo",
+    "handle": "promo-unleashia",
+    "description": "",
+    "published_at": "2025-03-16T01:33:43+02:00",
+    "updated_at": "2025-05-05T03:15:51+03:00",
+    "image": null,
+    "products_count": 0
+  },
+  {
+    "id": 461993640231,
+    "title": "Șampoane",
+    "handle": "șampoane",
+    "description": "",
+    "published_at": "2023-09-27T14:19:14+03:00",
+    "updated_at": "2026-07-30T15:13:15+03:00",
+    "image": null,
+    "products_count": 11
+  }
+]
