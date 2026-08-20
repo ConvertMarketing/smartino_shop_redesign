@@ -62,12 +62,17 @@ peste tot ar face mai ieftine exact rândurile care acum sunt „secțiune modif
 
 ## 2. Rezumat
 
-| Clasificare | Componente |
+Din **60 de rânduri de componentă** în tabelele din §3:
+
+| Clasificare | Rânduri |
 | --- | --- |
-| **nativ** | 21 |
+| **nativ**, direct | 45 |
+| **nativ, cu rezerve** — asamblat din secțiuni, doar stratul de afișare, prin workaround, sau cu setup greu | 7 |
 | **secțiune modificată** | 6 |
-| **secțiune nouă** | 3 |
-| **necunoscut / de verificat** | 13 puncte (§4) |
+| **secțiune nouă** | 1 |
+| **necunoscut** (rând întreg) | 1 |
+
+Separat, **13 puncte de comportament** rămân de verificat în theme editor (§4).
 
 Vestea bună: **Ella acoperă nativ majoritatea listei de conversie din brief** —
 inclusiv bara de progres spre livrarea gratuită, a doua imagine la hover, badge-urile,

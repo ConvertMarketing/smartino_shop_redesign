@@ -670,12 +670,17 @@ eticheta de procent. **Ce versiune e licențiată?**
 
 ### 8.2 Bilanțul
 
-| | |
+Din 60 de rânduri de componentă:
+
+| Clasificare | Rânduri |
 | --- | --- |
-| **nativ** | 21 componente |
+| **nativ**, direct | 45 |
+| **nativ, cu rezerve** (asamblat, doar afișare, workaround, setup greu) | 7 |
 | **secțiune modificată** | 6 |
-| **secțiune nouă** | 3 |
-| **de verificat** | 13 puncte |
+| **secțiune nouă** | 1 |
+| **necunoscut** | 1 |
+
+Plus 13 puncte de comportament de verificat în theme editor.
 
 **Ella acoperă nativ aproape toată lista de conversie din brief** — inclusiv bara de
 progres spre livrarea gratuită (`Free Shipping Calculator Message`, prag configurabil —
