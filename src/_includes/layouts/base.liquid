@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description | default: 'Prototip de redesign — preview intern.' }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="{{ '/assets/css/tokens.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/base.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/components.css' | url }}">
+  {% if extraCss %}<link rel="stylesheet" href="{{ extraCss | url }}">{% endif %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Sari la conținut</a>
+
+  {% include "components/announcement.liquid" %}
+  {% include "components/header.liquid" %}
+
+  <main id="main">
+    {{ content }}
+  </main>
+
+  {% include "components/footer.liquid" %}
+  {% include "components/cart-drawer.liquid" %}
+
+  <script src="{{ '/assets/js/catalog.js' | url }}" defer></script>
+  <script src="{{ '/assets/js/app.js' | url }}" defer></script>
+</body>
+</html>

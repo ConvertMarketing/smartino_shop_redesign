@@ -1,0 +1,82 @@
+{%- comment -%}
+  Header sticky cu căutare proeminentă, mega-menu și coș cu total.
+  Ella: Header sticky + Advanced Mega Menu sunt native (ella-mapping.md G2, G3).
+  Wordmark: setat în tip până primim SVG-ul real — vezi docs/brand/README.md.
+{%- endcomment -%}
+<header class="header" data-header>
+  <div class="container header__inner">
+
+    <button class="header__burger" type="button" data-open-nav aria-label="Deschide meniul" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a class="header__logo" href="{{ '/' | url }}" aria-label="Smartino — pagina principală">
+      <span class="wordmark">smartino<sup>®</sup></span>
+    </a>
+
+    <form class="search" role="search" data-search action="{{ '/search/' | url }}">
+      <label class="visually-hidden" for="q">Caută produse</label>
+      <input id="q" name="q" type="search" autocomplete="off" data-search-input
+             placeholder="Caută scutece, șervețele, detergent…" aria-describedby="search-hint">
+      <span id="search-hint" class="visually-hidden">Rezultatele apar pe măsură ce scrii</span>
+      <button class="search__submit" type="submit" aria-label="Caută">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+        </svg>
+      </button>
+      <div class="search__results" data-search-results hidden></div>
+    </form>
+
+    <div class="header__actions">
+      <a class="header__action header__action--phone" href="tel:+40374072222">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>
+        </svg>
+        <span>0374 072 222</span>
+      </a>
+
+      <button class="header__action header__action--cart" type="button" data-open-cart aria-label="Deschide coșul">
+        <span class="cart-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="cart-icon__count" data-cart-count hidden>0</span>
+        </span>
+        <span class="header__action-total tnum" data-cart-total>0,00 lei</span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="nav" aria-label="Categorii principale" data-nav>
+    <div class="container nav__inner">
+      <button class="nav__close" type="button" data-close-nav aria-label="Închide meniul">&times;</button>
+      <ul class="nav__list">
+        {%- for item in nav.primary -%}
+          <li class="nav__item{% if item.children %} has-mega{% endif %}">
+            <a href="{{ item.url | url }}"{% if item.children %} aria-haspopup="true"{% endif %}>{{ item.title }}</a>
+            {%- if item.children -%}
+              <div class="mega">
+                <div class="container mega__inner">
+                  {%- for col in item.children -%}
+                    <div class="mega__col">
+                      <p class="mega__title">{{ col.title }}</p>
+                      <ul>
+                        {%- for link in col.links -%}
+                          <li><a href="{{ link.url | url }}">{{ link.title }}</a></li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </nav>
+</header>
+<div class="nav__scrim" data-nav-scrim hidden></div>

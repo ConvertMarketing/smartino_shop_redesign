@@ -1,0 +1,103 @@
+{%- comment -%}
+  Footer. Conține obligațiile legale RO (design-brief.md §1.3):
+  denumire completă, nr. Registrul Comerțului, adresa sediului social,
+  pictogramă SAL — FĂRĂ SOL, platforma e închisă din 20 iulie 2025.
+  Baymard cere link direct la Retur și Livrare — sunt primele în coloana Ajutor.
+{%- endcomment -%}
+<footer class="footer">
+  <div class="container">
+
+    <div class="footer__usp">
+      {%- assign usps = "Livrare gratuită peste 200 lei|Comandat azi, livrat în 1–3 zile lucrătoare|Retur în 14 zile|Plata ramburs sau card" | split: "|" -%}
+      {%- for u in usps -%}
+        <div class="footer__usp-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m20 6-11 11-5-5"/>
+          </svg>
+          <span>{{ u }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="wordmark wordmark--footer">smartino<sup>®</sup></span>
+        <p class="footer__note">
+          Scutece Sleepy pentru copii și adulți, produse de igienă, curățenie
+          și cosmetice coreene originale.
+        </p>
+        <p class="footer__contact">
+          <a href="tel:+40374072222"><strong>0374 072 222</strong></a><br>
+          <a href="mailto:info@smartinoshop.ro">info@smartinoshop.ro</a><br>
+          <span class="footer__hours">Luni–Vineri, 09:00–17:00</span>
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <p class="footer__heading">Ajutor</p>
+        <ul>{%- for l in nav.footer.ajutor -%}<li><a href="{{ l.url | url }}">{{ l.title }}</a></li>{%- endfor -%}</ul>
+      </div>
+
+      <div class="footer__col">
+        <p class="footer__heading">Smartino</p>
+        <ul>{%- for l in nav.footer.despre -%}<li><a href="{{ l.url | url }}">{{ l.title }}</a></li>{%- endfor -%}</ul>
+      </div>
+
+      <div class="footer__col">
+        <p class="footer__heading">Magazine fizice</p>
+        <p class="footer__store">
+          <strong>Smartino Supermarket</strong><br>
+          Snagov Plaza, DN1, jud. Ilfov<br>
+          L–V 07:00–22:00 · S–D 08:00–21:00
+        </p>
+        <p class="footer__store">
+          <strong>Smartino Home &amp; Deco</strong><br>
+          Snagov Plaza, vizavi de supermarket
+        </p>
+      </div>
+    </div>
+
+    <div class="footer__pay">
+      <p class="footer__heading">Metode de plată</p>
+      <div class="footer__pay-list" role="list">
+        {%- assign methods = "Visa|Mastercard|Maestro|Ramburs" | split: "|" -%}
+        {%- for m in methods -%}
+          <span class="pay-chip" role="listitem">{{ m }}</span>
+        {%- endfor -%}
+      </div>
+      <p class="footer__pay-note">Plăți securizate 3D Secure prin PayU și MobilPay.</p>
+    </div>
+
+    <div class="footer__legal">
+      <div class="footer__legal-text">
+        <p>
+          <strong>S.C. SMARTINO INTERNATIONAL S.R.L.</strong> ·
+          CUI RO37843488 · J2017003263233<br>
+          Str. Avram Iancu nr. 22–26F, Otopeni, jud. Ilfov
+        </p>
+        <ul class="footer__legal-links">
+          {%- for l in nav.footer.legal -%}<li><a href="{{ l.url | url }}">{{ l.title }}</a></li>{%- endfor -%}
+        </ul>
+      </div>
+
+      {%- comment -%}
+        Pictogramă SAL, 250×50 px, conform Ordinului ANPC 449/2022.
+        SOL a fost eliminat prin OPANPC 270/2026 — nu se mai afișează.
+        Placeholder până primim assetul oficial de la client.
+      {%- endcomment -%}
+      <div class="footer__anpc">
+        <a class="anpc-badge" href="https://anpc.ro/ce-este-sal/" rel="noopener" target="_blank">
+          <span class="anpc-badge__mark">ANPC</span>
+          <span class="anpc-badge__text">Soluționarea Alternativă<br>a Litigiilor</span>
+        </a>
+        <p class="footer__anpc-note">Pictogramă 250×50 — de înlocuit cu assetul oficial ANPC.</p>
+      </div>
+    </div>
+
+    <p class="footer__preview">
+      Prototip de redesign — preview intern, fără checkout. Datele și imaginile provin
+      din catalogul real smartinoshop.ro.
+    </p>
+  </div>
+</footer>

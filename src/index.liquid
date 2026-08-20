@@ -1,0 +1,191 @@
+---
+layout: layouts/base.liquid
+title: "SmartinoShop — Scutece Sleepy, igienă și curățenie"
+description: "Prototip redesign. Scutece Sleepy pentru copii și adulți, produse de igienă, curățenie și cosmetice coreene originale."
+extraCss: /assets/css/home.css
+permalink: /index.html
+---
+{%- comment -%} Colecțiile reale, alese după ce chiar are produse {%- endcomment -%}
+{%- assign c_best = catalog.collections | where: "handle", "best-seller" | first -%}
+{%- assign c_red = catalog.collections | where: "handle", "reduceri" | first -%}
+{%- assign c_kbeauty = catalog.collections | where: "handle", "cosmetice-coreene" | first -%}
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <p class="hero__eyebrow">Importator unic Sleepy în România</p>
+      <h1 class="hero__title">Tot ce ține casa curată<br>și familia îngrijită</h1>
+      <p class="hero__lede">
+        Peste 1.200 de produse de igienă, curățenie și îngrijire.
+        Livrare gratuită peste 200&nbsp;lei.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="{{ '/collections/scutece-copii/' | url }}">Scutece bebeluși</a>
+        <a class="btn btn--secondary" href="{{ '/collections/produse-incontinenta/' | url }}">Produse incontinență</a>
+      </div>
+    </div>
+    {%- comment -%}
+      Produsul din hero e ales deliberat: ancora de brand e scutecul Sleepy, nu
+      primul item din best-seller (care e un pachet de mop și arăta off-message).
+    {%- endcomment -%}
+    {%- assign hp = catalog.productsByHandle["scutece-chilotel-pentru-bebeluși-sleepy-natural-h20-marimea-5-11-18kg-24-bucati"] -%}
+    {%- unless hp -%}
+      {%- assign c_baby = catalog.collections | where: "handle", "scutece-copii" | first -%}
+      {%- assign heroProduct = c_baby.productHandles | first -%}
+      {%- assign hp = catalog.productsByHandle[heroProduct] -%}
+    {%- endunless -%}
+    {%- if hp and hp.image -%}
+      <div class="hero__media">
+        <img src="{{ hp.image.src | cdn: 700 }}"
+             srcset="{{ hp.image.src | srcset: 400,600,800,1000 }}"
+             sizes="(min-width: 900px) 460px, 84vw"
+             alt="{{ hp.image.alt | escape }}" width="700" height="700"
+             fetchpriority="high" decoding="async">
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- comment -%} USP — Ella: Custom Service Block, nativ {%- endcomment -%}
+<section class="usp">
+  <div class="container usp__inner">
+    <div class="usp__item">
+      <strong>Livrare gratuită</strong>
+      <span>la comenzi peste 200 lei</span>
+    </div>
+    <div class="usp__item">
+      <strong>1–3 zile lucrătoare</strong>
+      <span>curier 24,90 lei · easybox 15 lei</span>
+    </div>
+    <div class="usp__item">
+      <strong>Retur în 14 zile</strong>
+      <span>conform OUG 34/2014</span>
+    </div>
+    <div class="usp__item">
+      <strong>Plata ramburs sau card</strong>
+      <span>3D Secure prin PayU și MobilPay</span>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} Categorii — punctele de intrare care separă publicurile {%- endcomment -%}
+<section class="section container">
+  <div class="section__head"><h2>Cumpără pe categorii</h2></div>
+  <div class="cats">
+    {%- assign catHandles = "scutece-copii,produse-incontinenta,servetele-umede,curatenie-intretinere,produse-din-hartie,cosmetice-coreene" | split: "," -%}
+    {%- for h in catHandles -%}
+      {%- assign col = catalog.collections | where: "handle", h | first -%}
+      {%- if col -%}
+        {%- assign firstHandle = col.productHandles | first -%}
+        {%- assign fp = catalog.productsByHandle[firstHandle] -%}
+        <a class="cat" href="{{ '/collections/' | append: col.handle | append: '/' | url }}">
+          <span class="cat__media">
+            {%- if fp and fp.image -%}
+              <img src="{{ fp.image.src | cdn: 240 }}" srcset="{{ fp.image.src | srcset: 160,240,320 }}"
+                   sizes="120px" alt="" width="240" height="240" loading="lazy" decoding="async">
+            {%- endif -%}
+          </span>
+          <span class="cat__name">{{ col.title }}</span>
+          <span class="cat__count tnum">{{ col.count }} produse</span>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{%- comment -%} Bestsellers {%- endcomment -%}
+{%- if c_best -%}
+<section class="section container">
+  <div class="section__head">
+    <h2>Cele mai vândute</h2>
+    <a class="section__link" href="{{ '/collections/best-seller/' | url }}">Vezi toate →</a>
+  </div>
+  <div class="grid-products">
+    {%- assign bestList = c_best.productHandles | slice: 0, 8 -%}
+    {%- for h in bestList -%}
+      {%- assign product = catalog.productsByHandle[h] -%}
+      {%- if product -%}{% include "components/product-card.liquid" %}{%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+
+{%- comment -%} Reduceri reale — doar produse cu compare_at_price {%- endcomment -%}
+<section class="section section--sale">
+  <div class="container">
+    <div class="section__head">
+      <h2>Reduceri</h2>
+      <a class="section__link" href="{{ '/collections/reduceri/' | url }}">Vezi toate →</a>
+    </div>
+    <div class="grid-products">
+      {%- comment -%}
+        Selecție diversificată pe vendor (vezi catalog.js): „primele 8" dădea
+        opt pachete de șervețele aproape identice.
+      {%- endcomment -%}
+      {%- for product in catalog.saleFeatured -%}
+        {% include "components/product-card.liquid" %}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- comment -%} Cosmetice coreene — diferențiatorul de importator oficial {%- endcomment -%}
+{%- if c_kbeauty -%}
+<section class="section container">
+  <div class="kbeauty">
+    <div class="kbeauty__text">
+      <p class="kbeauty__eyebrow">Importator oficial</p>
+      <h2>Cosmetice coreene, originale</h2>
+      <p>
+        Unleashia, Pyunkang Yul, Nard și Luvum — aduse direct, cu garanția
+        autenticității. {{ c_kbeauty.count }} produse în stoc.
+      </p>
+      <a class="btn btn--primary" href="{{ '/collections/cosmetice-coreene/' | url }}">Descoperă colecția</a>
+    </div>
+    <div class="kbeauty__grid">
+      {%- assign kList = c_kbeauty.productHandles | slice: 0, 4 -%}
+      {%- for h in kList -%}
+        {%- assign kp = catalog.productsByHandle[h] -%}
+        {%- if kp and kp.image -%}
+          <a class="kbeauty__tile" href="{{ '/products/' | append: kp.handle | append: '/' | url }}">
+            <img src="{{ kp.image.src | cdn: 300 }}" srcset="{{ kp.image.src | srcset: 200,300,400 }}"
+                 sizes="(min-width:900px) 180px, 40vw" alt="{{ kp.image.alt | escape }}"
+                 width="300" height="300" loading="lazy" decoding="async">
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{%- comment -%} Magazine fizice — activ de încredere real {%- endcomment -%}
+<section class="section container">
+  <div class="stores">
+    <div class="stores__item">
+      <h3>Smartino Supermarket</h3>
+      <p>Snagov Plaza, DN1 · jud. Ilfov</p>
+      <p class="stores__hours">Luni–Vineri 07:00–22:00 · Sâmbătă–Duminică 08:00–21:00</p>
+      <p class="stores__tel"><a href="tel:+40755210178">0755 210 178</a></p>
+    </div>
+    <div class="stores__item">
+      <h3>Smartino Home &amp; Deco</h3>
+      <p>Snagov Plaza, vizavi de supermarket</p>
+      <p class="stores__hours">Peste 1.200 mp de mobilier, decor și grădină</p>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="container newsletter__inner">
+    <div>
+      <h2>Ofertele, direct pe email</h2>
+      <p>Reduceri și produse noi. Fără spam.</p>
+    </div>
+    <form class="newsletter__form" onsubmit="return false;">
+      <label class="visually-hidden" for="nl">Adresa ta de email</label>
+      <input id="nl" type="email" placeholder="adresa@email.ro" required>
+      <button class="btn btn--primary" type="submit">Abonează-mă</button>
+    </form>
+  </div>
+</section>

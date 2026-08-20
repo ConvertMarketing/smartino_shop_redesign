@@ -1,0 +1,35 @@
+{%- comment -%}
+  Cart drawer cu bară de progres spre livrarea gratuită (prag 200 lei).
+  Ella: Quick Cart + Free Shipping Calculator Message sunt native
+  (ella-mapping.md G6, G6b). Pragul e o singură constantă în app.js.
+{%- endcomment -%}
+<div class="drawer" data-cart-drawer hidden>
+  <div class="drawer__scrim" data-close-cart></div>
+  <aside class="drawer__panel" role="dialog" aria-modal="true" aria-label="Coșul tău" data-cart-panel>
+    <header class="drawer__head">
+      <h2 class="drawer__title">Coșul tău</h2>
+      <button class="drawer__close" type="button" data-close-cart aria-label="Închide coșul">&times;</button>
+    </header>
+
+    <div class="ship-progress" data-ship-progress>
+      <p class="ship-progress__text" data-ship-text>Adaugă produse pentru livrare gratuită</p>
+      <div class="ship-progress__track">
+        <div class="ship-progress__bar" data-ship-bar style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="drawer__body" data-cart-items>
+      <p class="drawer__empty">Coșul tău e gol.</p>
+    </div>
+
+    <footer class="drawer__foot" data-cart-foot hidden>
+      <div class="drawer__row">
+        <span>Subtotal</span>
+        <strong class="tnum" data-cart-subtotal>0,00 lei</strong>
+      </div>
+      <p class="drawer__ship tnum" data-cart-ship></p>
+      <a class="btn btn--primary btn--block" href="#" aria-disabled="true">Finalizează comanda</a>
+      <p class="drawer__note">Prototip — checkout-ul nu e inclus.</p>
+    </footer>
+  </aside>
+</div>

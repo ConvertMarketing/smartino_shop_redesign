@@ -1,0 +1,61 @@
+{%- comment -%}
+  Card produs. Toate datele vin din data/products.json — niciun text inventat.
+  Ella: a doua imagine la hover, badge-urile și quick add sunt native
+  (ella-mapping.md C1, C4, C6). Prețul pe bucată e adăugarea noastră (C3).
+{%- endcomment -%}
+<article class="card" data-product="{{ product.handle }}">
+  <a class="card__media" href="{{ '/products/' | append: product.handle | append: '/' | url }}"
+     tabindex="-1" aria-hidden="true">
+    {%- if product.image -%}
+      <img class="card__img card__img--main"
+           src="{{ product.image.src | cdn: 400 }}"
+           srcset="{{ product.image.src | srcset: 200,300,400,600 }}"
+           sizes="(min-width: 1200px) 300px, (min-width: 768px) 33vw, 45vw"
+           alt="{{ product.image.alt | escape }}" loading="lazy" decoding="async"
+           width="400" height="400">
+      {%- if product.hoverImage -%}
+        <img class="card__img card__img--hover"
+             src="{{ product.hoverImage.src | cdn: 400 }}"
+             srcset="{{ product.hoverImage.src | srcset: 200,300,400,600 }}"
+             sizes="(min-width: 1200px) 300px, (min-width: 768px) 33vw, 45vw"
+             alt="" loading="lazy" decoding="async" width="400" height="400">
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="card__badges">
+      {%- if product.discountPct -%}<span class="badge badge--sale">−{{ product.discountPct }}%</span>{%- endif -%}
+      {%- if product.isNew -%}<span class="badge badge--new">Nou</span>{%- endif -%}
+      {%- unless product.available -%}<span class="badge badge--low">Stoc epuizat</span>{%- endunless -%}
+    </div>
+  </a>
+
+  <div class="card__body">
+    {%- if product.vendor != blank -%}
+      <p class="card__vendor">{{ product.vendor }}</p>
+    {%- endif -%}
+
+    <h3 class="card__title">
+      <a href="{{ '/products/' | append: product.handle | append: '/' | url }}">{{ product.title }}</a>
+    </h3>
+
+    <div class="card__price">
+      <span class="price {% if product.compareAt %}price--sale{% endif %}">{{ product.price | lei }}</span>
+      {%- if product.compareAt -%}
+        <s class="price__was">{{ product.compareAt | lei }}</s>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Prețul pe bucată — vezi docs/design-brief.md §6.3 {%- endcomment -%}
+    {%- if product.perUnit -%}
+      <p class="card__unit tnum">{{ product.perUnit | lei }} / bucată · {{ product.units }} buc</p>
+    {%- endif -%}
+
+    <div class="card__add" data-add-wrap>
+      <button class="btn btn--primary btn--block card__add-btn" type="button"
+              data-add="{{ product.handle }}"
+              {% unless product.available %}disabled{% endunless %}>
+        {%- if product.available -%}Adaugă în coș{%- else -%}Indisponibil{%- endif -%}
+      </button>
+    </div>
+  </div>
+</article>

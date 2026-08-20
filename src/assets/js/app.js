@@ -1,0 +1,233 @@
+/* Smartino prototip — fără framework. Tot ce e aici trebuie portabil în Liquid + JS de temă. */
+(() => {
+  'use strict';
+
+  /** Pragul de livrare gratuită. Singura constantă comercială — o schimbi aici. */
+  const FREE_SHIPPING = 200;
+  const SHIPPING_FEE = 24.9;
+
+  const lei = (n) =>
+    n.toLocaleString('ro-RO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' lei';
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  // ---------------------------------------------------------------- coș
+  const STORE = 'smartino-cart';
+  let cart = [];
+  try { cart = JSON.parse(localStorage.getItem(STORE)) || []; } catch { cart = []; }
+
+  const save = () => localStorage.setItem(STORE, JSON.stringify(cart));
+  const find = (h) => cart.find((l) => l.handle === h);
+  const count = () => cart.reduce((n, l) => n + l.qty, 0);
+  const subtotal = () => cart.reduce((n, l) => n + l.price * l.qty, 0);
+
+  function addToCart(handle) {
+    const p = window.__CATALOG__?.[handle];
+    if (!p) return;
+    const line = find(handle);
+    if (line) line.qty += 1;
+    else cart.push({ handle, title: p.title, price: p.price, image: p.image, qty: 1 });
+    save(); render();
+  }
+
+  function setQty(handle, qty) {
+    const line = find(handle);
+    if (!line) return;
+    if (qty <= 0) cart = cart.filter((l) => l.handle !== handle);
+    else line.qty = qty;
+    save(); render();
+  }
+
+  // ------------------------------------------------------- randare coș
+  function render() {
+    const n = count();
+    const sub = subtotal();
+
+    const badge = $('[data-cart-count]');
+    if (badge) { badge.textContent = n; badge.hidden = n === 0; }
+    const total = $('[data-cart-total]');
+    if (total) total.textContent = lei(sub);
+
+    // bară de progres spre livrare gratuită
+    const wrap = $('[data-ship-progress]');
+    if (wrap) {
+      const pct = Math.min(100, (sub / FREE_SHIPPING) * 100);
+      $('[data-ship-bar]').style.width = pct + '%';
+      const txt = $('[data-ship-text]');
+      if (sub === 0) txt.textContent = 'Adaugă produse pentru livrare gratuită';
+      else if (sub >= FREE_SHIPPING) txt.textContent = 'Ai livrare gratuită!';
+      else txt.textContent = `Încă ${lei(FREE_SHIPPING - sub)} până la livrare gratuită`;
+      wrap.classList.toggle('is-complete', sub >= FREE_SHIPPING);
+    }
+
+    const body = $('[data-cart-items]');
+    if (body) {
+      if (!cart.length) {
+        body.innerHTML = '<p class="drawer__empty">Coșul tău e gol.</p>';
+      } else {
+        body.innerHTML = cart.map((l) => `
+          <div class="cart-line">
+            <img src="${l.image ? l.image.split('?')[0] + '?width=128' : ''}" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <p class="cart-line__t">${l.title}</p>
+              <p class="cart-line__p tnum">${lei(l.price)}</p>
+              <button class="cart-line__rm" type="button" data-rm="${l.handle}">Șterge</button>
+            </div>
+            <div class="stepper" style="flex-direction:column;min-height:auto">
+              <button type="button" data-inc="${l.handle}" aria-label="Adaugă unul">+</button>
+              <span class="stepper__n">${l.qty}</span>
+              <button type="button" data-dec="${l.handle}" aria-label="Scade unul">−</button>
+            </div>
+          </div>`).join('');
+      }
+      const foot = $('[data-cart-foot]');
+      if (foot) foot.hidden = !cart.length;
+      const st = $('[data-cart-subtotal]');
+      if (st) st.textContent = lei(sub);
+      const ship = $('[data-cart-ship]');
+      if (ship) {
+        ship.textContent = sub >= FREE_SHIPPING
+          ? 'Livrare gratuită inclusă'
+          : `Livrare ${lei(SHIPPING_FEE)} · easybox ${lei(15)}`;
+      }
+    }
+
+    renderCards();
+  }
+
+  /** Butonul „Adaugă" devine stepper, iar cardul se marchează ca fiind în coș. */
+  function renderCards() {
+    $$('.card').forEach((card) => {
+      const handle = card.dataset.product;
+      const line = find(handle);
+      const wrap = $('[data-add-wrap]', card);
+      if (!wrap) return;
+      card.classList.toggle('is-in-cart', !!line);
+      if (line) {
+        wrap.innerHTML = `
+          <div class="stepper">
+            <button type="button" data-dec="${handle}" aria-label="Scade cantitatea">−</button>
+            <span class="stepper__n" aria-live="polite">${line.qty}</span>
+            <button type="button" data-inc="${handle}" aria-label="Crește cantitatea">+</button>
+          </div>`;
+      } else if (!$('.card__add-btn', wrap)) {
+        const p = window.__CATALOG__?.[handle];
+        wrap.innerHTML = `<button class="btn btn--primary btn--block card__add-btn" type="button"
+          data-add="${handle}"${p && p.available === false ? ' disabled' : ''}>Adaugă în coș</button>`;
+      }
+    });
+  }
+
+  // ------------------------------------------------------------ evenimente
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-add],[data-inc],[data-dec],[data-rm],[data-open-cart],[data-close-cart],[data-open-nav],[data-close-nav]');
+    if (!t) return;
+
+    if (t.dataset.add) { addToCart(t.dataset.add); openCart(); }
+    else if (t.dataset.inc) { const l = find(t.dataset.inc); setQty(t.dataset.inc, (l?.qty || 0) + 1); }
+    else if (t.dataset.dec) { const l = find(t.dataset.dec); setQty(t.dataset.dec, (l?.qty || 0) - 1); }
+    else if (t.dataset.rm !== undefined && t.hasAttribute('data-rm')) setQty(t.dataset.rm, 0);
+    else if (t.hasAttribute('data-open-cart')) openCart();
+    else if (t.hasAttribute('data-close-cart')) closeCart();
+    else if (t.hasAttribute('data-open-nav')) openNav();
+    else if (t.hasAttribute('data-close-nav')) closeNav();
+  });
+
+  // ------------------------------------------------------------- drawere
+  let lastFocus = null;
+  const drawer = () => $('[data-cart-drawer]');
+
+  function openCart() {
+    const d = drawer(); if (!d) return;
+    lastFocus = document.activeElement;
+    d.hidden = false;
+    requestAnimationFrame(() => d.classList.add('is-open'));
+    document.body.classList.add('is-locked');
+    $('[data-cart-panel]')?.focus?.();
+  }
+  function closeCart() {
+    const d = drawer(); if (!d) return;
+    d.classList.remove('is-open');
+    document.body.classList.remove('is-locked');
+    setTimeout(() => { d.hidden = true; }, 240);
+    lastFocus?.focus?.();
+  }
+  function openNav() {
+    $('[data-nav]')?.classList.add('is-open');
+    const s = $('[data-nav-scrim]'); if (s) s.hidden = false;
+    document.body.classList.add('is-locked');
+    $('[data-open-nav]')?.setAttribute('aria-expanded', 'true');
+  }
+  function closeNav() {
+    $('[data-nav]')?.classList.remove('is-open');
+    const s = $('[data-nav-scrim]'); if (s) s.hidden = true;
+    document.body.classList.remove('is-locked');
+    $('[data-open-nav]')?.setAttribute('aria-expanded', 'false');
+  }
+  $('[data-nav-scrim]')?.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    closeCart(); closeNav();
+    const r = $('[data-search-results]'); if (r) r.hidden = true;
+  });
+
+  // pe mobil, itemii cu mega-menu se expandează la tap
+  $$('.nav__item.has-mega > a').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      if (window.matchMedia('(min-width: 1000px)').matches) return;
+      e.preventDefault();
+      a.parentElement.classList.toggle('is-expanded');
+    });
+  });
+
+  // ------------------------------------------------- căutare predictivă
+  const input = $('[data-search-input]');
+  const results = $('[data-search-results]');
+
+  const norm = (s) => s.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')  // diacriticele nu blochează căutarea
+    .replace(/ș|ş/g, 's').replace(/ț|ţ/g, 't');
+
+  let idx = null;
+  const buildIndex = () => {
+    if (idx) return idx;
+    idx = Object.entries(window.__SEARCH__ || {}).map(([handle, p]) => ({
+      handle, ...p, key: norm(p.t + ' ' + (p.v || '')),
+    }));
+    return idx;
+  };
+
+  let timer;
+  input?.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const q = norm(input.value.trim());
+      if (q.length < 2) { results.hidden = true; return; }
+      const terms = q.split(/\s+/);
+      const hits = buildIndex()
+        .filter((p) => terms.every((t) => p.key.includes(t)))
+        .slice(0, 6);
+
+      if (!hits.length) {
+        results.innerHTML = `<p class="search-empty">Niciun rezultat pentru „${input.value.trim()}".</p>`;
+      } else {
+        results.innerHTML = hits.map((p) => `
+          <a class="search-hit" href="${window.__BASE__}products/${p.handle}/">
+            <img src="${p.i ? p.i.split('?')[0] + '?width=96' : ''}" alt="" width="48" height="48" loading="lazy">
+            <span class="search-hit__t">${p.t}</span>
+            <span class="search-hit__p tnum">${lei(p.p)}</span>
+          </a>`).join('') +
+          `<a class="search-more" href="${window.__BASE__}search/?q=${encodeURIComponent(input.value.trim())}">Vezi toate rezultatele</a>`;
+      }
+      results.hidden = false;
+    }, 120);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (results && !e.target.closest('[data-search]')) results.hidden = true;
+  });
+
+  render();
+})();

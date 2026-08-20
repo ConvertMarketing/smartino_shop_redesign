@@ -1,6 +1,8 @@
-node_modules/
-dist/
-.DS_Store
+
+# build + capturi
 *.log
+.DS_Store
 .vite/
+dist/
+node_modules/
 shots/

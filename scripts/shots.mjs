@@ -51,7 +51,19 @@ async function main() {
   await mkdir(OUT, { recursive: true });
 
   const executablePath = findChromium();
-  const browser = await chromium.launch(executablePath ? { executablePath } : {});
+  // Chromium nu citește HTTPS_PROXY singur. Fără asta, imaginile de pe
+  // cdn.shopify.com nu se încarcă în screenshot, deși pentru un utilizator real
+  // funcționează perfect.
+  const proxyServer = process.env.HTTPS_PROXY || process.env.https_proxy;
+  const browser = await chromium.launch({
+    ...(executablePath ? { executablePath } : {}),
+    // bypass pentru local: proxy-ul acceptă doar tuneluri HTTPS CONNECT, iar
+    // serverul de preview e HTTP simplu pe localhost.
+    ...(proxyServer
+      ? { proxy: { server: proxyServer, bypass: 'localhost,127.0.0.1,::1' } }
+      : {}),
+    ignoreHTTPSErrors: true,
+  });
 
   let failures = 0;
 
@@ -60,14 +72,45 @@ async function main() {
       const ctx = await browser.newContext({
         viewport: { width: vp.width, height: vp.height },
         deviceScaleFactor: 2,
+        ignoreHTTPSErrors: true,
       });
       const page = await ctx.newPage();
+
+      // Proxy-ul de egress resetează conexiuni când browserul cere zeci de
+      // imagini deodată (secvențial merge 10/10). Le reîncercăm la nivel de
+      // rețea, ca screenshot-ul să arate designul real, nu găuri albe.
+      await page.route('**://cdn.shopify.com/**', async (route) => {
+        for (let attempt = 0; attempt < 4; attempt++) {
+          try {
+            const res = await route.fetch({ timeout: 20000 });
+            if (res.ok()) return await route.fulfill({ response: res });
+          } catch { /* reîncercăm */ }
+          await new Promise((r) => setTimeout(r, 250 * (attempt + 1)));
+        }
+        return route.abort();
+      });
+
       const url = BASE + route;
       try {
-        const res = await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+        // 'load', nu 'networkidle': serverul de dev ține un websocket de live-reload
+        // deschis, deci networkidle nu se atinge niciodată.
+        const res = await page.goto(url, { waitUntil: 'load', timeout: 30000 });
         if (res && !res.ok()) throw new Error(`HTTP ${res.status()}`);
         await page.evaluate(() => document.fonts.ready);
-        await page.waitForTimeout(400);
+        // lăsăm imaginile lazy de sub fold să intre înainte de fullPage
+        await page.evaluate(async () => {
+          window.scrollTo(0, document.body.scrollHeight);
+          await new Promise((r) => setTimeout(r, 600));
+          window.scrollTo(0, 0);
+        });
+        await page.waitForTimeout(700);
+
+        const fontsLoaded = await page.evaluate(
+          () =>
+            document.fonts.check('700 1rem Quicksand') &&
+            document.fonts.check('400 1rem Inter'),
+        );
+        if (!fontsLoaded) console.warn('    (fonturi neîncărcate — screenshot cu fallback)');
 
         const file = `${OUT}/${slug(route)}-${vp.name}.png`;
         await page.screenshot({ path: file, fullPage: true });
@@ -76,8 +119,10 @@ async function main() {
         const overflow = await page.evaluate(
           () => document.documentElement.scrollWidth > window.innerWidth + 1,
         );
+        // alt="" e corect pentru imagini decorative (a doua imagine la hover,
+        // thumbnail lângă o etichetă text). Semnalăm doar atributul LIPSĂ.
         const noAlt = await page.evaluate(
-          () => [...document.images].filter((i) => !i.alt).length,
+          () => [...document.images].filter((i) => !i.hasAttribute('alt')).length,
         );
         const flags = [
           overflow ? 'SCROLL ORIZONTAL' : null,
