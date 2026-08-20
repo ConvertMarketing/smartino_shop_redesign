@@ -106,3 +106,8 @@ Detalii în `docs/design-brief.md` §3.
 
 Automat pe GitHub Pages prin GitHub Actions, la push pe `main` și pe branch-ul de
 dezvoltare. Site de proiect, deci build-ul primește `PATH_PREFIX=/<nume-repo>/`.
+
+**Pas necesar o singură dată:** activează Pages din
+`Settings → Pages → Build and deployment → Source: **GitHub Actions**`.
+Workflow-ul nu poate face asta singur — `GITHUB_TOKEN` poate publica pe un site
+Pages existent, dar nu are dreptul să creeze unul.
