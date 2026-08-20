@@ -648,3 +648,126 @@ imaginație — regula din `CLAUDE.md`.
 - Cod poștal contradictoriu în registre pentru sediul din Otopeni (075100 vs 751000)
 
 ---
+
+## 8. Ella — ce primim gratis și unde trebuie construit
+
+Detaliul complet, per componentă, e în **`docs/ella-mapping.md`**. Aici doar concluziile.
+
+**Sursa:** documentația publică Ella, citită prin conținut indexat — `halothemes.com`,
+`halosoft.gitbook.io` și `themeforest.net` sunt toate blocate din sesiune, deci nicio
+pagină nu a fost deschisă direct. 13 puncte rămân de verificat în theme editor
+(`ella-mapping.md` §4).
+
+### 8.1 Prima întrebare de lămurit: Ella 6 sau Ella 7?
+
+**Sunt două produse diferite.** Ella 7 e o rescriere pe Shopify Theme Blocks / OS 3.0
+(„Flex Section"), **fără upgrade automat din 6.x — paginile se reconstruiesc manual**.
+Documentațiile sunt separate, iar arhitectura de header și mega-menu diferă substanțial.
+
+Contează concret: în Ella 7, blocul Custom Liquid e „disponibil peste tot", ceea ce ar
+face mai ieftine exact componentele care acum cer editare de Liquid — footer-ul ANPC și
+eticheta de procent. **Ce versiune e licențiată?**
+
+### 8.2 Bilanțul
+
+| | |
+| --- | --- |
+| **nativ** | 21 componente |
+| **secțiune modificată** | 6 |
+| **secțiune nouă** | 3 |
+| **de verificat** | 13 puncte |
+
+**Ella acoperă nativ aproape toată lista de conversie din brief** — inclusiv bara de
+progres spre livrarea gratuită (`Free Shipping Calculator Message`, prag configurabil —
+îl setăm pe 200 lei), a doua imagine la hover, badge-urile Sale/New/Custom, quick add,
+swatch-uri pe card, sticky add-to-cart pe mobil, căutare predictivă și filtrare
+Search & Discovery.
+
+### 8.3 Cele trei locuri unde chiar trebuie construit
+
+| Ce | Clasificare | Efort | De ce |
+| --- | --- | --- | --- |
+| **Preț pe unitate (lei/bucată)** | secțiune modificată | **M** | Nu există nativ. E adăugarea cu cel mai bun raport valoare/efort din tot proiectul (§6.3). Cere un metafield pe produs + edit de Liquid pe snippet-ul de preț. |
+| **Descompunere PACHET PROMO** | **secțiune nouă** | **L** | Ella nu are nimic pentru „ce conține pachetul + cât economisești față de sumă". |
+| **Judge.me în tab-ul de recenzii** | secțiune modificată | **M** | Nicio documentație HaloThemes nu explică integrarea; thread-uri de comunitate arată utilizatori Ella la care widgetul cade la baza paginii. |
+
+Plus două mai mici: **badge-ul „−X%"** (Ella declanșează badge-ul Sale automat, dar
+nu e confirmat că poate randa procentul calculat) și **ANPC în footer** (setul de
+blocuri de footer în Ella 6 pare închis, fără bloc generic HTML).
+
+### 8.4 Două lucruri pe care le lăsăm oprite, deliberat
+
+Ella livrează `Sold In Last Period` și `Someone purchased notification popup` — al
+doilea cu **listă randomizată de timpi**. Fabrică dovadă socială. Contravin regulii de
+urgency onestă (§6.4). Folosim **doar** `Hot stock function`, care citește inventarul
+real.
+
+### 8.5 Un cost ascuns, de bugetat
+
+Datele care trebuie normalizate ca să funcționeze filtrele proiectate: **mărime,
+interval kg, talie cm, absorbție în picături, bucăți în pachet** trăiesc azi în
+**titlul produsului** **[confirmat]**. Acolo nu se pot filtra.
+
+Trebuie mutate în opțiuni de produs sau metafield-uri. E **muncă de catalog, nu de
+temă** — se poate face în bulk — dar e condiția ca PLP-ul din §6.2 să existe.
+De estimat separat.
+
+---
+
+## 9. Ce urmează, dacă aprobi
+
+Ordinea de lucru, o pagină pe rând, cu screenshot desktop (1440) + mobil (390),
+verificate critic înainte să ți le arăt, apoi commit + push. **Nu trec mai departe
+până nu confirmi fiecare.**
+
+| # | Livrabil | Depinde de |
+| --- | --- | --- |
+| 0 | Setup: 11ty + Liquid, tokens CSS, sistemul de grilă | — |
+| 1 | Header + footer + bară de anunț + căutare predictivă | date reale |
+| 2 | Home | (1) |
+| 3 | PLP „scutece copii" — filtre, sortare, load more | (1) |
+| 4 | PLP „produse incontinență" — validează fațetele pe a doua taxonomie | (3) |
+| 5 | PDP SKU simplu | (1) |
+| 6 | PDP PACHET PROMO | (5) |
+| 7 | Cart drawer + pagină coș | (1) |
+| 8 | Deploy GitHub Pages + README | — |
+
+**Nota tehnică care merită decizia ta acum:** propun **11ty cu template-uri Liquid**,
+nu Vite. Motivul e practic — **11ty randează nativ Liquid**, deci template-urile
+prototipului devin aproape drop-in pentru secțiunile Shopify. Aceeași buclă
+`{% for product in collection.products %}` merge în ambele locuri. Reduce direct
+riscul de „arată altfel în implementare" pe care prototipul e menit să-l elimine.
+
+Restul stack-ului conform brief-ului: fără framework UI, CSS custom properties, fără
+Tailwind/Bootstrap, Swiper doar unde chiar e carusel.
+
+**Nu încep să codez până nu aprobi.**
+
+---
+
+## Anexă — surse
+
+Cercetarea completă, cu marcaje per afirmație, e în dosarul de recon al sesiunii.
+Sursele principale:
+
+**Site (indexat, nu deschis):** `smartinoshop.ro` — `/`, `/pages/despre-noi`,
+`/pages/intrebari-frecvente`, `/pages/politica-de-retur`, `/pages/metode-de-plata`,
+`/pages/termeni-si-conditii`, `/pages/contact`, `/pages/branduri`,
+`/pages/smartino-supermarket`, `/collections/*`, `/products/*`, `/blogs/blog/*`
+
+**Registre:** termene.ro, listafirme.eu, targetare.ro, risco.ro, confidas.ro,
+topfirme.com, emis.com
+
+**Presă:** revistaprogresiv.ro (interviu — poziționarea pe preț), economica.net,
+capital.ro, adevarul.ro, realitatea.net, click.ro, magister.ro
+
+**Social:** facebook.com/smartinoshop.ro, instagram.com/smartino.ro,
+tiktok.com/@smartinoshop.ro
+
+**Recenzii:** judge.me/reviews/stores/smartinoshop.ro
+
+**Ella:** halosoft.gitbook.io/ella-documentation, halosoft.gitbook.io/ella-7-documentation,
+halothemes.net, themeforest.net
+
+**Legal:** iubenda, Taylor Wessing, Kluwer Mediation Blog,
+consumer-redress.ec.europa.eu (închiderea platformei ODR)
