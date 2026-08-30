@@ -68,6 +68,12 @@
   --rail-w: 262px;
   --gutter: var(--s4);
 
+  /* Umbre în tonul brandului, nu gri. rgb(21,183,198) e turcoazul Smartino —
+     o umbră tentată cu el se citește ca aleasă, nu ca implicită. */
+  --shadow-brand-sm: 0 1px 2px rgba(11, 118, 128, 0.06),
+                     0 6px 16px -4px rgba(21, 183, 198, 0.18);
+  --shadow-brand-md: 0 2px 4px rgba(11, 118, 128, 0.07),
+                     0 12px 28px -6px rgba(21, 183, 198, 0.30);
   --shadow-drawer: 0 8px 40px rgba(16, 32, 34, 0.18);
   --shadow-sticky: 0 -2px 12px rgba(16, 32, 34, 0.10);
 

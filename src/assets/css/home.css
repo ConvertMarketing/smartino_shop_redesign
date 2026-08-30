@@ -173,7 +173,8 @@
   border-radius: var(--radius); overflow: hidden;
   transition: transform .16s var(--ease), box-shadow .16s var(--ease);
 }
-.mb:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(16, 32, 34, .14); }
+.mb:hover { transform: translateY(-3px); box-shadow: var(--shadow-brand-md); }
+@media (prefers-reduced-motion: reduce) { .mb:hover { transform: none; } }
 
 /* Incontinență: registru sobru, deliberat — fără ton vesel pe categoria asta. */
 .mb--calm { background: var(--brand-050); color: var(--ink-900); border: 1px solid var(--brand-100); }
@@ -208,43 +209,57 @@
 @media (min-width: 900px) { .mb__media img { width: 98px; height: 98px; } }
 
 /* ============ Bara de servicii ============
-   Fără bandă colorată. O bară neagră lată e un tipar învechit și se bătea cu
-   bannerul întunecat de deasupra; itemii stau acum pe fundalul paginii,
-   delimitați de linii fine. Turcoazul rămâne doar pe iconițe. */
-.usp { background: var(--ground); border-block: 1px solid var(--line); }
+   Patru carduri cu umbră tentată cu turcoazul brandului, nu gri. Regula din
+   brief e „fără carduri cu umbre generice" — o umbră colorată în culoarea
+   brandului e exact opusul: se citește ca aleasă, nu ca implicită. */
+.usp {
+  /* fundal aproape alb, cu o urmă de turcoaz, ca să iasă cardurile albe */
+  background:
+    radial-gradient(140% 100% at 50% 0%, rgba(21, 183, 198, .07) 0%, rgba(21, 183, 198, 0) 70%),
+    #F8FBFB;
+}
 .usp__inner {
   display: grid; grid-template-columns: repeat(2, 1fr);
-  gap: var(--s2) 0; padding-block: var(--s5);
+  gap: var(--s3); padding-block: var(--s6);
 }
-@media (min-width: 620px) { .usp__inner { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 620px) { .usp__inner { grid-template-columns: repeat(4, 1fr); gap: var(--s4); } }
 
 .usp__item {
   display: grid; justify-items: center; text-align: center;
-  gap: 6px; padding: var(--s2);
-  border-radius: var(--radius-sm);
-  transition: background-color .15s var(--ease);
+  gap: var(--s2); padding: var(--s4) var(--s3);
+  background: var(--surface);
+  border: 1px solid rgba(21, 183, 198, .14);
+  border-radius: 14px;
+  box-shadow: var(--shadow-brand-sm);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease),
+              border-color .18s var(--ease);
 }
 @media (min-width: 620px) {
   .usp__item {
     grid-template-columns: auto minmax(0, 1fr);
     align-items: center; justify-items: start; text-align: left;
-    gap: var(--s3); padding: var(--s2) var(--s4);
+    gap: var(--s3); padding: var(--s4);
   }
-  /* Separatoare fine între coloane, nu chenare complete. */
-  .usp__item + .usp__item { box-shadow: inset 1px 0 0 var(--line); }
 }
-.usp__item:hover { background: var(--brand-050); }
+.usp__item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-brand-md);
+  border-color: rgba(21, 183, 198, .34);
+}
+@media (prefers-reduced-motion: reduce) { .usp__item:hover { transform: none; } }
 
 .usp__icon {
-  flex: none; width: 38px; height: 38px;
+  flex: none; width: 40px; height: 40px;
   display: grid; place-items: center;
   color: var(--brand-700);
-  background: var(--brand-050);
-  border-radius: 11px;
+  /* wash cu adâncime, nu plat */
+  background: linear-gradient(150deg, rgba(21, 183, 198, .20) 0%, rgba(21, 183, 198, .07) 100%);
+  border-radius: 12px;
 }
-@media (min-width: 620px) { .usp__icon { width: 42px; height: 42px; } }
+@media (min-width: 620px) { .usp__icon { width: 44px; height: 44px; } }
+.usp__item:hover .usp__icon { color: var(--brand-900); }
 
-.usp__text { display: grid; gap: 1px; min-width: 0; justify-items: inherit; }
+.usp__text { display: grid; gap: 2px; min-width: 0; justify-items: inherit; }
 .usp__text strong {
   font-family: var(--font-display); font-weight: 700;
   font-size: var(--text-sm); color: var(--ink-900); line-height: 1.25;
@@ -259,10 +274,18 @@
 .cat {
   display: flex; flex-direction: column; align-items: center; text-align: center;
   gap: var(--s2); padding: var(--s4) var(--s3);
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-  transition: border-color .15s var(--ease), background-color .15s var(--ease);
+  background: var(--surface);
+  border: 1px solid rgba(21, 183, 198, .14); border-radius: 14px;
+  box-shadow: var(--shadow-brand-sm);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease),
+              border-color .18s var(--ease);
 }
-.cat:hover { border-color: var(--brand-500); background: var(--brand-050); }
+.cat:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-brand-md);
+  border-color: rgba(21, 183, 198, .34);
+}
+@media (prefers-reduced-motion: reduce) { .cat:hover { transform: none; } }
 .cat__media { width: 96px; height: 96px; display: grid; place-items: center; overflow: hidden; }
 /* Pixeli expliciți, nu procente: pe un grid item cu align-self:center,
    max-height:100% nu se rezolvă în toate browserele, iar imaginile care nu
