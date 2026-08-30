@@ -2,9 +2,11 @@
 (() => {
   'use strict';
 
-  /** Pragul de livrare gratuită. Singura constantă comercială — o schimbi aici. */
-  const FREE_SHIPPING = 200;
-  const SHIPPING_FEE = 24.9;
+  /* Constantele comerciale vin din src/_data/shop.js, injectate de layout.
+     Valorile de aici sunt doar plasa de siguranță dacă scriptul rulează singur. */
+  const SHOP = window.__SHOP__ || {};
+  const FREE_SHIPPING = SHOP.freeShipping ?? 200;
+  const SHIPPING_FEE = SHOP.shippingFee ?? 24.9;
 
   const lei = (n) =>
     n.toLocaleString('ro-RO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' lei';

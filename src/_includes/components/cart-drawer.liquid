@@ -1,7 +1,7 @@
 {%- comment -%}
-  Cart drawer cu bară de progres spre livrarea gratuită (prag 200 lei).
+  Cart drawer cu bară de progres spre livrarea gratuită (prag din src/_data/shop.js).
   Ella: Quick Cart + Free Shipping Calculator Message sunt native
-  (ella-mapping.md G6, G6b). Pragul e o singură constantă în app.js.
+  (ella-mapping.md G6, G6b). Pragul vine din shop.freeShipping, injectat de layout.
 {%- endcomment -%}
 <div class="drawer" data-cart-drawer hidden>
   <div class="drawer__scrim" data-close-cart></div>

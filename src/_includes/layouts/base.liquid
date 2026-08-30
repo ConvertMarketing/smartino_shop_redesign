@@ -32,6 +32,7 @@
   {% include "components/bottom-nav.liquid" %}
 
   <script src="{{ '/assets/js/catalog.js' | url }}" defer></script>
+  <script>window.__SHOP__ = {{ shop | json }};</script>
   <script src="{{ '/assets/js/app.js' | url }}" defer></script>
 </body>
 </html>

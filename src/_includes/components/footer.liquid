@@ -8,7 +8,10 @@
   <div class="container">
 
     <div class="footer__usp">
-      {%- assign usps = "Livrare gratuită peste 200 lei|Comandat azi, livrat în 1–3 zile lucrătoare|Retur în 14 zile|Plata ramburs sau card" | split: "|" -%}
+      {%- capture usps_raw -%}
+Livrare gratuită peste {{ shop.freeShipping }} lei|Comandat azi, livrat în 1–3 zile lucrătoare|Retur în {{ shop.returnDays }} zile|Plata ramburs sau card
+      {%- endcapture -%}
+      {%- assign usps = usps_raw | strip | split: "|" -%}
       {%- for u in usps -%}
         <div class="footer__usp-item">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
