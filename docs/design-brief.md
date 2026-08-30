@@ -785,11 +785,11 @@ uitându-ne cum le rezolvă smartinohome.ro, nu doar în documentație.
 
 ### 8.2 Bilanțul
 
-Din 60 de rânduri de componentă:
+Din 62 de rânduri de componentă:
 
 | Clasificare | Rânduri |
 | --- | --- |
-| **nativ**, direct | 45 |
+| **nativ**, direct | 47 |
 | **nativ, cu rezerve** (asamblat, doar afișare, workaround, setup greu) | 7 |
 | **secțiune modificată** | 6 |
 | **secțiune nouă** | 1 |

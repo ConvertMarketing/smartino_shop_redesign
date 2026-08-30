@@ -62,11 +62,11 @@ peste tot ar face mai ieftine exact rândurile care acum sunt „secțiune modif
 
 ## 2. Rezumat
 
-Din **60 de rânduri de componentă** în tabelele din §3:
+Din **62 de rânduri de componentă** în tabelele din §3:
 
 | Clasificare | Rânduri |
 | --- | --- |
-| **nativ**, direct | 45 |
+| **nativ**, direct | 47 |
 | **nativ, cu rezerve** — asamblat din secțiuni, doar stratul de afișare, prin workaround, sau cu setup greu | 7 |
 | **secțiune modificată** | 6 |
 | **secțiune nouă** | 1 |
@@ -92,8 +92,10 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 | --- | --- | --- | --- | --- | --- |
 | G1 | Bară de anunț (200 lei) | **nativ** | S | secțiunea `Announcement Bar` (în Ella 7, în Header Group) | text plain sau **HTML brut**, padding 0–50px, `Layout = Slider` cu săgeți la ≥2 mesaje, icon de închidere opțional, countdown opțional |
 | G2 | Header sticky | **nativ** | S | „Sticky Header & Sticky Add to Cart" | funcția e listată; **numele/locul exact al setării = necunoscut** |
-| G3 | Mega-menu pe categorii | **nativ** | M | „Advanced Mega Menu" (6) / `Mega menu style #1–3` (7) | 2–6 coloane, lățime page/full, **banner promo în meniu**, 1–4 produse dintr-o colecție, badge-uri `New/Hot/Sale` pe item |
-| G4 | Drawer navigație mobil | **nativ** | S | Header for Mobile + `Sticky Toolbar Mobile` | bara de jos pe mobil e nativă (în Ella 7 mutată în grupul Popup) |
+| G3a | **Rail vertical de categorii (desktop)** | **nativ** | M | `Header Nav – vertical menu` — folosit de layout-ul demo „Home 06 SuperMarket" | Ella livrează exact tiparul: sursă meniu, stil, titlu de bloc, separatoare, lățime buton, rază. Cele 12 categorii cu flyout pe coloane se construiesc din Navigation + Advanced Mega Menu |
+| G3b | Flyout cu subcategorii | **nativ** | M | „Advanced Mega Menu" (6) / `Mega menu style #1–3` (7) | 2–6 coloane, banner promo în meniu, 1–4 produse dintr-o colecție. **Numărul de produse per subcategorie nu e documentat** — probabil Liquid (`collection.products_count`) |
+| G4a | **Bară de navigație jos (mobil)** | **nativ** | S | `Sticky Toolbar Mobile` (în Ella 7, în grupul Popup) | patru destinații; insigna de coș se leagă de `cart.item_count` |
+| G4b | Drawer de categorii pe mobil | **nativ** | S | Header for Mobile | deschis din tab-ul „Categorii" al barei de jos |
 | G5 | Căutare predictivă | **nativ** | S | `Quick Search` (Theme settings) | pe Shopify Predictive Search API; setări: activare, nr. max produse, doar produse vs. + articole/pagini |
 | G6 | Cart drawer | **nativ** | S | `Quick Cart / Quick Edit Cart` | plus notă comandă, gift wrap, calculator transport, „You may also like" |
 | G6b | **Bară progres livrare gratuită** | **nativ** | S | `Free Shipping Calculator Message` | prag configurabil, înălțime bară, afișare %, icon camion animat. **Se setează pe 200 lei.** |

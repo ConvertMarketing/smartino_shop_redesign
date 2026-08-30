@@ -32,20 +32,17 @@
 }
 .header__inner {
   display: grid; align-items: center; gap: var(--s3);
-  /* burger | logo | acțiuni — căutarea trece pe rândul doi pe mobil */
-  grid-template-columns: auto auto 1fr;
+  /* logo | acțiuni — căutarea trece pe rândul doi pe mobil */
+  grid-template-columns: auto 1fr;
   min-height: var(--header-h);
 }
 @media (min-width: 1000px) {
-  /* Burger-ul dispare, deci coloanele se redefinesc explicit: altfel se decalează
-     și 1fr ajunge pe acțiuni în loc de căutare. */
+  /* Căutarea intră pe rând, între logo și acțiuni. */
   .header__inner { grid-template-columns: auto minmax(0, 1fr) auto; }
 }
-.header__burger {
-  display: grid; gap: 4px; padding: var(--s2); margin-left: calc(var(--s2) * -1);
-}
-.header__burger span { display: block; width: 20px; height: 2px; background: var(--ink-900); border-radius: 2px; }
-@media (min-width: 1000px) { .header__burger { display: none; } }
+/* Meniul pe mobil e bara de jos. Un burger în plus ar fi a doua intrare
+   pentru același lucru, deci dispare peste tot. */
+.header__burger { display: none; }
 
 .header__logo { display: flex; align-items: center; }
 
@@ -403,4 +400,46 @@
   .catlist__item.is-expanded > .catlist__link .catlist__chev { transform: rotate(90deg); }
   .flyout__cols { grid-template-columns: 1fr; gap: var(--s4); }
   .catlist__link { padding: 11px var(--s2); }
+}
+
+/* ============ Bara de navigație de jos (doar mobil) ============
+   Sub 1100px railul dispare, iar navigația trece în bara fixă de jos —
+   tiparul standard de comerț mobil. */
+.botnav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -2px 14px rgba(16, 32, 34, .08);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+@media (min-width: 1100px) { .botnav { display: none; } }
+
+.botnav__item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; min-height: 56px; padding: 6px 4px;
+  color: var(--ink-500); font-size: 11px; font-weight: 600; line-height: 1.2;
+  font-family: var(--font-ui);
+}
+.botnav__item svg { width: 22px; height: 22px; }
+.botnav__item.is-active { color: var(--brand-700); }
+.botnav__item:active { background: var(--brand-050); }
+
+.botnav__icon-wrap { position: relative; display: block; }
+.botnav__count {
+  position: absolute; top: -5px; right: -8px; min-width: 17px; height: 17px;
+  display: grid; place-items: center; padding: 0 4px;
+  background: var(--sale); color: #fff; border-radius: var(--radius-pill);
+  font-size: 10px; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+
+/* Bara acoperă finalul paginii — îi facem loc. */
+@media (max-width: 1099px) {
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+  /* Butonul „Toate categoriile" e redundant lângă bara de jos. */
+  .catbar__toggle { display: none; }
+  .catbar__promo { padding-left: 0; }
+  .catbar__inner { padding-left: var(--gutter); }
+  /* Sticky add-to-cart și drawerele stau deasupra barei. */
+  .drawer { z-index: 100; }
 }

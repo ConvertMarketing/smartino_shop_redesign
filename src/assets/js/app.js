@@ -44,10 +44,12 @@
     const n = count();
     const sub = subtotal();
 
-    const badge = $('[data-cart-count]');
-    if (badge) { badge.textContent = n; badge.hidden = n === 0; }
-    const total = $('[data-cart-total]');
-    if (total) total.textContent = lei(sub);
+    // Două insigne de coș acum: în header și în bara de jos. $$ , nu $.
+    $$('[data-cart-count]').forEach((badge) => {
+      badge.textContent = n;
+      badge.hidden = n === 0;
+    });
+    $$('[data-cart-total]').forEach((total) => { total.textContent = lei(sub); });
 
     // bară de progres spre livrare gratuită
     const wrap = $('[data-ship-progress]');
@@ -121,7 +123,7 @@
 
   // ------------------------------------------------------------ evenimente
   document.addEventListener('click', (e) => {
-    const t = e.target.closest('[data-add],[data-inc],[data-dec],[data-rm],[data-open-cart],[data-close-cart],[data-open-nav],[data-close-nav],[data-cat-toggle]');
+    const t = e.target.closest('[data-add],[data-inc],[data-dec],[data-rm],[data-open-cart],[data-close-cart],[data-open-nav],[data-close-nav],[data-cat-toggle],[data-focus-search]');
     if (!t) return;
 
     if (t.dataset.add) { addToCart(t.dataset.add); openCart(); }
@@ -133,6 +135,13 @@
     else if (t.hasAttribute('data-open-nav')) openNav();
     else if (t.hasAttribute('data-close-nav')) closeNav();
     else if (t.hasAttribute('data-cat-toggle')) toggleNav();
+    else if (t.hasAttribute('data-focus-search')) {
+      const input = $('[data-search-input]');
+      if (input) {
+        input.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        input.focus();
+      }
+    }
   });
 
   // ------------------------------------------------------------- drawere
