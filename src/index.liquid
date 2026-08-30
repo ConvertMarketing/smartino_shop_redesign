@@ -167,25 +167,33 @@ permalink: /index.html
   </div>
 </section>
 
-{%- comment -%} USP — Ella: Custom Service Block, nativ {%- endcomment -%}
-<section class="usp">
+{%- comment -%}
+  Bara de servicii. Fiecare rând e o afirmație confirmată (design-brief.md §6.7)
+  și duce la pagina care o susține — Baymard cere acces direct la Livrare și Retur.
+  Ella: `Custom Service Block`, nativ, cu SVG brut per iconiță.
+{%- endcomment -%}
+<section class="usp" aria-label="Livrare, retur și plată">
   <div class="container usp__inner">
-    <div class="usp__item">
-      <strong>Livrare gratuită</strong>
-      <span>la comenzi peste 200 lei</span>
-    </div>
-    <div class="usp__item">
-      <strong>1–3 zile lucrătoare</strong>
-      <span>curier 24,90 lei · easybox 15 lei</span>
-    </div>
-    <div class="usp__item">
-      <strong>Retur în 14 zile</strong>
-      <span>conform OUG 34/2014</span>
-    </div>
-    <div class="usp__item">
-      <strong>Plata ramburs sau card</strong>
-      <span>3D Secure prin PayU și MobilPay</span>
-    </div>
+    {%- comment -%}
+      Separator „~", nu virgulă: textele conțin virgule („curier 24,90 lei",
+      „3D Secure, PayU"), iar split-ul pe virgulă rupea itemii în bucăți.
+    {%- endcomment -%}
+    {%- assign usps = "truck|Livrare gratuită|peste 200 lei|/pages/livrare/~clock|Livrare în 1–3 zile|24,90 lei · easybox 15 lei|/pages/livrare/~return|Retur în 14 zile|conform OUG 34/2014|/pages/politica-de-retur/~card|Ramburs sau card|3D Secure, PayU și MobilPay|/pages/metode-de-plata/" | split: "~" -%}
+    {%- for u in usps -%}
+      {%- assign f = u | split: "|" -%}
+      <a class="usp__item" href="{{ f[3] | url }}">
+        <span class="usp__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            {%- assign icon = f[0] -%}{% include "components/icons.liquid" %}
+          </svg>
+        </span>
+        <span class="usp__text">
+          <strong>{{ f[1] }}</strong>
+          <span class="usp__sub">{{ f[2] }}</span>
+        </span>
+      </a>
+    {%- endfor -%}
   </div>
 </section>
 

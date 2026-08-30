@@ -207,13 +207,50 @@
 .mb__media img { width: 88px; height: 88px; object-fit: contain; }
 @media (min-width: 900px) { .mb__media img { width: 98px; height: 98px; } }
 
-/* ============ USP ============ */
-.usp { background: var(--ink-900); color: #fff; }
-.usp__inner { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s4); padding-block: var(--s5); }
-@media (min-width: 900px) { .usp__inner { grid-template-columns: repeat(4, 1fr); } }
-.usp__item { display: flex; flex-direction: column; gap: 2px; }
-.usp__item strong { font-family: var(--font-display); font-size: var(--text-base); color: var(--brand-500); }
-.usp__item span { font-size: var(--text-xs); color: #C9CFD2; }
+/* ============ Bara de servicii ============
+   Fără bandă colorată. O bară neagră lată e un tipar învechit și se bătea cu
+   bannerul întunecat de deasupra; itemii stau acum pe fundalul paginii,
+   delimitați de linii fine. Turcoazul rămâne doar pe iconițe. */
+.usp { background: var(--ground); border-block: 1px solid var(--line); }
+.usp__inner {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: var(--s2) 0; padding-block: var(--s5);
+}
+@media (min-width: 620px) { .usp__inner { grid-template-columns: repeat(4, 1fr); } }
+
+.usp__item {
+  display: grid; justify-items: center; text-align: center;
+  gap: 6px; padding: var(--s2);
+  border-radius: var(--radius-sm);
+  transition: background-color .15s var(--ease);
+}
+@media (min-width: 620px) {
+  .usp__item {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center; justify-items: start; text-align: left;
+    gap: var(--s3); padding: var(--s2) var(--s4);
+  }
+  /* Separatoare fine între coloane, nu chenare complete. */
+  .usp__item + .usp__item { box-shadow: inset 1px 0 0 var(--line); }
+}
+.usp__item:hover { background: var(--brand-050); }
+
+.usp__icon {
+  flex: none; width: 38px; height: 38px;
+  display: grid; place-items: center;
+  color: var(--brand-700);
+  background: var(--brand-050);
+  border-radius: 11px;
+}
+@media (min-width: 620px) { .usp__icon { width: 42px; height: 42px; } }
+
+.usp__text { display: grid; gap: 1px; min-width: 0; justify-items: inherit; }
+.usp__text strong {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: var(--text-sm); color: var(--ink-900); line-height: 1.25;
+}
+@media (min-width: 900px) { .usp__text strong { font-size: var(--text-base); } }
+.usp__sub { font-size: var(--text-xs); color: var(--ink-500); line-height: 1.35; }
 
 /* ============ Categorii ============ */
 .cats { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s3); }
