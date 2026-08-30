@@ -282,15 +282,18 @@
 /* ============ Bara de categorii ============ */
 .catbar { background: var(--ink-900); color: #fff; position: relative; z-index: 55; }
 .catbar__inner { display: flex; align-items: center; gap: var(--s5); min-height: 46px; }
+/* Tab, nu buton: aceeași suprafață albă ca panoul de dedesubt, lipit de el.
+   Fără asta, panoul citea ca un al doilea meniu care plutește sub bară. */
 .catbar__toggle {
   display: flex; align-items: center; gap: var(--s2);
-  height: 46px; padding: 0 var(--s4); margin-left: calc(var(--gutter) * -1);
-  padding-left: var(--gutter);
-  background: var(--brand-500); color: var(--ink-900);
+  width: var(--rail-w); height: 46px; padding: 0 var(--s4);
+  background: var(--surface); color: var(--ink-900);
+  border-radius: var(--radius) var(--radius) 0 0;
   font-family: var(--font-display); font-weight: 700; font-size: var(--text-base);
-  white-space: nowrap;
+  white-space: nowrap; text-align: left;
 }
-.catbar__toggle:hover { background: var(--brand-600); }
+.catbar__toggle svg { color: var(--brand-700); flex: none; }
+.catbar__toggle:hover { background: var(--brand-050); }
 .catbar__promo {
   display: flex; gap: var(--s4); flex: 1; min-width: 0;
   overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
@@ -313,12 +316,19 @@
 .catbar__stores:hover { color: var(--brand-500); }
 
 /* ============ Panoul de categorii (flyout pe paginile interioare) ============ */
+/* Panoul atârnă din tab, aliniat cu el, nu pe toată lățimea paginii. */
 .catpanel {
   position: absolute; left: 0; right: 0; z-index: 54;
-  background: var(--surface); border-bottom: 1px solid var(--line);
-  box-shadow: 0 14px 30px rgba(16, 32, 34, .12);
+  pointer-events: none;
 }
-.catpanel__inner { position: relative; }
+.catpanel__align { position: relative; }
+.catpanel__inner {
+  position: relative; pointer-events: auto;
+  width: var(--rail-w); padding: var(--s2);
+  background: var(--surface);
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: 0 14px 30px rgba(16, 32, 34, .14);
+}
 .catpanel__head { display: none; }
 .catpanel--home { position: static; box-shadow: none; border: none; background: none; }
 
@@ -391,6 +401,9 @@
   }
   .catpanel__close { font-size: 30px; line-height: 1; padding: 0 var(--s2); color: var(--ink-700); }
   .catpanel .container { padding-inline: 0; }
+  /* În modul drawer panoul ocupă toată lățimea sertarului, nu lățimea tab-ului. */
+  .catpanel__inner { width: auto; padding: 0; box-shadow: none; border-radius: 0; }
+  .catpanel { pointer-events: auto; }
   .flyout {
     position: static; opacity: 1; visibility: visible; transform: none;
     box-shadow: none; border: none; padding: 0 0 var(--s3) var(--s8);

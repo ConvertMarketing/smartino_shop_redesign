@@ -2,19 +2,24 @@
    Tipar de marketplace. Railul e deschis pe Home pentru că 149 de colecții nu
    încap într-un meniu orizontal, iar cele două publicuri principale trebuie să
    se vadă din prima. */
-.stage { padding-top: var(--s4); }
+/* Fără spațiu sub bară: railul continuă direct din tab-ul „Toate categoriile". */
+.stage { padding-top: 0; }
 .stage__inner { display: grid; gap: var(--s4); }
 @media (min-width: 1100px) {
-  .stage__inner { grid-template-columns: 262px minmax(0, 1fr); gap: var(--s5); }
+  .stage__inner { grid-template-columns: var(--rail-w) minmax(0, 1fr); gap: var(--s5); }
 }
 .stage__rail { display: none; }
 @media (min-width: 1100px) {
   .stage__rail {
     display: block; background: var(--surface);
-    border: 1px solid var(--line); border-radius: var(--radius);
-    padding: var(--s2);
+    /* colțuri rotunjite doar jos — sus se lipește de tab */
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: 0 14px 30px rgba(16, 32, 34, .10);
+    padding: var(--s2); align-self: start;
   }
 }
+/* Hero-ul are nevoie de aerul pe care l-a pierdut railul. */
+@media (min-width: 1100px) { .stage__hero { padding-top: var(--s4); } }
 .stage__hero { display: grid; gap: var(--s3); align-content: start; }
 
 /* ============ Hero slider ============ */

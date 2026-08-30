@@ -34,7 +34,9 @@ const primary = [
       col('Scutece', ['scutece-copii', 'scutece-si-chilotei-copii', 'scutece-chilotel']),
       col('Șervețele', ['servetele-umede-bebelusi', 'servetele-doyfresh']),
       col('Îngrijire', ['ingrijire-copii', 'kit-igiena-scoala']),
-      col('Pachete promo', ['pachete-promo-scutece-copii', 'pachete-promotionale']),
+      // `pachete-promotionale` (272) e colecția generală, nu una de bebeluși —
+      // stă în bara promo. Nu există o colecție de pachete doar pentru scutece.
+      col('Pachete promo', ['pachete-promo-scutece-copii']),
     ].filter(Boolean),
   },
   {

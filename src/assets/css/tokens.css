@@ -63,6 +63,9 @@
   --radius-pill: 999px;
 
   --container: 1320px;
+  /* Butonul de categorii și railul trebuie să aibă exact aceeași lățime,
+     ca să se citească drept o singură suprafață continuă. */
+  --rail-w: 262px;
   --gutter: var(--s4);
 
   --shadow-drawer: 0 8px 40px rgba(16, 32, 34, 0.18);

@@ -163,11 +163,24 @@
     setTimeout(() => { d.hidden = true; }, 240);
     lastFocus?.focus?.();
   }
-  const panel = () => $('[data-cat-panel]');
   const isDesktop = () => window.matchMedia('(min-width: 1100px)').matches;
+
+  /**
+   * Pe Home, la desktop, railul din pagină ESTE meniul — tab-ul îl pliază și
+   * îl desface. În rest (și pe mobil) lucrăm cu panoul separat; altfel s-ar
+   * deschide un al doilea meniu peste rail.
+   */
+  const homeRail = () => $('.stage__rail');
+  const usesHomeRail = () => isDesktop() && !!homeRail();
+  const panel = () => (usesHomeRail() ? homeRail() : $('[data-cat-panel]'));
 
   function openNav() {
     const el = panel(); if (!el) return;
+    if (usesHomeRail()) {
+      el.hidden = false;
+      $('[data-cat-toggle]')?.setAttribute('aria-expanded', 'true');
+      return;
+    }
     el.hidden = false;
     requestAnimationFrame(() => el.classList.add('is-open'));
     const s = $('[data-nav-scrim]'); if (s) s.hidden = false;
@@ -177,6 +190,11 @@
   }
   function closeNav() {
     const el = panel(); if (!el) return;
+    if (usesHomeRail()) {
+      el.hidden = true;
+      $('[data-cat-toggle]')?.setAttribute('aria-expanded', 'false');
+      return;
+    }
     el.classList.remove('is-open');
     const s = $('[data-nav-scrim]'); if (s) s.hidden = true;
     document.body.classList.remove('is-locked');
@@ -187,10 +205,24 @@
   }
   function toggleNav() {
     const el = panel(); if (!el) return;
-    const open = el.classList.contains('is-open') || (isDesktop() && !el.hidden && !el.classList.contains('catpanel--home'));
+    const open = usesHomeRail()
+      ? !el.hidden
+      : el.classList.contains('is-open') || (isDesktop() && !el.hidden);
     open ? closeNav() : openNav();
   }
   $('[data-nav-scrim]')?.addEventListener('click', closeNav);
+
+  /** Pe Home railul e deschis din start — starea butonului trebuie să o spună. */
+  function syncNavState() {
+    const t = $('[data-cat-toggle]');
+    if (!t) return;
+    const open = usesHomeRail()
+      ? !homeRail().hidden
+      : $('[data-cat-panel]')?.classList.contains('is-open') || false;
+    t.setAttribute('aria-expanded', String(open));
+  }
+  syncNavState();
+  window.addEventListener('resize', syncNavState);
 
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;

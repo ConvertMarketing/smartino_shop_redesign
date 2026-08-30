@@ -36,7 +36,13 @@
     <span class="wordmark">smartino<sup>®</sup></span>
     <button class="catpanel__close" type="button" data-close-nav aria-label="Închide meniul">&times;</button>
   </div>
-  <div class="container catpanel__inner">
-    {% include "components/category-nav-rail.liquid" %}
+  {%- comment -%}
+    `container` aliniază cu bara; `catpanel__inner` ia lățimea tab-ului, ca
+    panoul să atârne exact din el.
+  {%- endcomment -%}
+  <div class="container catpanel__align">
+    <div class="catpanel__inner">
+      {% include "components/category-nav-rail.liquid" %}
+    </div>
   </div>
 </div>
