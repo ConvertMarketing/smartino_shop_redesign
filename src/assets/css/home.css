@@ -2,8 +2,10 @@
    Tipar de marketplace. Railul e deschis pe Home pentru că 149 de colecții nu
    încap într-un meniu orizontal, iar cele două publicuri principale trebuie să
    se vadă din prima. */
-/* Fără spațiu sub bară: railul continuă direct din tab-ul „Toate categoriile". */
-.stage { padding-top: 0; }
+/* Fără spațiu sub bară: railul continuă direct din tab-ul „Toate categoriile".
+   Dar cu spațiu dedesubt: bannerul întunecat se lipea de bara USP, la fel de
+   întunecată, și cele două se citeau ca o singură masă. */
+.stage { padding-top: 0; padding-bottom: var(--s6); }
 .stage__inner { display: grid; gap: var(--s4); }
 @media (min-width: 1100px) {
   .stage__inner { grid-template-columns: var(--rail-w) minmax(0, 1fr); gap: var(--s5); }
@@ -25,10 +27,12 @@
 /* ============ Hero slider ============ */
 .hero {
   position: relative; border-radius: var(--radius); overflow: hidden;
-  min-height: 340px;
+  min-height: 320px;
 }
-@media (min-width: 700px)  { .hero { min-height: 380px; } }
-@media (min-width: 1100px) { .hero { min-height: 440px; } }
+/* Mai scund decât înainte: sub el intră cele două bannere, iar împreună
+   ocupă cam cât ocupa hero-ul singur. */
+@media (min-width: 700px)  { .hero { min-height: 340px; } }
+@media (min-width: 1100px) { .hero { min-height: 384px; } }
 
 .hero__track { display: grid; height: 100%; }
 .hero__track > .slide { grid-area: 1 / 1; }
@@ -112,19 +116,19 @@
   .slide__media { display: grid; place-items: center; height: 100%; }
   .slide__media::before {
     content: ""; grid-area: 1 / 1;
-    width: min(300px, 100%); aspect-ratio: 1;
+    width: min(258px, 100%); aspect-ratio: 1;
     background: #fff; border-radius: 20px;
     box-shadow: 0 18px 40px rgba(16, 32, 34, .16);
   }
   .slide__media img {
     grid-area: 1 / 1;
-    max-width: 260px; max-height: 300px; width: auto; height: auto;
+    max-width: 218px; max-height: 258px; width: auto; height: auto;
     object-fit: contain; z-index: 1;
   }
 }
 @media (min-width: 1100px) {
-  .slide__media::before { width: min(340px, 100%); }
-  .slide__media img { max-width: 300px; max-height: 340px; }
+  .slide__media::before { width: min(290px, 100%); }
+  .slide__media img { max-width: 250px; max-height: 290px; }
 }
 
 /* Railul și hero-ul se termină la aceeași linie */
@@ -158,22 +162,50 @@
 .slide--kbeauty-active .hero__dot { background: rgba(255,255,255,.35); }
 .slide--kbeauty-active .hero__dot.is-active { background: #fff; }
 
-/* ============ Tile-uri rapide sub hero ============ */
-.quicktiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); }
-@media (max-width: 699px) { .quicktiles { grid-template-columns: 1fr; } }
-.quicktile {
-  display: flex; align-items: center; gap: var(--s3);
-  padding: var(--s3) var(--s4); background: var(--surface);
-  border: 1px solid var(--line); border-radius: var(--radius);
-  transition: border-color .15s var(--ease), background-color .15s var(--ease);
+/* ============ Mini-bannere sub hero ============ */
+.minibanners { display: grid; grid-template-columns: 1fr; gap: var(--s3); }
+@media (min-width: 700px) { .minibanners { grid-template-columns: 1fr 1fr; } }
+
+.mb {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center; gap: var(--s3);
+  min-height: 128px; padding: var(--s4) var(--s5);
+  border-radius: var(--radius); overflow: hidden;
+  transition: transform .16s var(--ease), box-shadow .16s var(--ease);
 }
-.quicktile:hover { border-color: var(--brand-500); background: var(--brand-050); }
-.quicktile__icon {
-  flex: none; width: 40px; height: 40px; display: grid; place-items: center;
-  background: var(--brand-050); color: var(--brand-700); border-radius: var(--radius-sm);
+.mb:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(16, 32, 34, .14); }
+
+/* Incontinență: registru sobru, deliberat — fără ton vesel pe categoria asta. */
+.mb--calm { background: var(--brand-050); color: var(--ink-900); border: 1px solid var(--brand-100); }
+.mb--dark {
+  background:
+    radial-gradient(90% 120% at 85% 30%, rgba(92,195,174,.22) 0%, rgba(92,195,174,0) 60%),
+    var(--ink-900);
+  color: #fff;
 }
-.quicktile strong { display: block; font-family: var(--font-display); font-size: var(--text-base); color: var(--ink-900); }
-.quicktile__count { display: block; font-size: var(--text-xs); color: var(--ink-500); }
+
+.mb__text { display: grid; gap: 2px; min-width: 0; }
+.mb__eyebrow {
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--brand-700);
+}
+.mb--dark .mb__eyebrow { color: var(--brand-500); }
+.mb__title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: var(--text-lg); line-height: 1.2; color: inherit;
+}
+@media (min-width: 900px) { .mb__title { font-size: var(--text-xl); } }
+.mb__meta { font-size: var(--text-xs); color: var(--ink-500); }
+.mb--dark .mb__meta { color: #A9B4B6; }
+
+.mb__media {
+  flex: none; width: 104px; height: 104px;
+  display: grid; place-items: center;
+  background: #fff; border-radius: 14px;
+}
+@media (min-width: 900px) { .mb__media { width: 116px; height: 116px; } }
+.mb__media img { width: 88px; height: 88px; object-fit: contain; }
+@media (min-width: 900px) { .mb__media img { width: 98px; height: 98px; } }
 
 /* ============ USP ============ */
 .usp { background: var(--ink-900); color: #fff; }

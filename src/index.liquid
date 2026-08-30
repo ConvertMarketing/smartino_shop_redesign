@@ -114,27 +114,53 @@ permalink: /index.html
         <div class="hero__dots" role="tablist" aria-label="Alege slide-ul" data-hero-dots></div>
       </div>
 
-      {%- comment -%} Trei intrări rapide sub hero, ca la marketplace-uri {%- endcomment -%}
-      <div class="quicktiles">
-        {%- assign qt = "scutece-pentru-adulti|Incontinență|shield,servetele-umede|Șervețele umede|wipes,curatenie-intretinere|Curățenie|spray" | split: "," -%}
-        {%- for t in qt -%}
-          {%- assign parts = t | split: "|" -%}
-          {%- assign c = catalog.collections | where: "handle", parts[0] | first -%}
-          {%- if c -%}
-            <a class="quicktile" href="{{ '/collections/' | append: c.handle | append: '/' | url }}">
-              <span class="quicktile__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                  {%- assign icon = parts[2] -%}{% include "components/icons.liquid" %}
-                </svg>
+      {%- comment -%}
+        Două bannere sub hero. Acoperă ce nu acoperă slider-ul: al doilea public
+        (incontinență, tratat sobru — vezi design-brief.md §6.6) și cea mai mare
+        categorie din catalog (curățenie, 594 produse).
+      {%- endcomment -%}
+      <div class="minibanners">
+
+        {%- assign c_inc = catalog.collections | where: "handle", "scutece-pentru-adulti" | first -%}
+        {%- if c_inc -%}
+          {%- assign ih = c_inc.productHandles | first -%}
+          {%- assign ip = catalog.productsByHandle[ih] -%}
+          <a class="mb mb--calm" href="{{ '/collections/scutece-pentru-adulti/' | url }}">
+            <span class="mb__text">
+              <span class="mb__eyebrow">Îngrijire adulți</span>
+              <strong class="mb__title">Produse de incontinență</strong>
+              <span class="mb__meta tnum">{{ c_inc.count }} produse · Sleepy, Dailee, Actual</span>
+            </span>
+            {%- if ip and ip.image -%}
+              <span class="mb__media">
+                <img src="{{ ip.image.src | cdn: 260 }}" srcset="{{ ip.image.src | srcset: 180,260,360 }}"
+                     sizes="130px" alt="{{ ip.image.alt | escape }}"
+                     width="260" height="260" loading="lazy" decoding="async">
               </span>
-              <span>
-                <strong>{{ parts[1] }}</strong>
-                <span class="quicktile__count tnum">{{ c.count }} produse</span>
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+
+        {%- assign c_cur = catalog.collections | where: "handle", "curatenie-intretinere" | first -%}
+        {%- if c_cur -%}
+          {%- assign ch = c_cur.productHandles | first -%}
+          {%- assign cp = catalog.productsByHandle[ch] -%}
+          <a class="mb mb--dark" href="{{ '/collections/curatenie-intretinere/' | url }}">
+            <span class="mb__text">
+              <span class="mb__eyebrow">Cea mai mare categorie</span>
+              <strong class="mb__title">Curățenie &amp; menaj</strong>
+              <span class="mb__meta tnum">{{ c_cur.count }} produse · Macromax, Kalyon, Scrub Daddy</span>
+            </span>
+            {%- if cp and cp.image -%}
+              <span class="mb__media">
+                <img src="{{ cp.image.src | cdn: 260 }}" srcset="{{ cp.image.src | srcset: 180,260,360 }}"
+                     sizes="130px" alt="{{ cp.image.alt | escape }}"
+                     width="260" height="260" loading="lazy" decoding="async">
               </span>
-            </a>
-          {%- endif -%}
-        {%- endfor -%}
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+
       </div>
     </div>
 
