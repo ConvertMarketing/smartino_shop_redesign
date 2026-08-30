@@ -122,7 +122,7 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 | --- | --- | --- | --- | --- |
 | C1 | A doua imagine la hover | **nativ** | S | `Product image swap` (Theme settings → Product card). Există și `product video swap` |
 | C2a | Preț tăiat + „economisești" | **nativ** | S | General → `Saved price` — afișează suma economisită față de `compare_at_price` |
-| C2b | **Badge „−X%" (procent)** | **secțiune modificată** | M | Badge-ul Sale se declanșează automat pe `compare_at_price`, dar **nicio sursă nu confirmă că eticheta poate randa procentul calculat**. Dacă vrem chip-ul „−30%", presupunem editare de Liquid pe snippet-ul de badge |
+| C2b | **Badge „−X%" (procent)** | **secțiune modificată** | M | Badge-ul Sale se declanșează automat pe `compare_at_price`, dar **nicio sursă nu confirmă că eticheta poate randa procentul calculat**. Dacă vrem chip-ul „−30%", presupunem editare de Liquid pe snippet-ul de badge. **Formula contează** — vezi §3.4b |
 | C3 | **Preț pe unitate (lei/bucată)** | **secțiune modificată** | M | **Nu există nativ.** Vezi §3.4 — e cea mai importantă adăugare pentru acest catalog |
 | C4 | Badge-uri Nou / Stoc limitat / Custom | **nativ** | S | `Product Badges / Labels`: Sold out (auto la qty 0), Sale (auto), New (dinamic după vechime **sau** manual prin tag `new`), Bundle, Custom (global sau per produs). Poziție stânga/dreapta + offset |
 | C5 | Rating pe card | **nativ** ca afișare; datele vin din app | S / M | Stilizare expusă (mărime stea, culoare, poziție). Motorul e Judge.me — vezi §3.5 |
@@ -145,13 +145,78 @@ poziționarea pe preț a brandului.
 1. **Sursa numărului de bucăți:** un **metafield de produs** (ex. `custom.units_per_pack`,
    Integer). *Nu* parsarea titlului — merge în prototip, dar e fragilă în producție și
    se rupe la prima redenumire.
-2. **Randare:** edit pe snippet-ul de preț din product card + blocul de preț de pe PDP:
-   `{{ product.price | divided_by: product.metafields.custom.units_per_pack.value }}`
+2. **Randare:** edit pe snippet-ul de preț din product card + blocul de preț de pe PDP.
+   Atenție, formula evidentă e greșită pe două planuri: `divided_by` cu doi întregi face
+   **împărțire trunchiată**, iar `product.price` e în **bani, nu în lei**. Varianta corectă:
+
+   ```liquid
+   {%- assign v = product.selected_or_first_available_variant -%}
+   {%- assign units = product.metafields.custom.units_per_pack.value -%}
+   {%- if units and units > 1 -%}
+     {%- assign unit_price = v.price | times: 1.0 | divided_by: units -%}
+     <p class="pc-unit">{{ unit_price | money }} /
+       <span class="u-long">bucată</span><span class="u-short">buc</span>
+       <span class="pack"> · {{ units }} buc</span></p>
+   {%- else -%}
+     <p class="pc-unit"></p>
+   {%- endif -%}
+   ```
+
+   `times: 1.0` forțează aritmetica în virgulă mobilă; `money` face conversia bani → lei
+   și formatarea locală. Ramura goală nu e opțională — fără ea, cardurile fără pachet au
+   footerul mai scurt cu 20 px și grila se decalează (vezi §3.3 C3).
 3. **Efort real:** M — populat metafield-ul e o operație de date pe catalog (se poate
    face în bulk din Matrixify/CSV), nu de front-end.
 
 **Beneficiu secundar:** același metafield permite mai târziu sortarea PLP după „preț pe
 bucată", care e sortarea cea mai onestă într-un catalog cu pachete de mărimi diferite.
+
+### 3.4b Trei capcane de aritmetică Liquid în blocul de preț
+
+Prototipul randează corect pentru că e JavaScript. La portare, aceleași trei calcule
+dau alt rezultat în Liquid — verificate pe catalogul real.
+
+**1. Procentul de reducere se trunchiază, nu se rotunjește.**
+`divided_by` între doi întregi taie zecimalele, deci `−16,9%` devine `−16%`, nu `−17%`.
+Prototipul folosește `Math.round` (`src/_data/catalog.js`). Echivalentul în Liquid:
+
+```liquid
+{%- assign v = product.selected_or_first_available_variant -%}
+{%- if v.compare_at_price > v.price -%}
+  {%- assign diff = v.compare_at_price | minus: v.price -%}
+  {%- assign pct = diff | times: 1000 | divided_by: v.compare_at_price | plus: 5 | divided_by: 10 -%}
+  <span class="pc-deal">−{{ pct }}%</span>
+{%- endif -%}
+```
+
+`times: 1000` apoi `plus: 5` apoi `divided_by: 10` e rotunjirea la întreg făcută cu
+împărțiri trunchiate. Verificat pe Sleepy (16,9 → 17), Macromax (15,45 → 15),
+Pyunkang Yul (50,0 → 50).
+
+**2. Zecimalele ridicate pierd zeroul din față.**
+Cardul afișează prețul ca `34⁹⁰ lei`, deci banii se separă de lei. Cu
+`{{ v.price | modulo: 100 }}`, un preț de `5,05 lei` randează `5⁵ lei` în loc de `5⁰⁵ lei`.
+**Sunt 7 variante reale în catalog cu banii între 01 și 09.** Umplerea e obligatorie:
+
+```liquid
+{%- assign lei_int = v.price | divided_by: 100 -%}
+{%- assign bani = v.price | modulo: 100 -%}
+<span class="pc-now" aria-hidden="true">{{ lei_int }}<sup>
+  {%- if bani < 10 %}0{% endif %}{{ bani }}</sup><span class="cur">lei</span></span>
+<span class="sr">{{ v.price | money }}</span>
+```
+
+Varianta pentru cititoare de ecran nu e decorativă: fără ea, `34⁹⁰` se aude
+„treizeci și patru nouăzeci", nu „treizeci și patru lei și nouăzeci de bani".
+
+**3. Zecimalele din atribute ies cu punct.**
+`5,5 picături` vine din `toLocaleString('ro-RO')` în prototip. Liquid n-are localizare:
+un metafield `number_decimal` randează `5.5`. Valoarea trebuie să rămână **număr**
+(altfel se pierde fațeta de filtrare din §3.5) și se formatează la randare:
+
+```liquid
+{{ product.metafields.custom.absorbtie.value | replace: ".", "," }}
+```
 
 ### 3.5 PLP
 
@@ -253,6 +318,24 @@ FBT-ul complet pentru top 20–30 SKU-uri, unde merită munca manuală.
 > `design-brief.md` §1.3.
 
 ---
+
+### 3.8 Pragul de livrare gratuită — o singură sursă
+
+Textul „peste 200 lei" apărea în **șase** locuri din prototip: bara de anunț, slide-ul
+de hero, bara de USP-uri, footer, cart drawer și constanta din `app.js`. La prima
+schimbare de campanie, cinci ar fi rămas în urmă.
+
+Acum e o singură dată în `src/_data/shop.js`, injectată în pagină ca `window.__SHOP__`
+și citită de `app.js` cu aceleași valori ca plasă de siguranță.
+
+**La portare:** Ella are pragul în `Settings → Cart → Free shipping`, dar numai pentru
+bara de progres din coș. Textele de marketing (anunț, USP-uri, footer) trebuie legate
+de aceeași valoare printr-o **setare de temă** (`settings.free_shipping_threshold`),
+altfel problema se reface identic în Shopify. **Clasificare: secțiune modificată, efort S.**
+
+⚠️ Liquid **nu interpolează în literale de șir.** Barele de USP-uri construiesc textele
+dintr-un singur șir separat cu `~` și `|`; acolo pragul trebuie să intre prin `capture`,
+nu direct în ghilimele — altfel `{{ … }}` ajunge literal în HTML.
 
 ## 4. Rânduri de verificat obligatoriu în theme editor / pe demo Ella
 

@@ -713,6 +713,27 @@ magazine fizice, care e un diferențiator real.
 
 ---
 
+### 6.9 Trei probleme de date găsite la construirea cardului de produs
+
+**1. Multiplicatorul din titlu strică prețul pe bucată.** Extractorul actual ia primul
+număr urmat de „buc" și ignoră un eventual „Nx" din față. La „12x MACROMAX Laveta …
+5 Buc" scoate 20,88 lei bucata, când corect e 12 × 5 = 60 de lavete, adică 1,74 lei.
+La „PACHET PROMO − 12 x Șervețele … 100 Buc" scoate 21,25 lei *pachetul*, când corect
+e 1.200 de șervețele la 0,21 lei bucata. **De verificat toate produsele cu „x" sau
+„pachet" în titlu.**
+
+**2. Unitatea trebuie să fie aceeași pe tot raftul.** „21,25 lei / pachet" nu se compară
+cu nimic; „0,21 lei / bucată" se compară direct cu „0,18 lei / bucată" al pachetului mic.
+Prețul pe unitate are valoare doar dacă unitatea e constantă în toată colecția — altfel
+e doar încă un număr pe card.
+
+**3. Brandul se repetă în titlu la 1.023 din 1.203 produse.** Cardul afișează vendorul
+pe o linie proprie, deasupra titlului, iar titlul are un buget fix de două rânduri —
+deci „Sleepy" mâncat de două ori costă spațiu real de citire. Am ales **să nu scot
+brandul automat** din titlu: regulile care par sigure rup nume ca „DAILEE-SLIP" sau
+„Pyunkang Yul". E o curățare de conținut pe catalog, nu ceva de rezolvat în front-end.
+**Decizie de luat cu tine** — o facem la import, sau lăsăm dublarea?
+
 ## 7. Ce îmi trebuie de la tine
 
 Lista e ordonată după cât deblochează. Nimic de aici nu poate fi completat din
