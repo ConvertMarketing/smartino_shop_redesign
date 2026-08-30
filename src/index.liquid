@@ -10,39 +10,134 @@ permalink: /index.html
 {%- assign c_red = catalog.collections | where: "handle", "reduceri" | first -%}
 {%- assign c_kbeauty = catalog.collections | where: "handle", "cosmetice-coreene" | first -%}
 
-<section class="hero">
-  <div class="container hero__inner">
-    <div class="hero__text">
-      <p class="hero__eyebrow">Importator unic Sleepy în România</p>
-      <h1 class="hero__title">Tot ce ține casa curată<br>și familia îngrijită</h1>
-      <p class="hero__lede">
-        Peste 1.200 de produse de igienă, curățenie și îngrijire.
-        Livrare gratuită peste 200&nbsp;lei.
-      </p>
-      <div class="hero__actions">
-        <a class="btn btn--primary" href="{{ '/collections/scutece-copii/' | url }}">Scutece bebeluși</a>
-        <a class="btn btn--secondary" href="{{ '/collections/produse-incontinenta/' | url }}">Produse incontinență</a>
+{%- comment -%}
+  Home: rail de categorii (stânga) + hero slider (dreapta), tipar de marketplace.
+  Slide-urile folosesc doar afirmații confirmate — vezi docs/design-brief.md §2.
+{%- endcomment -%}
+{%- assign homeRail = true -%}
+<section class="stage">
+  {%- comment -%}
+    Un singur h1 pe pagină. Titlurile din carusel sunt text de afișare (<p>):
+    un h1 care se schimbă la fiecare rotire nu are sens semantic.
+  {%- endcomment -%}
+  <h1 class="visually-hidden">SmartinoShop — scutece Sleepy, produse de igienă, curățenie și cosmetice coreene</h1>
+  <div class="container stage__inner">
+
+    <div class="stage__rail">
+      {% include "components/category-nav-rail.liquid" %}
+    </div>
+
+    <div class="stage__hero">
+      <div class="hero" data-hero>
+        <div class="hero__track" data-hero-track>
+
+          {%- comment -%} Produs ales deliberat: ancora de brand e scutecul Sleepy. {%- endcomment -%}
+          {%- assign hp = catalog.productsByHandle["scutece-chilotel-pentru-bebeluși-sleepy-natural-h20-marime-5-junior-11-18kg-24-bucati"] -%}
+          {%- unless hp -%}
+            {%- assign c_baby = catalog.collections | where: "handle", "scutece-copii" | first -%}
+            {%- assign fb = c_baby.productHandles | first -%}
+            {%- assign hp = catalog.productsByHandle[fb] -%}
+          {%- endunless -%}
+          <article class="slide slide--brand" data-slide>
+            <div class="slide__text">
+              <p class="slide__eyebrow">Importator unic în România</p>
+              <p class="slide__title">Sleepy.<br>Scutece care<br>țin toată noaptea.</p>
+              <p class="slide__lede">Bumbac organic, apă pură, testat dermatologic. De la nou-născut la 30&nbsp;kg.</p>
+              <div class="slide__cta">
+                <a class="btn btn--dark" href="{{ '/collections/scutece-copii/' | url }}">Vezi scutecele</a>
+                <span class="slide__note">Livrare gratuită peste 200 lei</span>
+              </div>
+            </div>
+            {%- if hp and hp.image -%}
+              <div class="slide__media">
+                <img src="{{ hp.image.src | cdn: 720 }}"
+                     srcset="{{ hp.image.src | srcset: 400,560,720 }}"
+                     sizes="(min-width: 1100px) 420px, 60vw"
+                     alt="{{ hp.image.alt | escape }}" width="720" height="720"
+                     fetchpriority="high" decoding="async">
+              </div>
+            {%- endif -%}
+          </article>
+
+          {%- assign kb = catalog.collections | where: "handle", "cosmetice-coreene" | first -%}
+          {%- assign kh = kb.productHandles | first -%}
+          {%- assign kp = catalog.productsByHandle[kh] -%}
+          <article class="slide slide--kbeauty" data-slide hidden>
+            <div class="slide__text">
+              <p class="slide__eyebrow">Importator oficial</p>
+              <p class="slide__title">Cosmetice<br>coreene, fără<br>intermediari.</p>
+              <p class="slide__lede">Unleashia, Pyunkang Yul, Nard și Luvum — aduse direct, cu garanția autenticității.</p>
+              <div class="slide__cta">
+                <a class="btn btn--light" href="{{ '/collections/cosmetice-coreene/' | url }}">Descoperă colecția</a>
+                <span class="slide__note">{{ kb.count }} produse în stoc</span>
+              </div>
+            </div>
+            {%- if kp and kp.image -%}
+              <div class="slide__media">
+                <img src="{{ kp.image.src | cdn: 720 }}" srcset="{{ kp.image.src | srcset: 400,560,720 }}"
+                     sizes="(min-width: 1100px) 420px, 60vw" alt="{{ kp.image.alt | escape }}"
+                     width="720" height="720" loading="lazy" decoding="async">
+              </div>
+            {%- endif -%}
+          </article>
+
+          {%- assign top = catalog.saleFeatured | first -%}
+          <article class="slide slide--sale" data-slide hidden>
+            <div class="slide__text">
+              <p class="slide__eyebrow">Reduceri active</p>
+              <p class="slide__title">Până la<br><span class="slide__big">−{{ catalog.sale.maxPct }}%</span><br>la {{ catalog.sale.count }} de produse.</p>
+              <p class="slide__lede">Prețuri reduse real, din catalogul curent. Fără cronometre inventate.</p>
+              <div class="slide__cta">
+                <a class="btn btn--dark" href="{{ '/collections/reduceri/' | url }}">Vezi reducerile</a>
+              </div>
+            </div>
+            {%- if top and top.image -%}
+              <div class="slide__media">
+                <img src="{{ top.image.src | cdn: 720 }}" srcset="{{ top.image.src | srcset: 400,560,720 }}"
+                     sizes="(min-width: 1100px) 420px, 60vw" alt="{{ top.image.alt | escape }}"
+                     width="720" height="720" loading="lazy" decoding="async">
+              </div>
+            {%- endif -%}
+          </article>
+
+        </div>
+
+        <button class="hero__arrow hero__arrow--prev" type="button" data-hero-prev aria-label="Slide-ul anterior">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+        </button>
+        <button class="hero__arrow hero__arrow--next" type="button" data-hero-next aria-label="Slide-ul următor">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+
+        <div class="hero__dots" role="tablist" aria-label="Alege slide-ul" data-hero-dots></div>
+      </div>
+
+      {%- comment -%} Trei intrări rapide sub hero, ca la marketplace-uri {%- endcomment -%}
+      <div class="quicktiles">
+        {%- assign qt = "scutece-pentru-adulti|Incontinență|shield,servetele-umede|Șervețele umede|wipes,curatenie-intretinere|Curățenie|spray" | split: "," -%}
+        {%- for t in qt -%}
+          {%- assign parts = t | split: "|" -%}
+          {%- assign c = catalog.collections | where: "handle", parts[0] | first -%}
+          {%- if c -%}
+            <a class="quicktile" href="{{ '/collections/' | append: c.handle | append: '/' | url }}">
+              <span class="quicktile__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  {%- assign icon = parts[2] -%}{% include "components/icons.liquid" %}
+                </svg>
+              </span>
+              <span>
+                <strong>{{ parts[1] }}</strong>
+                <span class="quicktile__count tnum">{{ c.count }} produse</span>
+              </span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     </div>
-    {%- comment -%}
-      Produsul din hero e ales deliberat: ancora de brand e scutecul Sleepy, nu
-      primul item din best-seller (care e un pachet de mop și arăta off-message).
-    {%- endcomment -%}
-    {%- assign hp = catalog.productsByHandle["scutece-chilotel-pentru-bebeluși-sleepy-natural-h20-marimea-5-11-18kg-24-bucati"] -%}
-    {%- unless hp -%}
-      {%- assign c_baby = catalog.collections | where: "handle", "scutece-copii" | first -%}
-      {%- assign heroProduct = c_baby.productHandles | first -%}
-      {%- assign hp = catalog.productsByHandle[heroProduct] -%}
-    {%- endunless -%}
-    {%- if hp and hp.image -%}
-      <div class="hero__media">
-        <img src="{{ hp.image.src | cdn: 700 }}"
-             srcset="{{ hp.image.src | srcset: 400,600,800,1000 }}"
-             sizes="(min-width: 900px) 460px, 84vw"
-             alt="{{ hp.image.alt | escape }}" width="700" height="700"
-             fetchpriority="high" decoding="async">
-      </div>
-    {%- endif -%}
+
   </div>
 </section>
 

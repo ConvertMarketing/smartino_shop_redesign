@@ -1,0 +1,42 @@
+{%- comment -%}
+  Bara de categorii + panoul vertical, în tiparul marketplace (eMAG).
+  Cu 149 de colecții, un meniu orizontal nu încape — railul vertical scalează.
+  Pe Home railul e deschis implicit lângă hero; pe restul paginilor e flyout.
+  Ella: „Header Nav – vertical menu" există nativ (ella-mapping.md G3).
+{%- endcomment -%}
+<div class="catbar">
+  <div class="container catbar__inner">
+    <button class="catbar__toggle" type="button" data-cat-toggle aria-expanded="false" aria-controls="cat-panel">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+      <span>Toate categoriile</span>
+    </button>
+
+    <nav class="catbar__promo" aria-label="Promoții">
+      {%- for l in nav.promo -%}
+        <a href="{{ l.url | url }}"{% if l.hot %} class="is-hot"{% endif %}>{{ l.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <a class="catbar__stores" href="{{ '/pages/smartino-supermarket/' | url }}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 21s-6-5.2-6-10a6 6 0 1 1 12 0c0 4.8-6 10-6 10Z"/><circle cx="12" cy="11" r="2.2"/>
+      </svg>
+      Magazine Snagov
+    </a>
+  </div>
+</div>
+
+<div class="catpanel" id="cat-panel" data-cat-panel hidden>
+  {%- comment -%} Antetul apare doar când panoul e drawer (sub 1100px). {%- endcomment -%}
+  <div class="catpanel__head">
+    <span class="wordmark">smartino<sup>®</sup></span>
+    <button class="catpanel__close" type="button" data-close-nav aria-label="Închide meniul">&times;</button>
+  </div>
+  <div class="container catpanel__inner">
+    {% include "components/category-nav-rail.liquid" %}
+  </div>
+</div>

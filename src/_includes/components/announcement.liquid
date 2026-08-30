@@ -10,6 +10,12 @@
          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
     </svg>
-    <p><strong>Livrare gratuită</strong> la comenzile de peste <strong>200 lei</strong></p>
+    {%- comment -%}
+      Textul confirmat de pe site e „Livrare GRATUITĂ la comenzile de peste 200 LEI".
+      Pe ecrane mici se rupea pe două rânduri, deci ascundem doar liantul —
+      afirmația rămâne aceeași.
+    {%- endcomment -%}
+    <p><strong>Livrare gratuită</strong><span class="announcement__mid"> la comenzile de</span>
+       peste <strong>200 lei</strong></p>
   </div>
 </div>

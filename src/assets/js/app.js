@@ -121,7 +121,7 @@
 
   // ------------------------------------------------------------ evenimente
   document.addEventListener('click', (e) => {
-    const t = e.target.closest('[data-add],[data-inc],[data-dec],[data-rm],[data-open-cart],[data-close-cart],[data-open-nav],[data-close-nav]');
+    const t = e.target.closest('[data-add],[data-inc],[data-dec],[data-rm],[data-open-cart],[data-close-cart],[data-open-nav],[data-close-nav],[data-cat-toggle]');
     if (!t) return;
 
     if (t.dataset.add) { addToCart(t.dataset.add); openCart(); }
@@ -132,6 +132,7 @@
     else if (t.hasAttribute('data-close-cart')) closeCart();
     else if (t.hasAttribute('data-open-nav')) openNav();
     else if (t.hasAttribute('data-close-nav')) closeNav();
+    else if (t.hasAttribute('data-cat-toggle')) toggleNav();
   });
 
   // ------------------------------------------------------------- drawere
@@ -153,17 +154,32 @@
     setTimeout(() => { d.hidden = true; }, 240);
     lastFocus?.focus?.();
   }
+  const panel = () => $('[data-cat-panel]');
+  const isDesktop = () => window.matchMedia('(min-width: 1100px)').matches;
+
   function openNav() {
-    $('[data-nav]')?.classList.add('is-open');
+    const el = panel(); if (!el) return;
+    el.hidden = false;
+    requestAnimationFrame(() => el.classList.add('is-open'));
     const s = $('[data-nav-scrim]'); if (s) s.hidden = false;
     document.body.classList.add('is-locked');
     $('[data-open-nav]')?.setAttribute('aria-expanded', 'true');
+    $('[data-cat-toggle]')?.setAttribute('aria-expanded', 'true');
   }
   function closeNav() {
-    $('[data-nav]')?.classList.remove('is-open');
+    const el = panel(); if (!el) return;
+    el.classList.remove('is-open');
     const s = $('[data-nav-scrim]'); if (s) s.hidden = true;
     document.body.classList.remove('is-locked');
     $('[data-open-nav]')?.setAttribute('aria-expanded', 'false');
+    $('[data-cat-toggle]')?.setAttribute('aria-expanded', 'false');
+    // Pe Home railul e permanent vizibil, deci nu-l ascundem niciodată.
+    if (!el.classList.contains('catpanel--home')) el.hidden = true;
+  }
+  function toggleNav() {
+    const el = panel(); if (!el) return;
+    const open = el.classList.contains('is-open') || (isDesktop() && !el.hidden && !el.classList.contains('catpanel--home'));
+    open ? closeNav() : openNav();
   }
   $('[data-nav-scrim]')?.addEventListener('click', closeNav);
 
@@ -173,14 +189,62 @@
     const r = $('[data-search-results]'); if (r) r.hidden = true;
   });
 
-  // pe mobil, itemii cu mega-menu se expandează la tap
-  $$('.nav__item.has-mega > a').forEach((a) => {
+  // Pe mobil (și pe tabletă) categoriile cu subcategorii se expandează la tap;
+  // pe desktop flyout-ul apare la hover, deci linkul rămâne link.
+  $$('.catlist__item.has-flyout > .catlist__link').forEach((a) => {
     a.addEventListener('click', (e) => {
-      if (window.matchMedia('(min-width: 1000px)').matches) return;
+      if (isDesktop()) return;
       e.preventDefault();
       a.parentElement.classList.toggle('is-expanded');
     });
   });
+
+  // --------------------------------------------------------- hero slider
+  const hero = $('[data-hero]');
+  if (hero) {
+    const slides = $$('[data-slide]', hero);
+    const dotsWrap = $('[data-hero-dots]', hero);
+    let index = 0;
+    let timer = null;
+
+    const dots = slides.map((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hero__dot';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', `Slide ${i + 1} din ${slides.length}`);
+      b.addEventListener('click', () => { go(i); rearm(); });
+      dotsWrap?.appendChild(b);
+      return b;
+    });
+
+    function go(next) {
+      index = (next + slides.length) % slides.length;
+      slides.forEach((s, i) => { s.hidden = i !== index; });
+      dots.forEach((d, i) => {
+        d.classList.toggle('is-active', i === index);
+        d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+      // punctele au nevoie de contrast invers pe slide-ul închis
+      hero.classList.toggle('slide--kbeauty-active', slides[index].classList.contains('slide--kbeauty'));
+    }
+
+    function rearm() {
+      clearInterval(timer);
+      // Fără autoplay dacă utilizatorul a cerut mai puțină mișcare.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      timer = setInterval(() => go(index + 1), 7000);
+    }
+
+    $('[data-hero-prev]', hero)?.addEventListener('click', () => { go(index - 1); rearm(); });
+    $('[data-hero-next]', hero)?.addEventListener('click', () => { go(index + 1); rearm(); });
+    hero.addEventListener('mouseenter', () => clearInterval(timer));
+    hero.addEventListener('mouseleave', rearm);
+    hero.addEventListener('focusin', () => clearInterval(timer));
+
+    go(0);
+    rearm();
+  }
 
   // ------------------------------------------------- căutare predictivă
   const input = $('[data-search-input]');

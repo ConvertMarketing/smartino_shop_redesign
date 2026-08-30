@@ -21,6 +21,8 @@
 }
 .announcement__icon { flex: none; }
 .announcement p { margin: 0; }
+.announcement__mid { display: none; }
+@media (min-width: 560px) { .announcement__mid { display: inline; } }
 
 /* ============ Header ============ */
 .header {
@@ -279,3 +281,126 @@
 .section__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s5); }
 .section__link { font-size: var(--text-sm); font-weight: 700; color: var(--brand-700); white-space: nowrap; }
 .section__link:hover { text-decoration: underline; }
+
+/* ============ Bara de categorii ============ */
+.catbar { background: var(--ink-900); color: #fff; position: relative; z-index: 55; }
+.catbar__inner { display: flex; align-items: center; gap: var(--s5); min-height: 46px; }
+.catbar__toggle {
+  display: flex; align-items: center; gap: var(--s2);
+  height: 46px; padding: 0 var(--s4); margin-left: calc(var(--gutter) * -1);
+  padding-left: var(--gutter);
+  background: var(--brand-500); color: var(--ink-900);
+  font-family: var(--font-display); font-weight: 700; font-size: var(--text-base);
+  white-space: nowrap;
+}
+.catbar__toggle:hover { background: var(--brand-600); }
+.catbar__promo {
+  display: flex; gap: var(--s4); flex: 1; min-width: 0;
+  overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  padding-left: var(--s4);
+}
+.catbar__promo::-webkit-scrollbar { display: none; }
+@media (min-width: 900px) { .catbar__promo { gap: var(--s5); overflow: visible; } }
+.catbar__promo a { font-size: var(--text-sm); font-weight: 600; color: #E6EAEB; white-space: nowrap; }
+.catbar__promo a:hover { color: var(--brand-500); }
+.catbar__promo a.is-hot { color: #fff; }
+.catbar__promo a.is-hot::before {
+  content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px;
+  border-radius: 50%; background: var(--sale); vertical-align: 1px;
+}
+.catbar__stores {
+  display: none; align-items: center; gap: 6px; margin-left: auto;
+  font-size: var(--text-sm); font-weight: 600; color: #E6EAEB; white-space: nowrap;
+}
+@media (min-width: 1100px) { .catbar__stores { display: flex; } }
+.catbar__stores:hover { color: var(--brand-500); }
+
+/* ============ Panoul de categorii (flyout pe paginile interioare) ============ */
+.catpanel {
+  position: absolute; left: 0; right: 0; z-index: 54;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+  box-shadow: 0 14px 30px rgba(16, 32, 34, .12);
+}
+.catpanel__inner { position: relative; }
+.catpanel__head { display: none; }
+.catpanel--home { position: static; box-shadow: none; border: none; background: none; }
+
+/* ============ Lista verticală ============ */
+.catlist { list-style: none; padding: 0; margin: 0; }
+.catlist__item { position: relative; }
+.catlist__link {
+  display: flex; align-items: center; gap: var(--s3);
+  padding: 9px var(--s3); border-radius: var(--radius-sm);
+  font-size: var(--text-base); color: var(--ink-900); line-height: 1.25;
+}
+.catlist__icon { flex: none; color: var(--brand-700); display: grid; place-items: center; }
+.catlist__label { flex: 1; min-width: 0; }
+.catlist__chev { flex: none; color: var(--ink-300); }
+.catlist__flag {
+  /* Railul e îngust (262px). Flag-ul inline împingea eticheta pe două rânduri
+     și se suprapunea peste ea — devine un punct discret, cu textul în title. */
+  flex: none; width: 7px; height: 7px; padding: 0; border-radius: 50%;
+  background: var(--brand-500); font-size: 0; overflow: hidden; text-indent: -999px;
+}
+.catlist__item:hover > .catlist__link,
+.catlist__item:focus-within > .catlist__link { background: var(--brand-050); color: var(--brand-900); }
+.catlist__item:hover .catlist__chev { color: var(--brand-700); }
+
+/* ============ Flyout cu subcategorii ============ */
+.flyout {
+  position: absolute; left: 100%; top: -8px; z-index: 60;
+  min-width: 460px; max-width: 720px;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: 0 18px 40px rgba(16, 32, 34, .16);
+  padding: var(--s5);
+  opacity: 0; visibility: hidden; transform: translateX(-6px);
+  transition: opacity .14s var(--ease), transform .14s var(--ease), visibility .14s;
+}
+.has-flyout:hover > .flyout, .has-flyout:focus-within > .flyout {
+  opacity: 1; visibility: visible; transform: none;
+}
+.flyout__cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--s5); }
+.flyout__title {
+  font-family: var(--font-display); font-weight: 700; font-size: var(--text-xs);
+  text-transform: uppercase; letter-spacing: .06em; color: var(--ink-900); margin-bottom: var(--s2);
+}
+.flyout__col ul { list-style: none; padding: 0; display: grid; gap: 1px; }
+.flyout__col a {
+  display: flex; align-items: baseline; gap: var(--s2);
+  padding: 4px 0; font-size: var(--text-sm); color: var(--ink-700);
+}
+.flyout__col a:hover { color: var(--brand-700); }
+.flyout__count { font-size: var(--text-xs); color: var(--ink-300); margin-left: auto; }
+.flyout__all {
+  display: inline-block; margin-top: var(--s4); padding-top: var(--s3);
+  border-top: 1px solid var(--line); width: 100%;
+  font-size: var(--text-sm); font-weight: 700; color: var(--brand-700);
+}
+
+/* ---- Mobil: panoul devine drawer ---- */
+@media (max-width: 1099px) {
+  .catpanel, .catpanel--home {
+    position: fixed; inset: 0 auto 0 0; z-index: 90;
+    width: min(88vw, 360px); background: var(--surface);
+    transform: translateX(-100%); transition: transform .22s var(--ease);
+    overflow-y: auto; border: none; box-shadow: var(--shadow-drawer);
+    display: block !important; padding: var(--s4) var(--s3);
+  }
+  .catpanel.is-open { transform: none; }
+  .catpanel__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--s2) var(--s2) var(--s4);
+    border-bottom: 1px solid var(--line); margin-bottom: var(--s3);
+  }
+  .catpanel__close { font-size: 30px; line-height: 1; padding: 0 var(--s2); color: var(--ink-700); }
+  .catpanel .container { padding-inline: 0; }
+  .flyout {
+    position: static; opacity: 1; visibility: visible; transform: none;
+    box-shadow: none; border: none; padding: 0 0 var(--s3) var(--s8);
+    min-width: 0; display: none;
+  }
+  .catlist__item.is-expanded > .flyout { display: block; }
+  .catlist__item.is-expanded > .catlist__link .catlist__chev { transform: rotate(90deg); }
+  .flyout__cols { grid-template-columns: 1fr; gap: var(--s4); }
+  .catlist__link { padding: 11px var(--s2); }
+}

@@ -154,6 +154,12 @@ const onSale = products.filter((p) => p.discountPct > 0 && p.available);
 export default {
   products,
   saleFeatured: diversifiedSale(onSale, 8),
+  // Cifrele din hero vin din catalog, nu scrise de mână: altfel devin false
+  // la prima actualizare de preț.
+  sale: {
+    count: onSale.length,
+    maxPct: onSale.reduce((m, p) => Math.max(m, p.discountPct || 0), 0),
+  },
   collections,
   productsByHandle: Object.fromEntries(byHandle),
   stats: {
