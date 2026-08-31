@@ -35,7 +35,6 @@
 .gal__stage {
   position: relative; aspect-ratio: 1 / 1; background: var(--surface);
   border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
-  box-shadow: var(--shadow-brand-md);
 }
 .gal__slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .22s var(--ease); }
 .gal__slide.is-active { opacity: 1; }
