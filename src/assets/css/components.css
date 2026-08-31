@@ -313,16 +313,6 @@
 .card__cart:active { transform: translateY(0); }
 .card__cart:disabled { background: var(--surface-2); color: var(--ink-500); cursor: not-allowed; transform: none; box-shadow: none; }
 
-/* bandă de livrare — doar peste pragul real din src/_data/shop.js */
-.card__ship {
-  display: flex; align-items: center; gap: 6px;
-  margin: 0 -12px 9px; padding: 6px 12px;
-  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-  background: var(--brand-050); color: var(--brand-900);
-  font-size: 11.5px; font-weight: 600; line-height: 1.25;
-}
-.card__ship svg { flex: none; }
-
 /* Stepper — butonul devine selector de cantitate (design-brief.md §6.3b) */
 .stepper {
   display: flex; align-items: center; height: 40px; padding: 0 2px;
@@ -355,7 +345,6 @@
   .spec { font-size: 10px; padding: 3px 7px 3px 5px; }
   .spec .s-long { display: none; }
   .spec .s-short { display: inline; }
-  .card__ship { margin: 0 -10px 8px; padding: 6px 10px; }
   .card__buy { gap: 7px; }
   .card__omni { font-size: 10px; }
   /* Stepperul e cu ~55 px mai lat decât butonul: pe carduri înguste ar strivi
@@ -380,7 +369,7 @@
 
 /* densitatea 01 „Esențial" — fără semnale secundare */
 .card--esential .card__attrs, .card--esential .card__rate,
-.card--esential .card__omni, .card--esential .card__ship,
+.card--esential .card__omni,
 .card--esential .card__stock { display: none; }
 
 /* ============ Grilă de produse ============ */

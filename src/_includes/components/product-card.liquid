@@ -136,17 +136,6 @@
     {%- endif -%}
 
     <div class="card__foot">
-      {%- if d != "esential" and product.available and product.price >= shop.freeShipping -%}
-        <p class="card__ship">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7z"/>
-            <circle cx="5.5" cy="18.5" r="2"/><circle cx="17.5" cy="18.5" r="2"/>
-          </svg>
-          <span>Livrare gratuită</span>
-        </p>
-      {%- endif -%}
-
       <div class="card__buy">
         <div class="card__buy-info">
           <div class="card__price">
