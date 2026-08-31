@@ -135,5 +135,44 @@ export default catalog.products.map((p) => {
     specs,
     /* Cât mai lipsește până la livrarea gratuită — regula reală de 200 lei. */
     saves: p.compareAt ? Math.round((p.compareAt - p.price) * 100) / 100 : 0,
+
+    /* Datele graficului de comparație. Barele sunt proporționale cu prețul pe
+       bucată, nu cu prețul: două pachete la 55 și 156 lei arată aproape la fel
+       pe bară dacă bara e prețul, și complet diferit dacă e prețul pe bucată —
+       care e chiar întrebarea la care răspunde pagina. */
+    chart: (() => {
+      const rows = [p, ...siblings].filter((x) => x.perUnit);
+      if (rows.length < 2) return null;
+      const max = Math.max(...rows.map((x) => x.perUnit));
+      const min = Math.min(...rows.map((x) => x.perUnit));
+      /* Sub 15% diferență, graficul arată patru bare aproape egale și nu spune
+         nimic. Mediana pe catalog e 1,1×, deci majoritatea familiilor cad aici
+         — și e corect să cadă. */
+      if (max / min < 1.15) return null;
+      return {
+        max,
+        /* Cât se economisește pe bucată alegând cel mai bun format din familie. */
+        spread: (Math.round((max / min) * 10) / 10).toLocaleString('ro-RO', { minimumFractionDigits: 1 }),
+        rows: rows
+          .sort((a, b) => a.perUnit - b.perUnit)
+          .map((x, i, all) => ({
+            handle: x.handle,
+            /* Când două formate au aceeași etichetă și prețuri diferite,
+               eticheta singură devine minciună — o completăm cu prețul. */
+            label: all.filter((y) => formatLabel(y) === formatLabel(x)).length > 1
+              ? `${formatLabel(x)} · ${x.price.toLocaleString('ro-RO', { minimumFractionDigits: 2 })} lei`
+              : formatLabel(x),
+            perUnit: x.perUnit,
+            price: x.price,
+            units: x.units,
+            /* Scara pornește de la 30%, nu de la 0: la un raport de 1,2× barele
+               proporționale pur arată aproape identice, iar diferența — care e
+               tot rostul graficului — dispare. */
+            pct: max === min ? 100 : Math.round(30 + 70 * ((x.perUnit - min) / (max - min))),
+            isCurrent: x.handle === p.handle,
+            isBest: Math.round(x.perUnit * 100) === Math.round(min * 100),
+          })),
+      };
+    })(),
   };
 });
