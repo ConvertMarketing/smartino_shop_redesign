@@ -10,11 +10,16 @@ eleventyExcludeFromCollections: true
 window.__BASE__ = "{{ '/' | url }}";
 window.__SEARCH__ = {
 {%- for p in catalog.products -%}
-"{{ p.handle }}":{"t":{{ p.title | json }},"p":{{ p.price }},"i":{% if p.image %}{{ p.image.src | json }}{% else %}null{% endif %},"v":{{ p.vendor | json }}}{% unless forloop.last %},{% endunless %}
+"{{ p.handle }}":{"t":{{ p.title | json }},"p":{{ p.price }},"i":{% if p.image %}{{ p.image.src | json }}{% else %}null{% endif %},"v":{{ p.vendor | json }},"a":{% if p.available %}1{% else %}0{% endif %}}{% unless forloop.last %},{% endunless %}
 {%- endfor -%}
 };
-window.__CATALOG__ = window.__SEARCH__;
-Object.keys(window.__CATALOG__).forEach(function(k){
+{%- comment -%}
+  __CATALOG__ e un obiect NOU. Înainte era aceeași referință cu __SEARCH__, iar
+  bucla îi rescria cheile scurte în chei lungi — deci buildIndex() din app.js,
+  care citește p.t, primea undefined și căutarea predictivă nu găsea nimic.
+{%- endcomment -%}
+window.__CATALOG__ = {};
+Object.keys(window.__SEARCH__).forEach(function(k){
   var s = window.__SEARCH__[k];
-  window.__CATALOG__[k] = { title: s.t, price: s.p, image: s.i, vendor: s.v, available: true };
+  window.__CATALOG__[k] = { title: s.t, price: s.p, image: s.i, vendor: s.v, available: s.a !== 0 };
 });
