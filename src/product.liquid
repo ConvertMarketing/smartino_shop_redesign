@@ -103,10 +103,9 @@ eleventyComputed:
           Prețul pe bucată nu e o notă sub preț, e al doilea număr al paginii:
           la pachete de 200 și 1.200 de bucăți, e singurul care se compară.
         {%- endcomment -%}
-        <div class="unitbox{% if pp.isBest %} unitbox--best{% endif %}">
+        <div class="unitbox">
           <p class="unitbox__n">{{ p.perUnit | lei | remove: " lei" }}<span> lei / bucată</span></p>
           {%- if p.units -%}<p class="unitbox__s">{{ p.units }} bucăți în pachet</p>{%- endif -%}
-          {%- if pp.isBest -%}<p class="unitbox__tag">cel mai bun preț pe bucată din familie</p>{%- endif -%}
         </div>
       {%- endif -%}
 
@@ -121,55 +120,6 @@ eleventyComputed:
         produse au o singură variantă, dar mărimile și formatele aceleiași linii
         sunt produse separate. Comparate după prețul pe bucată, nu după preț.
       {%- endcomment -%}
-      {%- if pp.chart -%}
-        {%- comment -%}
-          Graficul apare doar când diferența merită arătată — sub 15% ar fi
-          patru bare aproape egale. Barele sunt proporționale cu prețul pe
-          bucată, nu cu prețul: două pachete de 55 și 156 lei arată aproape la
-          fel dacă bara e prețul, și complet diferit dacă e prețul pe bucată.
-        {%- endcomment -%}
-        <section class="cmp" data-cmp>
-          <header class="cmp__head">
-            <h2>Cât costă bucata, pe formate</h2>
-            <p>Cel mai scump format e cu <b>{{ pp.chart.spread }}×</b> peste cel mai ieftin</p>
-          </header>
-          <ol class="cmp__list">
-            {%- for r in pp.chart.rows -%}
-              <li class="cmp__row{% if r.isCurrent %} is-current{% endif %}{% if r.isBest %} is-best{% endif %}">
-                {%- if r.isCurrent -%}
-                  <span class="cmp__lbl">{{ r.label }}<span class="cmp__you">acesta</span></span>
-                {%- else -%}
-                  <a class="cmp__lbl" href="{{ '/products/' | append: r.handle | append: '/' | url }}">{{ r.label }}</a>
-                {%- endif -%}
-                <span class="cmp__bar"><span class="cmp__fill" style="--w:{{ r.pct }}%"></span></span>
-                <span class="cmp__u tnum">{{ r.perUnit | lei | remove: " lei" }}</span>
-                <span class="cmp__p tnum">{{ r.price | lei }}</span>
-              </li>
-            {%- endfor -%}
-          </ol>
-        </section>
-      {%- elsif pp.hasChoice -%}
-        <section class="fmt">
-          <h2 class="fmt__h">Alte formate și mărimi</h2>
-          <ul class="fmt__list">
-            <li class="fmt__row is-current" aria-current="true">
-              <span class="fmt__lbl">{% if p.packDesc %}{{ p.packDesc }}{% elsif p.units %}{{ p.units }} bucăți{% else %}{{ p.title | truncate: 34 }}{% endif %}</span>
-              {%- if p.perUnit -%}<span class="fmt__u tnum">{{ p.perUnit | lei | remove: " lei" }} lei/buc</span>{%- endif -%}
-              <span class="fmt__p tnum">{{ p.price | lei }}</span>
-            </li>
-            {%- for s in pp.siblings -%}
-              <li class="fmt__row">
-                <a href="{{ '/products/' | append: s.handle | append: '/' | url }}">
-                  <span class="fmt__lbl">{{ s.label }}</span>
-                  {%- if s.perUnit -%}<span class="fmt__u tnum">{{ s.perUnit | lei | remove: " lei" }} lei/buc</span>{%- endif -%}
-                  <span class="fmt__p tnum">{{ s.price | lei }}</span>
-                </a>
-              </li>
-            {%- endfor -%}
-          </ul>
-        </section>
-      {%- endif -%}
-
       <p class="buy__stock{% unless p.available %} buy__stock--out{% endunless %}">
         {%- if p.available -%}
           <span class="dot" aria-hidden="true"></span>În stoc — expediere în 24h

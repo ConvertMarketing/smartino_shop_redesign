@@ -105,15 +105,6 @@
     }
   });
 
-  /* ---- graficul se umple când intră în ecran ----
-     Animația e informație: ochiul vede raportul crescând, nu doar starea finală. */
-  const cmp = $('[data-cmp]');
-  if (cmp && 'IntersectionObserver' in window) {
-    new IntersectionObserver((es, o) => {
-      es.forEach((e) => { if (e.isIntersecting) { cmp.classList.add('is-in'); o.disconnect(); } });
-    }, { threshold: .3 }).observe(cmp);
-  } else if (cmp) cmp.classList.add('is-in');
-
   /* ---- bara lipită de jos ----
      Apare doar după ce butonul principal a ieșit din ecran: până atunci ar fi
      un al doilea buton pentru aceeași acțiune, la 20 px distanță. */
