@@ -98,28 +98,6 @@ eleventyComputed:
         {%- endif -%}
       </div>
 
-      {%- if p.perUnit -%}
-        {%- comment -%}
-          Prețul pe bucată nu e o notă sub preț, e al doilea număr al paginii:
-          la pachete de 200 și 1.200 de bucăți, e singurul care se compară.
-        {%- endcomment -%}
-        <div class="unitbox">
-          <p class="unitbox__n">{{ p.perUnit | lei | remove: " lei" }}<span> lei / bucată</span></p>
-          {%- if p.units -%}<p class="unitbox__s">{{ p.units }} bucăți în pachet</p>{%- endif -%}
-        </div>
-      {%- endif -%}
-
-      {%- if p.compareAt -%}
-        {%- comment -%} Obligatoriu prin OUG 58/2022; istoricul de preț lipsește din date. {%- endcomment -%}
-        <p class="buy__omni">Cel mai mic preț din ultimele 30 de zile:
-          <span class="card__omni-v">lipsește din date</span></p>
-      {%- endif -%}
-
-      {%- comment -%}
-        „Alte formate" ține locul selectorului de variante: 1.202 din 1.203
-        produse au o singură variantă, dar mărimile și formatele aceleiași linii
-        sunt produse separate. Comparate după prețul pe bucată, nu după preț.
-      {%- endcomment -%}
       <p class="buy__stock{% unless p.available %} buy__stock--out{% endunless %}">
         {%- if p.available -%}
           <span class="dot" aria-hidden="true"></span>În stoc — expediere în 24h
