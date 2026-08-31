@@ -32,7 +32,9 @@ function unitsFromTitle(title) {
  * bucăți la 0,019 lei bucata.
  */
 function packMultiplier(title) {
-  const re = /(?:^|[\s(\-–])(\d{1,3})\s*x\s/gi;
+  /* Și semnul înmulțirii, nu doar litera: 112 titluri scriu „3× Șervețele",
+     iar prețul pe bucată ieșea de trei ori mai mare pe toată familia. */
+  const re = /(?:^|[\s(\-–])(\d{1,3})\s*[x×]\s/gi;
   let mm;
   while ((mm = re.exec(title)) !== null) {
     const after = title.slice(re.lastIndex);

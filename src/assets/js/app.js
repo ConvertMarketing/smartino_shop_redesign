@@ -24,12 +24,13 @@
   const count = () => cart.reduce((n, l) => n + l.qty, 0);
   const subtotal = () => cart.reduce((n, l) => n + l.price * l.qty, 0);
 
-  function addToCart(handle) {
+  /* n vine din selectorul de cantitate de pe pagina de produs; pe card e mereu 1. */
+  function addToCart(handle, n = 1) {
     const p = window.__CATALOG__?.[handle];
     if (!p) return;
     const line = find(handle);
-    if (line) line.qty += 1;
-    else cart.push({ handle, title: p.title, price: p.price, image: p.image, qty: 1 });
+    if (line) line.qty += n;
+    else cart.push({ handle, title: p.title, price: p.price, image: p.image, qty: n });
     save(); render();
   }
 
@@ -163,8 +164,11 @@
 
     if (t.dataset.add) {
       const c = t.closest('.card');
-      addToCart(t.dataset.add);
-      if (c) say('Adaugat in cos: ' + ($('.card__title', c)?.textContent || '').trim());
+      addToCart(t.dataset.add, Number(t.dataset.addQty) || 1);
+      delete t.dataset.addQty;
+      const name = ($('.card__title', c || document)?.textContent
+        || $('.buy__title')?.textContent || '').trim();
+      if (name) say('Adaugat in cos: ' + name);
       openCart();
     }
     else if (t.dataset.inc) { const l = find(t.dataset.inc); setQty(t.dataset.inc, (l?.qty || 0) + 1); }

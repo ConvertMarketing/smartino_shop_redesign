@@ -29,7 +29,7 @@
 
   {% include "components/footer.liquid" %}
   {% include "components/cart-drawer.liquid" %}
-  {% include "components/bottom-nav.liquid" %}
+  {% unless hideBottomNav %}{% include "components/bottom-nav.liquid" %}{% endunless %}
 
   <script src="{{ '/assets/js/catalog.js' | url }}" defer></script>
   <script>window.__SHOP__ = {{ shop | json }};</script>

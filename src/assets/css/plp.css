@@ -7,23 +7,6 @@
 
 .plp { padding-bottom: var(--s12); }
 
-/* ---------- fir de navigare ---------- */
-.crumbs { padding: var(--s4) 0 var(--s2); }
-.crumbs ol {
-  display: flex; align-items: center; gap: var(--s2);
-  list-style: none; margin: 0; padding: 0;
-  font-size: var(--text-sm); color: var(--ink-500);
-  overflow-x: auto; scrollbar-width: none; white-space: nowrap;
-  /* pe mobil se derulează; marginile se sting în loc să taie brusc */
-  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
-          mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
-}
-.crumbs ol::-webkit-scrollbar { display: none; }
-.crumbs li + li::before { content: '/'; margin-right: var(--s2); color: var(--ink-300); }
-.crumbs a { color: var(--ink-500); text-decoration: none; }
-.crumbs a:hover { color: var(--brand-700); text-decoration: underline; text-underline-offset: 2px; }
-.crumbs [aria-current] { color: var(--ink-900); font-weight: 500; }
-
 /* ---------- antet ---------- */
 .plp__head { padding: var(--s2) 0 var(--s5); }
 .plp__brand {
