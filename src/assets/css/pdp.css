@@ -329,9 +329,13 @@ a.cmp__lbl:hover { color: var(--brand-700); text-decoration: underline; text-und
 .acc__sum svg { width: 16px; height: 16px; flex: none; color: var(--ink-500); transition: transform .18s var(--ease); }
 .acc[open] .acc__sum svg { transform: rotate(180deg); }
 .acc__body { padding-bottom: var(--s5); }
-.acc__empty { font-size: var(--text-sm); color: var(--ink-500); max-width: 62ch; }
+.acc__empty { font-size: var(--text-base); color: var(--ink-500); }
 
-.rte { color: var(--ink-700); font-size: var(--text-base); line-height: 1.65; max-width: 68ch; }
+.rte { color: var(--ink-700); font-size: var(--text-base); line-height: 1.65; }
+/* Textul din taburi ține lățimea secțiunii. Pe rânduri lungi, corpul de literă
+   și interlinia cresc — altfel ochiul pierde rândul la întoarcere. */
+.tabs__p .rte { font-size: var(--text-md); line-height: 1.72; }
+.tabs__p .rte p, .tabs__p .rte ul, .tabs__p .rte ol { max-width: none; }
 .rte p { margin: 0 0 var(--s3); }
 .rte ul, .rte ol { margin: 0 0 var(--s3); padding-left: var(--s5); }
 .rte li { margin-bottom: 4px; }
@@ -340,10 +344,10 @@ a.cmp__lbl:hover { color: var(--brand-700); text-decoration: underline; text-und
 .rte img { max-width: 100%; height: auto; border-radius: var(--radius); }
 .rte table { display: block; overflow-x: auto; }
 
-.spectable { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; max-width: 560px; }
-.spectable > div { display: grid; grid-template-columns: 180px minmax(0, 1fr); background: var(--surface); }
-.spectable dt { padding: 10px 14px; font-size: var(--text-sm); color: var(--ink-500); }
-.spectable dd { padding: 10px 14px; margin: 0; font-size: var(--text-sm); font-weight: 600; color: var(--ink-900); }
+.spectable { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; max-width: 720px; }
+.spectable > div { display: grid; grid-template-columns: 240px minmax(0, 1fr); background: var(--surface); }
+.spectable dt { padding: 12px 18px; font-size: var(--text-sm); color: var(--ink-500); }
+.spectable dd { padding: 12px 18px; margin: 0; font-size: var(--text-sm); font-weight: 600; color: var(--ink-900); }
 @media (max-width: 520px) { .spectable > div { grid-template-columns: 130px minmax(0, 1fr); } }
 .spectable__note { margin-top: var(--s3); font-size: var(--text-xs); color: var(--ink-300); max-width: 60ch; }
 
