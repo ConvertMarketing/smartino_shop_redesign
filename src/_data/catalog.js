@@ -16,7 +16,29 @@ function unitsFromTitle(title) {
   const m = title.match(/(\d{1,4})\s*(?:buc[ăa]?[tț]i|bucati|buc)\b/i);
   if (!m) return null;
   const n = Number(m[1]);
-  return n > 1 && n <= 5000 ? n : null;
+  if (!(n > 1 && n <= 5000)) return null;
+
+  /*
+   * Multiplicatorul din capul titlului înmulțește conținutul pachetului.
+   * „12x MACROMAX Laveta … 5 Buc" înseamnă 60 de lavete, nu 5, iar
+   * „PACHET PROMO - 12 x Șervețele … 100 Buc" înseamnă 1.200, nu 100.
+   * Fără asta, prețul pe bucată al pachetelor promo era fals — 20,88 lei
+   * în loc de 1,74 la Macromax.
+   */
+  const mult = title.match(/(?:^|[\s(\-–])(\d{1,3})\s*x\s/i);
+  const k = mult ? Number(mult[1]) : 1;
+  const total = k > 1 && k <= 100 ? n * k : n;
+  return total <= 20000 ? total : null;
+}
+
+/** Descrierea pachetului, când titlul chiar spune „12 x 100 Buc". */
+function packDesc(title) {
+  const m = title.match(/(?:^|[\s(\-–])(\d{1,3})\s*x\s/i);
+  const u = title.match(/(\d{1,4})\s*(?:buc[ăa]?[tț]i|bucati|buc)\b/i);
+  if (!m || !u) return null;
+  const k = Number(m[1]);
+  if (!(k > 1 && k <= 100)) return null;
+  return `${k} × ${Number(u[1])} bucăți`;
 }
 
 /** Mărimea de scutec, pentru fațete: „mărime 4 Maxi, 7-14kg" */
@@ -95,6 +117,7 @@ const products = raw.map((p) => {
     available: variants.some((v) => v.available),
     isNew,
     isBundle: /pachet\s*promo|pachet\s*promo[țt]ional/i.test(p.title),
+    packDesc: packDesc(p.title),
     facets: {
       size: babySize(p.title),
       drops: drops(p.title),
