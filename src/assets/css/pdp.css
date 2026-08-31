@@ -289,9 +289,11 @@ a.cmp__lbl:hover { color: var(--brand-700); text-decoration: underline; text-und
 /* ---------- taburi ---------- */
 .tabs { margin-top: var(--s4); }
 .tabs__nav {
-  display: flex; gap: var(--s5); overflow-x: auto; scrollbar-width: none;
+  display: flex; gap: var(--s6); overflow-x: auto; scrollbar-width: none;
   border-bottom: 1px solid var(--line); margin-bottom: var(--s5);
 }
+/* Pe desktop e loc; etichetele respiră mai bine departe una de alta. */
+@media (min-width: 760px) { .tabs__nav { gap: var(--s10); } }
 .tabs__nav::-webkit-scrollbar { display: none; }
 .tabs__t {
   flex: none; position: relative; padding: 0 0 var(--s3);
