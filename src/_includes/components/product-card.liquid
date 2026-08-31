@@ -9,6 +9,10 @@
   Densitate: `density` = "esential" | "standard" (implicit) | "complet".
 {%- endcomment -%}
 {%- assign d = density | default: "standard" -%}
+{%- capture icon_size -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 12 4.8H4v8l8.6 8.6a2 2 0 0 0 2.8 0l5.2-5.2a2 2 0 0 0 0-2.8z"/><circle cx="7.5" cy="8.5" r="1.3"/></svg>{%- endcapture -%}
+{%- capture icon_pack -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>{%- endcapture -%}
+{%- capture icon_drops -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7 6.9 9.4a6.5 6.5 0 1 0 10.2 0z"/></svg>{%- endcapture -%}
+{%- capture icon_waist -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M6.5 8.5 3 12l3.5 3.5M17.5 8.5 21 12l-3.5 3.5"/></svg>{%- endcapture -%}
 {%- assign url = '/products/' | append: product.handle | append: '/' | url -%}
 
 {%- comment -%}
@@ -38,6 +42,40 @@
              srcset="{{ product.hoverImage.src | srcset: 200,300,400,600 }}"
              sizes="(min-width: 1200px) 235px, (min-width: 768px) 30vw, 45vw"
              alt="" loading="lazy" decoding="async" width="400" height="400">
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- comment -%}
+      Specificațiile stau la baza imaginii, nu în corp: acolo se uită ochiul
+      după ce recunoaște produsul, iar corpul rămâne pentru preț și acțiune.
+      Sunt decorative — pointer-events: none, ca stratul de link al cardului
+      să rămână clicabil peste tot.
+    {%- endcomment -%}
+    {%- if d != "esential" -%}
+      {%- capture specs -%}
+        {%- if product.facets.size -%}
+          <span class="spec spec--size">{{ icon_size }}<span>măr. {{ product.facets.size }}</span></span>
+        {%- elsif product.facets.adultSize -%}
+          <span class="spec spec--size">{{ icon_size }}<span>măr. {{ product.facets.adultSize }}</span></span>
+        {%- endif -%}
+        {%- if product.units -%}
+          <span class="spec spec--pack">{{ icon_pack }}
+            {%- if product.packDesc -%}
+              <span class="s-long">{{ product.packDesc }}</span><span class="s-short">{{ product.units }} buc</span>
+            {%- else -%}
+              <span>{{ product.units }} buc</span>
+            {%- endif -%}
+          </span>
+        {%- endif -%}
+        {%- if product.facets.drops -%}
+          <span class="spec spec--drops">{{ icon_drops }}<span>{{ product.facets.drops | replace: ".", "," }} pic.</span></span>
+        {%- endif -%}
+        {%- if product.facets.waist -%}
+          <span class="spec spec--waist">{{ icon_waist }}<span>{{ product.facets.waist.min }}–{{ product.facets.waist.max }} cm</span></span>
+        {%- endif -%}
+      {%- endcapture -%}
+      {%- if specs != blank -%}
+        <div class="card__specs" aria-hidden="true">{{ specs }}</div>
       {%- endif -%}
     {%- endif -%}
   </div>
@@ -73,20 +111,21 @@
 
     {%- if d != "esential" -%}
       {%- comment -%}
-        Părțile se separă cu „~" și se lipesc cu join: un separator scris direct
-        între ele ar rămâne agățat când prima valoare lipsește, iar remove_first
-        îl scotea pe cel dintre valori — „mărimea 524 bucăți".
+        Aceleași valori, pentru cititoarele de ecran: pastilele de pe imagine
+        sunt aria-hidden, ca să nu se audă de două ori.
       {%- endcomment -%}
       {%- capture attrs_raw -%}
-        {%- if product.facets.size -%}<b>mărimea {{ product.facets.size }}</b>~{%- endif -%}
-        {%- if product.facets.adultSize -%}<b>mărimea {{ product.facets.adultSize }}</b>~{%- endif -%}
-        {%- if product.facets.waist -%}{{ product.facets.waist.min }}–{{ product.facets.waist.max }} cm~{%- endif -%}
+        {%- if product.facets.size -%}mărimea {{ product.facets.size }}~{%- endif -%}
+        {%- if product.facets.adultSize -%}mărimea {{ product.facets.adultSize }}~{%- endif -%}
+        {%- if product.facets.waist -%}talie {{ product.facets.waist.min }}–{{ product.facets.waist.max }} cm~{%- endif -%}
         {%- if product.facets.drops -%}{{ product.facets.drops | replace: ".", "," }} picături~{%- endif -%}
         {%- if product.packDesc -%}{{ product.packDesc }}~
         {%- elsif product.units -%}{{ product.units }} bucăți~{%- endif -%}
       {%- endcapture -%}
       {%- assign attr_parts = attrs_raw | strip | split: "~" -%}
-      <p class="card__attrs">{{ attr_parts | join: '<span class="sep">·</span>' }}</p>
+      {%- if attr_parts.size > 0 -%}
+        <p class="visually-hidden">{{ attr_parts | join: ", " }}</p>
+      {%- endif -%}
 
       {%- comment -%}
         Slot de rating. Rezervat și dimensionat, dar desenat ca schiță — datele
