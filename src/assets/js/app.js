@@ -135,6 +135,10 @@
     });
   }
 
+  /* PLP-ul arata carduri noi dupa filtrare si load-more; trebuie sa-si recapete
+     starea „in cos". Singurul punct de contact intre app.js si plp.js. */
+  window.__renderCards__ = renderCards;
+
   /* O singura regiune live pentru toata pagina: butonul apasat dispare din DOM,
      deci confirmarea nu poate sta pe el. */
   const live = document.createElement('div');

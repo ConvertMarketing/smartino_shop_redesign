@@ -72,15 +72,21 @@
     <h3 class="card__title"><a href="{{ url }}">{{ product.title }}</a></h3>
 
     {%- if d != "esential" -%}
-      {%- capture attrs -%}
-        {%- if product.facets.size -%}<b>mărimea {{ product.facets.size }}</b>{%- endif -%}
-        {%- if product.facets.waist -%}<span class="sep">·</span>{{ product.facets.waist.min }}–{{ product.facets.waist.max }} cm{%- endif -%}
-        {%- if product.facets.drops -%}<span class="sep">·</span>{{ product.facets.drops | replace: ".", "," }} picături{%- endif -%}
-        {%- if product.packDesc -%}<span class="sep">·</span>{{ product.packDesc }}
-        {%- elsif product.units -%}<span class="sep">·</span>{{ product.units }} bucăți{%- endif -%}
+      {%- comment -%}
+        Părțile se separă cu „~" și se lipesc cu join: un separator scris direct
+        între ele ar rămâne agățat când prima valoare lipsește, iar remove_first
+        îl scotea pe cel dintre valori — „mărimea 524 bucăți".
+      {%- endcomment -%}
+      {%- capture attrs_raw -%}
+        {%- if product.facets.size -%}<b>mărimea {{ product.facets.size }}</b>~{%- endif -%}
+        {%- if product.facets.adultSize -%}<b>mărimea {{ product.facets.adultSize }}</b>~{%- endif -%}
+        {%- if product.facets.waist -%}{{ product.facets.waist.min }}–{{ product.facets.waist.max }} cm~{%- endif -%}
+        {%- if product.facets.drops -%}{{ product.facets.drops | replace: ".", "," }} picături~{%- endif -%}
+        {%- if product.packDesc -%}{{ product.packDesc }}~
+        {%- elsif product.units -%}{{ product.units }} bucăți~{%- endif -%}
       {%- endcapture -%}
-      {%- comment -%} Separatorul de la început cade dacă lipsește prima valoare. {%- endcomment -%}
-      <p class="card__attrs">{{ attrs | strip | remove_first: '<span class="sep">·</span>' }}</p>
+      {%- assign attr_parts = attrs_raw | strip | split: "~" -%}
+      <p class="card__attrs">{{ attr_parts | join: '<span class="sep">·</span>' }}</p>
 
       {%- comment -%}
         Slot de rating. Rezervat și dimensionat, dar desenat ca schiță — datele

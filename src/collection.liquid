@@ -1,0 +1,173 @@
+---
+pagination:
+  data: plp
+  size: 1
+  alias: col
+permalink: "/collections/{{ col.handle }}/index.html"
+layout: layouts/base.liquid
+extraCss: /assets/css/plp.css
+eleventyComputed:
+  title: "{{ col.title }}"
+  description: "{{ col.count }} produse în colecția {{ col.title }} — prototip Smartino."
+---
+{%- comment -%}
+  Pagina de colecție. Toate cardurile colecției intră în DOM, ascunse peste
+  primele 24 — nu în <template>, nu construite în JS: filtrarea trebuie să
+  funcționeze și fără JS, iar la portare Shopify randează același markup.
+
+  Numele câmpurilor de formular sunt exact parametrii Shopify (filter.p.vendor,
+  filter.v.availability, sort_by), ca la portare să se scoată doar preventDefault
+  și formularul să meargă nativ. Vezi docs/ella-mapping.md §3.5.
+{%- endcomment -%}
+
+<div class="plp" data-plp
+     data-page-size="{{ col.pageSize }}"
+     data-vendors="{{ col.vendors | json | escape }}"
+     data-types="{{ col.types | json | escape }}"
+     data-index="{{ col.index | json | escape }}">
+
+  <nav class="crumbs" aria-label="Firul de navigare">
+    <ol>
+      <li><a href="{{ '/' | url }}">Acasă</a></li>
+      {%- if col.crumb -%}<li><span>{{ col.crumb }}</span></li>{%- endif -%}
+      <li><span aria-current="page">{{ col.title }}</span></li>
+    </ol>
+  </nav>
+
+  <header class="plp__head">
+    {%- if col.monoBrand -%}<p class="plp__brand">{{ col.monoBrand }}</p>{%- endif -%}
+    <h1 class="plp__title">{{ col.title }}</h1>
+    {%- if col.description != blank -%}
+      <div class="plp__intro">{{ col.description }}</div>
+    {%- endif -%}
+  </header>
+
+  {%- comment -%}
+    Zona de auto-selecție: criteriul pe care cumpărătorul îl știe dinainte,
+    scos deasupra grilei. Se randează doar unde datele îl susțin.
+  {%- endcomment -%}
+  {%- if col.pills -%}
+    <section class="pills" aria-label="{{ col.pills.label }}">
+      <h2 class="pills__label">{{ col.pills.label }}</h2>
+      <div class="pills__row" role="group">
+        {%- for v in col.pills.values -%}
+          <button class="pill" type="button"
+                  data-facet="{{ col.pills.param_name }}" data-value="{{ v.value }}"
+                  aria-pressed="false">
+            <span class="pill__v">{{ v.label }}</span>
+            {%- if v.sub != blank -%}<span class="pill__sub">{{ v.sub }}</span>{%- endif -%}
+            <span class="pill__n">{{ v.count }}</span>
+          </button>
+        {%- endfor -%}
+      </div>
+      {%- if col.pills.missing > 0 -%}
+        <p class="pills__missing">{{ col.pills.missing }} produse n-au mărimea declarată în titlu —
+        apar la orice selecție. <span class="muted">De rezolvat cu metacâmpuri.</span></p>
+      {%- endif -%}
+    </section>
+  {%- endif -%}
+
+  <div class="plp__body{% if col.filters.size > 0 %} plp__body--rail{% endif %}">
+
+    {%- if col.filters.size > 0 -%}
+      <form class="plp__rail" id="plp-filters" data-rail method="get" aria-label="Filtre">
+        <div class="rail__head">
+          <h2 tabindex="-1">Filtre</h2>
+          <button class="rail__clear" type="button" data-clear hidden>Șterge tot</button>
+          <button class="rail__close" type="button" data-apply aria-label="Închide filtrele">×</button>
+        </div>
+        {%- for f in col.filters -%}
+          <details class="facet" {% if forloop.index <= 3 %}open{% endif %}>
+            <summary class="facet__sum">
+              <span>{{ f.label }}</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </summary>
+            <ul class="facet__list">
+              {%- for v in f.values -%}
+                <li class="facet__row{% if v.thin %} is-thin{% endif %}">
+                  <label>
+                    <input type="checkbox" name="{{ f.param_name }}" value="{{ v.value }}">
+                    <span class="facet__box" aria-hidden="true">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                           stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 6 6L20 6"/></svg>
+                    </span>
+                    <span class="facet__txt">{{ v.label }}</span>
+                    <span class="facet__n tnum">{{ v.count }}</span>
+                  </label>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </details>
+        {%- endfor -%}
+        <div class="rail__apply">
+          <button class="btn btn--primary btn--block" type="button" data-apply>
+            Vezi <span data-apply-n>{{ col.count }}</span> produse
+          </button>
+        </div>
+      </form>
+    {%- endif -%}
+
+    <div class="plp__main">
+      <div class="toolbar">
+        {%- if col.filters.size > 0 -%}
+          <button class="toolbar__filters" type="button" data-open-filters>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M3 6h18M6 12h12M10 18h4"/>
+            </svg>
+            Filtre<span class="toolbar__badge" data-active-n hidden></span>
+          </button>
+        {%- endif -%}
+        <p class="toolbar__count"><b data-count>{{ col.count }}</b> <span data-count-word>produse</span></p>
+        <label class="sortsel">
+          <span class="visually-hidden">Sortează</span>
+          <select name="sort_by" data-sort>
+            <option value="manual">Recomandate</option>
+            <option value="price-ascending">Preț crescător</option>
+            <option value="price-descending">Preț descrescător</option>
+            {%- if col.perUnitSort -%}<option value="unit-ascending">Preț pe bucată</option>{%- endif -%}
+            <option value="discount-descending">Reducere</option>
+            <option value="created-descending">Cele mai noi</option>
+          </select>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </label>
+      </div>
+
+      <div class="chips" data-chips hidden></div>
+
+      <div class="grid-products" data-grid>
+        {%- for product in col.products -%}
+          {%- assign eager = false -%}{%- if forloop.index <= 4 -%}{%- assign eager = true -%}{%- endif -%}
+          <div class="plp__cell" data-i="{{ forloop.index0 }}"{% if forloop.index > col.pageSize %} hidden{% endif %}>
+            {%- include "components/product-card.liquid", product: product, density: "standard", eager: eager -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="plp__empty" data-empty hidden>
+        <p class="plp__empty-t">Niciun produs cu filtrele astea.</p>
+        <p class="plp__empty-s" data-empty-hint></p>
+        <button class="btn btn--primary" type="button" data-undo hidden></button>
+      </div>
+
+      <div class="plp__more" data-more{% if col.count <= col.pageSize %} hidden{% endif %}>
+        <p class="plp__more-n"><span data-shown>{{ col.pageSize }}</span> din <span data-total>{{ col.count }}</span></p>
+        <a class="btn btn--ghost btn--block" href="?page=2" data-load>Încarcă mai multe</a>
+      </div>
+
+      {%- if col.capped -%}
+        <p class="plp__cap">Prototipul afișează primele {{ col.count }} produse din {{ col.total }}.
+        În magazin, restul vin prin paginare pe server.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<div class="plp__scrim" data-filters-scrim hidden></div>
+<script src="{{ '/assets/js/plp.js' | url }}" defer></script>

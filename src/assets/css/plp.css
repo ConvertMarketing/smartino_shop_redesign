@@ -1,0 +1,262 @@
+/* ============================================================
+   Pagina de colecție.
+   Sidebar fără cutii și fără umbre: doar structură, linii fine și ritm.
+   Singurul element cu greutate vizuală e rândul de mărimi — pentru că
+   e singura decizie pe care cumpărătorul o ia înainte să se uite la produse.
+   ============================================================ */
+
+.plp { padding-bottom: var(--s12); }
+
+/* ---------- fir de navigare ---------- */
+.crumbs { padding: var(--s4) 0 var(--s2); }
+.crumbs ol {
+  display: flex; align-items: center; gap: var(--s2);
+  list-style: none; margin: 0; padding: 0;
+  font-size: var(--text-sm); color: var(--ink-500);
+  overflow-x: auto; scrollbar-width: none; white-space: nowrap;
+  /* pe mobil se derulează; marginile se sting în loc să taie brusc */
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
+          mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
+}
+.crumbs ol::-webkit-scrollbar { display: none; }
+.crumbs li + li::before { content: '/'; margin-right: var(--s2); color: var(--ink-300); }
+.crumbs a { color: var(--ink-500); text-decoration: none; }
+.crumbs a:hover { color: var(--brand-700); text-decoration: underline; text-underline-offset: 2px; }
+.crumbs [aria-current] { color: var(--ink-900); font-weight: 500; }
+
+/* ---------- antet ---------- */
+.plp__head { padding: var(--s2) 0 var(--s5); }
+.plp__brand {
+  font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--brand-700); margin-bottom: var(--s2);
+}
+.plp__title {
+  font-family: var(--font-display); font-size: clamp(26px, 4.5vw, 38px); font-weight: 700;
+  line-height: 1.1; letter-spacing: -.025em; color: var(--ink-900); text-wrap: balance;
+}
+.plp__count { margin-top: var(--s2); font-size: var(--text-base); color: var(--ink-500); }
+.plp__count b { color: var(--ink-900); font-variant-numeric: tabular-nums; }
+.plp__intro { margin-top: var(--s3); max-width: 62ch; color: var(--ink-700); font-size: var(--text-base); }
+
+/* ---------- rândul de mărimi ---------- */
+.pills { padding-bottom: var(--s5); border-bottom: 1px solid var(--line); margin-bottom: var(--s5); }
+.pills__label {
+  font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-500); margin-bottom: var(--s3);
+}
+.pills__row {
+  display: flex; gap: var(--s2); overflow-x: auto; scrollbar-width: none;
+  padding-bottom: 2px;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 20px), transparent);
+          mask-image: linear-gradient(90deg, #000 calc(100% - 20px), transparent);
+}
+.pills__row::-webkit-scrollbar { display: none; }
+@media (min-width: 760px) {
+  .pills__row { flex-wrap: wrap; overflow: visible; -webkit-mask-image: none; mask-image: none; }
+}
+.pill {
+  /* padding-right lasă loc contorului absolut din colț: la „XXXL 1" litera
+     trecea pe sub cifră. */
+  flex: none; position: relative; min-width: 76px; padding: 9px 28px 8px 12px;
+  display: grid; gap: 1px; justify-items: start;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px;
+  cursor: pointer; text-align: left;
+  transition: border-color .16s var(--ease), background .16s var(--ease), transform .16s var(--ease);
+}
+.pill:hover { border-color: var(--brand-500); transform: translateY(-1px); }
+.pill__v {
+  font-family: var(--font-display); font-size: 20px; font-weight: 700; line-height: 1.1;
+  letter-spacing: -.02em; color: var(--ink-900);
+}
+.pill__sub { font-size: 10.5px; color: var(--ink-500); line-height: 1.2; }
+.pill__n {
+  position: absolute; top: 7px; right: 9px;
+  font-size: 10.5px; font-weight: 600; color: var(--ink-300); font-variant-numeric: tabular-nums;
+}
+/* #232323 pe #15B7C6 = 6,45:1 — pastila e suprafață, nu pictogramă */
+.pill[aria-pressed="true"] {
+  background: var(--brand-500); border-color: var(--brand-500);
+}
+.pill[aria-pressed="true"] .pill__v,
+.pill[aria-pressed="true"] .pill__sub { color: var(--ink-900); }
+.pill[aria-pressed="true"] .pill__n { color: var(--brand-900); }
+.pills__missing { margin-top: var(--s3); font-size: var(--text-xs); color: var(--ink-500); max-width: 60ch; }
+.pills__missing .muted { color: var(--ink-300); }
+
+/* ---------- schelet ---------- */
+.plp__body { display: grid; gap: var(--s6); align-items: start; }
+/* Coloana de sidebar apare doar când există fațete. Fără modificatorul ăsta,
+   colecțiile fără filtre — încălțăminte, colecțiile sub 12 produse — își
+   striveau toată grila în cei 248 px ai railului. */
+@media (min-width: 1000px) {
+  .plp__body--rail { grid-template-columns: 248px minmax(0, 1fr); gap: var(--s8); }
+}
+
+/* ---------- sidebar ---------- */
+.plp__rail { display: none; }
+@media (min-width: 1000px) {
+  .plp__rail { display: block; position: sticky; top: calc(var(--header-h) + var(--s4)); }
+}
+.rail__head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--s2);
+  padding-bottom: var(--s3); border-bottom: 1px solid var(--ink-900);
+}
+.rail__head h2 {
+  font-family: var(--font-ui); font-size: var(--text-base); font-weight: 700;
+  letter-spacing: -.01em; color: var(--ink-900);
+}
+.rail__clear {
+  font-size: var(--text-xs); font-weight: 600; color: var(--brand-700);
+  text-decoration: underline; text-underline-offset: 2px; padding: 2px;
+}
+.rail__clear:hover { color: var(--brand-900); }
+.rail__close { display: none; }
+@media (max-width: 999px) {
+  .plp__rail.is-open .rail__close {
+    display: grid; place-items: center; width: 34px; height: 34px; margin: -6px -6px -6px 0;
+    border-radius: 50%; font-size: 22px; line-height: 1; color: var(--ink-500);
+  }
+  .plp__rail.is-open .rail__close:hover { background: var(--surface-2); color: var(--ink-900); }
+}
+
+.facet { border-bottom: 1px solid var(--line); }
+.facet__sum {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s2);
+  padding: var(--s3) 0; cursor: pointer; list-style: none;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-700);
+}
+.facet__sum::-webkit-details-marker { display: none; }
+.facet__sum:hover { color: var(--ink-900); }
+.facet__sum svg { flex: none; color: var(--ink-300); transition: transform .18s var(--ease); }
+.facet[open] .facet__sum svg { transform: rotate(180deg); }
+.facet__list { list-style: none; margin: 0; padding: 0 0 var(--s3); display: grid; gap: 1px; }
+.facet__row label {
+  display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; align-items: center; gap: var(--s2);
+  padding: 5px 4px 5px 0; margin-left: -4px; padding-left: 4px;
+  border-radius: var(--radius-sm); cursor: pointer;
+  font-size: var(--text-sm); color: var(--ink-700);
+  transition: background .14s var(--ease), color .14s var(--ease);
+}
+.facet__row label:hover { background: var(--surface-2); color: var(--ink-900); }
+.facet__row input { position: absolute; opacity: 0; width: 0; height: 0; }
+.facet__box {
+  width: 16px; height: 16px; border: 1.5px solid var(--line-strong); border-radius: 4px;
+  display: grid; place-items: center; color: transparent;
+  transition: background .14s var(--ease), border-color .14s var(--ease), color .14s var(--ease);
+}
+.facet__row input:checked + .facet__box {
+  background: var(--brand-500); border-color: var(--brand-500); color: #fff;
+}
+.facet__row input:focus-visible + .facet__box { outline: 2px solid var(--brand-700); outline-offset: 2px; }
+.facet__row input:checked ~ .facet__txt { color: var(--ink-900); font-weight: 600; }
+.facet__txt { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.facet__n { font-size: var(--text-xs); color: var(--ink-300); }
+.facet__row.is-thin .facet__txt, .facet__row.is-thin .facet__n { color: var(--ink-300); }
+.rail__apply { display: none; }
+
+/* ---------- bara de unelte ---------- */
+.toolbar {
+  display: flex; align-items: center; gap: var(--s3);
+  padding: var(--s2) 0; border-bottom: 1px solid var(--line); margin-bottom: var(--s4);
+}
+.toolbar__count { font-size: var(--text-sm); color: var(--ink-500); margin-right: auto; }
+.toolbar__count b { color: var(--ink-900); font-variant-numeric: tabular-nums; }
+
+.toolbar__filters {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  min-height: 38px; padding: 0 var(--s3);
+  border: 1.5px solid var(--line-strong); border-radius: var(--radius);
+  font-size: var(--text-sm); font-weight: 600; color: var(--ink-900); background: var(--surface);
+}
+.toolbar__filters:hover { border-color: var(--brand-500); }
+@media (min-width: 1000px) { .toolbar__filters { display: none; } }
+.toolbar__badge {
+  min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px;
+  background: var(--brand-500); color: var(--ink-900);
+  font-size: 11px; font-weight: 700; display: grid; place-items: center;
+}
+.sortsel { position: relative; display: inline-flex; align-items: center; }
+.sortsel select {
+  appearance: none; min-height: 38px; padding: 0 30px 0 var(--s3);
+  border: 1.5px solid var(--line-strong); border-radius: var(--radius);
+  background: var(--surface); color: var(--ink-900);
+  font-family: inherit; font-size: var(--text-sm); font-weight: 600; cursor: pointer;
+}
+.sortsel select:hover { border-color: var(--brand-500); }
+.sortsel svg { position: absolute; right: 11px; color: var(--ink-500); pointer-events: none; }
+
+/* ---------- chip-uri de filtre active ----------
+   Înălțime rezervată permanent: un rând care apare împinge grila cu ~34 px,
+   adică exact CLS-ul pe care îl evităm peste tot. */
+.chips {
+  display: flex; flex-wrap: wrap; gap: var(--s2);
+  margin-bottom: var(--s4);
+}
+.chip {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  padding: 5px 6px 5px 10px; border-radius: 999px;
+  background: var(--brand-050); border: 1px solid var(--brand-100);
+  font-size: var(--text-xs); color: var(--brand-900);
+}
+.chip b { font-weight: 700; }
+.chip__x {
+  width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%;
+  color: var(--brand-700); font-size: 15px; line-height: 1;
+}
+.chip__x:hover { background: var(--brand-100); color: var(--brand-900); }
+.chips__clear {
+  font-size: var(--text-xs); font-weight: 600; color: var(--brand-700);
+  text-decoration: underline; text-underline-offset: 2px; align-self: center; padding: 4px;
+}
+
+/* ---------- grila ----------
+   Pragul de 4 coloane e la 1280, nu la 1100: cu sidebarul de 248 px, la 1100
+   cardul ar avea 181 px și ar cădea în modul compact chiar pe desktop. */
+.plp__main .grid-products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 640px) { .plp__main .grid-products { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .plp__main .grid-products { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.plp__cell { display: flex; }
+.plp__cell > .card { flex: 1; }
+
+/* ---------- stare goală ---------- */
+.plp__empty { padding: var(--s12) var(--s4); text-align: center; }
+.plp__empty-t {
+  font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700;
+  color: var(--ink-900); margin-bottom: var(--s2);
+}
+.plp__empty-s { color: var(--ink-500); font-size: var(--text-base); margin-bottom: var(--s5); }
+
+/* ---------- încarcă mai multe ---------- */
+.plp__more { margin-top: var(--s8); display: grid; gap: var(--s3); justify-items: center; }
+.plp__more-n { font-size: var(--text-sm); color: var(--ink-500); font-variant-numeric: tabular-nums; }
+.plp__more .btn { max-width: 320px; min-height: 48px; }
+.btn--ghost {
+  background: var(--surface); color: var(--ink-900); border: 1.5px solid var(--line-strong);
+}
+.btn--ghost:hover { border-color: var(--brand-500); background: var(--brand-050); }
+.plp__cap { margin-top: var(--s5); font-size: var(--text-xs); color: var(--ink-500); text-align: center; }
+
+/* ---------- drawer de filtre pe mobil ---------- */
+.plp__scrim {
+  position: fixed; inset: 0; z-index: 90; background: rgba(16, 32, 34, .42);
+  opacity: 0; transition: opacity .22s var(--ease);
+}
+.plp__scrim.is-open { opacity: 1; }
+@media (max-width: 999px) {
+  .plp__rail.is-open {
+    display: block; position: fixed; inset: 0 auto 0 0; z-index: 91;
+    width: min(88vw, 340px); background: var(--surface);
+    padding: var(--s4) var(--s4) 88px;
+    overflow-y: auto; box-shadow: var(--shadow-drawer);
+    animation: railIn .24s var(--ease);
+  }
+  @keyframes railIn { from { transform: translateX(-100%); } }
+  @media (prefers-reduced-motion: reduce) { .plp__rail.is-open { animation: none; } }
+  .plp__rail.is-open .rail__apply {
+    display: block; position: fixed; left: 0; bottom: 0; z-index: 92;
+    width: min(88vw, 340px); padding: var(--s3) var(--s4);
+    background: var(--surface); border-top: 1px solid var(--line);
+  }
+  .plp__rail.is-open .rail__apply .btn { min-height: 48px; }
+}

@@ -161,7 +161,9 @@ const products = raw.map((p) => {
     packDesc: packDesc(p.title),
     facets: {
       size: babySize(p.title),
-      adultSize: adultSize(p.title),
+      /* Cele două taxonomii se exclud: „Nr. 4 … + Magics L" e scutec de bebeluș
+         mărimea 4, nu și mărimea L. Litera contează doar unde nu există cifră. */
+      adultSize: babySize(p.title) ? null : adultSize(p.title),
       drops: drops(p.title),
       waist: waist(p.title),
       units,
