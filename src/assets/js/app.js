@@ -100,7 +100,13 @@
     renderCards();
   }
 
-  /** Butonul „Adaugă" devine stepper, iar cardul se marchează ca fiind în coș. */
+  const CART_SVG =
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+    'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/>' +
+    '<path d="M16 10a4 4 0 0 1-8 0"/></svg>';
+
+  /** Butonul de cos devine stepper, iar cardul se marcheaza ca fiind in cos. */
   function renderCards() {
     $$('.card').forEach((card) => {
       const handle = card.dataset.product;
@@ -109,26 +115,54 @@
       if (!wrap) return;
       card.classList.toggle('is-in-cart', !!line);
       if (line) {
-        wrap.innerHTML = `
-          <div class="stepper">
-            <button type="button" data-dec="${handle}" aria-label="Scade cantitatea">−</button>
-            <span class="stepper__n" aria-live="polite">${line.qty}</span>
-            <button type="button" data-inc="${handle}" aria-label="Crește cantitatea">+</button>
+        if (!$('.stepper', wrap)) {
+          wrap.innerHTML = `
+          <div class="stepper" role="group" aria-label="Cantitate">
+            <button type="button" data-dec="${handle}" aria-label="Scade cantitatea">\u2212</button>
+            <span class="stepper__n">${line.qty}</span>
+            <button type="button" data-inc="${handle}" aria-label="Creste cantitatea">+</button>
           </div>`;
-      } else if (!$('.card__add-btn', wrap)) {
+        } else {
+          $('.stepper__n', wrap).textContent = line.qty;
+        }
+      } else if (!$('.card__cart', wrap)) {
         const p = window.__CATALOG__?.[handle];
-        wrap.innerHTML = `<button class="btn btn--primary btn--block card__add-btn" type="button"
-          data-add="${handle}"${p && p.available === false ? ' disabled' : ''}>Adaugă în coș</button>`;
+        const off = p && p.available === false;
+        const title = ($('.card__title', card)?.textContent || '').trim().replace(/"/g, '&quot;');
+        wrap.innerHTML = `<button class="card__cart" type="button" data-add="${handle}"${off ? ' disabled' : ''}
+          aria-label="${off ? 'Indisponibil' : 'Adauga in cos'}: ${title}">${CART_SVG}</button>`;
       }
     });
   }
 
+  /* O singura regiune live pentru toata pagina: butonul apasat dispare din DOM,
+     deci confirmarea nu poate sta pe el. */
+  const live = document.createElement('div');
+  live.className = 'visually-hidden';
+  live.setAttribute('aria-live', 'polite');
+  live.setAttribute('aria-atomic', 'true');
+  document.addEventListener('DOMContentLoaded', () => document.body.appendChild(live));
+  function say(msg) { live.textContent = ''; live.textContent = msg; }
+
   // ------------------------------------------------------------ evenimente
+  /* Favorite — starea vizuală. Ella are wishlist nativ (ella-mapping.md C7);
+     aici marcăm doar interacțiunea, fără persistență. */
+  document.addEventListener('click', (e) => {
+    const f = e.target.closest('.card__fav');
+    if (!f) return;
+    f.setAttribute('aria-pressed', f.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+  });
+
   document.addEventListener('click', (e) => {
     const t = e.target.closest('[data-add],[data-inc],[data-dec],[data-rm],[data-open-cart],[data-close-cart],[data-open-nav],[data-close-nav],[data-cat-toggle],[data-focus-search]');
     if (!t) return;
 
-    if (t.dataset.add) { addToCart(t.dataset.add); openCart(); }
+    if (t.dataset.add) {
+      const c = t.closest('.card');
+      addToCart(t.dataset.add);
+      if (c) say('Adaugat in cos: ' + ($('.card__title', c)?.textContent || '').trim());
+      openCart();
+    }
     else if (t.dataset.inc) { const l = find(t.dataset.inc); setQty(t.dataset.inc, (l?.qty || 0) + 1); }
     else if (t.dataset.dec) { const l = find(t.dataset.dec); setQty(t.dataset.dec, (l?.qty || 0) - 1); }
     else if (t.dataset.rm !== undefined && t.hasAttribute('data-rm')) setQty(t.dataset.rm, 0);

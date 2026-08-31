@@ -143,60 +143,227 @@
   .nav__scrim { position: fixed; inset: 0; z-index: 80; background: rgba(16,32,34,.42); }
 }
 
-/* ============ Card produs ============ */
-.card { display: flex; flex-direction: column; background: var(--surface); border-radius: var(--radius); }
+/* ============ Card produs ============
+   Un singur sistem, trei densități: .card--esential / .card--standard / .card--complet.
+   Cardul e un container: se adaptează la lățimea LUI, nu la a ecranului — același
+   card trăiește în grile de 2, 4 și 5 coloane.
+   ==================================================================== */
+.card {
+  container-type: inline-size; container-name: card;
+  position: relative; display: flex; flex-direction: column;
+  background: var(--surface); color: var(--ink-900);
+  border: 1px solid var(--line); border-radius: 14px;
+  font-family: var(--font-ui);
+  overflow: hidden;
+  transition: box-shadow .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .card:hover { border-color: var(--brand-100); box-shadow: var(--shadow-brand-md); transform: translateY(-2px); }
+}
+.card:focus-within { border-color: var(--brand-100); box-shadow: var(--shadow-brand-md); }
+.card a:focus-visible, .card button:focus-visible {
+  outline: 2px solid var(--brand-700); outline-offset: 2px; border-radius: var(--radius);
+}
+
 .card__media {
-  position: relative; display: block; aspect-ratio: 1 / 1;
-  /* Packshot-urile din catalog au deja fundal alb, cu decupaje inegale. Un tile
-     gri le transformă în dreptunghiuri albe lipite; alb + chenar de 1px le lasă
-     să se așeze curat, indiferent de cât de strâns e decupajul. */
-  background: var(--surface); border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden; margin-bottom: var(--s3);
+  position: relative; aspect-ratio: 1 / 1; overflow: hidden;
+  background: var(--surface); border-radius: 13px 13px 0 0;
 }
 .card__img {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: contain; padding: var(--s3);
-  transition: opacity .2s var(--ease);
+  position: absolute; inset: 9%; width: 82%; height: 82%;
+  object-fit: contain;
+  transition: opacity .3s var(--ease), transform .45s var(--ease);
 }
 .card__img--hover { opacity: 0; }
-@media (hover: hover) {
-  .card:hover .card__img--hover { opacity: 1; }
-  .card:hover .card__img--main { opacity: 0; }
+@media (hover: hover) and (pointer: fine) {
+  /* Fără --swap, regula ar albi cardurile care n-au a doua poză. */
+  .card:hover .card__media--swap .card__img--hover { opacity: 1; }
+  .card:hover .card__media--swap .card__img--main { opacity: 0; }
+  .card:hover .card__img { transform: scale(1.035); }
 }
-.card__badges { position: absolute; top: var(--s2); left: var(--s2); display: flex; flex-direction: column; align-items: flex-start; gap: 4px; z-index: 2; }
-.card__body { display: flex; flex-direction: column; gap: var(--s1); flex: 1; }
-.card__vendor { font-size: var(--text-xs); font-weight: 600; color: var(--ink-500); text-transform: uppercase; letter-spacing: .04em; }
-.card__title { font-family: var(--font-ui); font-size: var(--text-sm); font-weight: 500; line-height: 1.38; color: var(--ink-900); letter-spacing: 0;
-  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-@media (min-width: 768px) { .card__title { font-size: var(--text-base); } }
-.card__price { display: flex; align-items: baseline; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s1); }
-.price { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); color: var(--ink-900); font-variant-numeric: tabular-nums; }
+
+/* Un singur slot de insignă, sus-stânga. Keyline alb ca să nu se piardă
+   pe ambalajele care au deja roșu. */
+.card__deal {
+  position: absolute; top: var(--s2); left: var(--s2); z-index: 2;
+  display: inline-flex; align-items: center;
+  background: var(--sale); color: #fff; font-weight: 700; font-size: 11.5px;
+  letter-spacing: -.01em; font-variant-numeric: tabular-nums;
+  padding: 4px 8px; border-radius: 7px; line-height: 1.2;
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,.92);
+}
+.card__deal--new { background: var(--brand-900); }
+.card__deal--out { background: var(--ink-500); }
+
+.card__fav {
+  position: absolute; top: var(--s2); right: var(--s2); z-index: 2;
+  width: 34px; height: 34px; display: grid; place-items: center;
+  border: 1px solid var(--line); border-radius: 50%;
+  background: rgba(255,255,255,.93); color: var(--ink-700); padding: 0;
+  transition: color .16s var(--ease), border-color .16s var(--ease), transform .16s var(--ease);
+}
+.card__fav:hover { color: var(--sale); border-color: var(--sale); transform: scale(1.07); }
+.card__fav[aria-pressed="true"] { color: var(--sale); border-color: var(--sale); }
+.card__fav[aria-pressed="true"] svg { fill: var(--sale); }
+
+.card__body { display: flex; flex-direction: column; gap: 6px; padding: 11px 12px 12px; flex: 1; }
+
+.card__vendor {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .11em;
+  text-transform: uppercase; color: var(--ink-500); line-height: 1;
+}
+.card__title {
+  font-family: var(--font-ui); font-size: var(--text-sm); font-weight: 500;
+  line-height: 1.35; color: var(--ink-900); letter-spacing: 0;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  /* blocificarea din flex rupe line-clamp — înălțimea o fixez explicit */
+  min-height: calc(2 * 1.35em); max-height: calc(2 * 1.35em);
+}
+.card__title a { color: inherit; text-decoration: none; }
+.card__title a:hover { text-decoration: underline; text-underline-offset: 2px; }
+/* Ancora se întinde peste tot cardul: un singur link, o singură oprire de tabulare. */
+.card__title a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+
+.card__attrs {
+  font-size: 11.5px; line-height: 1.35; color: var(--ink-700);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-height: 1.35em;
+}
+.card__attrs b { font-weight: 600; color: var(--ink-900); }
+.card__attrs .sep { color: var(--ink-500); margin: 0 5px; }
+
+.card__rate {
+  align-self: flex-start; display: inline-flex; align-items: center;
+  height: 17px; padding: 0 7px; border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-sm); background: var(--surface-2); color: var(--ink-500); max-width: 100%;
+}
+.card__rate-lbl {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+  line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* --- zona de cumpărare: prețul și butonul pe același rând ---
+   Butonul pe rând propriu ancora fundul cardului și lăsa un gol mort de ~50 px
+   pe fiecare card mai scurt din rând. Grupul e ancorat jos, deci rândurile
+   rămân aliniate. */
+.card__foot { margin-top: auto; display: flex; flex-direction: column; padding-top: 9px; }
+.card__buy { display: flex; align-items: flex-end; gap: 9px; }
+.card__buy-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.card__price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 7px; }
+
+.price {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: var(--text-xl); line-height: 1.05; letter-spacing: -.02em;
+  color: var(--ink-900); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
 .price--sale { color: var(--sale); }
-.price__was { color: var(--ink-500); font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
-.card__unit { font-size: var(--text-xs); color: var(--ink-500); }
-.card__add { margin-top: auto; padding-top: var(--s3); }
-.card__add-btn {
-  min-height: 40px; font-size: var(--text-sm);
-  /* Patru bare turcoaz pline într-un rând înecau culoarea de brand. Cardul
-     primește varianta conturată; turcoazul plin rămâne pentru acțiunea
-     principală (hero, coș). */
-  background: var(--surface); color: var(--brand-900);
-  border: 1.5px solid var(--brand-500);
+.price sup { font-size: .52em; font-weight: 700; top: -.55em; position: relative; letter-spacing: 0; }
+.price__cur { font-size: .5em; font-weight: 600; margin-left: 3px; letter-spacing: .01em; }
+.price__was {
+  font-size: var(--text-xs); color: var(--ink-500); text-decoration: line-through;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
 }
-.card__add-btn:hover { background: var(--brand-050); border-color: var(--brand-600); }
-.card__add-btn:disabled { background: var(--surface-2); color: var(--ink-500); cursor: not-allowed; }
+
+/* Prețul pe bucată — diferențiatorul catalogului (design-brief.md §6.3).
+   Înălțime fixă: goală sau plină, pastila ocupă la fel, altfel footerele
+   cardurilor de pe același rând se decalează cu 6 px. */
+.card__unit {
+  align-self: flex-start;
+  font-size: 11.5px; font-weight: 600; line-height: 1.2;
+  color: var(--brand-900); background: var(--brand-050);
+  padding: 3px 7px; border-radius: 6px; font-variant-numeric: tabular-nums;
+  min-height: 20px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.card__unit:empty { background: none; padding: 0; }
+.card__unit .pack { font-weight: 500; color: var(--brand-700); }
+.card__unit .u-short { display: none; }
+
+.card__omni { font-size: 10.5px; line-height: 1.3; color: var(--ink-500); min-height: calc(2 * 1.3em); }
+.card__omni-v { color: var(--sale); font-weight: 600; font-style: italic; border-bottom: 1px dashed var(--sale); }
+
+.card__stock { font-size: 11.5px; line-height: 1.3; color: var(--ink-700); min-height: 1.3em; }
+.card__stock b { color: var(--ok); font-weight: 600; }
+.card__stock--out b { color: var(--ink-500); }
+
+.card__act { position: relative; z-index: 2; flex: none; }
+.card__cart {
+  width: 40px; height: 40px; border-radius: 12px; border: 0; padding: 0;
+  display: grid; place-items: center; cursor: pointer;
+  /* #232323 pe #15B7C6 = 6,45:1. Turcoazul nu trece cu alb (2,44:1). */
+  background: var(--brand-500); color: var(--ink-900);
+  transition: background .16s var(--ease), transform .16s var(--ease), box-shadow .16s var(--ease);
+}
+.card__cart:hover { background: var(--brand-600); box-shadow: var(--shadow-brand-sm); transform: translateY(-1px); }
+.card__cart:active { transform: translateY(0); }
+.card__cart:disabled { background: var(--surface-2); color: var(--ink-500); cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* bandă de livrare — doar peste pragul real din src/_data/shop.js */
+.card__ship {
+  display: flex; align-items: center; gap: 6px;
+  margin: 0 -12px 9px; padding: 6px 12px;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  background: var(--brand-050); color: var(--brand-900);
+  font-size: 11.5px; font-weight: 600; line-height: 1.25;
+}
+.card__ship svg { flex: none; }
 
 /* Stepper — butonul devine selector de cantitate (design-brief.md §6.3b) */
-.stepper { display: flex; align-items: center; justify-content: space-between; gap: var(--s2);
-  border: 1.5px solid var(--brand-500); border-radius: var(--radius); min-height: 40px; padding: 0 4px; background: var(--brand-050); }
-.stepper button { width: 34px; height: 34px; display: grid; place-items: center; font-size: 19px; font-weight: 700; color: var(--brand-900); border-radius: var(--radius-sm); }
-.stepper button:hover { background: var(--brand-100); }
-.stepper__n { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink-900); }
+.stepper {
+  display: flex; align-items: center; height: 40px; padding: 0 2px;
+  background: var(--brand-050); border: 1px solid var(--brand-100); border-radius: 12px;
+}
+.stepper button {
+  width: 34px; height: 36px; display: grid; place-items: center;
+  font-size: 17px; font-weight: 700; color: var(--brand-900); border-radius: var(--radius-sm);
+}
+.stepper button:hover { background: var(--surface); }
+.stepper__n { min-width: 24px; text-align: center; font-weight: 700; font-size: var(--text-base);
+  color: var(--brand-900); font-variant-numeric: tabular-nums; }
 
 /* În coș — Baymard: 96% dintre site-uri nu marchează asta */
-.card.is-in-cart .card__media { box-shadow: inset 0 0 0 2px var(--brand-500); }
+.card.is-in-cart { border-color: var(--brand-100); }
 .card__in-cart { display: flex; align-items: center; gap: 4px; font-size: var(--text-xs); font-weight: 700; color: var(--brand-900); }
+
+/* produs epuizat — clasa vine din template, nu din :has(), ca să se porteze
+   fără să depindă de suportul de selector. */
+.card--out .card__img { filter: grayscale(1); opacity: .45; }
+.card--out .price { color: var(--ink-500); }
+.card--out .card__unit { color: var(--ink-500); background: var(--surface-2); }
+
+/* ---- adaptarea la lățime (2 coloane pe 390 px ≈ 173 px card) ---- */
+@container card (max-width: 212px) {
+  .card__body { padding: 9px 10px 10px; gap: 5px; }
+  .price { font-size: var(--text-lg); }
+  /* Linia de atribute trece pe două rânduri în loc să taie cu „…":
+     mărimea și numărul de bucăți sunt exact ce se compară pe telefon. */
+  .card__attrs { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; text-overflow: clip; }
+  .card__ship { margin: 0 -10px 8px; padding: 6px 10px; }
+  .card__buy { gap: 7px; }
+  .card__omni { font-size: 10px; }
+  /* Stepperul e cu ~55 px mai lat decât butonul: pe carduri înguste ar strivi
+     prețul, așa că trece sub el, pe toată lățimea. */
+  .card.is-in-cart .card__buy { flex-wrap: wrap; }
+  .card.is-in-cart .card__act { width: 100%; margin-top: 8px; }
+  .card.is-in-cart .stepper { justify-content: space-between; }
+}
+@container card (max-width: 190px) {
+  /* Prețul tăiat nu mai încape lângă cel curent decât la unele produse.
+     În loc să se rupă neregulat, trece deterministic pe rândul lui. */
+  .price__was { width: 100%; margin-top: 1px; }
+  /* „bucată" nu mai încape lângă buton la 173 px; „buc" e citit la fel în retailul RO */
+  .card__unit .u-long { display: none; }
+  .card__unit .u-short { display: inline; }
+}
+@container card (max-width: 168px) {
+  .card__title { font-size: 12.5px; }
+  .card__stock { display: none; }
+}
+
+/* densitatea 01 „Esențial" — fără semnale secundare */
+.card--esential .card__attrs, .card--esential .card__rate,
+.card--esential .card__omni, .card--esential .card__ship,
+.card--esential .card__stock { display: none; }
 
 /* ============ Grilă de produse ============ */
 .grid-products {

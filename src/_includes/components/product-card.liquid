@@ -1,61 +1,160 @@
 {%- comment -%}
-  Card produs. Toate datele vin din data/products.json — niciun text inventat.
-  Ella: a doua imagine la hover, badge-urile și quick add sunt native
+  Card produs — densitatea 02 „Standard", validată cu clientul.
+  Toate datele vin din data/products.json; niciun text inventat.
+
+  Ella: a doua imagine la hover, badge-urile, wishlist-ul și quick add sunt native
   (ella-mapping.md C1, C4, C6). Prețul pe bucată e adăugarea noastră (C3).
+  Aritmetica de preț e scrisă ca să meargă identic în Shopify Liquid — vezi §3.4b.
+
+  Densitate: `density` = "esential" | "standard" (implicit) | "complet".
 {%- endcomment -%}
-<article class="card" data-product="{{ product.handle }}">
-  <a class="card__media" href="{{ '/products/' | append: product.handle | append: '/' | url }}"
-     tabindex="-1" aria-hidden="true">
+{%- assign d = density | default: "standard" -%}
+{%- assign url = '/products/' | append: product.handle | append: '/' | url -%}
+
+{%- comment -%}
+  Zecimalele ridicate. `times: 100 | round` aduce prețul în bani, ca în Shopify.
+  `| floor` după împărțire nu e redundant: Shopify trunchiază singur când ambele
+  operande sunt întregi, dar LiquidJS — motorul din 11ty — face împărțire în
+  virgulă mobilă și scotea „126.9⁹⁰" în loc de „126⁹⁰".
+  Umplerea cu zero nu e opțională: 7 variante din catalog au banii între 01 și 09.
+{%- endcomment -%}
+{%- assign bani_total = product.price | times: 100 | round -%}
+{%- assign lei_int = bani_total | divided_by: 100 | floor -%}
+{%- assign bani = bani_total | modulo: 100 -%}
+
+<article class="card card--{{ d }}{% unless product.available %} card--out{% endunless %}" data-product="{{ product.handle }}">
+  <div class="card__media{% if product.hoverImage %} card__media--swap{% endif %}">
     {%- if product.image -%}
       <img class="card__img card__img--main"
            src="{{ product.image.src | cdn: 400 }}"
            srcset="{{ product.image.src | srcset: 200,300,400,600 }}"
-           sizes="(min-width: 1200px) 300px, (min-width: 768px) 33vw, 45vw"
-           alt="{{ product.image.alt | escape }}" loading="lazy" decoding="async"
+           sizes="(min-width: 1200px) 235px, (min-width: 768px) 30vw, 45vw"
+           alt="{{ product.image.alt | escape }}" decoding="async"
+           {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
            width="400" height="400">
       {%- if product.hoverImage -%}
         <img class="card__img card__img--hover"
              src="{{ product.hoverImage.src | cdn: 400 }}"
              srcset="{{ product.hoverImage.src | srcset: 200,300,400,600 }}"
-             sizes="(min-width: 1200px) 300px, (min-width: 768px) 33vw, 45vw"
+             sizes="(min-width: 1200px) 235px, (min-width: 768px) 30vw, 45vw"
              alt="" loading="lazy" decoding="async" width="400" height="400">
       {%- endif -%}
     {%- endif -%}
+  </div>
 
-    <div class="card__badges">
-      {%- if product.discountPct -%}<span class="badge badge--sale">−{{ product.discountPct }}%</span>{%- endif -%}
-      {%- if product.isNew -%}<span class="badge badge--new">Nou</span>{%- endif -%}
-      {%- unless product.available -%}<span class="badge badge--low">Stoc epuizat</span>{%- endunless -%}
-    </div>
-  </a>
+  {%- comment -%} Un singur slot de insignă, în ordinea în care contează. {%- endcomment -%}
+  {%- unless product.available -%}
+    <span class="card__deal card__deal--out">Stoc epuizat</span>
+  {%- elsif product.discountPct -%}
+    <span class="card__deal">−{{ product.discountPct }}%</span>
+  {%- elsif product.isNew -%}
+    <span class="card__deal card__deal--new">Nou</span>
+  {%- endunless -%}
+
+  <button class="card__fav" type="button" aria-pressed="false"
+          aria-label="Adaugă la favorite: {{ product.title | escape }}">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/>
+    </svg>
+  </button>
 
   <div class="card__body">
     {%- if product.vendor != blank -%}
       <p class="card__vendor">{{ product.vendor }}</p>
     {%- endif -%}
 
-    <h3 class="card__title">
-      <a href="{{ '/products/' | append: product.handle | append: '/' | url }}">{{ product.title }}</a>
-    </h3>
+    {%- comment -%}
+      Singura ancoră din card. `.card__title a::after` o întinde peste tot cardul:
+      o a doua ancoră pe imagine ar însemna două opriri de tabulare, două ținte
+      identice pentru cititoarele de ecran și link duplicat la portare.
+    {%- endcomment -%}
+    <h3 class="card__title"><a href="{{ url }}">{{ product.title }}</a></h3>
 
-    <div class="card__price">
-      <span class="price {% if product.compareAt %}price--sale{% endif %}">{{ product.price | lei }}</span>
-      {%- if product.compareAt -%}
-        <s class="price__was">{{ product.compareAt | lei }}</s>
-      {%- endif -%}
-    </div>
+    {%- if d != "esential" -%}
+      {%- capture attrs -%}
+        {%- if product.facets.size -%}<b>mărimea {{ product.facets.size }}</b>{%- endif -%}
+        {%- if product.facets.waist -%}<span class="sep">·</span>{{ product.facets.waist.min }}–{{ product.facets.waist.max }} cm{%- endif -%}
+        {%- if product.facets.drops -%}<span class="sep">·</span>{{ product.facets.drops | replace: ".", "," }} picături{%- endif -%}
+        {%- if product.packDesc -%}<span class="sep">·</span>{{ product.packDesc }}
+        {%- elsif product.units -%}<span class="sep">·</span>{{ product.units }} bucăți{%- endif -%}
+      {%- endcapture -%}
+      {%- comment -%} Separatorul de la început cade dacă lipsește prima valoare. {%- endcomment -%}
+      <p class="card__attrs">{{ attrs | strip | remove_first: '<span class="sep">·</span>' }}</p>
 
-    {%- comment -%} Prețul pe bucată — vezi docs/design-brief.md §6.3 {%- endcomment -%}
-    {%- if product.perUnit -%}
-      <p class="card__unit tnum">{{ product.perUnit | lei }} / bucată · {{ product.units }} buc</p>
+      {%- comment -%}
+        Slot de rating. Rezervat și dimensionat, dar desenat ca schiță — datele
+        vin din Judge.me și nu sunt încă în export. Fără spațiul rezervat de acum,
+        apariția stelelor ar împinge tot cardul (ella-mapping.md C5).
+      {%- endcomment -%}
+      <span class="card__rate"><span class="card__rate-lbl">rating · Judge.me</span></span>
     {%- endif -%}
 
-    <div class="card__add" data-add-wrap>
-      <button class="btn btn--primary btn--block card__add-btn" type="button"
-              data-add="{{ product.handle }}"
-              {% unless product.available %}disabled{% endunless %}>
-        {%- if product.available -%}Adaugă în coș{%- else -%}Indisponibil{%- endif -%}
-      </button>
+    <div class="card__foot">
+      {%- if d != "esential" and product.available and product.price >= shop.freeShipping -%}
+        <p class="card__ship">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7z"/>
+            <circle cx="5.5" cy="18.5" r="2"/><circle cx="17.5" cy="18.5" r="2"/>
+          </svg>
+          <span>Livrare gratuită</span>
+        </p>
+      {%- endif -%}
+
+      <div class="card__buy">
+        <div class="card__buy-info">
+          <div class="card__price">
+            <span class="price{% if product.compareAt %} price--sale{% endif %}">
+              <span aria-hidden="true">{{ lei_int }}<sup>{% if bani < 10 %}0{% endif %}{{ bani }}</sup><span class="price__cur">lei</span></span>
+              <span class="visually-hidden">{{ product.price | lei }}</span>
+            </span>
+            {%- if product.compareAt and d != "esential" -%}
+              {%- comment -%} Fără „lei": moneda e scrisă o dată, pe prețul de alături. {%- endcomment -%}
+              <s class="price__was"><span class="visually-hidden">preț anterior </span>{{ product.compareAt | lei | remove: " lei" }}<span class="visually-hidden"> lei</span></s>
+            {%- endif -%}
+          </div>
+
+          {%- comment -%}
+            Pastila se randează întotdeauna, chiar goală: altfel cardurile fără preț
+            pe bucată au footerul mai scurt cu 20 px și grila se decalează.
+            Numărul de bucăți apare doar în densitatea 01, unde lipsesc atributele.
+          {%- endcomment -%}
+          {%- if product.perUnit -%}
+            <p class="card__unit tnum">{{ product.perUnit | lei | remove: " lei" }} lei /<span class="u-long"> bucată</span><span class="u-short"> buc</span>{% if d == "esential" %}<span class="pack"> · {{ product.units }} buc</span>{% endif %}</p>
+          {%- else -%}
+            <p class="card__unit"></p>
+          {%- endif -%}
+
+          {%- if d == "complet" -%}
+            {%- if product.compareAt -%}
+              {%- comment -%}
+                Obligatoriu la orice reducere anunțată (OUG 58/2022). Nu avem istoricul
+                de preț, deci slotul spune explicit că lipsește — nu imită o valoare.
+              {%- endcomment -%}
+              <p class="card__omni">Cel mai mic preț din ultimele 30 de zile:
+                <span class="card__omni-v">lipsește din date</span></p>
+            {%- else -%}
+              <p class="card__omni"></p>
+            {%- endif -%}
+            <span class="card__stock{% unless product.available %} card__stock--out{% endunless %}">
+              {%- if product.available -%}În <b>stoc</b>{%- else -%}<b>Stoc epuizat</b>{%- endif -%}
+            </span>
+          {%- endif -%}
+        </div>
+
+        <div class="card__act" data-add-wrap>
+          <button class="card__cart" type="button" data-add="{{ product.handle }}"
+                  {% unless product.available %}disabled{% endunless %}
+                  aria-label="{% if product.available %}Adaugă în coș{% else %}Indisponibil{% endif %}: {{ product.title | escape }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </article>
