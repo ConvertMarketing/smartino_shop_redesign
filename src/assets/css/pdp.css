@@ -311,7 +311,10 @@ a.cmp__lbl:hover { color: var(--brand-700); text-decoration: underline; text-und
 .tabs__p.is-on { display: block; }
 
 /* ---------- restul paginii ---------- */
-.pdp__rest { margin-top: var(--s10); max-width: 900px; }
+/* Secțiunea de jos ține lățimea containerului, ca restul paginii. Doar textul
+   curent își păstrează măsura de citit — grila de produse și bara de taburi nu
+   au niciun motiv să se oprească înainte de marginea paginii. */
+.pdp__rest { margin-top: var(--s10); }
 .acc { border-top: 1px solid var(--line); }
 .acc:last-of-type { border-bottom: 1px solid var(--line); }
 .acc__sum {
@@ -346,7 +349,8 @@ a.cmp__lbl:hover { color: var(--brand-700); text-decoration: underline; text-und
 
 .section__h { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; color: var(--ink-900); margin: var(--s8) 0 var(--s4); letter-spacing: -.02em; }
 .pdp__rel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (min-width: 640px) { .pdp__rel { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 640px) { .pdp__rel { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .pdp__rel { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
 /* ---------- bara lipită de jos, pe mobil ----------
    Înlocuiește bara de navigație: două bare fixe ar fi însemnat 112 px de crom
