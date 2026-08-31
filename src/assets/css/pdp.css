@@ -143,11 +143,6 @@
 .qty input:focus-visible { outline: 2px solid var(--brand-700); outline-offset: -2px; border-radius: 4px; }
 .buy__cta { flex: 1; min-height: 52px; font-size: var(--text-md); font-weight: 700; }
 
-.buy__ship { list-style: none; margin: var(--s5) 0 0; padding: var(--s4) 0 0; border-top: 1px solid var(--line); display: grid; gap: var(--s3); }
-.buy__ship li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: var(--s3); align-items: start; font-size: var(--text-sm); color: var(--ink-700); }
-.buy__ship svg { width: 18px; height: 18px; color: var(--brand-700); margin-top: 1px; }
-.buy__ship b { color: var(--ink-900); font-weight: 700; }
-
 /* ---------- acțiuni secundare ---------- */
 .buy__aux { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s3); }
 .auxbtn {
@@ -161,16 +156,22 @@
 .auxbtn[aria-pressed="true"] svg { color: var(--sale); fill: var(--sale); }
 
 /* ---------- încredere ----------
-   Textele sunt cele reale de pe smartinohome.ro, magazinul soră. */
+   Patru carduri, textele reale de pe smartinohome.ro, magazinul soră. */
 .trust {
-  list-style: none; margin: var(--s5) 0 0; padding: var(--s4) 0 0;
+  list-style: none; margin: var(--s5) 0 0; padding: var(--s5) 0 0;
   border-top: 1px solid var(--line);
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4) var(--s3);
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3);
 }
-.trust li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: var(--s2) var(--s3); align-items: start; }
-.trust svg { width: 20px; height: 20px; color: var(--brand-600); grid-row: 1 / 3; }
+.trust li {
+  display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 2px var(--s3);
+  align-items: start; padding: 13px 14px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  transition: border-color .16s var(--ease), box-shadow .16s var(--ease);
+}
+.trust li:hover { border-color: var(--brand-100); box-shadow: var(--shadow-brand-sm); }
+.trust svg { width: 22px; height: 22px; color: var(--brand-600); grid-row: 1 / 3; margin-top: 1px; }
 .trust b { font-size: var(--text-sm); font-weight: 700; color: var(--ink-900); line-height: 1.3; }
-.trust span { font-size: var(--text-xs); color: var(--ink-500); line-height: 1.3; }
+.trust span { font-size: var(--text-xs); color: var(--ink-500); line-height: 1.35; }
 
 .paybox { margin-top: var(--s4); padding-top: var(--s4); border-top: 1px solid var(--line); }
 .paybox__h { font-size: var(--text-xs); color: var(--ink-500); margin-bottom: var(--s2); }
