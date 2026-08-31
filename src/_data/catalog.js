@@ -114,6 +114,7 @@ const now = Date.parse(meta.fetchedAt);
 const products = raw.map((p) => {
   const variants = p.variants.map((v) => ({
     id: v.id,
+    sku: v.sku || '',
     title: v.title,
     price: Number(v.price),
     compareAt: v.compare_at_price ? Number(v.compare_at_price) : null,
@@ -152,6 +153,7 @@ const products = raw.map((p) => {
     image: images[0] || null,
     hoverImage: images[1] || null,
     variants,
+    sku: (variants[0] || {}).sku || '',
     price,
     compareAt,
     discountPct,

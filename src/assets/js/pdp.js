@@ -66,6 +66,45 @@
     if (n > 1) add.dataset.addQty = n;
   }, true);
 
+  /* ---- taburi ---- */
+  const tabs = $('[data-tabs]');
+  tabs?.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-tab]');
+    if (!t) return;
+    $$('[data-tab]', tabs).forEach((x) => {
+      const on = x === t;
+      x.classList.toggle('is-on', on);
+      x.setAttribute('aria-selected', String(on));
+    });
+    $$('[data-pane]', tabs).forEach((x) => x.classList.toggle('is-on', x.dataset.pane === t.dataset.tab));
+  });
+  /* Săgeți între taburi, ca la orice tablist. */
+  tabs?.addEventListener('keydown', (e) => {
+    if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+    const list = $$('[data-tab]', tabs);
+    const i = list.indexOf(document.activeElement);
+    if (i < 0) return;
+    e.preventDefault();
+    const n = list[(i + (e.key === 'ArrowRight' ? 1 : -1) + list.length) % list.length];
+    n.focus(); n.click();
+  });
+
+  /* ---- favorite și trimite ---- */
+  $('[data-fav]')?.addEventListener('click', (e) => {
+    const b = e.currentTarget;
+    b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+  });
+  $('[data-share]')?.addEventListener('click', async () => {
+    const d = { title: document.title, url: location.href };
+    if (navigator.share) { try { await navigator.share(d); } catch {} }
+    else if (navigator.clipboard) {
+      await navigator.clipboard.writeText(location.href);
+      const b = $('[data-share]'); const t = b.lastChild;
+      const old = t.textContent; t.textContent = ' Link copiat';
+      setTimeout(() => { t.textContent = old; }, 1800);
+    }
+  });
+
   /* ---- graficul se umple când intră în ecran ----
      Animația e informație: ochiul vede raportul crescând, nu doar starea finală. */
   const cmp = $('[data-cmp]');
