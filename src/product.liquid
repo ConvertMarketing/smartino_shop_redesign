@@ -85,7 +85,14 @@ eleventyComputed:
         </ul>
       {%- endif -%}
 
-      <span class="card__rate buy__rate"><span class="card__rate-lbl">rating · Judge.me</span></span>
+      {%- assign rv = reviews.byHandle[p.handle] -%}
+      {%- if rv and rv.count > 0 -%}
+        <a class="buy__rate" href="#recenzii" data-go-tab="rev">
+          <span class="stars" style="--n:{{ rv.avg }}" aria-hidden="true"></span>
+          <b>{{ rv.avg | replace: ".", "," }}</b>
+          <span>din {{ rv.count }} recenzii</span>
+        </a>
+      {%- endif -%}
 
       <div class="buy__price">
         <span class="price{% if p.compareAt %} price--sale{% endif %}">
@@ -255,9 +262,32 @@ eleventyComputed:
         </div>
       </section>
 
-      <section class="tabs__p" data-pane="rev" role="tabpanel">
-        <p class="acc__empty">Recenziile vin din Judge.me, care nu e în exportul curent.
-        Spațiul e rezervat aici și pe card, ca apariția lor să nu mute pagina.</p>
+      <section class="tabs__p" data-pane="rev" role="tabpanel" id="recenzii">
+        {%- if rv and rv.count > 0 -%}
+          <div class="revs">
+            <div class="revs__sum">
+              <p class="revs__avg">{{ rv.avg | replace: ".", "," }}<span>din 5</span></p>
+              <span class="stars stars--lg" style="--n:{{ rv.avg }}" aria-hidden="true"></span>
+              <p class="revs__n">{{ rv.count }} recenzii</p>
+              {%- if reviews.DEMO -%}<p class="demo-tag">date demonstrative</p>{%- endif -%}
+            </div>
+            <ol class="revs__list">
+              {%- for r in rv.list -%}
+                <li class="rev">
+                  <div class="rev__top">
+                    <span class="stars" style="--n:{{ r.stars }}" aria-hidden="true"></span>
+                    <b>{{ r.autor }}</b>
+                    <span class="rev__ok">achiziție confirmată</span>
+                    <time>{{ r.data }}</time>
+                  </div>
+                  <p class="rev__txt">{{ r.text }}</p>
+                </li>
+              {%- endfor -%}
+            </ol>
+          </div>
+        {%- else -%}
+          <p class="acc__empty">Produsul nu are încă recenzii.</p>
+        {%- endif -%}
       </section>
     </div>
   </div>

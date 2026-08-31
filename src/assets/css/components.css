@@ -267,14 +267,35 @@
 .spec:nth-child(n+3) { display: none; }
 .spec .s-short { display: none; }
 
-.card__rate {
-  align-self: flex-start; display: inline-flex; align-items: center;
-  height: 17px; padding: 0 7px; border: 1px dashed var(--line-strong);
-  border-radius: var(--radius-sm); background: var(--surface-2); color: var(--ink-500); max-width: 100%;
+/* Slotul de rating. Fără recenzii rămâne gol, dar păstrează înălțimea —
+   apariția notelor nu trebuie să miște grila. */
+.card__rate { display: flex; align-items: center; gap: 5px; min-height: 15px; }
+.card__rate b { font-size: var(--text-xs); font-weight: 700; color: var(--ink-900); }
+.card__rate span:not(.stars) { font-size: var(--text-xs); color: var(--ink-500); }
+
+/* Stele desenate din text, umplute proporțional cu nota: o singură dată în DOM,
+   fără cinci SVG-uri pe card. --n e nota, de la 0 la 5. */
+.stars {
+  --pct: calc(var(--n) / 5 * 100%);
+  display: inline-block; position: relative; flex: none;
+  font-size: 12px; line-height: 1; letter-spacing: 1px; white-space: nowrap;
+  color: var(--line-strong);
 }
-.card__rate-lbl {
-  font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
-  line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+.stars::before { content: '★★★★★'; }
+.stars::after {
+  content: '★★★★★'; position: absolute; inset: 0; overflow: hidden;
+  width: var(--pct); color: #F5A623;
+}
+
+/* Varianta mare — antet de recenzii. */
+.stars--lg { font-size: 18px; }
+
+/* Marcaj pentru datele de recenzii simulate. Se scoate odată cu
+   src/_data/reviews.js, la trecerea pe Judge.me. */
+.demo-tag {
+  display: inline-block; padding: 3px 8px; border-radius: 5px;
+  background: var(--warn-wash); color: var(--warn);
+  font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
 }
 
 /* --- zona de cumpărare: prețul și butonul pe același rând ---

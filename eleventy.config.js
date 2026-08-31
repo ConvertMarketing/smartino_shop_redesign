@@ -26,6 +26,13 @@ export default function (eleventyConfig) {
       .join(', ');
   });
 
+  // Mii cu punct: 11.320. Liquid pe Shopify nu are echivalent — la portare
+  // numărul vine deja formatat din Judge.me, deci filtrul nu se portează.
+  eleventyConfig.addFilter('nr', (v) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? n.toLocaleString('ro-RO') : '';
+  });
+
   eleventyConfig.addFilter('json', (v) => JSON.stringify(v));
 
   return {

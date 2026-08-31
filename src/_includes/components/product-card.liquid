@@ -132,7 +132,20 @@
         vin din Judge.me și nu sunt încă în export. Fără spațiul rezervat de acum,
         apariția stelelor ar împinge tot cardul (ella-mapping.md C5).
       {%- endcomment -%}
-      <span class="card__rate"><span class="card__rate-lbl">rating · Judge.me</span></span>
+      {%- comment -%}
+        Notele sunt DATE FABRICATE pentru prototip — vezi src/_data/reviews.js.
+        La implementare, sursa devine Judge.me (ella-mapping.md §3.5/C5).
+        Produsele fără recenzii păstrează spațiul gol, ca grila să nu sară.
+      {%- endcomment -%}
+      {%- assign rv = reviews.byHandle[product.handle] -%}
+      {%- if rv and rv.count > 0 -%}
+        <span class="card__rate has-rating">
+          <span class="stars" style="--n:{{ rv.avg }}" aria-hidden="true"></span>
+          <b>{{ rv.avg | replace: ".", "," }}</b><span>({{ rv.count }})</span>
+        </span>
+      {%- else -%}
+        <span class="card__rate" aria-hidden="true"></span>
+      {%- endif -%}
     {%- endif -%}
 
     <div class="card__foot">

@@ -112,9 +112,21 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 | H4 | Carusel bestsellers | **nativ** | S | `Product Block` / `Featured Collection` / `Spotlight Products` — coloane separate desktop/tabletă/mobil |
 | H5 | Rând „Reduceri" | **nativ** (asamblat) | S–M | `Product Block` pe colecția `reduceri` + `Countdown` + badge Sale automat pe `compare_at_price`. **Nu există secțiune „Deal of the Day".** |
 | H6 | Bloc „Importator oficial" | **nativ** | S | `Custom Service Block` sau `Image Banner` cu logo-urile brandurilor |
-| H7 | Bloc recenzii | **nativ** dacă e static; **necunoscut** dacă trebuie să randeze Judge.me live | S / M | `Customer Review` — e o secțiune de testimoniale, **Ella nu are motor de recenzii** |
+| H7 | Bloc recenzii (medie + distribuție + 6 recenzii) | **secțiune nouă** | M | `Customer Review` din Ella e doar un carusel de testimoniale statice: **nu are medie agregată, nici barele de distribuție pe stele**. Blocul din prototip se construiește ca secțiune proprie, alimentată din Judge.me. **Ella nu are motor de recenzii.** Vezi nota de sub tabel |
 | H8 | Bloc magazine fizice | **nativ** | S | `Image Banner` + `Custom Liquid`, sau secțiune de tip store-locator dacă există |
 | H9 | Newsletter | **nativ** | S | `Newsletter` + `Newsletter With Countdown` + popup |
+
+> **⚠️ Recenziile din prototip sunt date FABRICATE.** Notele, numărul de recenzii,
+> numele și textele vin din `src/_data/reviews.js`, generate determinist — cerute
+> explicit de client ca să se vadă cum arată secțiunea. **Nicio recenzie nu e reală.**
+> În prototip sunt marcate vizibil cu eticheta „date demonstrative" (flag-ul `DEMO`).
+>
+> **La implementare:** fișierul `src/_data/reviews.js` **se șterge integral**, iar
+> sursa devine Judge.me. Nu se portează nimic din el în temă. Locurile care consumă
+> datele — și care trebuie rescrise pe Judge.me — sunt trei: blocul de pe home (H7),
+> slotul de rating de pe cardul de produs (C5) și tab-ul „Recenzii" de pe PDP (D13).
+> Odată cu ele dispar `.demo-tag` din `components.css` și filtrul `nr` din
+> `eleventy.config.js`.
 
 ### 3.3 Card produs
 
@@ -125,7 +137,7 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 | C2b | **Badge „−X%" (procent)** | **secțiune modificată** | M | Badge-ul Sale se declanșează automat pe `compare_at_price`, dar **nicio sursă nu confirmă că eticheta poate randa procentul calculat**. Dacă vrem chip-ul „−30%", presupunem editare de Liquid pe snippet-ul de badge. **Formula contează** — vezi §3.4b |
 | C3 | **Preț pe unitate (lei/bucată)** | **secțiune modificată** | M | **Nu există nativ.** Vezi §3.4 — e cea mai importantă adăugare pentru acest catalog |
 | C4 | Badge-uri Nou / Stoc limitat / Custom | **nativ** | S | `Product Badges / Labels`: Sold out (auto la qty 0), Sale (auto), New (dinamic după vechime **sau** manual prin tag `new`), Bundle, Custom (global sau per produs). Poziție stânga/dreapta + offset |
-| C5 | Rating pe card | **nativ** ca afișare; datele vin din app | S / M | Stilizare expusă (mărime stea, culoare, poziție). Motorul e Judge.me — vezi §3.5 |
+| C5 | Rating pe card | **nativ** ca afișare; datele vin din app | S / M | Stilizare expusă (mărime stea, culoare, poziție). Motorul e Judge.me. În prototip datele sunt simulate — vezi nota de sub §3.2. Slotul își păstrează înălțimea și când produsul n-are recenzii, ca grila să nu sară |
 | C6 | Quick add | **nativ** | S | `Quick Shop` + `Product Action → Show action button`; comportament după adăugare din General → `Add to cart action` |
 | C7 | Swatch-uri de variante pe card | **nativ** | S–M | `Product Swatch` (afișare + mărime separată desktop/mobil). Definiții la General → `Swatch / Customization Option`; culorile non-bazice cer un PNG în Content → Files, numit `nume-culoare.png` |
 
@@ -259,7 +271,7 @@ un metafield `number_decimal` randează `5.5`. Valoarea trebuie să rămână **
 | D10 | Descriere în acordeon | **nativ** | S | `Product Tabs` — `Closed by default` = acordeon; sau secțiunea `Collapsible Content` |
 | D11 | Specificații | **nativ** | S | Custom tab în `Product Tabs` |
 | D12 | FAQ pe PDP | **nativ prin workaround** | S | **niciun bloc FAQ dedicat pe PDP**; se face din Custom tab sau `Collapsible Content` pe template-ul de produs |
-| D13 | Recenzii (Judge.me) | **secțiune modificată** | M | vezi §3.6.2 |
+| D13 | Recenzii (Judge.me) | **secțiune modificată** | M | vezi §3.6.2. În prototip: antet cu media produsului + 3 recenzii, pe date simulate — vezi nota de sub §3.2 |
 | D14 | „Cumpărate împreună" | **nativ, dar cu setup greu** | **L** | vezi §3.6.3 |
 | D15 | Produse similare | **nativ** | S | `Complementary products` prin Search & Discovery |
 

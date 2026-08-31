@@ -295,6 +295,65 @@ truck|Livrare gratuită|peste {{ shop.freeShipping }} lei|/pages/livrare/~clock|
 </section>
 {%- endif -%}
 
+{%- comment -%}
+  Recenzii — DATE SIMULATE (src/_data/reviews.js). La implementare secțiunea
+  primește feed-ul Judge.me și eticheta „date demonstrative" dispare odată cu
+  flag-ul DEMO. Vezi docs/ella-mapping.md §3.5/C5.
+{%- endcomment -%}
+<section class="section container" aria-labelledby="rev-title">
+  <div class="section__head section__head--wrap">
+    <h2 id="rev-title">Ce spun clienții</h2>
+    {%- if reviews.DEMO -%}
+      <span class="demo-tag">date demonstrative</span>
+    {%- endif -%}
+  </div>
+
+  <div class="rvs">
+    <div class="rvs__score">
+      <p class="rvs__num">{{ reviews.avg | replace: ".", "," }}</p>
+      <span class="stars stars--lg" style="--n:{{ reviews.avg }}" aria-hidden="true"></span>
+      <p class="rvs__meta">
+        {{ reviews.total | nr }} recenzii<br>
+        pentru {{ reviews.rated }} produse
+      </p>
+    </div>
+
+    <ul class="rvs__bars">
+      {%- for d in reviews.dist -%}
+        <li>
+          <span class="rvs__lbl">{{ d.stars }}<span aria-hidden="true">★</span></span>
+          <span class="rvs__track"><span class="rvs__fill" style="width:{{ d.pct }}%"></span></span>
+          <span class="rvs__cnt">{{ d.count | nr }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <p class="rvs__note">
+      Fiecare recenzie vine de la o comandă livrată. Nu ștergem notele mici —
+      dacă un produs nu e bun, se vede aici înainte să îl cumperi.
+    </p>
+  </div>
+
+  <ul class="rvs__list">
+    {%- for r in reviews.featured -%}
+      <li class="rvc">
+        <div class="rvc__top">
+          <span class="stars" style="--n:{{ r.stars }}" aria-hidden="true"></span>
+          <span class="visually-hidden">{{ r.stars }} din 5 stele</span>
+          <span class="rvc__ok">achiziție confirmată</span>
+        </div>
+        <p class="rvc__text">{{ r.text }}</p>
+        <p class="rvc__by">{{ r.autor }} · <time>{{ r.data }}</time></p>
+        <a class="rvc__prod" href="{{ '/products/' | append: r.handle | append: '/' | url }}">
+          <img src="{{ r.image.src | cdn: 120 }}" srcset="{{ r.image.src | srcset: 80,120,160 }}"
+               sizes="56px" alt="" width="56" height="56" loading="lazy" decoding="async">
+          <span>{{ r.product }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
 {%- comment -%} Magazine fizice — activ de încredere real {%- endcomment -%}
 <section class="section container">
   <div class="stores">

@@ -89,6 +89,15 @@
     n.focus(); n.click();
   });
 
+  /* Nota de sub titlu duce la tabul de recenzii, nu doar la ancoră. */
+  $('[data-go-tab]')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const t = $(`[data-tab="${e.currentTarget.dataset.goTab}"]`);
+    if (!t) return;
+    t.click();
+    t.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  });
+
   /* ---- favorite și trimite ---- */
   $('[data-fav]')?.addEventListener('click', (e) => {
     const b = e.currentTarget;

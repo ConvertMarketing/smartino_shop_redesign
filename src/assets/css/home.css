@@ -333,3 +333,98 @@
   border: 1.5px solid var(--line-strong); border-radius: var(--radius); background: var(--surface);
 }
 .newsletter__form input:focus { border-color: var(--brand-700); outline: none; }
+
+/* ============ Recenzii ============
+   Antetul agregat + șase recenzii. Datele sunt simulate (src/_data/reviews.js);
+   marcajul .demo-tag din antet dispare la trecerea pe Judge.me.
+   Numărul de stele nu e imagine: .stars din components.css, o suprapunere de
+   text decupată pe procent — se scalează cu fontul și nu adaugă cereri. */
+.rvs {
+  display: grid; gap: var(--s5);
+  padding: var(--s5); border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface-2);
+}
+@media (min-width: 800px) {
+  .rvs {
+    grid-template-columns: auto minmax(220px, 300px) minmax(0, 1fr);
+    align-items: center; gap: var(--s8); padding: var(--s6) var(--s8);
+  }
+}
+
+.rvs__score { text-align: center; }
+@media (min-width: 800px) { .rvs__score { text-align: left; } }
+.rvs__num {
+  font-family: var(--font-display); font-size: 52px; font-weight: 700;
+  line-height: 1; letter-spacing: -.03em; color: var(--ink-900); margin: 0;
+}
+.rvs__score .stars { margin-top: var(--s2); }
+.rvs__meta { margin: var(--s2) 0 0; font-size: var(--text-sm); line-height: 1.45; color: var(--ink-500); }
+
+/* Barele: coloana din mijloc e singura care se întinde, ca toate să pornească
+   și să se termine aliniat, indiferent de lungimea numărului din dreapta. */
+.rvs__bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.rvs__bars li { display: grid; grid-template-columns: 26px minmax(0, 1fr) 42px; align-items: center; gap: var(--s2); }
+.rvs__lbl { font-size: var(--text-xs); color: var(--ink-500); font-variant-numeric: tabular-nums; }
+.rvs__lbl span { color: var(--line-strong); margin-left: 1px; }
+.rvs__track { height: 6px; border-radius: var(--radius-pill); background: #E1E5E7; overflow: hidden; }
+.rvs__fill { display: block; height: 100%; border-radius: inherit; background: #F5A623; }
+.rvs__cnt { font-size: var(--text-xs); color: var(--ink-500); text-align: right; font-variant-numeric: tabular-nums; }
+
+.rvs__note {
+  margin: 0; font-size: var(--text-sm); line-height: 1.6; color: var(--ink-700);
+  border-left: 2px solid var(--brand-500); padding-left: var(--s4); max-width: 46ch;
+}
+
+/* Lista: derulare orizontală pe mobil (cardurile rămân lizibile, nu se strâng),
+   grilă de la 700px în sus. */
+.rvs__list {
+  list-style: none; margin: var(--s5) 0 0; padding: 0 var(--gutter) var(--s2);
+  margin-inline: calc(-1 * var(--gutter));
+  display: grid; grid-auto-flow: column; grid-auto-columns: 82%;
+  gap: var(--s4); overflow-x: auto; scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain; scrollbar-width: none;
+}
+.rvs__list::-webkit-scrollbar { display: none; }
+.rvs__list > li { scroll-snap-align: start; }
+@media (min-width: 700px) {
+  .rvs__list {
+    grid-auto-flow: row; grid-template-columns: repeat(3, 1fr);
+    overflow: visible; margin-inline: 0; padding-inline: 0;
+  }
+}
+
+.rvc {
+  display: flex; flex-direction: column; gap: var(--s3);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: var(--s4);
+}
+.rvc__top { display: flex; align-items: center; gap: var(--s3); }
+.rvc__ok {
+  margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--ok); background: var(--ok-wash);
+  padding: 2px 7px; border-radius: 5px; white-space: nowrap;
+}
+/* Trei rânduri fixe: cardurile din rând au aceeași înălțime chiar dacă textele
+   diferă, iar cel scurt nu lasă un gol sub el. */
+.rvc__text {
+  margin: 0; font-size: var(--text-base); line-height: 1.6; color: var(--ink-900);
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
+}
+.rvc__by { margin: 0; font-size: var(--text-xs); color: var(--ink-500); }
+.rvc__prod {
+  margin-top: auto; display: flex; align-items: center; gap: var(--s3);
+  padding-top: var(--s3); border-top: 1px solid var(--line);
+  text-decoration: none; color: var(--ink-700);
+}
+.rvc__prod img {
+  width: 44px; height: 44px; flex: none; object-fit: contain;
+  background: var(--surface-2); border-radius: var(--radius-sm);
+}
+.rvc__prod span {
+  font-size: var(--text-xs); line-height: 1.35;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+}
+.rvc__prod:hover span { color: var(--brand-700); text-decoration: underline; }
+
+/* Titlul și eticheta de date simulate nu încap pe un rând la 390px. */
+.section__head--wrap { flex-wrap: wrap; }
