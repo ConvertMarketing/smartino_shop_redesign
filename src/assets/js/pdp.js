@@ -105,6 +105,34 @@
     }
   });
 
+  /* ---- cross-sell: total viu + adăugare în bloc ---- */
+  const fbt = $('[data-fbt]');
+  if (fbt) {
+    const lei = (n) => n.toLocaleString('ro-RO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' lei';
+    const sync = () => {
+      const on = $$('input:checked', fbt);
+      const total = Number(fbt.dataset.base) + on.reduce((n, i) => n + Number(i.dataset.x), 0);
+      $('[data-fbt-total]', fbt).textContent = lei(total);
+      const n = on.length + 1;
+      $('[data-fbt-n]', fbt).textContent = n === 1 ? '1 produs' : n + ' produse';
+    };
+    fbt.addEventListener('change', sync);
+    $('[data-fbt-add]', fbt)?.addEventListener('click', () => {
+      /* Produsul principal întâi, apoi bifatele. Coșul e al lui app.js. */
+      const main = $('.buy__cta');
+      if (main && !main.disabled) main.click();
+      $$('input:checked', fbt).forEach((i) => {
+        const b = document.createElement('button');
+        b.dataset.add = i.dataset.handle;
+        b.hidden = true;
+        document.body.appendChild(b);
+        b.click();
+        b.remove();
+      });
+    });
+    sync();
+  }
+
   /* ---- bara lipită de jos ----
      Apare doar după ce butonul principal a ieșit din ecran: până atunci ar fi
      un al doilea buton pentru aceeași acțiune, la 20 px distanță. */

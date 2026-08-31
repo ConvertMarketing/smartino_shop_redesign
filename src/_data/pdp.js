@@ -12,6 +12,12 @@ const raw = JSON.parse(readFileSync(resolve('data/products.json'), 'utf8'));
 const bodyOf = new Map(raw.map((p) => [p.handle, p.body_html || '']));
 const typeOf = new Map(raw.map((p) => [p.handle, (p.product_type || '').trim()]));
 
+/* Frunza tipului de produs: ultimul segment din „a | b > c". */
+const typeLeaf = (h) => {
+  const t = (typeOf.get(h) || '').split(/[|>]/).map((x) => x.trim()).filter(Boolean);
+  return t.length ? t[t.length - 1] : '';
+};
+
 /**
  * Colecția în care produsul e cel mai „acasă". Nu pur și simplu cea mai mică:
  * asta scotea „Servetele Sleepy Easy Clean Craciun" ca fir de navigare.
@@ -33,6 +39,34 @@ const SPEC_LABELS = {
 };
 
 export default catalog.products.map((p) => {
+  /**
+   * Cross-sell: produse de alt tip din colecțiile pe care le împarte cu acesta.
+   * NU sunt „cele mai frecvent cumpărate împreună" — exportul n-are date de
+   * comenzi, iar o astfel de afirmație n-ar avea nimic în spate. Sunt produse
+   * complementare, alese ca să funcționeze ca adaos: mai ieftine decât cel
+   * principal, din cea mai specifică colecție comună.
+   */
+  const shared = catalog.collections
+    .filter((c) => c.count >= 6 && c.count <= 400 && !HIDDEN.test(c.handle)
+      && c.productHandles.includes(p.handle))
+    .sort((a, b) => a.count - b.count);
+  const seenX = new Set([p.handle]);
+  const cross = [];
+  for (const c of shared) {
+    for (const h of c.productHandles) {
+      if (seenX.has(h)) continue;
+      const q = catalog.productsByHandle[h];
+      if (!q || !q.available || !q.image) continue;
+      if (!typeLeaf(h) || typeLeaf(h) === typeLeaf(p.handle)) continue;
+      if (q.price > p.price) continue;      /* adaosul nu costă mai mult decât produsul */
+      seenX.add(h);
+      cross.push(q);
+    }
+    if (cross.length >= 12) break;
+  }
+  cross.sort((a, b) => a.price - b.price);
+  const crossSell = cross.slice(0, 3);
+
   const home = homeCollection.get(p.handle);
   const related = home
     ? home.productHandles
@@ -57,6 +91,8 @@ export default catalog.products.map((p) => {
     product: p,
     body: bodyOf.get(p.handle) || '',
     crumb: home && home.title !== p.title ? { title: home.title, handle: home.handle } : null,
+    crossSell,
+    crossTotal: crossSell.reduce((n, q) => n + q.price, p.price),
     related,
     specs,
     /* Cât mai lipsește până la livrarea gratuită — regula reală de 200 lei. */

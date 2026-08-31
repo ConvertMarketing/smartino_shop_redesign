@@ -153,13 +153,51 @@ eleventyComputed:
         </li>
       </ul>
 
-      <div class="paybox">
-        <p class="paybox__h">Plătești sigur cu</p>
-        <div class="paybox__list">
-          {%- assign methods = "Visa|Mastercard|Maestro|PayU|Ramburs" | split: "|" -%}
-          {%- for m in methods -%}<span class="pay-chip">{{ m }}</span>{%- endfor -%}
-        </div>
-      </div>
+      {%- comment -%}
+        Cross-sell. NU „cele mai frecvent cumpărate împreună": exportul n-are
+        date de comenzi, iar afirmația n-ar avea nimic în spate. Sunt produse
+        complementare — alt tip, din cea mai specifică colecție comună, mai
+        ieftine decât produsul principal, ca să funcționeze ca adaos.
+      {%- endcomment -%}
+      {%- if pp.crossSell.size > 0 -%}
+        <section class="fbt" data-fbt data-base="{{ p.price }}">
+          <h2 class="fbt__h">Completează comanda</h2>
+          <p class="fbt__s">Produse care se potrivesc cu ce ai ales</p>
+
+          <ul class="fbt__list">
+            <li class="fbt__row fbt__row--base">
+              <span class="fbt__pic">
+                <img src="{{ p.image.src | cdn: 120 }}" alt="" width="52" height="52" loading="lazy" decoding="async">
+              </span>
+              <span class="fbt__t">{{ p.title | truncate: 58 }}<span class="fbt__this">produsul ales</span></span>
+              <span class="fbt__p tnum">{{ p.price | lei }}</span>
+            </li>
+            {%- for q in pp.crossSell -%}
+              <li class="fbt__row">
+                <label>
+                  <input type="checkbox" checked data-x="{{ q.price }}" data-handle="{{ q.handle }}">
+                  <span class="fbt__box" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 6 6L20 6"/></svg>
+                  </span>
+                  <span class="fbt__pic">
+                    <img src="{{ q.image.src | cdn: 120 }}" alt="" width="52" height="52" loading="lazy" decoding="async">
+                  </span>
+                  <span class="fbt__t">
+                    <a href="{{ '/products/' | append: q.handle | append: '/' | url }}">{{ q.title | truncate: 58 }}</a>
+                  </span>
+                  <span class="fbt__p tnum">{{ q.price | lei }}</span>
+                </label>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          <div class="fbt__foot">
+            <p class="fbt__tot">Total <b data-fbt-total>{{ pp.crossTotal | lei }}</b>
+              <span data-fbt-n>{{ pp.crossSell.size | plus: 1 }} produse</span></p>
+            <button class="btn btn--primary" type="button" data-fbt-add>Adaugă tot în coș</button>
+          </div>
+        </section>
+      {%- endif -%}
     </div>
   </div>
 
