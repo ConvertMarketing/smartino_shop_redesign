@@ -300,6 +300,32 @@ numită `BUNDLE-<ID produs>` **+** o reducere automată numită `FBT-BUNDLE-<ID 
 Shopify Search & Discovery — S în loc de L. Recomand să pornim cu asta și să rezervăm
 FBT-ul complet pentru top 20–30 SKU-uri, unde merită munca manuală.
 
+### 3.6b „Alte formate și mărimi" — componenta care ține locul variantelor
+
+**Constatarea care schimbă estimarea:** 1.202 din 1.203 produse au o singură
+opțiune, `Title` = `Default Title`. Selectorul de variante — nativ în Ella, efort S —
+**nu are ce afișa**. În schimb, mărimile și formatele aceleiași linii de produs sunt
+produse *separate* în catalog.
+
+Prototipul le regrupează la build: brand + titlul curățat de multiplicator, cantitate,
+mărime și interval de greutate. Rezultat: **668 din 1.203 produse au cel puțin un
+„frate"**, comparabili după prețul pe bucată.
+
+| # | Componentă | Clasificare | Efort | Corespondent Ella |
+| --- | --- | --- | --- | --- |
+| D9 | **Alte formate și mărimi** | **secțiune nouă** | **L** | Nu există nativ. Cere fie un metafield de listă `custom.family` populat în bulk, fie o colecție per familie. Recomandat: metafield — 208 familii, se populează dintr-un export |
+| D10 | Preț pe bucată în blocul de preț | **secțiune modificată** | M | Vezi §3.4 |
+| D11 | Bară de cumpărare lipită jos, pe mobil | **nativ** | S | `Sticky Add To Cart`; de verificat dacă poate înlocui bara de navigație de jos, nu doar să se adauge peste ea |
+| D12 | Preț minim 30 zile (Omnibus) | **secțiune nouă** | M | Fără sursă de date azi. Slot rezervat |
+| D13 | Galerie fără miniaturi la o singură imagine | **nativ cu rezervă** | S | 913 din 1.203 produse au o singură imagine — de verificat că Ella nu randează o bară de miniaturi cu un singur element |
+
+⚠️ **Capcană de portare, confirmată în prototip.** În LiquidJS `{% include %}` vede
+**și scrie** scope-ul exterior: cardurile din „Din aceeași categorie" lăsau în urmă
+propriile variabile de preț, iar bara lipită de jos afișa prețul ultimului card.
+În Shopify, `{% render %}` e izolat și problema dispare — dar tot repo-ul folosește
+`include`, deci la portare fiecare devine `{% render %}`, și orice variabilă pe care
+un snippet o primea tacit din exterior trebuie trecută explicit ca parametru.
+
 ### 3.7 Coș și footer
 
 | # | Componentă | Clasificare | Efort | Corespondent Ella |
