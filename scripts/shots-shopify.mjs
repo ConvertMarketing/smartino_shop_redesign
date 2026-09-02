@@ -75,14 +75,29 @@ for (const vp of VIEWPORTS) {
     const sep = route.includes('?') ? '&' : '?';
     const url = `${STORE}${route}${sep}preview_theme_id=${themeId}`;
     try {
-      const res = await page.goto(url, { waitUntil: 'networkidle', timeout: 90000 });
+      // Nu 'networkidle': pagina de colecție ține request-uri deschise (recently
+      // viewed, recomandări) și nu ajunge niciodată la liniște.
+      const res = await page.goto(url, { waitUntil: 'load', timeout: 90000 });
       // Bara de preview a Shopify e injectată în pagină; o ascundem ca să nu
       // acopere header-ul în screenshot.
       await page.addStyleTag({ content: '#preview-bar-iframe, .shopify-preview-bar { display:none !important }' });
-      await page.waitForTimeout(1500);
-      const file = `${OUT}/shopify-${themeId}-${slug(route)}-${vp.name}.png`;
-      await page.screenshot({ path: file, fullPage: true });
-      console.log(`${res?.status()} ${vp.name} ${route} → ${file}`);
+      // Ella încarcă secțiunile și imaginile la scroll (IntersectionObserver).
+      // Fără o derulare completă, tot ce e sub fold rămâne alb în captură.
+      await page.evaluate(async () => {
+        const step = Math.max(400, Math.floor(window.innerHeight * 0.8));
+        for (let y = 0; y < document.body.scrollHeight; y += step) {
+          window.scrollTo(0, y);
+          await new Promise((r) => setTimeout(r, 120));
+        }
+        window.scrollTo(0, 0);
+      });
+      await page.waitForLoadState('networkidle').catch(() => {});
+      await page.waitForTimeout(1200);
+      // Două capturi: primul ecran (lizibil la review) și pagina întreagă.
+      const base = `${OUT}/shopify-${themeId}-${slug(route)}-${vp.name}`;
+      await page.screenshot({ path: `${base}-fold.png`, fullPage: false });
+      await page.screenshot({ path: `${base}.png`, fullPage: true });
+      console.log(`${res?.status()} ${vp.name} ${route} → ${base}-fold.png + full`);
     } catch (e) {
       failures += 1;
       console.error(`EȘEC ${vp.name} ${route}: ${e.message.split('\n')[0]}`);
