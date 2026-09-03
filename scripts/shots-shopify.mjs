@@ -86,34 +86,50 @@ for (const vp of VIEWPORTS) {
         // cascadă) și estompează imaginile lazy. În captura full-page toate
         // secțiunile „intră" deodată și ies pe jumătate transparente.
         '.scroll-trigger.animate--slide-in, .scroll-trigger.animate--fade-in { opacity:1 !important; transform:none !important; animation:none !important; transition:none !important }',
-        'img.lazyload, img.lazyloaded, .media--loading-effect img { opacity:1 !important; transition:none !important }',
+        // component-loading-overlay.css ține imaginile lazy la opacity 0 și
+        // afișează un overlay .media-loading până la evenimentul lazysizes.
+        '.media--loading-effect > img.lazyload, .media--loading-effect > img.lazyloading, .media--loading-effect > img, img.lazyload, img.lazyloaded { opacity:1 !important; transition:none !important }',
+        '.media-loading { display:none !important }',
       ].join('\n') });
+      // Primul ecran se capturează ÎNAINTE de derulare: e ce vede utilizatorul
+      // la încărcare (primul slide din hero, nu al treilea, după autoplay).
+      const base = `${OUT}/shopify-${themeId}-${slug(route)}-${vp.name}`;
+      await page.waitForTimeout(1500);
+      await page.screenshot({ path: `${base}-fold.png`, fullPage: false });
       // Ella încarcă secțiunile și imaginile la scroll (IntersectionObserver).
       // Fără o derulare completă, tot ce e sub fold rămâne alb în captură.
-      await page.evaluate(async () => {
+      // Grilele de produse (product-block pe colecție) se încarcă prin AJAX
+      // la intrarea în viewport, iar imaginile lor abia după aceea. De aceea:
+      // două treceri de derulare, apoi forțarea a ce a rămas lazy.
+      const scrollPass = async (ms) => page.evaluate(async (wait) => {
         const step = Math.max(300, Math.floor(window.innerHeight * 0.6));
         for (let y = 0; y < document.body.scrollHeight; y += step) {
           window.scrollTo(0, y);
-          await new Promise((r) => setTimeout(r, 250));
+          await new Promise((r) => setTimeout(r, wait));
         }
         window.scrollTo(0, 0);
+      }, ms);
+      const forceLazy = () => page.evaluate(() => {
         // lazysizes încarcă doar ce e aproape de viewport; ce a rămas se
-        // forțează manual (data-src/data-srcset → src/srcset), altfel grilele
-        // de jos ies fără imagini în captura full-page.
+        // forțează manual (data-src/data-srcset → src/srcset).
+        let n = 0;
         for (const img of document.querySelectorAll('img[data-src], img[data-srcset]')) {
-          if (img.dataset.srcset && !img.getAttribute('srcset')) img.setAttribute('srcset', img.dataset.srcset);
-          if (img.dataset.src && !img.getAttribute('src')) img.setAttribute('src', img.dataset.src);
+          if (img.dataset.srcset && !img.getAttribute('srcset')) { img.setAttribute('srcset', img.dataset.srcset); n += 1; }
+          if (img.dataset.src && !img.getAttribute('src')) { img.setAttribute('src', img.dataset.src); n += 1; }
           if (img.dataset.sizes === 'auto' && !img.getAttribute('sizes')) img.setAttribute('sizes', `${img.getBoundingClientRect().width || 400}px`);
           img.classList.remove('lazyload'); img.classList.add('lazyloaded');
         }
+        return n;
       });
+      await scrollPass(400);
       await page.waitForLoadState('networkidle').catch(() => {});
+      await scrollPass(250);
+      const forced = await forceLazy();
       // Așteptăm decodarea tuturor imaginilor, altfel grilele ies fără poze.
       await page.waitForFunction(() => [...document.images].every((i) => i.complete), null, { timeout: 20000 }).catch(() => {});
+      const forced2 = await forceLazy();
+      if (forced + forced2) console.log(`  imagini lazy forțate: ${forced + forced2}`);
       await page.waitForTimeout(1200);
-      // Două capturi: primul ecran (lizibil la review) și pagina întreagă.
-      const base = `${OUT}/shopify-${themeId}-${slug(route)}-${vp.name}`;
-      await page.screenshot({ path: `${base}-fold.png`, fullPage: false });
       await page.screenshot({ path: `${base}.png`, fullPage: true });
       console.log(`${res?.status()} ${vp.name} ${route} → ${base}-fold.png + full`);
     } catch (e) {
