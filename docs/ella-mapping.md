@@ -107,14 +107,14 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 | # | Componentă | Clasificare | Efort | Corespondent Ella |
 | --- | --- | --- | --- | --- |
 | H1 | Hero | **secțiune nouă** | M | `Slideshow`-ul Ella cere imagine de fundal pe fiecare slide; designul nostru e panou colorat + packshot pe card alb. Construit ca `smartino-hero` (slider propriu, fără jQuery), cu mini-bannerele sub el și railul de categorii (G3a) în stânga pe desktop |
-| H2 | Tile-uri categorii | **secțiune nouă** | S | `Collection List` randează `collection.image` — și **niciuna din cele 204 colecții n-are imagine** (verificat); ar fi afișat placeholdere. `smartino-categories` ia imaginea din primul produs, editabilă per bloc |
-| H3 | Bară USP | **nativ** | S | `Custom Service Block` |
+| H2 | Tile-uri categorii (12, prototipul are 6 — abatere deliberată, de confirmat cu clientul) | **secțiune nouă** | S | `Collection List` randează `collection.image` — și **niciuna din cele 204 colecții n-are imagine** (verificat); ar fi afișat placeholdere. `smartino-categories` ia imaginea din primul produs, editabilă per bloc |
+| H3 | Bară USP | **nativ** + CSS | S | `Custom Service Block`, stil 2; CSS-ul nostru țintește secțiunea după cheia din index.json (`[id$="__usp"]`), pentru că secțiunile native nu primesc clasa noastră. Iconițele SVG din contur au nevoie de `fill: none` (Ella le umple). Pe mobil: grilă 2×2 din CSS |
 | H4 | Carusel bestsellers | **nativ** | S | `Product Block` / `Featured Collection` / `Spotlight Products` — coloane separate desktop/tabletă/mobil |
 | H5 | Rând „Reduceri" | **nativ** (asamblat) | S–M | `Product Block` pe colecția `reduceri` + `Countdown` + badge Sale automat pe `compare_at_price`. **Nu există secțiune „Deal of the Day".** |
 | H6 | Bloc „Importator oficial" | **nativ** + CSS | S | `Product Block` cu blocul lui de **banner** ca panou de text închis lângă grila de produse. Fără imagine, Ella pune un placeholder de îmbrăcăminte și un buton de video (URL YouTube implicit); CSS-ul nostru le ascunde și pune fundalul închis — dacă se încarcă o imagine, ea acoperă fundalul |
 | H7 | Bloc recenzii (medie + distribuție + 6 recenzii) | **secțiune nouă** | M | `Customer Review` din Ella e doar un carusel de testimoniale statice: **nu are medie agregată, nici barele de distribuție pe stele**. Blocul din prototip se construiește ca secțiune proprie, alimentată din Judge.me. **Ella nu are motor de recenzii.** Vezi nota de sub tabel |
 | H8 | Bloc magazine fizice | **secțiune nouă** | S | `Store Locator`-ul Ella e o pagină cu hartă. `smartino-stores`: două carduri (nume, adresă, program, telefon), 60 de linii |
-| H9 | Newsletter | **nativ** | S | `Newsletter` + `Newsletter With Countdown` + popup |
+| H9 | Newsletter | **nativ** | S | `Newsletter`; fundalul, marginile și mărimile de font vin din setări; CSS-ul nostru adaugă doar liniile de sus/jos |
 
 > **⚠️ Recenziile din prototip sunt date FABRICATE.** Notele, numărul de recenzii,
 > numele și textele vin din `src/_data/reviews.js`, generate determinist — cerute
