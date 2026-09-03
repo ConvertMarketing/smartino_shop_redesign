@@ -132,13 +132,13 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 
 | # | Componentă | Clasificare | Efort | Corespondent Ella |
 | --- | --- | --- | --- | --- |
-| C1 | A doua imagine la hover | **nativ** | S | `Product image swap`; cardul 09 refolosește `image-product-card` + `media--hover-effect` (hover-ul e CSS Ella) |
+| C1 | A doua imagine la hover | **nativ** + CSS | S | `Product image swap`; cardul 09 refolosește `image-product-card` + `media--hover-effect`. Regulile de hover ale Ellei (zoom 1.05 în 2 s, active și pe touch) sunt suprascrise cu selectori mai specifici: pe mouse timing-ul din prototip, pe touch fără swap |
 | C2a | Preț tăiat + „economisești" | **secțiune nouă** (în cardul 09) | S | Snippet-ul `price` al Ellei afișa „Salva X lei (-10%)" ca două pastile; cardul 09 compune prețul ca în prototip (lei + banii ridicați, preț vechi tăiat), cu aritmetica din §3.4b. Consecință: la schimbarea swatch-ului prețul din card nu se actualizează (1 202/1 203 produse au o singură variantă) |
 | C2b | **Badge „−X%" (procent)** | **nativ** + CSS | S | Confirmat: `product-badge` cu `sale_badge_type: discount` randează procentul (rotunjit cu `round`). Cardul 09 păstrează snippet-ul și impune din CSS prioritatea din prototip (epuizat > reducere > nou), sus-stânga |
 | C3 | **Preț pe unitate (lei/bucată)** | **secțiune nouă** (în cardul 09) | M | **Implementat** din metafield-ul existent `custom.cantitate_pachet` (nu din titlu): `price × 1.0 ÷ units | round | money`. Pastila se randează și goală, ca footerele cardurilor să rămână aliniate. Pe PDP rămâne de făcut |
 | C4 | Badge-uri Nou / Stoc limitat / Custom | **nativ** + CSS | S | `product-badge` nativ (Sold out auto, Sale auto, New la 30 de zile). Cardul 09 le restilizează și afișează una singură |
 | C5 | Rating pe card | **secțiune nouă** (în cardul 09) | S | Ella nu are rating pe card. Cardul 09 citește metafield-urile standard `reviews.rating` / `reviews.rating_count` (le scrie Judge.me; pe magazin există deja, ex. 4,9 din 735). Slotul are înălțime fixă și rămâne gol fără recenzii |
-| C6 | Quick add | **nativ** + CSS | S | `add-to-cart-form` al Ellei (formular + popup de variante), redus din CSS la butonul-iconiță de 40px de lângă preț, mereu vizibil (Ella îl ascundea până la hover) |
+| C6 | Quick add | **nativ** + CSS | S | `add-to-cart-form` al Ellei (formular + popup de variante), redus din CSS la butonul-iconiță de 40px de lângă preț, mereu vizibil (Ella îl ascundea până la hover). La produsele epuizate cardul randează un buton dezactivat (ca în prototip), nu ancora „Anunță-mă" a Ellei; popup-ul de variante (quick shop tip 1) se poziționează față de card |
 | C7 | Swatch-uri de variante pe card | **nativ** | S | `product-swatch` randat sub titlu când produsul are opțiunea din `settings.swatch`; practic irelevant pentru catalog (o singură variantă la 1 202/1 203 produse) |
 
 ### 3.4 ⭐ Prețul pe unitate — componenta cu cel mai bun raport valoare/efort
