@@ -92,7 +92,7 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 | --- | --- | --- | --- | --- | --- |
 | G1 | Bară de anunț (200 lei) | **nativ** | S | secțiunea `Announcement Bar` (în Ella 7, în Header Group) | text plain sau **HTML brut**, padding 0–50px, `Layout = Slider` cu săgeți la ≥2 mesaje, icon de închidere opțional, countdown opțional |
 | G2 | Header sticky | **nativ** | S | „Sticky Header & Sticky Add to Cart" | funcția e listată; **numele/locul exact al setării = necunoscut** |
-| G3a | **Rail vertical de categorii (desktop)** | **nativ** | M | `Header Nav – vertical menu` — folosit de layout-ul demo „Home 06 SuperMarket" | Ella livrează exact tiparul: sursă meniu, stil, titlu de bloc, separatoare, lățime buton, rază. Cele 12 categorii cu flyout pe coloane se construiesc din Navigation + Advanced Mega Menu |
+| G3a | **Rail vertical de categorii (desktop)** | **secțiune nouă** (parte din `smartino-hero`) | S | `Header Nav – vertical menu` rămâne pentru tab-ul „Toate categoriile" și dropdown-ul lui pe toate paginile | **Corectat la implementare:** dropdown-ul Ella deschis automat pe home (`auto_show_index`) se închide la primul scroll și lasă un gol lângă hero. Railul permanent din prototip e randat de hero din același meniu Shopify (`rail_menu`), cu flyout pe subcategorii la hover/focus și iconițe după convenția Ellei (`<handle>.png` în Fișiere) |
 | G3b | Flyout cu subcategorii | **nativ** | M | „Advanced Mega Menu" (6) / `Mega menu style #1–3` (7) | 2–6 coloane, banner promo în meniu, 1–4 produse dintr-o colecție. **Numărul de produse per subcategorie nu e documentat** — probabil Liquid (`collection.products_count`) |
 | G4a | **Bară de navigație jos (mobil)** | **nativ** | S | `Sticky Toolbar Mobile` (în Ella 7, în grupul Popup) | patru destinații; insigna de coș se leagă de `cart.item_count` |
 | G4b | Drawer de categorii pe mobil | **nativ** | S | Header for Mobile | deschis din tab-ul „Categorii" al barei de jos |
@@ -106,12 +106,12 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 
 | # | Componentă | Clasificare | Efort | Corespondent Ella |
 | --- | --- | --- | --- | --- |
-| H1 | Hero | **secțiune nouă** | M | `Slideshow`-ul Ella cere imagine de fundal pe fiecare slide; designul nostru e panou colorat + packshot pe card alb. Construit ca `smartino-hero` (slider propriu, fără jQuery), cu mini-bannerele sub el |
+| H1 | Hero | **secțiune nouă** | M | `Slideshow`-ul Ella cere imagine de fundal pe fiecare slide; designul nostru e panou colorat + packshot pe card alb. Construit ca `smartino-hero` (slider propriu, fără jQuery), cu mini-bannerele sub el și railul de categorii (G3a) în stânga pe desktop |
 | H2 | Tile-uri categorii | **secțiune nouă** | S | `Collection List` randează `collection.image` — și **niciuna din cele 204 colecții n-are imagine** (verificat); ar fi afișat placeholdere. `smartino-categories` ia imaginea din primul produs, editabilă per bloc |
 | H3 | Bară USP | **nativ** | S | `Custom Service Block` |
 | H4 | Carusel bestsellers | **nativ** | S | `Product Block` / `Featured Collection` / `Spotlight Products` — coloane separate desktop/tabletă/mobil |
 | H5 | Rând „Reduceri" | **nativ** (asamblat) | S–M | `Product Block` pe colecția `reduceri` + `Countdown` + badge Sale automat pe `compare_at_price`. **Nu există secțiune „Deal of the Day".** |
-| H6 | Bloc „Importator oficial" | **nativ** | S | `Product Block` cu blocul lui de **banner** ca panou de text închis lângă grila de produse — fără imagine, stilul `not-img` |
+| H6 | Bloc „Importator oficial" | **nativ** + CSS | S | `Product Block` cu blocul lui de **banner** ca panou de text închis lângă grila de produse. Fără imagine, Ella pune un placeholder de îmbrăcăminte și un buton de video (URL YouTube implicit); CSS-ul nostru le ascunde și pune fundalul închis — dacă se încarcă o imagine, ea acoperă fundalul |
 | H7 | Bloc recenzii (medie + distribuție + 6 recenzii) | **secțiune nouă** | M | `Customer Review` din Ella e doar un carusel de testimoniale statice: **nu are medie agregată, nici barele de distribuție pe stele**. Blocul din prototip se construiește ca secțiune proprie, alimentată din Judge.me. **Ella nu are motor de recenzii.** Vezi nota de sub tabel |
 | H8 | Bloc magazine fizice | **secțiune nouă** | S | `Store Locator`-ul Ella e o pagină cu hartă. `smartino-stores`: două carduri (nume, adresă, program, telefon), 60 de linii |
 | H9 | Newsletter | **nativ** | S | `Newsletter` + `Newsletter With Countdown` + popup |
