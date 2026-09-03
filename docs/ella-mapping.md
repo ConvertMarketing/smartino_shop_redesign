@@ -106,14 +106,14 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 
 | # | Componentă | Clasificare | Efort | Corespondent Ella |
 | --- | --- | --- | --- | --- |
-| H1 | Hero | **nativ** | S | `Slideshow` / `Image Banner` |
-| H2 | Tile-uri categorii | **nativ** | S | `Collection List` (grid sau slider) |
+| H1 | Hero | **secțiune nouă** | M | `Slideshow`-ul Ella cere imagine de fundal pe fiecare slide; designul nostru e panou colorat + packshot pe card alb. Construit ca `smartino-hero` (slider propriu, fără jQuery), cu mini-bannerele sub el |
+| H2 | Tile-uri categorii | **secțiune nouă** | S | `Collection List` randează `collection.image` — și **niciuna din cele 204 colecții n-are imagine** (verificat); ar fi afișat placeholdere. `smartino-categories` ia imaginea din primul produs, editabilă per bloc |
 | H3 | Bară USP | **nativ** | S | `Custom Service Block` |
 | H4 | Carusel bestsellers | **nativ** | S | `Product Block` / `Featured Collection` / `Spotlight Products` — coloane separate desktop/tabletă/mobil |
 | H5 | Rând „Reduceri" | **nativ** (asamblat) | S–M | `Product Block` pe colecția `reduceri` + `Countdown` + badge Sale automat pe `compare_at_price`. **Nu există secțiune „Deal of the Day".** |
-| H6 | Bloc „Importator oficial" | **nativ** | S | `Custom Service Block` sau `Image Banner` cu logo-urile brandurilor |
+| H6 | Bloc „Importator oficial" | **nativ** | S | `Product Block` cu blocul lui de **banner** ca panou de text închis lângă grila de produse — fără imagine, stilul `not-img` |
 | H7 | Bloc recenzii (medie + distribuție + 6 recenzii) | **secțiune nouă** | M | `Customer Review` din Ella e doar un carusel de testimoniale statice: **nu are medie agregată, nici barele de distribuție pe stele**. Blocul din prototip se construiește ca secțiune proprie, alimentată din Judge.me. **Ella nu are motor de recenzii.** Vezi nota de sub tabel |
-| H8 | Bloc magazine fizice | **nativ** | S | `Image Banner` + `Custom Liquid`, sau secțiune de tip store-locator dacă există |
+| H8 | Bloc magazine fizice | **secțiune nouă** | S | `Store Locator`-ul Ella e o pagină cu hartă. `smartino-stores`: două carduri (nume, adresă, program, telefon), 60 de linii |
 | H9 | Newsletter | **nativ** | S | `Newsletter` + `Newsletter With Countdown` + popup |
 
 > **⚠️ Recenziile din prototip sunt date FABRICATE.** Notele, numărul de recenzii,
