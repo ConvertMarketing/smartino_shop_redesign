@@ -80,7 +80,14 @@ for (const vp of VIEWPORTS) {
       const res = await page.goto(url, { waitUntil: 'load', timeout: 90000 });
       // Bara de preview a Shopify e injectată în pagină; o ascundem ca să nu
       // acopere header-ul în screenshot.
-      await page.addStyleTag({ content: '#preview-bar-iframe, .shopify-preview-bar { display:none !important }' });
+      await page.addStyleTag({ content: [
+        '#preview-bar-iframe, .shopify-preview-bar { display:none !important }',
+        // Ella animează cardurile la intrarea în viewport (opacity 0 → 1, în
+        // cascadă) și estompează imaginile lazy. În captura full-page toate
+        // secțiunile „intră" deodată și ies pe jumătate transparente.
+        '.scroll-trigger.animate--slide-in, .scroll-trigger.animate--fade-in { opacity:1 !important; transform:none !important; animation:none !important; transition:none !important }',
+        'img.lazyload, img.lazyloaded, .media--loading-effect img { opacity:1 !important; transition:none !important }',
+      ].join('\n') });
       // Ella încarcă secțiunile și imaginile la scroll (IntersectionObserver).
       // Fără o derulare completă, tot ce e sub fold rămâne alb în captură.
       await page.evaluate(async () => {
@@ -92,6 +99,12 @@ for (const vp of VIEWPORTS) {
         window.scrollTo(0, 0);
       });
       await page.waitForLoadState('networkidle').catch(() => {});
+      // Imaginile lazy (lazysizes) primesc srcset abia după derulare; așteptăm
+      // să fie toate decodate, altfel grilele de produse ies fără poze.
+      await page.waitForFunction(() => {
+        const imgs = [...document.querySelectorAll('img.lazyload, img.lazyloaded')];
+        return imgs.every((i) => i.classList.contains('lazyloaded') && i.complete);
+      }, null, { timeout: 15000 }).catch(() => {});
       await page.waitForTimeout(1200);
       // Două capturi: primul ecran (lizibil la review) și pagina întreagă.
       const base = `${OUT}/shopify-${themeId}-${slug(route)}-${vp.name}`;
