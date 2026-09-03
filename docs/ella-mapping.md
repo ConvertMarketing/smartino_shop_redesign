@@ -132,14 +132,14 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 
 | # | Componentă | Clasificare | Efort | Corespondent Ella |
 | --- | --- | --- | --- | --- |
-| C1 | A doua imagine la hover | **nativ** | S | `Product image swap` (Theme settings → Product card). Există și `product video swap` |
-| C2a | Preț tăiat + „economisești" | **nativ** | S | General → `Saved price` — afișează suma economisită față de `compare_at_price` |
-| C2b | **Badge „−X%" (procent)** | **secțiune modificată** | M | Badge-ul Sale se declanșează automat pe `compare_at_price`, dar **nicio sursă nu confirmă că eticheta poate randa procentul calculat**. Dacă vrem chip-ul „−30%", presupunem editare de Liquid pe snippet-ul de badge. **Formula contează** — vezi §3.4b |
-| C3 | **Preț pe unitate (lei/bucată)** | **secțiune modificată** | M | **Nu există nativ.** Vezi §3.4 — e cea mai importantă adăugare pentru acest catalog |
-| C4 | Badge-uri Nou / Stoc limitat / Custom | **nativ** | S | `Product Badges / Labels`: Sold out (auto la qty 0), Sale (auto), New (dinamic după vechime **sau** manual prin tag `new`), Bundle, Custom (global sau per produs). Poziție stânga/dreapta + offset |
-| C5 | Rating pe card | **nativ** ca afișare; datele vin din app | S / M | Stilizare expusă (mărime stea, culoare, poziție). Motorul e Judge.me. În prototip datele sunt simulate — vezi nota de sub §3.2. Slotul își păstrează înălțimea și când produsul n-are recenzii, ca grila să nu sară |
-| C6 | Quick add | **nativ** | S | `Quick Shop` + `Product Action → Show action button`; comportament după adăugare din General → `Add to cart action` |
-| C7 | Swatch-uri de variante pe card | **nativ** | S–M | `Product Swatch` (afișare + mărime separată desktop/mobil). Definiții la General → `Swatch / Customization Option`; culorile non-bazice cer un PNG în Content → Files, numit `nume-culoare.png` |
+| C1 | A doua imagine la hover | **nativ** | S | `Product image swap`; cardul 09 refolosește `image-product-card` + `media--hover-effect` (hover-ul e CSS Ella) |
+| C2a | Preț tăiat + „economisești" | **secțiune nouă** (în cardul 09) | S | Snippet-ul `price` al Ellei afișa „Salva X lei (-10%)" ca două pastile; cardul 09 compune prețul ca în prototip (lei + banii ridicați, preț vechi tăiat), cu aritmetica din §3.4b. Consecință: la schimbarea swatch-ului prețul din card nu se actualizează (1 202/1 203 produse au o singură variantă) |
+| C2b | **Badge „−X%" (procent)** | **nativ** + CSS | S | Confirmat: `product-badge` cu `sale_badge_type: discount` randează procentul (rotunjit cu `round`). Cardul 09 păstrează snippet-ul și impune din CSS prioritatea din prototip (epuizat > reducere > nou), sus-stânga |
+| C3 | **Preț pe unitate (lei/bucată)** | **secțiune nouă** (în cardul 09) | M | **Implementat** din metafield-ul existent `custom.cantitate_pachet` (nu din titlu): `price × 1.0 ÷ units | round | money`. Pastila se randează și goală, ca footerele cardurilor să rămână aliniate. Pe PDP rămâne de făcut |
+| C4 | Badge-uri Nou / Stoc limitat / Custom | **nativ** + CSS | S | `product-badge` nativ (Sold out auto, Sale auto, New la 30 de zile). Cardul 09 le restilizează și afișează una singură |
+| C5 | Rating pe card | **secțiune nouă** (în cardul 09) | S | Ella nu are rating pe card. Cardul 09 citește metafield-urile standard `reviews.rating` / `reviews.rating_count` (le scrie Judge.me; pe magazin există deja, ex. 4,9 din 735). Slotul are înălțime fixă și rămâne gol fără recenzii |
+| C6 | Quick add | **nativ** + CSS | S | `add-to-cart-form` al Ellei (formular + popup de variante), redus din CSS la butonul-iconiță de 40px de lângă preț, mereu vizibil (Ella îl ascundea până la hover) |
+| C7 | Swatch-uri de variante pe card | **nativ** | S | `product-swatch` randat sub titlu când produsul are opțiunea din `settings.swatch`; practic irelevant pentru catalog (o singură variantă la 1 202/1 203 produse) |
 
 ### 3.4 ⭐ Prețul pe unitate — componenta cu cel mai bun raport valoare/efort
 
