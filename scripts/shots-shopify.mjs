@@ -91,20 +91,25 @@ for (const vp of VIEWPORTS) {
       // Ella încarcă secțiunile și imaginile la scroll (IntersectionObserver).
       // Fără o derulare completă, tot ce e sub fold rămâne alb în captură.
       await page.evaluate(async () => {
-        const step = Math.max(400, Math.floor(window.innerHeight * 0.8));
+        const step = Math.max(300, Math.floor(window.innerHeight * 0.6));
         for (let y = 0; y < document.body.scrollHeight; y += step) {
           window.scrollTo(0, y);
-          await new Promise((r) => setTimeout(r, 120));
+          await new Promise((r) => setTimeout(r, 250));
         }
         window.scrollTo(0, 0);
+        // lazysizes încarcă doar ce e aproape de viewport; ce a rămas se
+        // forțează manual (data-src/data-srcset → src/srcset), altfel grilele
+        // de jos ies fără imagini în captura full-page.
+        for (const img of document.querySelectorAll('img[data-src], img[data-srcset]')) {
+          if (img.dataset.srcset && !img.getAttribute('srcset')) img.setAttribute('srcset', img.dataset.srcset);
+          if (img.dataset.src && !img.getAttribute('src')) img.setAttribute('src', img.dataset.src);
+          if (img.dataset.sizes === 'auto' && !img.getAttribute('sizes')) img.setAttribute('sizes', `${img.getBoundingClientRect().width || 400}px`);
+          img.classList.remove('lazyload'); img.classList.add('lazyloaded');
+        }
       });
       await page.waitForLoadState('networkidle').catch(() => {});
-      // Imaginile lazy (lazysizes) primesc srcset abia după derulare; așteptăm
-      // să fie toate decodate, altfel grilele de produse ies fără poze.
-      await page.waitForFunction(() => {
-        const imgs = [...document.querySelectorAll('img.lazyload, img.lazyloaded')];
-        return imgs.every((i) => i.classList.contains('lazyloaded') && i.complete);
-      }, null, { timeout: 15000 }).catch(() => {});
+      // Așteptăm decodarea tuturor imaginilor, altfel grilele ies fără poze.
+      await page.waitForFunction(() => [...document.images].every((i) => i.complete), null, { timeout: 20000 }).catch(() => {});
       await page.waitForTimeout(1200);
       // Două capturi: primul ecran (lizibil la review) și pagina întreagă.
       const base = `${OUT}/shopify-${themeId}-${slug(route)}-${vp.name}`;
