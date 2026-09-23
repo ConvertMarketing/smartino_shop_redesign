@@ -13,7 +13,12 @@
   <div class="footer__panel">
 
     {%- comment -%} 1. Newsletter {%- endcomment -%}
-    <section class="fnl" aria-labelledby="fnl-title">
+    {%- comment -%}
+      Fundal: imagine generată de client (produse în lateral, centru liber).
+      use_shots = true readuce compoziția cu packshot-uri reale din footerShots.js.
+    {%- endcomment -%}
+    {%- assign use_shots = false -%}
+    <section class="fnl{% unless use_shots %} fnl--img{% endunless %}" aria-labelledby="fnl-title">
       <div class="container fnl__inner">
         <p class="fnl__eyebrow">Newsletter</p>
         <h2 class="fnl__title" id="fnl-title">Abonează-te la ofertele Smartino</h2>
@@ -33,6 +38,8 @@
         </p>
       </div>
 
+      {%- unless use_shots -%}<div class="fnl__bg" aria-hidden="true"></div>{%- endunless -%}
+      {%- if use_shots -%}
       <div class="fnl__shots" aria-hidden="true">
         {%- for s in footerShots -%}
           {%- assign p = catalog.productsByHandle[s.handle] -%}
@@ -46,6 +53,7 @@
           {%- endif -%}
         {%- endfor -%}
       </div>
+      {%- endif -%}
     </section>
 
     <div class="container">

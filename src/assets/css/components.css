@@ -504,6 +504,26 @@
 .fnl::after { content: ""; position: absolute; inset: auto 0 0 0; height: 70px; z-index: 1;
   background: linear-gradient(180deg, transparent, rgba(11,29,32,.55)); pointer-events: none; }
 
+/* Varianta cu imagine de fundal (produse în lateral, centru liber; 2000×667, 3:1).
+   Desktop: imaginea acoperă tot panoul, iar panoul e ținut aproape de 3:1 ca să nu
+   se taie produsele din margini. Mobil: imaginea e doar o bandă jos, ancorată pe
+   grupul din stânga, cu o trecere estompată spre gradientul de sus (culorile
+   gradientului sunt luate din marginea de sus a imaginii). */
+.fnl--img { padding-top: var(--s10);
+  background: radial-gradient(70% 60% at 50% 0%, #0A8AA6 0%, #064B5E 40%, #012735 100%); }
+.fnl--img .fnl__inner { padding-bottom: 230px; }
+.fnl--img::after { display: none; }
+.fnl--img .fnl__title, .fnl--img .fnl__lead { text-shadow: 0 2px 18px rgba(0,0,0,.45); }
+.fnl__bg { position: absolute; left: 0; right: 0; bottom: 0; height: 230px; z-index: 0;
+  background: url("../img/footer-newsletter.webp") 12% bottom / auto 100% no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 45%); mask-image: linear-gradient(to bottom, transparent, #000 45%); }
+@media (min-width: 640px) {
+  .fnl__bg { top: 0; height: auto; background-size: cover; background-position: center bottom; -webkit-mask-image: none; mask-image: none; }
+  .fnl--img .fnl__inner { padding-bottom: 130px; }
+}
+@media (min-width: 800px) { .fnl--img { padding-top: var(--s12); } }
+@media (min-width: 1600px) { .fnl--img .fnl__inner { padding-bottom: 170px; } }
+
 /* --- 2. Contact / magazine --- */
 .finfo { display: grid; gap: var(--s5); padding-block: var(--s8); border-bottom: 1px solid var(--f-line); }
 .finfo__cell { display: grid; gap: var(--s1); align-content: start; }
