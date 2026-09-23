@@ -453,38 +453,104 @@
 .cart-line__p { font-weight: 700; font-variant-numeric: tabular-nums; font-size: var(--text-sm); margin-top: 2px; }
 .cart-line__rm { font-size: var(--text-xs); color: var(--ink-500); text-decoration: underline; margin-top: var(--s1); }
 
-/* ============ Footer ============ */
-.footer { background: var(--surface-2); padding-block: var(--s8) var(--s6); font-size: var(--text-base); }
-.footer__usp { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s3); padding-bottom: var(--s6); border-bottom: 1px solid var(--line-strong); }
-@media (min-width: 900px) { .footer__usp { grid-template-columns: repeat(4, 1fr); } }
-.footer__usp-item { display: flex; align-items: center; gap: var(--s2); font-size: var(--text-sm); font-weight: 600; color: var(--ink-900); }
-.footer__usp-item svg { color: var(--brand-700); flex: none; }
-.footer__grid { display: grid; gap: var(--s8); padding-block: var(--s8); grid-template-columns: 1fr; }
-@media (min-width: 700px) { .footer__grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1000px) { .footer__grid { grid-template-columns: 1.6fr 1fr 1fr 1.3fr; } }
-.footer__note { color: var(--ink-500); font-size: var(--text-sm); margin: var(--s3) 0; max-width: 34ch; }
-.footer__contact { font-size: var(--text-sm); line-height: 1.8; }
-.footer__contact a:hover { color: var(--brand-700); }
-.footer__hours { color: var(--ink-500); }
-.footer__heading { font-family: var(--font-display); font-weight: 700; font-size: var(--text-sm); text-transform: uppercase; letter-spacing: .05em; color: var(--ink-900); margin-bottom: var(--s3); }
-.footer__col ul { list-style: none; padding: 0; display: grid; gap: var(--s2); }
-.footer__col a { font-size: var(--text-sm); color: var(--ink-700); }
-.footer__col a:hover { color: var(--brand-700); text-decoration: underline; }
-.footer__store { font-size: var(--text-sm); color: var(--ink-700); margin-bottom: var(--s3); line-height: 1.5; }
-.footer__pay { padding-block: var(--s6); border-top: 1px solid var(--line-strong); }
-.footer__pay-list { display: flex; flex-wrap: wrap; gap: var(--s2); }
-.pay-chip { display: inline-flex; align-items: center; height: 30px; padding: 0 var(--s3); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 600; color: var(--ink-700); }
-.footer__pay-note { font-size: var(--text-xs); color: var(--ink-500); margin-top: var(--s2); }
-.footer__legal { display: grid; gap: var(--s5); padding-top: var(--s6); border-top: 1px solid var(--line-strong); }
-@media (min-width: 800px) { .footer__legal { grid-template-columns: 1fr auto; align-items: start; } }
-.footer__legal-text p { font-size: var(--text-xs); color: var(--ink-500); line-height: 1.7; }
-.footer__legal-links { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); list-style: none; padding: 0; margin-top: var(--s3); }
-.footer__legal-links a { font-size: var(--text-xs); color: var(--ink-500); text-decoration: underline; }
-.anpc-badge { display: flex; align-items: center; gap: var(--s2); width: 250px; height: 50px; padding: 0 var(--s3); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); }
+/* ============ Footer ============
+   Panou închis cu marginea de sus curbată (referința clientului). Se așază pe
+   fundalul alb al paginii, deci curba se vede pe orice pagină.
+   Structură: newsletter (cu packshot-uri reale pe marginea de jos) → contact /
+   magazine → coloane → bară legală. Culorile sunt un turcoaz-cerneală derivat
+   din brand, nu gri generic; accentele rămân --brand-500. */
+.footer { --f-bg: #10272B; --f-bg-2: #0B1D20; --f-ink: #FFFFFF; --f-ink-2: rgba(255,255,255,.74); --f-ink-3: rgba(255,255,255,.52); --f-line: rgba(255,255,255,.12); --f-curve: 28px;
+  background: var(--ground); color: var(--f-ink-2); font-size: var(--text-sm); margin-top: var(--s6); }
+.footer__panel { background: var(--f-bg); border-radius: var(--f-curve) var(--f-curve) 0 0; overflow: hidden; }
+.footer a { color: inherit; }
+.footer a:hover { color: var(--f-ink); }
+.fico { flex: none; color: var(--brand-500); }
+@media (min-width: 800px) { .footer { --f-curve: 44px; margin-top: var(--s10); } }
+
+/* --- 1. Newsletter --- */
+.fnl { position: relative; isolation: isolate; overflow: hidden; padding-block: var(--s12) 0;
+  background:
+    radial-gradient(60% 70% at 50% 0%, rgba(21,183,198,.26), transparent 70%),
+    linear-gradient(180deg, var(--f-bg) 0%, var(--f-bg-2) 100%); }
+.fnl__inner { position: relative; z-index: 2; text-align: center; max-width: 620px; padding-bottom: var(--s10); }
+.fnl__eyebrow { font-size: var(--text-xs); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-500); margin-bottom: var(--s3); }
+.fnl__title { font-size: var(--text-2xl); color: var(--f-ink); line-height: 1.15; letter-spacing: -.01em; }
+.fnl__lead { margin-top: var(--s3); color: var(--f-ink-2); font-size: var(--text-base); line-height: 1.55; max-width: 44ch; margin-inline: auto; }
+.fnl__form { display: flex; flex-direction: column; gap: var(--s2); margin-top: var(--s6); }
+.fnl__input { min-height: 50px; padding: 0 var(--s4); border-radius: var(--radius); border: 1.5px solid transparent;
+  background: var(--surface); color: var(--ink-900); font-size: var(--text-md); }
+.fnl__input::placeholder { color: var(--ink-500); }
+.fnl__input:focus { outline: none; border-color: var(--brand-500); box-shadow: 0 0 0 3px rgba(21,183,198,.35); }
+.fnl__btn { min-height: 50px; padding-inline: var(--s6); }
+.fnl__terms { margin-top: var(--s3); font-size: var(--text-xs); color: var(--f-ink-3); }
+.fnl__terms a { text-decoration: underline; text-underline-offset: 2px; }
+@media (min-width: 640px) {
+  .fnl__form { flex-direction: row; max-width: 520px; margin-inline: auto; padding: 5px; border-radius: calc(var(--radius) + 5px); background: rgba(255,255,255,.08); }
+  .fnl__input { flex: 1; min-width: 0; border-color: transparent; }
+  .fnl__btn { flex: none; }
+}
+@media (min-width: 800px) { .fnl { padding-top: var(--s16); } .fnl__title { font-size: var(--text-3xl); } }
+
+/* Packshot-urile: bandă la baza panoului, fiecare poziționat pe % din lățime,
+   cu lățime, rotație și „scufundare" sub margine (--b negativ = tăiat de bandă,
+   exact ca ingredientele din referință). Pe mobil rămân doar cele marcate --m. */
+.fnl__shots { position: relative; z-index: 1; height: 160px; margin-top: calc(-1 * var(--s8)); pointer-events: none; }
+.fnl__shot { position: absolute; left: calc(var(--x) * 1%); bottom: var(--b); width: var(--w); height: auto; max-width: none;
+  transform: translateX(-50%) rotate(var(--r)); transform-origin: 50% 100%;
+  filter: drop-shadow(0 18px 22px rgba(0,0,0,.45)); display: none; }
+.fnl__shot--m { display: block; width: calc(var(--w) * .78); bottom: calc(var(--b) * .5); }
+@media (min-width: 640px) { .fnl__shots { height: 200px; } .fnl__shot { display: block; width: calc(var(--w) * .8); bottom: calc(var(--b) * .8); } }
+@media (min-width: 1000px) { .fnl__shots { height: 250px; margin-top: calc(-1 * var(--s10)); } .fnl__shot { width: var(--w); bottom: var(--b); } }
+.fnl::after { content: ""; position: absolute; inset: auto 0 0 0; height: 70px; z-index: 1;
+  background: linear-gradient(180deg, transparent, rgba(11,29,32,.55)); pointer-events: none; }
+
+/* --- 2. Contact / magazine --- */
+.finfo { display: grid; gap: var(--s5); padding-block: var(--s8); border-bottom: 1px solid var(--f-line); }
+.finfo__cell { display: grid; gap: var(--s1); align-content: start; }
+.finfo__label { display: flex; align-items: center; gap: var(--s2); font-family: var(--font-display); font-weight: 700; font-size: var(--text-base); color: var(--f-ink); margin-bottom: var(--s1); }
+.finfo__big { font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl); color: var(--f-ink); letter-spacing: -.01em; }
+.finfo__line { font-size: var(--text-sm); line-height: 1.5; }
+.finfo__muted { color: var(--f-ink-3); }
+@media (min-width: 800px) {
+  .finfo { grid-template-columns: repeat(3, 1fr); gap: 0; padding-block: var(--s10); }
+  .finfo__cell { padding-inline: var(--s8); border-left: 1px solid var(--f-line); }
+  .finfo__cell:first-child { padding-left: 0; border-left: 0; }
+  .finfo__cell:last-child { padding-right: 0; }
+}
+
+/* --- 3. Coloane --- */
+.fcols { display: grid; gap: var(--s8) var(--s6); padding-block: var(--s10); grid-template-columns: 1fr 1fr; }
+.fcols__brand { grid-column: 1 / -1; }
+.fcols__brand .wordmark { color: var(--f-ink); display: inline-block; }
+.fcols__about { margin-top: var(--s4); max-width: 42ch; line-height: 1.6; color: var(--f-ink-2); }
+.fcols__usp { list-style: none; padding: 0; margin-top: var(--s5); display: grid; gap: var(--s2); }
+.fcols__usp li { display: flex; align-items: center; gap: var(--s2); color: var(--f-ink); font-weight: 600; }
+.fcols__h { font-family: var(--font-display); font-weight: 700; font-size: var(--text-sm); text-transform: uppercase; letter-spacing: .08em; color: var(--f-ink); margin-bottom: var(--s4); }
+.fcols__col ul { list-style: none; padding: 0; display: grid; gap: var(--s2); }
+.fcols__col a { line-height: 1.4; }
+.fcols__col a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.fcols__pay { grid-column: 1 / -1; }
+.fcols__col .paycards { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.paycard { display: inline-flex; align-items: center; justify-content: center; height: 32px; min-width: 50px; padding: 0 6px; background: var(--surface); border-radius: 6px; }
+.paycard svg { height: 22px; width: auto; display: block; }
+.paycard--text { font-size: var(--text-xs); font-weight: 700; color: var(--ink-900); padding-inline: var(--s3); }
+.fcols__paynote { margin-top: var(--s3); font-size: var(--text-xs); color: var(--f-ink-3); }
+.fcols__pay .anpc-badge { margin-top: var(--s5); }
+.anpc-badge { display: flex; align-items: center; gap: var(--s2); width: 250px; max-width: 100%; height: 50px; padding: 0 var(--s3); background: var(--surface); border-radius: var(--radius-sm); }
+.anpc-badge:hover { color: inherit; }
 .anpc-badge__mark { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--brand-900); letter-spacing: .02em; }
 .anpc-badge__text { font-size: 10px; line-height: 1.25; color: var(--ink-500); }
-.footer__anpc-note { font-size: 10px; color: var(--ink-300); margin-top: 4px; }
-.footer__preview { margin-top: var(--s6); padding-top: var(--s4); border-top: 1px solid var(--line-strong); font-size: var(--text-xs); color: var(--ink-500); text-align: center; }
+@media (min-width: 800px) {
+  .fcols { grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr; gap: var(--s6); padding-block: var(--s12); }
+  .fcols__brand, .fcols__pay { grid-column: auto; }
+}
+@media (min-width: 640px) and (max-width: 799px) { .fcols { grid-template-columns: repeat(3, 1fr); } }
+
+/* --- 4. Legal + copyright --- */
+.fbottom { background: var(--f-bg-2); border-top: 1px solid var(--f-line); }
+.fbottom__inner { display: grid; gap: var(--s2); padding-block: var(--s5); font-size: var(--text-xs); color: var(--f-ink-3); }
+.fbottom__legal { line-height: 1.6; }
+@media (min-width: 900px) { .fbottom__inner { grid-template-columns: 1fr auto; align-items: center; } }
 
 /* ============ Secțiuni ============ */
 .section { padding-block: var(--s10); }

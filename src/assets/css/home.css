@@ -322,18 +322,6 @@
 .stores__tel { margin-top: var(--s3); }
 .stores__tel a { font-weight: 700; color: var(--brand-700); }
 
-/* ============ Newsletter ============ */
-.newsletter { background: var(--brand-050); border-block: 1px solid var(--brand-100); }
-.newsletter__inner { display: grid; gap: var(--s5); padding-block: var(--s10); align-items: center; }
-@media (min-width: 800px) { .newsletter__inner { grid-template-columns: 1fr auto; gap: var(--s10); } }
-.newsletter p { color: var(--ink-700); margin-top: var(--s2); }
-.newsletter__form { display: flex; gap: var(--s2); flex-wrap: wrap; }
-.newsletter__form input {
-  flex: 1; min-width: 220px; min-height: 44px; padding: 0 var(--s4);
-  border: 1.5px solid var(--line-strong); border-radius: var(--radius); background: var(--surface);
-}
-.newsletter__form input:focus { border-color: var(--brand-700); outline: none; }
-
 /* ============ Recenzii ============
    Antetul agregat + șase recenzii. Datele sunt simulate (src/_data/reviews.js);
    marcajul .demo-tag din antet dispare la trecerea pe Judge.me.

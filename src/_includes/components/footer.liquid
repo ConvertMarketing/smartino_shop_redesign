@@ -1,106 +1,166 @@
 {%- comment -%}
-  Footer. Conține obligațiile legale RO (design-brief.md §1.3):
-  denumire completă, nr. Registrul Comerțului, adresa sediului social,
-  pictogramă SAL — FĂRĂ SOL, platforma e închisă din 20 iulie 2025.
-  Baymard cere link direct la Retur și Livrare — sunt primele în coloana Ajutor.
+  Footer nou (referință client: panou închis cu marginea de sus curbată).
+  1. Newsletter cu packshot-uri reale din catalog „împrăștiate" pe marginea de jos
+     a panoului (src/_data/footerShots.js — doar PNG-uri cu fundal transparent).
+  2. Rând de contact / magazine / program, cu separatoare verticale.
+  3. Coloane de link-uri + metode de plată.
+  4. Obligații legale RO (design-brief.md §1.3): denumire, CUI, Reg. Com., sediu,
+     pictogramă SAL — FĂRĂ SOL (platforma e închisă din 20 iulie 2025).
+  5. Bară de copyright.
+  Fără rețele sociale: nu avem link-uri reale de la client — nu le inventăm.
 {%- endcomment -%}
 <footer class="footer">
-  <div class="container">
+  <div class="footer__panel">
 
-    <div class="footer__usp">
-      {%- capture usps_raw -%}
-Livrare gratuită peste {{ shop.freeShipping }} lei|Comandat azi, livrat în 1–3 zile lucrătoare|Retur în {{ shop.returnDays }} zile|Plata ramburs sau card
-      {%- endcapture -%}
-      {%- assign usps = usps_raw | strip | split: "|" -%}
-      {%- for u in usps -%}
-        <div class="footer__usp-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="m20 6-11 11-5-5"/>
-          </svg>
-          <span>{{ u }}</span>
-        </div>
-      {%- endfor -%}
-    </div>
-
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <span class="wordmark wordmark--footer">smartino<sup>®</sup></span>
-        <p class="footer__note">
-          Scutece Sleepy pentru copii și adulți, produse de igienă, curățenie
-          și cosmetice coreene originale.
+    {%- comment -%} 1. Newsletter {%- endcomment -%}
+    <section class="fnl" aria-labelledby="fnl-title">
+      <div class="container fnl__inner">
+        <p class="fnl__eyebrow">Newsletter</p>
+        <h2 class="fnl__title" id="fnl-title">Abonează-te la ofertele Smartino</h2>
+        <p class="fnl__lead">
+          Reduceri, pachete promo și produse noi, direct pe email.
+          Fără spam — te dezabonezi cu un click.
         </p>
-        <p class="footer__contact">
-          <a href="tel:+40374072222"><strong>0374 072 222</strong></a><br>
-          <a href="mailto:info@smartinoshop.ro">info@smartinoshop.ro</a><br>
-          <span class="footer__hours">Luni–Vineri, 09:00–17:00</span>
+        <form class="fnl__form" onsubmit="return false;">
+          <label class="visually-hidden" for="fnl-email">Adresa ta de email</label>
+          <input class="fnl__input" id="fnl-email" type="email" name="email"
+                 placeholder="adresa@email.ro" autocomplete="email" required>
+          <button class="btn btn--primary fnl__btn" type="submit">Abonează-mă</button>
+        </form>
+        <p class="fnl__terms">
+          Prin abonare ești de acord cu
+          <a href="{{ '/pages/politica-de-confidentialitate/' | url }}">politica de confidențialitate</a>.
         </p>
       </div>
 
-      <div class="footer__col">
-        <p class="footer__heading">Ajutor</p>
-        <ul>{%- for l in nav.footer.ajutor -%}<li><a href="{{ l.url | url }}">{{ l.title }}</a></li>{%- endfor -%}</ul>
-      </div>
-
-      <div class="footer__col">
-        <p class="footer__heading">Smartino</p>
-        <ul>{%- for l in nav.footer.despre -%}<li><a href="{{ l.url | url }}">{{ l.title }}</a></li>{%- endfor -%}</ul>
-      </div>
-
-      <div class="footer__col">
-        <p class="footer__heading">Magazine fizice</p>
-        <p class="footer__store">
-          <strong>Smartino Supermarket</strong><br>
-          Snagov Plaza, DN1, jud. Ilfov<br>
-          L–V 07:00–22:00 · S–D 08:00–21:00
-        </p>
-        <p class="footer__store">
-          <strong>Smartino Home &amp; Deco</strong><br>
-          Snagov Plaza, vizavi de supermarket
-        </p>
-      </div>
-    </div>
-
-    <div class="footer__pay">
-      <p class="footer__heading">Metode de plată</p>
-      <div class="footer__pay-list" role="list">
-        {%- assign methods = "Visa|Mastercard|Maestro|Ramburs" | split: "|" -%}
-        {%- for m in methods -%}
-          <span class="pay-chip" role="listitem">{{ m }}</span>
+      <div class="fnl__shots" aria-hidden="true">
+        {%- for s in footerShots -%}
+          {%- assign p = catalog.productsByHandle[s.handle] -%}
+          {%- if p and p.image -%}
+            <img class="fnl__shot{% if s.mobile %} fnl__shot--m{% endif %}"
+                 style="--x:{{ s.x }};--w:{{ s.w }}px;--r:{{ s.r }}deg;--b:{{ s.b }}px"
+                 src="{{ p.image.src | cdn: 300 }}"
+                 srcset="{{ p.image.src | srcset: 200,300,400,600 }}"
+                 sizes="{{ s.w }}px" alt="" width="{{ p.image.width }}" height="{{ p.image.height }}"
+                 loading="lazy" decoding="async">
+          {%- endif -%}
         {%- endfor -%}
       </div>
-      <p class="footer__pay-note">Plăți securizate 3D Secure prin PayU și MobilPay.</p>
+    </section>
+
+    <div class="container">
+
+      {%- comment -%} 2. Contact / magazine / program {%- endcomment -%}
+      <div class="finfo">
+        <div class="finfo__cell">
+          <p class="finfo__label">
+            {%- assign icon = "phone" -%}<svg class="fico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{% include "components/icons.liquid" %}</svg>
+            Comenzi &amp; suport
+          </p>
+          <a class="finfo__big" href="tel:+40374072222">0374 072 222</a>
+          <a class="finfo__line" href="mailto:info@smartinoshop.ro">info@smartinoshop.ro</a>
+          <p class="finfo__line finfo__muted">Luni–Vineri 09:00–17:00</p>
+        </div>
+        <div class="finfo__cell">
+          <p class="finfo__label">
+            {%- assign icon = "pin" -%}<svg class="fico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{% include "components/icons.liquid" %}</svg>
+            Smartino Supermarket
+          </p>
+          <p class="finfo__line">DN1, Snagov · jud. Ilfov</p>
+          <p class="finfo__line finfo__muted">L–V 07:00–22:00 · S–D 08:00–21:00</p>
+          <a class="finfo__line" href="tel:+40755210178">0755 210 178</a>
+        </div>
+        <div class="finfo__cell">
+          <p class="finfo__label">
+            {%- assign icon = "pin" -%}<svg class="fico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{% include "components/icons.liquid" %}</svg>
+            Smartino Home
+          </p>
+          <p class="finfo__line">Intersecția Snagov, Șos. București-Ploiești DN1</p>
+          <p class="finfo__line finfo__muted">Luni–Duminică 10:00–21:00</p>
+          <a class="finfo__line" href="tel:+40755210121">0755 210 121</a>
+        </div>
+      </div>
+
+      {%- comment -%} 3. Coloane {%- endcomment -%}
+      <div class="fcols">
+        <div class="fcols__brand">
+          <a class="wordmark wordmark--footer" href="{{ '/' | url }}" aria-label="Smartino — acasă">smartino<sup>®</sup></a>
+          <p class="fcols__about">
+            Importator oficial Sleepy în România. Scutece pentru copii și adulți,
+            șervețele umede, produse de curățenie și cosmetice coreene originale —
+            online și în magazinele din Snagov.
+          </p>
+          <ul class="fcols__usp">
+            <li>{%- assign icon = "truck" -%}<svg class="fico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{% include "components/icons.liquid" %}</svg> Livrare gratuită peste {{ shop.freeShipping }} lei</li>
+            <li>{%- assign icon = "return" -%}<svg class="fico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{% include "components/icons.liquid" %}</svg> Retur în {{ shop.returnDays }} zile</li>
+            <li>{%- assign icon = "shield" -%}<svg class="fico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{% include "components/icons.liquid" %}</svg> Plată securizată 3D Secure</li>
+          </ul>
+        </div>
+
+        <nav class="fcols__col" aria-labelledby="fcol-cat">
+          <p class="fcols__h" id="fcol-cat">Categorii</p>
+          <ul>
+            {%- for c in nav.primary limit: 8 -%}
+              <li><a href="{{ c.url | url }}">{{ c.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+
+        <nav class="fcols__col" aria-labelledby="fcol-help">
+          <p class="fcols__h" id="fcol-help">Ajutor</p>
+          <ul>
+            {%- for l in nav.footer.ajutor -%}<li><a href="{{ l.url | url }}">{{ l.title }}</a></li>{%- endfor -%}
+          </ul>
+        </nav>
+
+        <nav class="fcols__col" aria-labelledby="fcol-about">
+          <p class="fcols__h" id="fcol-about">Smartino</p>
+          <ul>
+            {%- for l in nav.footer.despre -%}<li><a href="{{ l.url | url }}">{{ l.title }}</a></li>{%- endfor -%}
+            {%- for l in nav.footer.legal -%}<li><a href="{{ l.url | url }}">{{ l.title }}</a></li>{%- endfor -%}
+          </ul>
+        </nav>
+
+        <div class="fcols__col fcols__pay">
+          <p class="fcols__h">Plăți acceptate</p>
+          <ul class="paycards" role="list">
+            <li class="paycard" role="listitem" title="Visa">
+              <svg viewBox="0 0 48 16" aria-hidden="true"><text x="24" y="13" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" font-style="italic" fill="#1A1F71">VISA</text></svg>
+              <span class="visually-hidden">Visa</span>
+            </li>
+            <li class="paycard" role="listitem" title="Mastercard">
+              <svg viewBox="0 0 48 30" aria-hidden="true"><circle cx="18" cy="15" r="9.5" fill="#EB001B"/><circle cx="30" cy="15" r="9.5" fill="#F79E1B" fill-opacity=".92"/></svg>
+              <span class="visually-hidden">Mastercard</span>
+            </li>
+            <li class="paycard" role="listitem" title="Maestro">
+              <svg viewBox="0 0 48 30" aria-hidden="true"><circle cx="18" cy="15" r="9.5" fill="#0099DF"/><circle cx="30" cy="15" r="9.5" fill="#ED0006" fill-opacity=".92"/></svg>
+              <span class="visually-hidden">Maestro</span>
+            </li>
+            <li class="paycard paycard--text" role="listitem">Ramburs</li>
+          </ul>
+          <p class="fcols__paynote">Plăți online securizate prin PayU și MobilPay.</p>
+          {%- comment -%}
+            Pictogramă SAL, 250×50 px, conform Ordinului ANPC 449/2022.
+            SOL a fost eliminat prin OPANPC 270/2026 — nu se mai afișează.
+            Placeholder până primim assetul oficial de la client.
+          {%- endcomment -%}
+          <a class="anpc-badge" href="https://anpc.ro/ce-este-sal/" rel="noopener" target="_blank">
+            <span class="anpc-badge__mark">ANPC</span>
+            <span class="anpc-badge__text">Soluționarea Alternativă<br>a Litigiilor</span>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <div class="footer__legal">
-      <div class="footer__legal-text">
-        <p>
-          <strong>S.C. SMARTINO INTERNATIONAL S.R.L.</strong> ·
-          CUI RO37843488 · J2017003263233<br>
+    {%- comment -%} 4 + 5. Legal + copyright {%- endcomment -%}
+    <div class="fbottom">
+      <div class="container fbottom__inner">
+        <p class="fbottom__legal">
+          S.C. SMARTINO INTERNATIONAL S.R.L. · CUI RO37843488 · J2017003263233 ·
           Str. Avram Iancu nr. 22–26F, Otopeni, jud. Ilfov
         </p>
-        <ul class="footer__legal-links">
-          {%- for l in nav.footer.legal -%}<li><a href="{{ l.url | url }}">{{ l.title }}</a></li>{%- endfor -%}
-        </ul>
-      </div>
-
-      {%- comment -%}
-        Pictogramă SAL, 250×50 px, conform Ordinului ANPC 449/2022.
-        SOL a fost eliminat prin OPANPC 270/2026 — nu se mai afișează.
-        Placeholder până primim assetul oficial de la client.
-      {%- endcomment -%}
-      <div class="footer__anpc">
-        <a class="anpc-badge" href="https://anpc.ro/ce-este-sal/" rel="noopener" target="_blank">
-          <span class="anpc-badge__mark">ANPC</span>
-          <span class="anpc-badge__text">Soluționarea Alternativă<br>a Litigiilor</span>
-        </a>
-        <p class="footer__anpc-note">Pictogramă 250×50 — de înlocuit cu assetul oficial ANPC.</p>
+        <p class="fbottom__copy">© {{ "now" | date: "%Y" }} Smartino. Toate drepturile rezervate.</p>
       </div>
     </div>
-
-    <p class="footer__preview">
-      Prototip de redesign — preview intern, fără checkout. Datele și imaginile provin
-      din catalogul real smartinoshop.ro.
-    </p>
   </div>
 </footer>

@@ -99,7 +99,7 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 | G5 | Căutare predictivă | **nativ** | S | `Quick Search` (Theme settings) | pe Shopify Predictive Search API; setări: activare, nr. max produse, doar produse vs. + articole/pagini |
 | G6 | Cart drawer | **nativ** | S | `Quick Cart / Quick Edit Cart` | plus notă comandă, gift wrap, calculator transport, „You may also like" |
 | G6b | **Bară progres livrare gratuită** | **nativ** | S | `Free Shipping Calculator Message` | prag configurabil, înălțime bară, afișare %, icon camion animat. **Se setează pe 200 lei.** |
-| G7 | Footer | **nativ** parțial | S | `Social With Payment` + `Footer Bottom` | iconițe de plată native. Pentru ANPC vezi §3.7 |
+| G7 | Footer | **secțiune nouă** | L | `footer-group` din Ella + secțiune `smartino-footer` proprie | Footer-ul din prototip (panou închis cu marginea de sus curbată, newsletter cu packshot-uri reale pe marginea de jos, rând contact / magazine cu separatoare, coloane, plăți, bară legală) nu se poate compune din blocurile footer-01 (Menu ×4, Newsletter, Footer Bottom). Se face o secțiune nouă cu blocuri `shot` (produs + poziție), `store` și `menu`; iconițele de plată rămân native. Pentru ANPC vezi §3.7 |
 | G8 | Bară USP | **nativ** | S | `Custom Service Block` | SVG brut per iconiță, dimensiune, culoare, text — potrivit exact pentru „fără emoji" |
 
 ### 3.2 Home
