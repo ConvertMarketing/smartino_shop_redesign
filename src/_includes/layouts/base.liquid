@@ -12,10 +12,10 @@
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
 
-  <link rel="stylesheet" href="{{ '/assets/css/tokens.css' | url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/base.css' | url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/components.css' | url }}">
-  {% if extraCss %}<link rel="stylesheet" href="{{ extraCss | url }}">{% endif %}
+  <link rel="stylesheet" href="{{ '/assets/css/tokens.css' | url }}?v={{ build.version }}">
+  <link rel="stylesheet" href="{{ '/assets/css/base.css' | url }}?v={{ build.version }}">
+  <link rel="stylesheet" href="{{ '/assets/css/components.css' | url }}?v={{ build.version }}">
+  {% if extraCss %}<link rel="stylesheet" href="{{ extraCss | url }}?v={{ build.version }}">{% endif %}
 </head>
 <body>
   <a class="skip-link" href="#main">Sari la conținut</a>
@@ -31,8 +31,8 @@
   {% include "components/cart-drawer.liquid" %}
   {% unless hideBottomNav %}{% include "components/bottom-nav.liquid" %}{% endunless %}
 
-  <script src="{{ '/assets/js/catalog.js' | url }}" defer></script>
+  <script src="{{ '/assets/js/catalog.js' | url }}?v={{ build.version }}" defer></script>
   <script>window.__SHOP__ = {{ shop | json }};</script>
-  <script src="{{ '/assets/js/app.js' | url }}" defer></script>
+  <script src="{{ '/assets/js/app.js' | url }}?v={{ build.version }}" defer></script>
 </body>
 </html>
