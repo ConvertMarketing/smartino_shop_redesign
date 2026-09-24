@@ -454,28 +454,30 @@
 .cart-line__rm { font-size: var(--text-xs); color: var(--ink-500); text-decoration: underline; margin-top: var(--s1); }
 
 /* ============ Footer ============
-   Panou închis delimitat sus de un val pe toată lățimea (SVG în pseudo-element,
-   întins cu preserveAspectRatio none; culoarea lui = --f-bg, iar newsletter-ul
-   începe cu aceeași culoare plată ca să nu existe cusătură). Structură: newsletter
-   centrat → contact / magazine → coloane → bară legală. Culorile sunt un
-   turcoaz-cerneală derivat din brand, nu gri generic; accentele rămân --brand-500. */
-.footer { --f-bg: #10272B; --f-bg-2: #0B1D20; --f-ink: #FFFFFF; --f-ink-2: rgba(255,255,255,.74); --f-ink-3: rgba(255,255,255,.52); --f-line: rgba(255,255,255,.12); --f-wave: 44px;
+   Panou în turcoazul de brand (--brand-700 sus, --brand-900 jos), delimitat sus
+   de un val pe toată lățimea (SVG în pseudo-element, întins cu preserveAspectRatio
+   none; fill-ul lui e --brand-700 scris literal, pentru că data-URI-ul nu citește
+   variabile — newsletter-ul începe cu aceeași culoare plată, fără cusătură).
+   Structură: newsletter → contact / magazine → coloane → bară legală. Textul e alb
+   (pe --brand-900 dă 7,4:1, pe --brand-700 5,4:1), accentele sunt tintele
+   --brand-050/100, iar butonul principal devine alb cu text --brand-900. */
+.footer { --f-bg: var(--brand-700); --f-bg-2: var(--brand-900); --f-bg-3: color-mix(in srgb, var(--brand-900) 88%, #000); --f-ink: #FFFFFF; --f-ink-2: rgba(255,255,255,.86); --f-ink-3: rgba(255,255,255,.68); --f-accent: var(--brand-100); --f-line: rgba(255,255,255,.2); --f-wave: 44px;
   background: var(--ground); color: var(--f-ink-2); font-size: var(--text-sm); margin-top: var(--s6); padding-top: var(--f-wave); }
-.footer__panel { position: relative; background: var(--f-bg); }
+.footer__panel { position: relative; background: var(--f-bg-2); }
 .footer__panel::before { content: ""; position: absolute; left: 0; right: 0; top: calc(1px - var(--f-wave)); height: var(--f-wave); pointer-events: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%2310272B' d='M0,44 C180,84 360,8 560,36 C760,64 920,4 1120,28 C1280,48 1380,20 1440,8 L1440,80 L0,80 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%230B7680' d='M0,44 C180,84 360,8 560,36 C760,64 920,4 1120,28 C1280,48 1380,20 1440,8 L1440,80 L0,80 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
 .footer a { color: inherit; }
 .footer a:hover { color: var(--f-ink); }
-.fico { flex: none; color: var(--brand-500); }
+.fico { flex: none; color: var(--f-accent); }
 @media (min-width: 800px) { .footer { --f-wave: 80px; margin-top: var(--s8); } }
 
 /* --- 1. Newsletter --- */
 .fnl { position: relative; padding-block: var(--s8) var(--s10);
   background:
-    radial-gradient(60% 70% at 50% 60%, rgba(21,183,198,.22), transparent 70%),
+    radial-gradient(60% 70% at 50% 60%, rgba(21,183,198,.45), transparent 70%),
     linear-gradient(180deg, var(--f-bg) 0%, var(--f-bg-2) 100%); }
 .fnl__inner { position: relative; z-index: 2; text-align: center; max-width: 560px; }
-.fnl__eyebrow { font-size: var(--text-xs); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-500); margin-bottom: var(--s3); }
+.fnl__eyebrow { font-size: var(--text-xs); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--f-accent); margin-bottom: var(--s3); }
 .fnl__title { font-size: var(--text-2xl); color: var(--f-ink); line-height: 1.15; letter-spacing: -.01em; }
 .fnl__lead { margin-top: var(--s3); color: var(--f-ink-2); font-size: var(--text-base); line-height: 1.55; max-width: 44ch; margin-inline: auto; }
 .fnl__action { margin-top: var(--s5); }
@@ -483,12 +485,13 @@
 .fnl__input { min-height: 50px; padding: 0 var(--s4); border-radius: var(--radius); border: 1.5px solid transparent;
   background: var(--surface); color: var(--ink-900); font-size: var(--text-md); }
 .fnl__input::placeholder { color: var(--ink-500); }
-.fnl__input:focus { outline: none; border-color: var(--brand-500); box-shadow: 0 0 0 3px rgba(21,183,198,.35); }
-.fnl__btn { min-height: 50px; padding-inline: var(--s6); }
+.fnl__input:focus { outline: none; border-color: var(--brand-900); box-shadow: 0 0 0 3px rgba(255,255,255,.45); }
+.fnl__btn { min-height: 50px; padding-inline: var(--s6); background: var(--surface); color: var(--brand-900); }
+.fnl__btn:hover { background: var(--brand-050); }
 .fnl__terms { margin-top: var(--s3); font-size: var(--text-xs); color: var(--f-ink-3); }
 .fnl__terms a { text-decoration: underline; text-underline-offset: 2px; }
 @media (min-width: 640px) {
-  .fnl__form { flex-direction: row; max-width: 520px; margin-inline: auto; padding: 5px; border-radius: calc(var(--radius) + 5px); background: rgba(255,255,255,.08); }
+  .fnl__form { flex-direction: row; max-width: 520px; margin-inline: auto; padding: 5px; border-radius: calc(var(--radius) + 5px); background: rgba(255,255,255,.14); }
   .fnl__input { flex: 1; min-width: 0; border-color: transparent; }
   .fnl__btn { flex: none; }
 }
@@ -545,7 +548,7 @@
 @media (min-width: 640px) and (max-width: 799px) { .fcols { grid-template-columns: repeat(3, 1fr); } }
 
 /* --- 4. Legal + copyright --- */
-.fbottom { background: var(--f-bg-2); border-top: 1px solid var(--f-line); }
+.fbottom { background: var(--f-bg-3); border-top: 1px solid var(--f-line); }
 .fbottom__inner { display: grid; gap: var(--s2); padding-block: var(--s5); font-size: var(--text-xs); color: var(--f-ink-3); }
 .fbottom__legal { line-height: 1.6; }
 @media (min-width: 900px) { .fbottom__inner { grid-template-columns: 1fr auto; align-items: center; } }
