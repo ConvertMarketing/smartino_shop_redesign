@@ -1,7 +1,7 @@
 {%- comment -%}
-  Footer nou (referință client: panou închis cu marginea de sus curbată).
-  1. Newsletter cu packshot-uri reale din catalog „împrăștiate" pe marginea de jos
-     a panoului (src/_data/footerShots.js — doar PNG-uri cu fundal transparent).
+  Footer nou (referință client: panou închis, delimitat sus de un val).
+  1. Newsletter centrat, fără imagini; marginea de sus a panoului e un val
+     (pseudo-element SVG pe .footer__panel).
   2. Rând de contact / magazine / program, cu separatoare verticale.
   3. Coloane de link-uri + metode de plată.
   4. Obligații legale RO (design-brief.md §1.3): denumire, CUI, Reg. Com., sediu,
@@ -13,13 +13,7 @@
   <div class="footer__panel">
 
     {%- comment -%} 1. Newsletter {%- endcomment -%}
-    {%- comment -%}
-      Persoană decupată (generată de client) în dreapta, peste gradientul nostru cu
-      lumini: picioarele sunt tăiate de marginea de jos a panoului, capul iese puțin
-      deasupra. use_shots = true readuce compoziția cu packshot-uri din footerShots.js.
-    {%- endcomment -%}
-    {%- assign use_shots = false -%}
-    <section class="fnl{% unless use_shots %} fnl--person{% endunless %}" aria-labelledby="fnl-title">
+    <section class="fnl" aria-labelledby="fnl-title">
       <div class="container fnl__inner">
         <p class="fnl__eyebrow">Newsletter</p>
         <h2 class="fnl__title" id="fnl-title">Abonează-te la ofertele Smartino</h2>
@@ -38,27 +32,6 @@
           <a href="{{ '/pages/politica-de-confidentialitate/' | url }}">politica de confidențialitate</a>.
         </p>
       </div>
-
-      {%- unless use_shots -%}
-      <div class="fnl__person" aria-hidden="true">
-        <img src="{{ '/assets/img/footer-person.webp' | url }}" alt="" width="1024" height="1536" loading="lazy" decoding="async">
-      </div>
-      {%- endunless -%}
-      {%- if use_shots -%}
-      <div class="fnl__shots" aria-hidden="true">
-        {%- for s in footerShots -%}
-          {%- assign p = catalog.productsByHandle[s.handle] -%}
-          {%- if p and p.image -%}
-            <img class="fnl__shot{% if s.mobile %} fnl__shot--m{% endif %}"
-                 style="--x:{{ s.x }};--w:{{ s.w }}px;--r:{{ s.r }}deg;--b:{{ s.b }}px"
-                 src="{{ p.image.src | cdn: 300 }}"
-                 srcset="{{ p.image.src | srcset: 200,300,400,600 }}"
-                 sizes="{{ s.w }}px" alt="" width="{{ p.image.width }}" height="{{ p.image.height }}"
-                 loading="lazy" decoding="async">
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-      {%- endif -%}
     </section>
 
     <div class="container">
