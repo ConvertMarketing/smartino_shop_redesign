@@ -454,25 +454,27 @@
 .cart-line__rm { font-size: var(--text-xs); color: var(--ink-500); text-decoration: underline; margin-top: var(--s1); }
 
 /* ============ Footer ============
-   Panou în turcoazul cerut de client (#00BBC5), delimitat sus de un val pe toată
-   lățimea (SVG în pseudo-element, întins cu preserveAspectRatio none; fill-ul e
-   scris literal, pentru că data-URI-ul nu citește variabile). Pe #00BBC5 albul dă
-   doar 2,36:1, deci textul e verde-petrol închis #083A3E (5,29:1) — aceeași logică
-   ca bara de anunț: turcoaz cu text închis. Butonul principal e închis cu text alb.
-   Structură: newsletter → contact / magazine → coloane → bară legală. */
-.footer { --f-bg: #00BBC5; --f-bg-3: color-mix(in srgb, #00BBC5 92%, #fff); --f-ink: #083A3E; --f-ink-2: rgba(8,58,62,.92); --f-ink-3: rgba(8,58,62,.85); --f-accent: #083A3E; --f-line: rgba(8,58,62,.22); --f-wave: 44px;
+   Un singur gradient pe tot panoul: pornește din turcoazul cerut de client
+   (#00BBC5) exact la val, se închide în ~120 px spre --brand-700 și ajunge la
+   un petrol închis la bara legală. Textul e alb: pe zona în care începe (sub
+   120 px) fundalul e deja ≤ --brand-700 (5,4:1). Valul e SVG în pseudo-element,
+   întins cu preserveAspectRatio none; fill-ul e #00BBC5 literal, pentru că
+   data-URI-ul nu citește variabile. Structură: newsletter → contact / magazine →
+   coloane → bară legală (transparentă, gradientul continuă). */
+.footer { --f-top: #00BBC5; --f-ink: #FFFFFF; --f-ink-2: rgba(255,255,255,.86); --f-ink-3: rgba(255,255,255,.68); --f-accent: var(--brand-100); --f-line: rgba(255,255,255,.18); --f-wave: 44px; --f-fade: 96px;
   background: var(--ground); color: var(--f-ink-2); font-size: var(--text-sm); margin-top: var(--s6); padding-top: var(--f-wave); }
-.footer__panel { position: relative; background: var(--f-bg); }
+.footer__panel { position: relative;
+  background: linear-gradient(180deg, var(--f-top) 0, var(--brand-700) var(--f-fade), var(--brand-900) 46%, #06474D 100%); }
 .footer__panel::before { content: ""; position: absolute; left: 0; right: 0; top: calc(1px - var(--f-wave)); height: var(--f-wave); pointer-events: none;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%2300BBC5' d='M0,44 C180,84 360,8 560,36 C760,64 920,4 1120,28 C1280,48 1380,20 1440,8 L1440,80 L0,80 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
 .footer a { color: inherit; }
 .footer a:hover { color: var(--f-ink); }
 .fico { flex: none; color: var(--f-accent); }
-@media (min-width: 800px) { .footer { --f-wave: 80px; margin-top: var(--s8); } }
+@media (min-width: 800px) { .footer { --f-wave: 80px; --f-fade: 120px; margin-top: var(--s8); } }
 
 /* --- 1. Newsletter --- */
-.fnl { position: relative; padding-block: var(--s8) var(--s10);
-  background: radial-gradient(60% 70% at 50% 60%, rgba(255,255,255,.22), transparent 70%), var(--f-bg); }
+.fnl { position: relative; padding-block: var(--s12) var(--s10);
+  background: radial-gradient(60% 70% at 50% 60%, rgba(21,183,198,.35), transparent 70%); }
 .fnl__inner { position: relative; z-index: 2; text-align: center; max-width: 560px; }
 .fnl__eyebrow { font-size: var(--text-xs); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--f-accent); margin-bottom: var(--s3); }
 .fnl__title { font-size: var(--text-2xl); color: var(--f-ink); line-height: 1.15; letter-spacing: -.01em; }
@@ -482,17 +484,17 @@
 .fnl__input { min-height: 50px; padding: 0 var(--s4); border-radius: var(--radius); border: 1.5px solid transparent;
   background: var(--surface); color: var(--ink-900); font-size: var(--text-md); }
 .fnl__input::placeholder { color: var(--ink-500); }
-.fnl__input:focus { outline: none; border-color: var(--f-ink); box-shadow: 0 0 0 3px rgba(8,58,62,.3); }
-.fnl__btn { min-height: 50px; padding-inline: var(--s6); background: var(--f-ink); color: #fff; }
-.fnl__btn:hover { background: #0B4C51; }
+.fnl__input:focus { outline: none; border-color: var(--brand-900); box-shadow: 0 0 0 3px rgba(255,255,255,.45); }
+.fnl__btn { min-height: 50px; padding-inline: var(--s6); background: var(--surface); color: var(--brand-900); }
+.fnl__btn:hover { background: var(--brand-050); }
 .fnl__terms { margin-top: var(--s3); font-size: var(--text-xs); color: var(--f-ink-3); }
 .fnl__terms a { text-decoration: underline; text-underline-offset: 2px; }
 @media (min-width: 640px) {
-  .fnl__form { flex-direction: row; max-width: 520px; margin-inline: auto; padding: 5px; border-radius: calc(var(--radius) + 5px); background: rgba(255,255,255,.26); }
+  .fnl__form { flex-direction: row; max-width: 520px; margin-inline: auto; padding: 5px; border-radius: calc(var(--radius) + 5px); background: rgba(255,255,255,.14); }
   .fnl__input { flex: 1; min-width: 0; border-color: transparent; }
   .fnl__btn { flex: none; }
 }
-@media (min-width: 800px) { .fnl { padding-block: var(--s10) var(--s12); } .fnl__title { font-size: var(--text-3xl); } }
+@media (min-width: 800px) { .fnl { padding-block: var(--s16) var(--s12); } .fnl__title { font-size: var(--text-3xl); } }
 /* Desktop: text în stânga, formular în dreapta, pe același rând. */
 @media (min-width: 900px) {
   .fnl__inner { max-width: var(--container); display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--s10); align-items: center; text-align: left; }
@@ -545,7 +547,7 @@
 @media (min-width: 640px) and (max-width: 799px) { .fcols { grid-template-columns: repeat(3, 1fr); } }
 
 /* --- 4. Legal + copyright --- */
-.fbottom { background: var(--f-bg-3); border-top: 1px solid var(--f-line); }
+.fbottom { border-top: 1px solid var(--f-line); }
 .fbottom__inner { display: grid; gap: var(--s2); padding-block: var(--s5); font-size: var(--text-xs); color: var(--f-ink-3); }
 .fbottom__legal { line-height: 1.6; }
 @media (min-width: 900px) { .fbottom__inner { grid-template-columns: 1fr auto; align-items: center; } }
