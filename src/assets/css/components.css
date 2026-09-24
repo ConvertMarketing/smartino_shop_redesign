@@ -455,7 +455,8 @@
 
 /* ============ Footer ============
    Un singur gradient pe tot panoul: baza merge de la --brand-700 la un petrol
-   închis, iar peste ea turcoazul cerut de client (#00BBC5) se estompează liniar
+   închis, iar peste ea turcoazul cerut de client (#00BBC5) se estompează cu o curbă (opriri intermediare, ca să nu apară o
+   margine la capătul rampei)
    de la val în jos pe --f-fade (proporțional cu lățimea ecranului, ca să nu se
    vadă o bandă pe monitoare late). Textul e alb; newsletter-ul începe la ~45 %
    din --f-fade, unde titlul mare are ≥ 3:1, iar textul mic ajunge sub --brand-700. Valul e SVG în pseudo-element,
@@ -467,7 +468,7 @@
   background: var(--ground); color: var(--f-ink-2); font-size: var(--text-sm); margin-top: var(--s6); padding-top: var(--f-wave); }
 .footer__panel { position: relative;
   background:
-    linear-gradient(180deg, var(--f-top) 0, rgba(0,187,197,0) var(--f-fade)),
+    linear-gradient(180deg, var(--f-top) 0, rgba(0,187,197,.7) calc(var(--f-fade) * .25), rgba(0,187,197,.4) calc(var(--f-fade) * .5), rgba(0,187,197,.17) calc(var(--f-fade) * .75), rgba(0,187,197,.05) calc(var(--f-fade) * .92), rgba(0,187,197,0) var(--f-fade)),
     radial-gradient(420px 220px at 50% calc(var(--f-fade) * .9), rgba(21,183,198,.22), transparent 100%),
     linear-gradient(180deg, var(--brand-700) 0, var(--brand-900) 50%, #06474D 100%); }
 .footer__panel::before { content: ""; position: absolute; left: 0; right: 0; top: calc(1px - var(--f-wave)); height: var(--f-wave); pointer-events: none;
