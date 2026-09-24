@@ -15,22 +15,26 @@
     {%- comment -%} 1. Newsletter {%- endcomment -%}
     <section class="fnl" aria-labelledby="fnl-title">
       <div class="container fnl__inner">
-        <p class="fnl__eyebrow">Newsletter</p>
-        <h2 class="fnl__title" id="fnl-title">Abonează-te la ofertele Smartino</h2>
-        <p class="fnl__lead">
-          Reduceri, pachete promo și produse noi, direct pe email.
-          Fără spam — te dezabonezi cu un click.
-        </p>
-        <form class="fnl__form" onsubmit="return false;">
-          <label class="visually-hidden" for="fnl-email">Adresa ta de email</label>
-          <input class="fnl__input" id="fnl-email" type="email" name="email"
-                 placeholder="adresa@email.ro" autocomplete="email" required>
-          <button class="btn btn--primary fnl__btn" type="submit">Abonează-mă</button>
-        </form>
-        <p class="fnl__terms">
-          Prin abonare ești de acord cu
-          <a href="{{ '/pages/politica-de-confidentialitate/' | url }}">politica de confidențialitate</a>.
-        </p>
+        <div class="fnl__copy">
+          <p class="fnl__eyebrow">Newsletter</p>
+          <h2 class="fnl__title" id="fnl-title">Abonează-te la ofertele Smartino</h2>
+          <p class="fnl__lead">
+            Reduceri, pachete promo și produse noi, direct pe email.
+            Fără spam — te dezabonezi cu un click.
+          </p>
+        </div>
+        <div class="fnl__action">
+          <form class="fnl__form" onsubmit="return false;">
+            <label class="visually-hidden" for="fnl-email">Adresa ta de email</label>
+            <input class="fnl__input" id="fnl-email" type="email" name="email"
+                   placeholder="adresa@email.ro" autocomplete="email" required>
+            <button class="btn btn--primary fnl__btn" type="submit">Abonează-mă</button>
+          </form>
+          <p class="fnl__terms">
+            Prin abonare ești de acord cu
+            <a href="{{ '/pages/politica-de-confidentialitate/' | url }}">politica de confidențialitate</a>.
+          </p>
+        </div>
       </div>
     </section>
 
