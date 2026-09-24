@@ -504,30 +504,40 @@
 .fnl::after { content: ""; position: absolute; inset: auto 0 0 0; height: 70px; z-index: 1;
   background: linear-gradient(180deg, transparent, rgba(11,29,32,.55)); pointer-events: none; }
 
-/* Varianta cu produse decupate (PNG/WebP cu transparență, 2000×667, două grupuri
-   în margini, centrul liber). Fundalul e al nostru: gradient turcoaz-cerneală cu
-   trei lumini — una sus-centru și câte una în spatele fiecărui grup de produse.
-   Desktop: imaginea pe toată lățimea, ancorată jos, iar panoul are min-height =
-   lățime/3 ca produsele să nu fie tăiate pe înălțime. Mobil: bandă jos, ancorată
-   pe grupul din stânga. */
-.fnl--img { padding-top: var(--s10);
+/* Varianta cu persoană decupată (WebP cu transparență, 1024×1536, corp între
+   x 17–82 %). Fundalul e al nostru: gradient turcoaz-cerneală cu lumini. Persoana
+   stă într-un wrapper ancorat la baza panoului, care se întinde deasupra marginii
+   de sus (capul iese din secțiune) și taie picioarele la bază (overflow hidden).
+   Panoul și secțiunea rămân cu overflow vizibil pentru asta, deci raza de colț
+   se pune și pe secțiune. Desktop: textul și formularul trec în stânga. */
+.footer:has(.fnl--person) { margin-top: calc(var(--s10) + 40px); }
+.footer:has(.fnl--person) .footer__panel { overflow: visible; }
+.fnl--person { overflow: visible; border-radius: var(--f-curve) var(--f-curve) 0 0; padding-top: var(--s10);
   background:
-    radial-gradient(34% 60% at 10% 100%, rgba(21,183,198,.30), transparent 72%),
-    radial-gradient(34% 60% at 90% 100%, rgba(21,183,198,.30), transparent 72%),
-    radial-gradient(60% 55% at 50% 0%, rgba(21,183,198,.28), transparent 70%),
+    radial-gradient(40% 65% at 78% 100%, rgba(21,183,198,.34), transparent 72%),
+    radial-gradient(60% 55% at 35% 0%, rgba(21,183,198,.26), transparent 70%),
     linear-gradient(180deg, #0F2A30 0%, #0B1F24 55%, #0C2C33 100%); }
-.fnl--img .fnl__inner { padding-bottom: 230px; }
-.fnl--img::after { display: none; }
-.fnl--img .fnl__title, .fnl--img .fnl__lead { text-shadow: 0 2px 18px rgba(0,0,0,.45); }
-.fnl__bg { position: absolute; left: 0; right: 0; bottom: 0; height: 240px; z-index: 0; pointer-events: none;
-  background: url("../img/footer-products.webp") 10% bottom / auto 135% no-repeat; }
+.fnl--person::after { display: none; }
+.fnl--person .fnl__inner { padding-bottom: 330px; }
+.fnl--person .fnl__title, .fnl--person .fnl__lead { text-shadow: 0 2px 18px rgba(0,0,0,.45); }
+.fnl__person { position: absolute; right: -24%; bottom: 0; height: 320px; z-index: 1; overflow: hidden; pointer-events: none; }
+.fnl__person img { display: block; height: 172%; width: auto; }
 @media (min-width: 640px) {
-  .fnl--img { min-height: calc(100vw / 3); display: flex; flex-direction: column; justify-content: flex-start; }
-  .fnl__bg { top: 0; height: auto; background-size: 100% auto; background-position: center bottom; }
-  .fnl--img .fnl__inner { padding-bottom: 130px; }
+  .fnl--person .fnl__inner { padding-bottom: 130px; }
+  .fnl__person { right: -6%; top: -56px; height: auto; }
+  .fnl__person img { height: 165%; }
 }
-@media (min-width: 800px) { .fnl--img { padding-top: var(--s12); } }
-@media (min-width: 1600px) { .fnl--img .fnl__inner { padding-bottom: 170px; } }
+@media (min-width: 900px) {
+  .fnl--person { padding-top: var(--s12); }
+  .fnl--person .fnl__inner { text-align: left; margin-left: 0; max-width: 560px; padding-bottom: var(--s12); }
+  .fnl--person .fnl__lead, .fnl--person .fnl__form { margin-left: 0; }
+  .fnl--person .fnl__form { max-width: 480px; }
+  .fnl__person { right: 2%; top: -72px; }
+  .fnl__person img { height: 162%; }
+}
+/* Marginea dreaptă a corpului se aliniază la container: imaginea are ~18 % transparent în dreapta. */
+@media (min-width: 1200px) { .fnl--person .fnl__inner { max-width: 620px; } .fnl__person { right: max(2%, calc((100vw - var(--container)) / 2 - 80px)); } }
+@media (min-width: 1600px) { .fnl--person .fnl__inner { padding-bottom: var(--s16); } }
 
 /* --- 2. Contact / magazine --- */
 .finfo { display: grid; gap: var(--s5); padding-block: var(--s8); border-bottom: 1px solid var(--f-line); }

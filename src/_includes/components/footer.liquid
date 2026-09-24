@@ -14,12 +14,12 @@
 
     {%- comment -%} 1. Newsletter {%- endcomment -%}
     {%- comment -%}
-      Fundal: produse decupate, generate de client (două grupuri în margini, centru liber),
-      peste gradientul nostru cu lumini.
-      use_shots = true readuce compoziția cu packshot-uri reale din footerShots.js.
+      Persoană decupată (generată de client) în dreapta, peste gradientul nostru cu
+      lumini: picioarele sunt tăiate de marginea de jos a panoului, capul iese puțin
+      deasupra. use_shots = true readuce compoziția cu packshot-uri din footerShots.js.
     {%- endcomment -%}
     {%- assign use_shots = false -%}
-    <section class="fnl{% unless use_shots %} fnl--img{% endunless %}" aria-labelledby="fnl-title">
+    <section class="fnl{% unless use_shots %} fnl--person{% endunless %}" aria-labelledby="fnl-title">
       <div class="container fnl__inner">
         <p class="fnl__eyebrow">Newsletter</p>
         <h2 class="fnl__title" id="fnl-title">Abonează-te la ofertele Smartino</h2>
@@ -39,7 +39,11 @@
         </p>
       </div>
 
-      {%- unless use_shots -%}<div class="fnl__bg" aria-hidden="true"></div>{%- endunless -%}
+      {%- unless use_shots -%}
+      <div class="fnl__person" aria-hidden="true">
+        <img src="{{ '/assets/img/footer-person.webp' | url }}" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+      </div>
+      {%- endunless -%}
       {%- if use_shots -%}
       <div class="fnl__shots" aria-hidden="true">
         {%- for s in footerShots -%}
