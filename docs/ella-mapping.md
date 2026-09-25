@@ -282,6 +282,17 @@ un metafield `number_decimal` randează `5.5`. Valoarea trebuie să rămână **
 > îi permitem manipulare. Folosim **doar** `Hot stock function`, care citește inventarul
 > real.
 
+> **Implementat (pasul 11, `smartino-theme-ella` PR #13):** layout-ul global `default`
+> (cel „horizontal tabs" arată două imagini deodată în galerie, hardcodat în `theme.js`),
+> galerie pătrată cu miniaturi în stânga, zoom + lightbox (D1 nativ); blocurile care
+> lipsesc din Ella — pastile din metafield-uri, rating din `reviews.*`, preț mare cu
+> economie și preț pe bucată (D3b/D3c), disponibilitate onestă, carduri de încredere —
+> sunt blocuri **Custom Liquid** care apelează `snippets/smartino-pdp-block.liquid`
+> (zero modificări vendor). Sticky add-to-cart Ella doar pe mobil (D7). Taburi
+> Descriere + Livrare și retur (D8/D10). Complementary products (D14/D15) prin Search &
+> Discovery. Judge.me se adaugă din customizer ca bloc de aplicație (D13).
+> Neimplementate: D9 (pachete promo), „Alte formate și mărimi" (§3.6b), FAQ (D12).
+
 #### 3.6.1 Descompunerea pachetelor promo — **secțiune nouă, L**
 
 Pachetele promo sunt un tip de produs de primă clasă în catalog **[confirmat]**, cu
