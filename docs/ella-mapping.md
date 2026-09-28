@@ -313,6 +313,13 @@ Thread-uri de comunitate Shopify arată utilizatori Ella care **nu reușesc** s�
 widgetul Judge.me în tab-ul „Customers Reviews" — acesta cade la baza paginii.
 **Dacă designul cere recenziile în tab, bugetăm Liquid.**
 
+*Implementare (PR #13, tema Ella):* recenziile nu sunt în tab, ci în secțiunea
+proprie `smartino-product-reviews`, sub „Produse similare": widgetul de produs
+Judge.me instalat manual, restilizat prin CSS (`!important`, fiindcă Judge.me își
+injectează stilurile la rulare) și afișat ca grilă de carduri 4 pe rând, 8 vizibile,
+cu „Vezi mai multe" propriu care aduce următoarele 8 din endpoint-ul widgetului
+(`reviews_for_widget`) și le trece prin `jdgm.customizeReviews()`. Efort real: M.
+
 #### 3.6.3 „Cumpărate împreună" — **nativ, dar L**
 
 Ella are `Product Bundle` (FBT), dar setup-ul e manual per produs:
