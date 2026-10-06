@@ -47,9 +47,12 @@ h3 { font-size: var(--text-lg); }
   padding-inline: var(--gutter);
 }
 
+/* left/top: 0 — altfel, într-un container derulabil orizontal fără părinte
+   poziționat (lista de recenzii), elementul cădea în afara paginii și lărgea
+   documentul; telefonul micșora toată pagina și bara de jos ieșea din ecran. */
 .visually-hidden {
-  position: absolute; width: 1px; height: 1px; padding: 0;
-  margin: -1px; overflow: hidden; clip: rect(0 0 0 0);
+  position: absolute; left: 0; top: 0; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
   white-space: nowrap; border: 0;
 }
 
