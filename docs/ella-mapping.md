@@ -393,6 +393,19 @@ altfel problema se reface identic în Shopify. **Clasificare: secțiune modifica
 dintr-un singur șir separat cu `~` și `|`; acolo pragul trebuie să intre prin `capture`,
 nu direct în ghilimele — altfel `{{ … }}` ajunge literal în HTML.
 
+### 3.9 Blog și articol (adăugat la implementare, pasul 33)
+
+Blogul nu era în prototip (CLAUDE.md îl excludea), dar clientul l-a cerut în temă. Nu
+există mock-up; s-a aplicat limbajul vizual al restului temei (carduri ca produsele,
+breadcrumb + titlu 25px/500, săgeata subțire, pastile pentru etichete).
+
+| Componentă | Ella | Clasificare | Efort |
+| --- | --- | --- | --- |
+| Lista de articole (`/blogs/blog`) | `main-blog` + layout-ul „default" (`blog-default.liquid`, cardul `article-card-3.liquid`), fără sidebar | **nativ** + CSS (`component-smartino-blog.css`), setări în `blog.json` | S |
+| Articolul | `main-article`, fără sidebar și fără blocurile demo | **nativ** + CSS; h1-ul Ellei (numele blogului) devine etichetă deasupra titlului | S |
+| Datele în română | Ella: `%b %d, %Y` (luni în engleză) | **secțiune modificată** (format numeric `%d.%m.%Y` în două fișiere vendor) | S |
+| „Alte articole" sub articol | `featured-blog` (are și el datele în engleză) | neimplementat, la cerere | S |
+
 ## 4. Rânduri de verificat obligatoriu în theme editor / pe demo Ella
 
 Documentația publică nu le stabilește. Niciunul nu e completat din presupuneri.
