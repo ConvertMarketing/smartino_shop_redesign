@@ -401,8 +401,10 @@ breadcrumb + titlu 25px/500, săgeata subțire, pastile pentru etichete).
 
 | Componentă | Ella | Clasificare | Efort |
 | --- | --- | --- | --- |
-| Lista de articole (`/blogs/blog`) | `main-blog` + layout-ul „default" (`blog-default.liquid`, cardul `article-card-3.liquid`), fără sidebar | **nativ** + CSS (`component-smartino-blog.css`), setări în `blog.json` | S |
-| Articolul | `main-article`, fără sidebar și fără blocurile demo | **nativ** + CSS; h1-ul Ellei (numele blogului) devine etichetă deasupra titlului | S |
+| Lista de articole (`/blogs/blog`) | `main-blog` + layout-ul „default" (`blog-default.liquid`, cardul `article-card-3.liquid`), sidebar în stânga pe desktop | **nativ** + CSS (`component-smartino-blog.css`), setări în `blog.json` | S |
+| Articolul | `main-article`, același sidebar, fără blocurile demo, fără autor și fără poza mare | **nativ** + CSS; h1-ul Ellei (numele blogului) devine etichetă deasupra titlului; data în pastilă cu eticheta „Publicat" (vendor: un `span` în plus în `main-article.liquid`) | S |
+| Sidebar: „Articole recente" | blocul `recent_post` (titlu + dată) | **secțiune modificată**: miniatura 64px adăugată în `halo-side-recent-post.liquid`; CSS fără liniile Ellei | S |
+| Sidebar: „Produse recomandate" slider | blocul `product_block` (grid sau slick cu autoplay 2s hardcodat) | **nativ** (layout `grid`) + CSS rând derulabil cu snap + `smartino-row-arrows.js` (săgețile temei în antet) | S |
 | Datele în română | Ella: `%b %d, %Y` (luni în engleză) | **secțiune modificată** (format numeric `%d.%m.%Y` în două fișiere vendor) | S |
 | „Alte articole" sub articol | `featured-blog` (are și el datele în engleză) | neimplementat, la cerere | S |
 
