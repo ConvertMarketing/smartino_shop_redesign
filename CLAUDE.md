@@ -105,6 +105,10 @@ secțiunile existente din temă. **Designul primează.** Nu modificăm designul 
   după push verific starea o dată, la cerere sau când am altceva de făcut, nu pornesc
   bucle de „sleep". Fiecare răspuns se încheie cu un anunț explicit că am terminat și că
   se poate da următorul prompt.
+- **Clientul editează manual tema de Staging** (din 26 oct.): înainte de orice lucrare
+  declanșez `sync-staging.yml` din repo-ul temei (trage JSON-urile de setări de pe Staging în
+  `main`), apoi `git pull`; înainte de merge, din nou sync + `git merge main`. Detalii în
+  `docs/mod-de-lucru.md` din repo-ul temei.
 
 ## Note de mediu (sesiuni Claude Code pe web)
 
