@@ -420,6 +420,17 @@ secțiune.
 | Setări de aspect în Customize (≈50: culori, fonturi, imagini, spațieri desktop/mobil) | — | **secțiune nouă** (schema + `<style>` cu variabile `--ab-*`) | S |
 | „Completează comanda" în drawer-ul coșului, prețul vechi și nou pe un rând | blocul de produse populare din cart drawer | **secțiune modificată** (CSS) | S |
 
+### 3.11 Pagini de prezentare: Cariere, Ghid MACROMAX, Scrub Daddy (adăugate la implementare, pasul 36)
+
+Pe tema Halo erau construite din secțiuni în template-uri dedicate (`page.cariere`, `page.qr-instructiuni`,
+`page.scrub-daddy`); pe Ella lipseau, deci paginile cădeau pe template-ul implicit și apăreau goale. Template-uri
+noi cu aceleași nume (paginile au deja sufixele în admin), conținutul preluat din tema live.
+
+| Componentă | Ella | Clasificare | Efort |
+| --- | --- | --- | --- |
+| Antet (breadcrumb + titlu + text) și blocuri: banner desktop/mobil, grilă de produse dintr-o colecție cu cardul nostru, video cu copertă (YouTube/Vimeo, se încarcă la Play), imagini, text, blocuri de aplicații | `image-banner`, `product-block`, `rich-text`, `apps` separate, fiecare cu alt stil | **secțiune nouă** (`smartino-landing.liquid` + `component-smartino-landing.css`) | M |
+| Lista de joburi (Jobly) | bloc de aplicație (iframe al aplicației) | **nativ** (stilul din interior se setează în aplicația Jobly) | S |
+
 ## 4. Rânduri de verificat obligatoriu în theme editor / pe demo Ella
 
 Documentația publică nu le stabilește. Niciunul nu e completat din presupuneri.
