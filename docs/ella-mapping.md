@@ -408,6 +408,18 @@ breadcrumb + titlu 25px/500, săgeata subțire, pastile pentru etichete).
 | Datele în română | Ella: `%b %d, %Y` (luni în engleză) | **secțiune modificată** (format numeric `%d.%m.%Y` în două fișiere vendor) | S |
 | „Alte articole" sub articol | `featured-blog` (are și el datele în engleză) | neimplementat, la cerere | S |
 
+### 3.10 Pagina „Despre noi" (adăugată la implementare)
+
+Nu era în prototip; construită în temă la cererea clientului. Din pasul 36 e reglabilă integral
+din Customize (culori, fonturi, imagini, spațieri desktop/mobil), prin variabile CSS scrise de
+secțiune.
+
+| Componentă | Ella | Clasificare | Efort |
+| --- | --- | --- | --- |
+| Hero text + fotografie la aceeași înălțime, cifre-cheie, bandă de branduri, poveste, rânduri imagine–text numerotate, valori, presă | `main-about-1/2-page` nu acoperă structura | **secțiune nouă** (`smartino-about.liquid` + `component-smartino-about.css`) | M |
+| Setări de aspect în Customize (≈50: culori, fonturi, imagini, spațieri desktop/mobil) | — | **secțiune nouă** (schema + `<style>` cu variabile `--ab-*`) | S |
+| „Completează comanda" în drawer-ul coșului, prețul vechi și nou pe un rând | blocul de produse populare din cart drawer | **secțiune modificată** (CSS) | S |
+
 ## 4. Rânduri de verificat obligatoriu în theme editor / pe demo Ella
 
 Documentația publică nu le stabilește. Niciunul nu e completat din presupuneri.
