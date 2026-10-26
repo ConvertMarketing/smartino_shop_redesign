@@ -101,6 +101,10 @@ secțiunile existente din temă. **Designul primează.** Nu modificăm designul 
   **Nu trec la pagina următoare până nu confirmă clientul.**
 - `docs/ella-mapping.md` se ține **la zi**: pentru fiecare componentă din prototip —
   `nativ` / `secțiune modificată` / `secțiune nouă` + estimare de efort (**S/M/L**).
+- **Fără cronometre de așteptare în fundal** pentru build-uri/deploy-uri (clientul, 26 oct.):
+  după push verific starea o dată, la cerere sau când am altceva de făcut, nu pornesc
+  bucle de „sleep". Fiecare răspuns se încheie cu un anunț explicit că am terminat și că
+  se poate da următorul prompt.
 
 ## Note de mediu (sesiuni Claude Code pe web)
 
