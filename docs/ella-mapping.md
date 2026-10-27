@@ -438,7 +438,9 @@ cardul, text alb peste gradient), următoarele ca rânduri cu poză lată 16:10;
 
 | Componentă | Ella | Clasificare | Efort |
 | --- | --- | --- | --- |
-| Articol mare + listă de rânduri, buton-pastilă „Vezi toate", setări (blog, câte în listă, dată, link, spațieri) | `blog-post` / `blog-post-2` (grilă de carduri egale, alt stil) | **secțiune nouă** (`smartino-blog-posts.liquid` + stiluri în `component-smartino-home.css`) | S–M |
+| Articol mare + listă de rânduri, tot cardul / rândul clicabil, setări (blog, câte în listă, dată, link, spațieri) | `blog-post` / `blog-post-2` (grilă de carduri egale, alt stil) | **secțiune nouă** (`smartino-blog-posts.liquid` + stiluri în `component-smartino-home.css`) | S–M |
+| Articolul mare din Customize: articol ales, imagine proprie pentru desktop (alt format, ~2,1:1, punct focal), mărimea titlului desktop/mobil (implicit 18px) | — | **secțiune nouă** (setări în aceeași secțiune, `<picture>`) | S |
+| Butonul „Vezi toate" ca pastilă cu contur (text + săgeată) — rândurile de produse Ella, blogul, paginile de prezentare | `view_all` din `halo-block-header` (link text subliniat) | **secțiune modificată** (doar CSS, `component-smartino-card.css`) | S |
 
 ## 4. Rânduri de verificat obligatoriu în theme editor / pe demo Ella
 
