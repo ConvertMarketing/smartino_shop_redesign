@@ -106,7 +106,7 @@ promo** (§3.6) și **fidelitatea vizuală** — vezi avertismentul din §5.
 
 | # | Componentă | Clasificare | Efort | Corespondent Ella |
 | --- | --- | --- | --- | --- |
-| H1 | Hero | **secțiune nouă** | M | `Slideshow`-ul Ella cere imagine de fundal pe fiecare slide; designul nostru e panou colorat + packshot pe card alb. Construit ca `smartino-hero` (slider propriu, fără jQuery), cu mini-bannerele sub el și railul de categorii (G3a) în stânga pe desktop |
+| H1 | Hero | **secțiune nouă** | M | `Slideshow`-ul Ella cere imagine de fundal pe fiecare slide; designul nostru e panou colorat + packshot pe card alb. Construit ca `smartino-hero` (slider propriu, fără jQuery), cu mini-bannerele sub el și railul de categorii (G3a) în stânga pe desktop. Pașii 42–43: tranziție prin glisare (nu crossfade), glisare care urmărește degetul pe mobil; fără `transition` (al Ellei pe `a`) în slide-urile ascunse — altfel bannerul vechi reapărea 0,3s peste cel nou |
 | H2 | Tile-uri categorii (12, prototipul are 6 — abatere deliberată, de confirmat cu clientul) | **secțiune nouă** | S | `Collection List` randează `collection.image` — și **niciuna din cele 204 colecții n-are imagine** (verificat); ar fi afișat placeholdere. `smartino-categories` ia imaginea din primul produs, editabilă per bloc |
 | H3 | Bară USP | **nativ** + CSS | S | `Custom Service Block`, stil 2; CSS-ul nostru țintește secțiunea după cheia din index.json (`[id$="__usp"]`), pentru că secțiunile native nu primesc clasa noastră. Iconițele SVG din contur au nevoie de `fill: none` (Ella le umple). Pe mobil: grilă 2×2 din CSS |
 | H4 | Carusel bestsellers | **nativ** | S | `Product Block` / `Featured Collection` / `Spotlight Products` — coloane separate desktop/tabletă/mobil. Implementat ca `Product Block` în grilă: **5 pe rând pe desktop** (cerința clientului; prototipul are 4), 10 produse, 2 pe rând pe mobil |
@@ -365,7 +365,7 @@ un snippet o primea tacit din exterior trebuie trecută explicit ca parametru.
 | K3 | Upsell în coș | **nativ** | S | „You may also like" în Quick Cart |
 | K4 | Estimare livrare | **nativ** | S | calculator de transport în drawer + blocul `Delivery Time` |
 | K5 | Sumar + CTA | **nativ** | S | plus General → `Terms and Conditions Checkbox` — util pentru consimțământul legal RO |
-| K6 | Câmp cod reducere în drawer | **necunoscut** | ? | rapoartele se contrazic; **de verificat în editor** |
+| K6 | Câmp cod reducere în drawer | **secțiune modificată** | M | rezolvat la implementare: foile „Cod reducere" / „Notă comandă" din drawer (`smartino-side-cart`), iar sub butoane „Discount aplicat: COD (−suma)" (roșu) și „Notă adăugată la comandă" (pasul 43; nota se salvează cu răspuns așteptat, și pe pagina coșului la scriere) |
 | T1 | Iconițe metode de plată | **nativ** | S | blocul `Social With Payment` + `Footer Bottom` |
 | T2 | **ANPC / SAL în footer** | **secțiune modificată** | M | setul de blocuri de footer documentat în Ella 6 pare închis (Menu ×4, Newsletter ×1, Footer Bottom ×1) — **niciun bloc generic imagine/HTML**. Necesită `Custom Liquid` sau edit pe footer. **În Ella 7 ar putea fi nativ** (bloc Custom Liquid „disponibil peste tot") — de verificat |
 
