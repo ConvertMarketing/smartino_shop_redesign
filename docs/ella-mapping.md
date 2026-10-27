@@ -242,6 +242,7 @@ un metafield `number_decimal` randează `5.5`. Valoarea trebuie să rămână **
 | P5 | Chip-uri filtre active | **nativ** | S | parte din UI-ul de filtrare |
 | P6 | Sortare | **nativ** | S | control cu etichetă editabilă |
 | P7 | Grilă 2 col mobil / 5 desktop | **nativ** | S | `View as` / grid density. Implementat: `layout: "5"` pe `main-collection-product-grid` (opțiuni 1–5; clientul a cerut 5 în loc de 4). **Toggle-ul 1↔2 coloane pe mobil = necunoscut** |
+| P3b | Pe mobil: iconiță rotundă de filtre la derulare, în locul barei „Filtre / Sortează" lipite sus (pasul 46) | **secțiune modificată** | S | bara Ella (`toolbar.show-sticky`) rămâne în pagină; `smartino-plp-filter.js` adaugă butonul, care apasă „Filtre" al Ellei și arată numărul de filtre active |
 | P8 | Load more | **nativ** | S–M | „Ajax Infinite Scroll module with Pagination"; text/mărime/lățime buton documentate. **Setarea care alege pagination vs. load more vs. infinite scroll = cale necunoscută** |
 
 > **Nota cea mai importantă de pe PLP.** Fațetele care contează cu adevărat aici —
