@@ -455,6 +455,23 @@ cardul, text alb peste gradient), următoarele ca rânduri cu poză lată 16:10;
 | Articolul mare din Customize: articol ales, imagine proprie pentru desktop (alt format, ~2,1:1, punct focal), mărimea titlului desktop/mobil (implicit 18px) | — | **secțiune nouă** (setări în aceeași secțiune, `<picture>`) | S |
 | Butonul „Vezi toate" ca pastilă cu contur (text + săgeată) — rândurile de produse Ella, blogul, paginile de prezentare | `view_all` din `halo-block-header` (link text subliniat) | **secțiune modificată** (doar CSS, `component-smartino-card.css`) | S |
 
+### 3.13 Performanță, accesibilitate, SEO (audit, pasul 55)
+
+Raportul complet (scoruri înainte/după, metoda, ce depinde de client): `docs/audit-viteza.md` în repo-ul temei.
+
+| # | Componentă | Clasificare | Efort | Corespondent Ella |
+| --- | --- | --- | --- | --- |
+| V1 | Imaginile cardurilor: `srcset` cu 8 lățimi, `sizes` pe tip de pagină, `loading` nativ, primele carduri din grilă eager + `fetchpriority=high`, a doua imagine nedescărcată pe telefoane | **snippet nou** (`smartino-card-img`) + vendor (`image-product-card`, 4 linii) | S–M | snippet-ul `lazyload` (lazysizes, până la 45 de lățimi, `sizes` = lățimea originalului pe desktop) |
+| V2 | LCP: hero cu `srcset` și prioritate mică pe slide-urile ascunse; imaginea principală a produsului cu `srcset` 400–1000, `sizes` măsurat, `fetchpriority=high`; galeria produsului pornită la DOM ready (după `vendor.css`), nu la `window.onload` | **secțiune modificată** + vendor (`product-page.liquid`, `theme.js`) | M | Ella pornea galeria la `window.onload` → LCP re-raportat după încărcarea completă (~19 s pe mobil în Lighthouse) |
+| V3 | Fără ecranul de încărcare; animația de intrare doar pentru ce e sub ecran (primul ecran vizibil imediat, cardurile AJAX animate ca înainte) | **setare** + vendor (`animations.js`, `fade-up-animation.css`) | S | `enable_preloading_screen`; `scroll-trigger` ascundea tot |
+| V4 | CLS: meniul „Toate categoriile" mutat în hero la parsare; stilul barei de avantaje sincron; font de rezervă cu metricile Montserrat | **secțiune modificată** + vendor (`custom-service-block`, `variable.liquid`) | S–M | — |
+| V5 | Firul principal: fără animații infinite ascunse, autoplay-ul hero-ului la prima interacțiune, săgețile rândurilor fără reflow forțat, recenziile de pe home încărcate lângă ecran, stilul coșului lateral asincron | **CSS/JS propriu** + vendor (`global-style.liquid`) | S | — |
+| V6 | Accesibilitate: nume și roluri (carduri-schelet, bara lipită, iconițe, linkurile hero-ului, cantitatea), rolurile Slick `listbox`/`option` scoase, griul secundar la 4,5:1 | **CSS/JS propriu** + vendor (3 snippet-uri, câte o linie) | S | — |
+| V7 | SEO: descriere meta de rezervă (colecțiile: titlu + număr de produse; restul: descrierea magazinului) | vendor (`theme.liquid`) + locale | S | doar `page_description` |
+
+> Scorul de performanță pe mobil e limitat acum de scripturile terților (etichetele Google, Facebook, TikTok, pixelii
+> aplicațiilor) — nu sunt în temă; lista de acțiuni pentru client e în raport.
+
 ## 4. Rânduri de verificat obligatoriu în theme editor / pe demo Ella
 
 Documentația publică nu le stabilește. Niciunul nu e completat din presupuneri.
