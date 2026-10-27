@@ -430,6 +430,7 @@ noi cu aceleași nume (paginile au deja sufixele în admin), conținutul preluat
 | --- | --- | --- | --- |
 | Antet (breadcrumb + titlu + text) și blocuri: banner desktop/mobil, grilă de produse dintr-o colecție cu cardul nostru, video cu copertă (YouTube/Vimeo, se încarcă la Play), imagini, text, blocuri de aplicații | `image-banner`, `product-block`, `rich-text`, `apps` separate, fiecare cu alt stil | **secțiune nouă** (`smartino-landing.liquid` + `component-smartino-landing.css`) | M |
 | Lista de joburi (Jobly) | bloc de aplicație (iframe al aplicației) | **nativ** (stilul din interior se setează în aplicația Jobly) | S |
+| Ghid MACROMAX (pasul 37): text sub titlu pe toată lățimea (setare), recomandare + buton turcoaz spre `produse-macromax` în blocul video, videoclipul primul pe mobil (QR de pe ambalaj) | — | **secțiune nouă** (setări în `smartino-landing`) | S |
 
 ### 3.12 Blog pe home (adăugat la implementare, pasul 36)
 
