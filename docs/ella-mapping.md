@@ -370,6 +370,7 @@ un snippet o primea tacit din exterior trebuie trecută explicit ca parametru.
 | K6b | Cod reducere pe pagina coșului, aplicat pe loc | **secțiune modificată** | S–M | pasul 51: Ella doar ținea codul până la checkout; `snippets/smartino-cart-coupon.liquid` (în `main-cart`) adaugă „Aplică", `smartino-cart.js` pune codul pe coș cu `/cart/update.js {discount}` și citește `discount_codes[].applicable` → codul aplicat apare doar pe rândul „Cod:" (pasul 53: fără „Discount aplicat" sub câmp), sub câmp doar „Codul nu este valid…" (codul bun de dinainte rămâne) |
 | T1 | Iconițe metode de plată | **nativ** | S | blocul `Social With Payment` + `Footer Bottom` |
 | T2 | **ANPC / SAL în footer** | **secțiune modificată** | M | setul de blocuri de footer documentat în Ella 6 pare închis (Menu ×4, Newsletter ×1, Footer Bottom ×1) — **niciun bloc generic imagine/HTML**. Necesită `Custom Liquid` sau edit pe footer. **În Ella 7 ar putea fi nativ** (bloc Custom Liquid „disponibil peste tot") — de verificat |
+| T3 | Insigna „Protejat prin hCaptcha” (protecția Shopify a formularelor) | **CSS** + subsol | S | pasul 54: insigna fixă `#shop-hcaptcha-badge-container` (apare după atingerea unui formular, peste meniul de jos de pe mobil) e ascunsă; protecția rămâne, iar mențiunea cerută de hCaptcha („Protejat prin hCaptcha · Confidențialitate · Condiții”, cu legături) e în subsol, sub copyright |
 
 > **Reminder legal:** doar **ANPC/SAL**. **SOL/ODR nu se mai pune** — platforma
 > europeană e închisă din 20 iulie 2025 (Regulamentul UE 2024/3228). Vezi
