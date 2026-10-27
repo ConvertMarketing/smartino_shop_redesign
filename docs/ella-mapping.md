@@ -419,6 +419,8 @@ secțiune.
 | Hero text + fotografie la aceeași înălțime, cifre-cheie, bandă de branduri, poveste, rânduri imagine–text numerotate, valori, presă | `main-about-1/2-page` nu acoperă structura | **secțiune nouă** (`smartino-about.liquid` + `component-smartino-about.css`) | M |
 | Setări de aspect în Customize (≈50: culori, fonturi, imagini, spațieri desktop/mobil) | — | **secțiune nouă** (schema + `<style>` cu variabile `--ab-*`) | S |
 | „Completează comanda" în drawer-ul coșului, prețul vechi și nou pe un rând | blocul de produse populare din cart drawer | **secțiune modificată** (CSS) | S |
+| Pasul 38: texte sub titluri pe toată lățimea, carduri de valori cifră + titlu (setare de mărime), textul introductiv 16px | — | **secțiune nouă** (CSS + o setare) | S |
+| Pagina Smartino Supermarket (`smartino-store`), pasul 38: pe mobil pozele între text și listă, banda de avantaje slider cu puncte pe telefon | — | **secțiune nouă** (CSS `display: contents` + `order`, scroll-snap, script mic) | S |
 
 ### 3.11 Pagini de prezentare: Cariere, Ghid MACROMAX, Scrub Daddy (adăugate la implementare, pasul 36)
 
