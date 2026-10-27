@@ -431,6 +431,15 @@ noi cu aceleași nume (paginile au deja sufixele în admin), conținutul preluat
 | Antet (breadcrumb + titlu + text) și blocuri: banner desktop/mobil, grilă de produse dintr-o colecție cu cardul nostru, video cu copertă (YouTube/Vimeo, se încarcă la Play), imagini, text, blocuri de aplicații | `image-banner`, `product-block`, `rich-text`, `apps` separate, fiecare cu alt stil | **secțiune nouă** (`smartino-landing.liquid` + `component-smartino-landing.css`) | M |
 | Lista de joburi (Jobly) | bloc de aplicație (iframe al aplicației) | **nativ** (stilul din interior se setează în aplicația Jobly) | S |
 
+### 3.12 Blog pe home (adăugat la implementare, pasul 36)
+
+După recenzii, înainte de magazine. Layout editorial după referința clientului: cel mai nou articol mare (poză pe tot
+cardul, text alb peste gradient), următoarele ca rânduri cu poză lată 16:10; fără autor și fără dată (clientul).
+
+| Componentă | Ella | Clasificare | Efort |
+| --- | --- | --- | --- |
+| Articol mare + listă de rânduri, buton-pastilă „Vezi toate", setări (blog, câte în listă, dată, link, spațieri) | `blog-post` / `blog-post-2` (grilă de carduri egale, alt stil) | **secțiune nouă** (`smartino-blog-posts.liquid` + stiluri în `component-smartino-home.css`) | S–M |
+
 ## 4. Rânduri de verificat obligatoriu în theme editor / pe demo Ella
 
 Documentația publică nu le stabilește. Niciunul nu e completat din presupuneri.
