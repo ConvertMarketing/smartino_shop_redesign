@@ -470,14 +470,14 @@ Raportul complet (scoruri înainte/după, metoda, ce depinde de client): `docs/a
 | V7 | SEO: descriere meta de rezervă (colecțiile: titlu + număr de produse; restul: descrierea magazinului) | vendor (`theme.liquid`) + locale | S | doar `page_description` |
 | V8 | Bara de anunț cu mai multe mesaje: rotație proprie (fără Slick / jQuery), mesajele în aceeași celulă de grid, primul vizibil de la prima randare, schimbarea (fade, 4 s) pornită la prima interacțiune; bannerul de cookie-uri Pandectes cu locul logo-ului rezervat (fără salt) | **secțiune modificată** (`announcement-bar`) + CSS propriu | S | Ella: Slick cu autoplay la 3 s, inițializat la parsare; cu săgețile pornite rămâne sliderul Ellei (pasul 56) |
 | V9 | Bara de anunț pe mobil: textul pe mai multe rânduri (fără micșorarea fontului), înălțime stabilă de la prima randare | **secțiune modificată** (`announcement-bar`) | S | pasul 57 |
-| P9 | Caseta promoției pe produs (colecție aleasă în Theme settings → Smartino: titlu, text, link), sub preț, deasupra cantității | **secțiune nouă** (bloc custom Liquid + `smartino-pdp-block` kind `promo`) | S | pasul 57: cadou la 4 scutece Sleepy |
-| H7 | „Informații" din meniul mobil dintr-un meniu ales (`meniu-mobil-nou`), nu din meniul de sus de pe desktop | **secțiune modificată** (setare în header + `smartino-mobile-menu.js`) | S | pasul 57 |
+| P9 | Caseta promoției pe produs (colecție aleasă în Theme settings → Smartino: titlu, text, link), sub preț, deasupra cantității | **secțiune nouă** (bloc custom Liquid + `smartino-pdp-block` kind `promo`) | S | pasul 57: cadou la 4 scutece Sleepy; pasul 59: un singur text (în câmpul de titlu) + link, glow mai discret |
+| H7 | „Informații" din meniul mobil dintr-un meniu ales (`meniu-mobil-nou`), nu din meniul de sus de pe desktop | **secțiune modificată** (setare în header + `smartino-mobile-menu.js`) | S | pasul 57; pasul 59: meniul de sus al Ellei ascuns cu totul în sidebar (CSS-ul nostru îl afișa peste `hidden`) |
 | T4 | Adresa sediului în contactul din footer (iconiță de locație) | **secțiune modificată** (`smartino-footer`) | S | pasul 57 |
 | V10 | Bara lipită „Adaugă în coș": miniaturile din panoul ascuns la 160 px (`image_url`, `loading=lazy`), nu originalul | vendor (`halo-sticky-add-to-cart`, o linie) | S | Ella: `img_url: 'master'` — pe un produs Sleepy, LCP-ul pe mobil de la 13,5 s la 4,4–5,0 s (pasul 57) |
 | S1 | Scripturi în `<head>`: xConnector (token din dată + md5), verificarea Bing (`msvalidate.01`), Ahrefs Analytics (`async`) | vendor (`theme.liquid`, înainte de `</head>`) | S | pasul 58 |
 
-> Pașii 57 și 58 sunt pe tema live din 28 oct. (publicare directă, o singură dată, cu acordul clientului;
-> setările de pe live verificate înainte și după).
+> Pașii 57, 58 și 59 sunt pe tema live din 28 oct. (publicare directă, cu acordul explicit al clientului de fiecare dată;
+> fișierele de pe live verificate înainte și după).
 
 > Scorul de performanță pe mobil e limitat acum de scripturile terților (etichetele Google, Facebook, TikTok, pixelii
 > aplicațiilor) — nu sunt în temă; lista de acțiuni pentru client e în raport.
