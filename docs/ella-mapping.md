@@ -468,6 +468,7 @@ Raportul complet (scoruri înainte/după, metoda, ce depinde de client): `docs/a
 | V5 | Firul principal: fără animații infinite ascunse, autoplay-ul hero-ului la prima interacțiune, săgețile rândurilor fără reflow forțat, recenziile de pe home încărcate lângă ecran, stilul coșului lateral asincron | **CSS/JS propriu** + vendor (`global-style.liquid`) | S | — |
 | V6 | Accesibilitate: nume și roluri (carduri-schelet, bara lipită, iconițe, linkurile hero-ului, cantitatea, butonul „Trimite"), rolurile Slick `listbox`/`option` scoase, griul secundar și data recenziilor la 4,5:1 | **CSS/JS propriu** + vendor (3 snippet-uri, câte o linie) | S | — |
 | V7 | SEO: descriere meta de rezervă (colecțiile: titlu + număr de produse; restul: descrierea magazinului) | vendor (`theme.liquid`) + locale | S | doar `page_description` |
+| V8 | Bara de anunț cu mai multe mesaje: rotație proprie (fără Slick / jQuery), mesajele în aceeași celulă de grid, primul vizibil de la prima randare, schimbarea (fade, 4 s) pornită la prima interacțiune; bannerul de cookie-uri Pandectes cu locul logo-ului rezervat (fără salt) | **secțiune modificată** (`announcement-bar`) + CSS propriu | S | Ella: Slick cu autoplay la 3 s, inițializat la parsare; cu săgețile pornite rămâne sliderul Ellei (pasul 56) |
 
 > Scorul de performanță pe mobil e limitat acum de scripturile terților (etichetele Google, Facebook, TikTok, pixelii
 > aplicațiilor) — nu sunt în temă; lista de acțiuni pentru client e în raport.
