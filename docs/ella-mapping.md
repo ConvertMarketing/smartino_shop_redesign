@@ -469,6 +469,10 @@ Raportul complet (scoruri înainte/după, metoda, ce depinde de client): `docs/a
 | V6 | Accesibilitate: nume și roluri (carduri-schelet, bara lipită, iconițe, linkurile hero-ului, cantitatea, butonul „Trimite"), rolurile Slick `listbox`/`option` scoase, griul secundar și data recenziilor la 4,5:1 | **CSS/JS propriu** + vendor (3 snippet-uri, câte o linie) | S | — |
 | V7 | SEO: descriere meta de rezervă (colecțiile: titlu + număr de produse; restul: descrierea magazinului) | vendor (`theme.liquid`) + locale | S | doar `page_description` |
 | V8 | Bara de anunț cu mai multe mesaje: rotație proprie (fără Slick / jQuery), mesajele în aceeași celulă de grid, primul vizibil de la prima randare, schimbarea (fade, 4 s) pornită la prima interacțiune; bannerul de cookie-uri Pandectes cu locul logo-ului rezervat (fără salt) | **secțiune modificată** (`announcement-bar`) + CSS propriu | S | Ella: Slick cu autoplay la 3 s, inițializat la parsare; cu săgețile pornite rămâne sliderul Ellei (pasul 56) |
+| V9 | Bara de anunț pe mobil: textul pe mai multe rânduri (fără micșorarea fontului), înălțime stabilă de la prima randare | **secțiune modificată** (`announcement-bar`) | S | pasul 57 |
+| P9 | Caseta promoției pe produs (colecție aleasă în Theme settings → Smartino: titlu, text, link), sub preț, deasupra cantității | **secțiune nouă** (bloc custom Liquid + `smartino-pdp-block` kind `promo`) | S | pasul 57: cadou la 4 scutece Sleepy |
+| H7 | „Informații" din meniul mobil dintr-un meniu ales (`meniu-mobil-nou`), nu din meniul de sus de pe desktop | **secțiune modificată** (setare în header + `smartino-mobile-menu.js`) | S | pasul 57 |
+| T4 | Adresa sediului în contactul din footer (iconiță de locație) | **secțiune modificată** (`smartino-footer`) | S | pasul 57 |
 
 > Scorul de performanță pe mobil e limitat acum de scripturile terților (etichetele Google, Facebook, TikTok, pixelii
 > aplicațiilor) — nu sunt în temă; lista de acțiuni pentru client e în raport.
