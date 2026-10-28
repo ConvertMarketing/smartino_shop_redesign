@@ -473,6 +473,11 @@ Raportul complet (scoruri înainte/după, metoda, ce depinde de client): `docs/a
 | P9 | Caseta promoției pe produs (colecție aleasă în Theme settings → Smartino: titlu, text, link), sub preț, deasupra cantității | **secțiune nouă** (bloc custom Liquid + `smartino-pdp-block` kind `promo`) | S | pasul 57: cadou la 4 scutece Sleepy |
 | H7 | „Informații" din meniul mobil dintr-un meniu ales (`meniu-mobil-nou`), nu din meniul de sus de pe desktop | **secțiune modificată** (setare în header + `smartino-mobile-menu.js`) | S | pasul 57 |
 | T4 | Adresa sediului în contactul din footer (iconiță de locație) | **secțiune modificată** (`smartino-footer`) | S | pasul 57 |
+| V10 | Bara lipită „Adaugă în coș": miniaturile din panoul ascuns la 160 px (`image_url`, `loading=lazy`), nu originalul | vendor (`halo-sticky-add-to-cart`, o linie) | S | Ella: `img_url: 'master'` — pe un produs Sleepy, LCP-ul pe mobil de la 13,5 s la 4,4–5,0 s (pasul 57) |
+| S1 | Scripturi în `<head>`: xConnector (token din dată + md5), verificarea Bing (`msvalidate.01`), Ahrefs Analytics (`async`) | vendor (`theme.liquid`, înainte de `</head>`) | S | pasul 58 |
+
+> Pașii 57 și 58 sunt pe tema live din 28 oct. (publicare directă, o singură dată, cu acordul clientului;
+> setările de pe live verificate înainte și după).
 
 > Scorul de performanță pe mobil e limitat acum de scripturile terților (etichetele Google, Facebook, TikTok, pixelii
 > aplicațiilor) — nu sunt în temă; lista de acțiuni pentru client e în raport.
