@@ -483,6 +483,18 @@ Raportul complet (scoruri înainte/după, metoda, ce depinde de client): `docs/a
 > Scorul de performanță pe mobil e limitat acum de scripturile terților (etichetele Google, Facebook, TikTok, pixelii
 > aplicațiilor) — nu sunt în temă; lista de acțiuni pentru client e în raport.
 
+### 3.14 Landing page Black Friday (pasul 61)
+
+Template `page.black-friday` — fundal negru, accente turcoaz și roșu (inspirat de paginile de campanie eMAG).
+
+| # | Componentă | Clasificare | Efort | Corespondent Ella |
+| --- | --- | --- | --- | --- |
+| BF1 | Hero: „Black / Friday", eticheta roșie „până la −X%" (pe telefon lângă titlu), descriere, două butoane, 4 avantaje reale | **secțiune nouă** (`smartino-bf-hero`) | M | `image-banner` / `slideshow` (imagine + text, fără etichetă și countdown) |
+| BF2 | Countdown setabil: început / sfârșit în ora României, trei stări (începe în / se termină în / încheiat), cifre fără salt | **secțiune nouă** (în `smartino-bf-hero`, JS inline ~1,5 KB) | S | countdown-ul din `product-block` (o singură dată, fără stări, ora browserului) |
+| BF3 | Slider de categorii cu „până la −X%" calculat din prețurile reale | **secțiune modificată** (`smartino-categories`, setarea `show_discount`) | S | — |
+| BF4 | Rânduri / grilă de oferte: doar produse reduse, fără epuizate, ordonate după reducere; card 09 | **secțiune nouă** (`smartino-bf-products`) | M | `product-block` (arată toată colecția, în ordinea ei) |
+| BF5 | Pagina pe negru (fundal, titluri, carduri albe) | CSS propriu (`component-smartino-bf.css`) + vendor (`theme.liquid`: clasa `template-suffix--…` pe `<body>`) | S | — |
+
 ## 4. Rânduri de verificat obligatoriu în theme editor / pe demo Ella
 
 Documentația publică nu le stabilește. Niciunul nu e completat din presupuneri.
