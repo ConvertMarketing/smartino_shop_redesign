@@ -483,17 +483,19 @@ Raportul complet (scoruri înainte/după, metoda, ce depinde de client): `docs/a
 > Scorul de performanță pe mobil e limitat acum de scripturile terților (etichetele Google, Facebook, TikTok, pixelii
 > aplicațiilor) — nu sunt în temă; lista de acțiuni pentru client e în raport.
 
-### 3.14 Landing page Black Friday (pasul 61)
+### 3.14 Black Friday (pasul 62 — sistemul de pe smartinohome.ro)
 
-Template `page.black-friday` — fundal negru, accente turcoaz și roșu (inspirat de paginile de campanie eMAG).
+Aceleași fișiere, setări și logică pe ambele magazine (documentul clientului); designul în linia Smartino (fundal negru,
+turcoaz, roșu pentru reducere). Pasul 61 (secțiuni proprii) a fost scos.
 
 | # | Componentă | Clasificare | Efort | Corespondent Ella |
 | --- | --- | --- | --- | --- |
-| BF1 | Hero: „Black / Friday", eticheta roșie „până la −X%" (pe telefon lângă titlu), descriere, două butoane, 4 avantaje reale | **secțiune nouă** (`smartino-bf-hero`) | M | `image-banner` / `slideshow` (imagine + text, fără etichetă și countdown) |
-| BF2 | Countdown setabil: început / sfârșit în ora României, trei stări (începe în / se termină în / încheiat), cifre fără salt | **secțiune nouă** (în `smartino-bf-hero`, JS inline ~1,5 KB) | S | countdown-ul din `product-block` (o singură dată, fără stări, ora browserului) |
-| BF3 | Slider de categorii cu „până la −X%" calculat din prețurile reale | **secțiune modificată** (`smartino-categories`, setarea `show_discount`) | S | — |
-| BF4 | Rânduri / grilă de oferte: doar produse reduse, fără epuizate, ordonate după reducere; card 09 | **secțiune nouă** (`smartino-bf-products`) | M | `product-block` (arată toată colecția, în ordinea ei) |
-| BF5 | Pagina pe negru (fundal, titluri, carduri albe) | CSS propriu (`component-smartino-bf.css`) + vendor (`theme.liquid`: clasa `template-suffix--…` pe `<body>`) | S | — |
+| BF1 | Header-ul magazinului ascuns pe template-urile `*black-friday*`, înlocuit de bara de sus (logo, „Înapoi la magazin”, coș cu `[data-cart-count]`) | vendor (`theme.liquid`, un bloc) + **secțiune nouă** (`sm-bf-topbar`) | S | — |
+| BF2 | Motorul comun de countdown (dată cu fus orar explicit, expirare cu text de final, Theme Editor) | **snippet nou** (`sm-campanie-countdown`) | S | countdown-ul din `product-block` |
+| BF3 | Hero: landing (titlu cu `<em>`, linkuri rapide, badge, countdown) / categorie compactă (titlul din meniu, înapoi la landing) | **secțiune nouă** (`sm-bf-hero`) | M | `image-banner` |
+| BF4 | Catalog din meniu: iconițe categorii, bara lipicioasă (countdown compact, filtre rapide după reducere / preț, număr de produse), „Top oferte”, câte un raft pe categorie; pe categorie grila paginată cu „Încarcă mai multe” (Section Rendering API), sortare, stare goală | **secțiune nouă** (`sm-bf-catalog`) + **snippet nou** (`sm-bf-card`, cardul temei) | L | `product-block` + `main-collection-product-grid` |
+| BF5 | Pagina „În curând”: stări soon / live cu redirect, countdown până la start, Google Calendar / `.ics`, categorii, oferte în avant-premieră (preț ascuns), abonare cu etichete | **secțiune nouă** (`sm-bf-teaser`) | M | — |
+| BF6 | Template-uri: `page.black-friday`, `collection.black-friday` (deschis cu `?view=black-friday`), `page.black-friday-teaser` | template-uri noi | S | — |
 
 ## 4. Rânduri de verificat obligatoriu în theme editor / pe demo Ella
 
