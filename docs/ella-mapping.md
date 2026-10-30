@@ -490,11 +490,11 @@ turcoaz, roșu pentru reducere). Pasul 61 (secțiuni proprii) a fost scos.
 
 | # | Componentă | Clasificare | Efort | Corespondent Ella |
 | --- | --- | --- | --- | --- |
-| BF1 | Header-ul magazinului ascuns pe template-urile `*black-friday*`, înlocuit de bara de sus (logo, „Înapoi la magazin”, coș cu `[data-cart-count]`) | vendor (`theme.liquid`, un bloc) + **secțiune nouă** (`sm-bf-topbar`) | S | — |
+| BF1 | Header-ul magazinului ascuns pe template-urile `*black-friday*`, înlocuit de bara de sus (logo, „Înapoi la magazin”, coș cu `[data-cart-count]`); bara e transparentă peste hero / teasing (secțiunea de dedesubt urcă sub ea, `--bft-overlay`), deci fundalul continuă fără linie | vendor (`theme.liquid`, un bloc) + **secțiune nouă** (`sm-bf-topbar`) | S | — |
 | BF2 | Motorul comun de countdown (dată cu fus orar explicit, expirare cu text de final, Theme Editor) | **snippet nou** (`sm-campanie-countdown`) | S | countdown-ul din `product-block` |
 | BF3 | Hero: landing (titlu cu `<em>`, linkuri rapide, badge, countdown) / categorie compactă (titlul din meniu, înapoi la landing) | **secțiune nouă** (`sm-bf-hero`) | M | `image-banner` |
-| BF4 | Catalog din meniu: iconițe categorii, bara lipicioasă (countdown compact, filtre rapide după reducere / preț, număr de produse), „Top oferte”, câte un raft pe categorie; pe categorie grila paginată cu „Încarcă mai multe” (Section Rendering API), sortare, stare goală | **secțiune nouă** (`sm-bf-catalog`) + **snippet nou** (`sm-bf-card`, cardul temei) | L | `product-block` + `main-collection-product-grid` |
-| BF5 | Pagina „În curând”: stări soon / live cu redirect, countdown până la start, Google Calendar / `.ics`, categorii, oferte în avant-premieră (preț ascuns), abonare cu etichete | **secțiune nouă** (`sm-bf-teaser`) | M | — |
+| BF4 | Catalog din meniu: iconițe categorii (imagine proprie din blocul „Imagine categorie”, altfel imaginea colecției), bara lipicioasă (countdown compact, filtre rapide după reducere / preț, număr de produse), „Top oferte”, câte un raft pe categorie; pe categorie grila paginată cu „Încarcă mai multe” (Section Rendering API), sortare, stare goală | **secțiune nouă** (`sm-bf-catalog`) + **snippet nou** (`sm-bf-card`, cardul temei) | L | `product-block` + `main-collection-product-grid` |
+| BF5 | Pagina „În curând”: stări soon / live cu redirect, countdown până la start, Google Calendar / `.ics`, categorii (imagine proprie din blocul „Imagine categorie”), oferte în avant-premieră (preț ascuns), abonare cu etichete | **secțiune nouă** (`sm-bf-teaser`) | M | — |
 | BF6 | Template-uri: `page.black-friday`, `collection.black-friday` (deschis cu `?view=black-friday`), `page.black-friday-teaser` | template-uri noi | S | — |
 
 ## 4. Rânduri de verificat obligatoriu în theme editor / pe demo Ella
